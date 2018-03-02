@@ -48,11 +48,6 @@ public class MVPLCEViewImpl<M> implements MVPLCEView<M> {
         return lceAnimator;
     }
 
-    /**
-     * 绑定动画执行策略
-     *
-     * @param lceAnimator
-     */
     public void setLceAnimator(ILCEAnimator lceAnimator) {
         this.lceAnimator = lceAnimator;
     }

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">JReadHub</string>
+
+    <string name="main_essence_text">精华</string>
+    <string name="main_mine_text">我</string>
+    <string name="main_newpost_text">新帖</string>
+    <string name="main_attention_text">关注</string>
+
+
+    <array name="essence_tab">
+        <item>全部@dream@1</item>
+        <item>视频@dream@41</item>
+        <item>声音@dream@31</item>
+        <item>图片@dream@10</item>
+        <item>段子@dream@29</item>
+        <item>广告@dream@5</item>
+        <item>剧情@dream@6</item>
+    </array>
 </resources>

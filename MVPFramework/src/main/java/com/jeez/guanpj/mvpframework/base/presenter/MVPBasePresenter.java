@@ -16,6 +16,10 @@ public abstract class MVPBasePresenter<V extends MVPView> implements MVPPresente
     private WeakReference<V> weakView;
     private V proxyView;
 
+    public MVPBasePresenter(Context context) {
+        this.weakContext = new WeakReference<Context>(context);
+    }
+
     public Context getContext() {
         return weakContext.get();
     }

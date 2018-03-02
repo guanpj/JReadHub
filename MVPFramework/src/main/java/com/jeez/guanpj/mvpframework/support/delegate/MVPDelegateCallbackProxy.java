@@ -41,7 +41,7 @@ public class MVPDelegateCallbackProxy<V extends MVPView, P extends MVPPresenter<
         if (presenter == null) {
             throw new NullPointerException("Presenter is null!");
         }
-        return null;
+        return presenter;
     }
 
     @Override

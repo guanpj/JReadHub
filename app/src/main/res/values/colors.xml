@@ -3,4 +3,30 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="tab_bg_color">#D43A32</color>
+
+
+    <color name="main_content_bg">#10000000</color>
+    <color name="main_tab_bg">#11000000</color>
+
+    <color name="main_tab_line_color">#DEE1E3</color>
+
+    <color name="main_tab_text_normal">#ff847d7b</color>
+    <color name="main_tab_text_select">#ff333333</color>
+
+    <color name="essence_item_color">#DEE1E3</color>
+    <color name="essence_tab_bg">@android:color/white</color>
+    <color name="essence_tab_text_color_normal">#ff847d7b</color>
+    <color name="essence_tab_text_color_press">#D43A32</color>
+
+    <color name="essence_item_text_normal">#ff847d7b</color>
+    <color name="essence_item_text_select">#ff333333</color>
+
+
+
+    <color name="navigation_bar_color">#88232121</color>
+    <color name="video_seek_bar_bg">#ff222222</color>
+    <color name="video_seek_bar_progress">#ffff0000</color>
+    <color name="video_seek_bar_second_progress">#ffbcbcbc</color>
 </resources>
