@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.moduls.base.presenter;
+package com.jeez.guanpj.jreadhub.base.presenter;
 
 import android.content.Context;
 

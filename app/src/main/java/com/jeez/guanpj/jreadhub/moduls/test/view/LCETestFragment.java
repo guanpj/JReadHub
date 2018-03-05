@@ -1,8 +1,8 @@
 package com.jeez.guanpj.jreadhub.moduls.test.view;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.moduls.base.view.BaseRefreshLCEFragment;
-import com.jeez.guanpj.jreadhub.moduls.base.view.BaseRefreshViewAdapter;
+import com.jeez.guanpj.jreadhub.base.view.BaseRefreshLCEFragment;
+import com.jeez.guanpj.jreadhub.base.view.BaseRefreshViewAdapter;
 import com.jeez.guanpj.jreadhub.moduls.test.bean.PostModel;
 import com.jeez.guanpj.jreadhub.moduls.test.presenter.LCETestPresenter;
 

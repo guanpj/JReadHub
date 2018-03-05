@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.moduls.test.presenter;
 
 import android.content.Context;
 
-import com.jeez.guanpj.jreadhub.moduls.base.presenter.BasePresenter;
+import com.jeez.guanpj.jreadhub.base.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.moduls.test.bean.PostModel;
 import com.jeez.guanpj.jreadhub.moduls.test.model.LCETestModel;
 import com.jeez.guanpj.jreadhub.moduls.test.util.HttpUtils;
@@ -17,7 +17,7 @@ public class LCETestPresenter extends BasePresenter<LCETestView> {
         this.lceTestModel = new LCETestModel(context);
     }
 
-    public void getLCETestList(int type, boolean pullToRefresh){
+    public void getLCETestList(int type, boolean pullToRefresh) {
         //lceTestModel.getTestData();
         getView().showLoading(pullToRefresh);
         lceTestModel.getTestList(0, type, new HttpUtils.OnLceHttpResultListener() {
@@ -32,9 +32,9 @@ public class LCETestPresenter extends BasePresenter<LCETestView> {
 
             @Override
             public void onResult(Object result) {
-                if (result == null){
+                if (result == null) {
                     getView().bindData(null);
-                }else {
+                } else {
                     getView().bindData((PostModel) result);
                 }
                 getView().showContent();

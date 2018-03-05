@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.moduls.base.model;
+package com.jeez.guanpj.jreadhub.base.model;
 
 import android.content.Context;
 

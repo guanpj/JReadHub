@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.moduls.base.view;
+package com.jeez.guanpj.jreadhub.base.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
