@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">JReadHub</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_share">Share</string>
+    <string name="action_search">Settings</string>
+
     <string name="main_essence_text">精华</string>
     <string name="main_mine_text">我</string>
     <string name="main_newpost_text">新帖</string>
     <string name="main_attention_text">关注</string>
-
 
     <array name="essence_tab">
         <item>全部@dream@1</item>

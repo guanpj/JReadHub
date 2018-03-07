@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@android:id/tabhost"
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dl_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <fragment
-        android:id="@+id/fragment_test"
-        android:layout_width="match_parent"
+    <include layout="@layout/navigation_content"/>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nv_main"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:name="com.jeez.guanpj.jreadhub.moduls.test.view.LCETestFragment"/>
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/menu_drawer"/>
 
-</FrameLayout>
+</android.support.v4.widget.DrawerLayout>

@@ -27,7 +27,7 @@ public class LoadingView extends RelativeLayout {
 		super.onFinishInflate();
 		ImageView imageView = (ImageView) LayoutInflater.from(getContext()).inflate(R.layout.loading_view,this,false);
 		addView(imageView);
-		imageView.setBackgroundResource(R.drawable.loading_frame);
+		imageView.setBackgroundResource(R.drawable.essence_loading_frame);
 		animationDrawable = (AnimationDrawable) imageView.getBackground();
 	}
 	

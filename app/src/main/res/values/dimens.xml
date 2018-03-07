@@ -3,20 +3,48 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-
     <dimen name="dimen_1_dp">1dp</dimen>
-    <dimen name="dimen_2_dp">5dp</dimen>
+    <dimen name="dimen_2_dp">2dp</dimen>
+    <dimen name="dimen_3_dp">2dp</dimen>
+    <dimen name="dimen_4_dp">4dp</dimen>
     <dimen name="dimen_5_dp">5dp</dimen>
-    <dimen name="dimen_48_dp">48dp</dimen>
+    <dimen name="dimen_6_dp">6dp</dimen>
+    <dimen name="dimen_7_dp">7dp</dimen>
+    <dimen name="dimen_8_dp">8dp</dimen>
+    <dimen name="dimen_10_dp">10dp</dimen>
     <dimen name="dimen_12_dp">12dp</dimen>
-    <dimen name="main_tab_line_height">@dimen/dimen_1_dp</dimen>
+    <dimen name="dimen_14_dp">14dp</dimen>
+    <dimen name="dimen_15_dp">15dp</dimen>
+    <dimen name="dimen_16_dp">16dp</dimen>
+    <dimen name="dimen_18_dp">18dp</dimen>
+    <dimen name="dimen_20_dp">20dp</dimen>
+    <dimen name="dimen_24_dp">24dp</dimen>
+    <dimen name="dimen_25_dp">25dp</dimen>
+    <dimen name="dimen_35_dp">35dp</dimen>
+    <dimen name="dimen_45_dp">45dp</dimen>
+    <dimen name="dimen_48_dp">48dp</dimen>
+    <dimen name="dimen_50_dp">50dp</dimen>
+    <dimen name="dimen_77_dp">55dp</dimen>
+    <dimen name="dimen_60_dp">60dp</dimen>
 
-    <dimen name="main_tab_height">@dimen/dimen_48_dp</dimen>
+    <dimen name="line_0_1">0.1dp</dimen>
+    <dimen name="line_0_5">0.5dp</dimen>
+    <dimen name="line_0_8">0.8dp</dimen>
+    <dimen name="line_1">1dp</dimen>
+    <dimen name="line_2">2dp</dimen>
+    <dimen name="line_2_4">2.4dp</dimen>
 
-    <dimen name="navigation_height">46dp</dimen>
+    <dimen name="textSize_8">8sp</dimen>
+    <dimen name="textSize_10">10sp</dimen>
+    <dimen name="textSize_11">11sp</dimen>
+    <dimen name="textSize_12">12sp</dimen>
+    <dimen name="textSize_13">13sp</dimen>
+    <dimen name="textSize_14">14sp</dimen>
+    <dimen name="textSize_16">16sp</dimen>
+    <dimen name="textSize_18">18sp</dimen>
+    <dimen name="textSize_20">20sp</dimen>
 
     <dimen name="text_size_12_sp">12sp</dimen>
-
     <dimen name="essence_item_name_size">14sp</dimen>
 
 </resources>

@@ -1,8 +1,123 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <style name="WhiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">?attr/readhubStatus</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="readhubBackground">@android:color/white</item>
+        <item name="readhubToolbarText">@color/theme_white_toolbar_text</item>
+        <item name="readhubBadge">@color/theme_white_badge</item>
+        <item name="readhubStatus">@color/theme_white_status</item>
+        <item name="readhubTextCommonColor">@color/theme_white_text_common</item>
+        <item name="readhubTextContentColor">@color/theme_white_text_content</item>
+        <item name="readhubTheme">@color/theme_white_theme</item>
+        <item name="readhubFloatBtn">@color/theme_white_float_btn</item>
+
+        <item name="navIcon">@mipmap/ic_actionbar_menu_white</item>
+        <item name="navBackIcon">@mipmap/ic_action_return_white</item>
+        <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more_white</item>
+        <!--<item name="menuSearch">@mipmap/ic_actionbar_search_white</item>
+        <item name="menuNotice">@mipmap/ic_actionbar_notice_white</item>
+        <item name="menuShare">@mipmap/ic_action_share_white</item>
+        <item name="menuSend">@mipmap/ic_send_default</item>-->
+
+    </style>
+
+    <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">?attr/readhubStatus</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="readhubBackground">@color/colorPrimary</item>
+        <item name="readhubToolbarText">@color/theme_blue_toolbar_text</item>
+        <item name="readhubBadge">@color/theme_blue_badge</item>
+        <item name="readhubStatus">@color/theme_blue_status</item>
+        <item name="readhubTextCommonColor">@color/theme_blue_text_common</item>
+        <item name="readhubTextContentColor">@color/theme_blue_text_content</item>
+        <item name="readhubTheme">@color/theme_blue_theme</item>
+        <item name="readhubFloatBtn">@color/theme_blue_float_btn</item>
+
+        <item name="navIcon">@mipmap/ic_actionbar_menu</item>
+        <item name="navBackIcon">@mipmap/ic_action_return</item>
+        <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more</item>
+        <!--<item name="menuSearch">@mipmap/ic_actionbar_search</item>
+        <item name="menuNotice">@mipmap/ic_actionbar_notice</item>
+        <item name="menuShare">@mipmap/ic_action_share</item>
+        <item name="menuSend">@mipmap/ic_send_white</item>-->
+    </style>
+
+    <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">?attr/readhubStatus</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="readhubBackground">@color/colorPrimary</item>
+        <item name="readhubToolbarText">@color/theme_gray_toolbar_text</item>
+        <item name="readhubBadge">@color/theme_gray_badge</item>
+        <item name="readhubStatus">@color/theme_gray_status</item>
+        <item name="readhubTextCommonColor">@color/theme_gray_text_common</item>
+        <item name="readhubTextContentColor">@color/theme_gray_text_content</item>
+        <item name="readhubTheme">@color/theme_gray_theme</item>
+        <item name="readhubFloatBtn">@color/theme_gray_float_btn</item>
+
+        <item name="navIcon">@mipmap/ic_actionbar_menu</item>
+        <item name="navBackIcon">@mipmap/ic_action_return</item>
+        <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more</item>
+        <!--<item name="menuSearch">@mipmap/ic_actionbar_search</item>
+        <item name="menuNotice">@mipmap/ic_actionbar_notice</item>
+        <item name="menuShare">@mipmap/ic_action_share</item>
+        <item name="menuSend">@mipmap/ic_send_white</item>-->
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Custom.Theme.ToolBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:actionOverflowButtonStyle">@style/ActionButton.Overflow</item>
+    </style>
+
+    <style name="Theme.ToolBar.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">@dimen/textSize_16</item>
+        <item name="android:textColorPrimary">@color/text_common</item>
+    </style>
+
+    <style name="ActionButton.Overflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">?attr/overFlowIcon</item>
+        <item name="android:color">@android:color/white</item>
+    </style>
+
+    <style name="toolbar_textAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/textSize_18</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabMaxWidth">@dimen/design_tab_max_width</item>
+        <item name="tabIndicatorColor">#FFFFFF</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
 
 </resources>
