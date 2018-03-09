@@ -3,28 +3,24 @@
     <item android:title="实验室">
         <menu>
             <group android:checkableBehavior="single">
-                <!--<item
-                    android:id="@+id/nav_my_vote"
-                    android:icon="@mipmap/ic_my_vote"
-                    android:title="@string/my_vote"/>
                 <item
-                    android:id="@+id/nav_my_share"
-                    android:icon="@mipmap/ic_my_share"
-                    android:title="@string/my_share"/>
+                    android:id="@+id/nav_change_theme"
+                    android:icon="@mipmap/ic_menu_settings"
+                    android:title="设置"/>
                 <item
-                    android:id="@+id/nav_my_reply"
-                    android:icon="@mipmap/ic_my_reply"
-                    android:title="@string/my_reply"/>-->
+                    android:id="@+id/nav_help"
+                    android:icon="@mipmap/ic_menu_about"
+                    android:title="关于"/>
             </group>
         </menu>
     </item>
 
     <item
-        android:id="@+id/nav_change_theme"
+        android:id="@+id/nav_setting"
         android:icon="@mipmap/ic_menu_settings"
         android:title="设置"/>
     <item
-        android:id="@+id/nav_help"
+        android:id="@+id/nav_about"
         android:icon="@mipmap/ic_menu_about"
         android:title="关于"/>
 </menu>

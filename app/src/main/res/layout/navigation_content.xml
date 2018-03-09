@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_16_dp"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@mipmap/top" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -6,29 +6,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="190dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp"
-    android:paddingTop="35dp"
     android:fitsSystemWindows="true"
-    android:background="@mipmap/background">
+    android:background="@mipmap/background"
+    android:gravity="center">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/nav_header_desc"
         android:paddingTop="8dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/txt_login"
+        android:id="@+id/txt_domain"
+        android:paddingTop="@dimen/dimen_15_dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="https://readhub.me"
         android:textColor="@color/text_common"
         android:textSize="@dimen/textSize_16"
-        android:gravity="center"
-        android:clickable="true"/>
+        android:gravity="center"/>
 
 </LinearLayout>
