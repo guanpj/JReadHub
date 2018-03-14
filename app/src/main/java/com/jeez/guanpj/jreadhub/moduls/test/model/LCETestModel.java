@@ -11,9 +11,10 @@ import com.jeez.guanpj.jreadhub.moduls.test.view.TestAdapter;
 import java.util.HashMap;
 import java.util.Map;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class LCETestModel extends BaseModel {
 
@@ -46,8 +47,13 @@ public class LCETestModel extends BaseModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PostModel>() {
                     @Override
-                    public void onCompleted() {
-                        onLceHttpResultListener.onCompleted();
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(PostModel postModel) {
+                        onLceHttpResultListener.onResult(postModel);
                     }
 
                     @Override
@@ -56,8 +62,8 @@ public class LCETestModel extends BaseModel {
                     }
 
                     @Override
-                    public void onNext(PostModel model) {
-                        onLceHttpResultListener.onResult(model);
+                    public void onComplete() {
+                        onLceHttpResultListener.onCompleted();
                     }
                 });
     }

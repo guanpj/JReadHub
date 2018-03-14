@@ -5,7 +5,7 @@ import com.jeez.guanpj.jreadhub.moduls.test.bean.PostModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface ITestService {
 
