@@ -9,7 +9,7 @@ import com.jeez.guanpj.mvpframework.base.presenter.MVPPresenter;
 import com.jeez.guanpj.mvpframework.support.lce.MVPLCEFragment;
 import com.jeez.guanpj.mvpframework.support.lce.MVPLCEView;
 
-public abstract class BaseMPVLCEFragment<M, V extends MVPLCEView<M>, P extends MVPPresenter<V>>
+public abstract class BaseMvpLceFragment<M, V extends MVPLCEView<M>, P extends MVPPresenter<V>>
         extends MVPLCEFragment<M, V, P> {
 
     private View viewContent;//缓存视图
@@ -18,13 +18,13 @@ public abstract class BaseMPVLCEFragment<M, V extends MVPLCEView<M>, P extends M
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (viewContent == null){
-            viewContent = inflater.inflate(getContentView(),container,false);
+        if (viewContent == null) {
+            viewContent = inflater.inflate(getContentView(), container, false);
             initContentView(viewContent);
         }
 
         ViewGroup parent = (ViewGroup) viewContent.getParent();
-        if (parent != null){
+        if (parent != null) {
             parent.removeView(viewContent);
         }
         return viewContent;
@@ -33,7 +33,7 @@ public abstract class BaseMPVLCEFragment<M, V extends MVPLCEView<M>, P extends M
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (!isInit){
+        if (!isInit) {
             this.isInit = true;
             initData();
         }
@@ -41,7 +41,7 @@ public abstract class BaseMPVLCEFragment<M, V extends MVPLCEView<M>, P extends M
 
     public abstract int getContentView();
 
-    public void initData(){
+    public void initData() {
 
     }
 
@@ -56,5 +56,6 @@ public abstract class BaseMPVLCEFragment<M, V extends MVPLCEView<M>, P extends M
     }
 
     public abstract void initContentView(View contentView);
+
     public abstract void initNavigation(View contentView);
 }

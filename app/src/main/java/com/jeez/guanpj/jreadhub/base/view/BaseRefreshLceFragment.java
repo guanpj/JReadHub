@@ -11,8 +11,8 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.mvpframework.base.presenter.MVPPresenter;
 import com.jeez.guanpj.mvpframework.support.lce.MVPLCEView;
 
-public abstract class BaseRefreshLCEFragment<M, V extends MVPLCEView<M>, P extends MVPPresenter<V>>
-        extends BaseMPVLCEFragment<M,V,P> {
+public abstract class BaseRefreshLceFragment<M, V extends MVPLCEView<M>, P extends MVPPresenter<V>>
+        extends BaseMvpLceFragment<M, V, P> {
 
     private XRefreshView refreshView;
     private RecyclerView recyclerView;

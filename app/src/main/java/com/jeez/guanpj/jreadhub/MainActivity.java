@@ -58,7 +58,7 @@ public class MainActivity extends FragmentActivity {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 initErrorLogDetactor();
             } else {
-                showShortToast(getString(R.string.toast_permission_fail));
+                //showShortToast(getString(R.string.toast_permission_fail));
             }
         }
     }

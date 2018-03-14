@@ -9,7 +9,7 @@ import com.andview.refreshview.recyclerview.BaseRecyclerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseRefreshViewAdapter<M,L,VH extends RecyclerView.ViewHolder>
+public abstract class BaseRefreshViewAdapter<M, L, VH extends RecyclerView.ViewHolder>
         extends BaseRecyclerAdapter<VH> {
 
     private Context context;
@@ -35,10 +35,10 @@ public abstract class BaseRefreshViewAdapter<M,L,VH extends RecyclerView.ViewHol
     }
 
     public void refreshAdapter(boolean isPullRefresh, List<M> list, L data) {
-        if (isPullRefresh){
+        if (isPullRefresh) {
             getData().clear();
         }
-        if (list != null){
+        if (list != null) {
             getData().addAll(list);
         }
         //刷新

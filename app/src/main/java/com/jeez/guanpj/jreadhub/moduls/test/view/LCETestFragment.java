@@ -1,12 +1,12 @@
 package com.jeez.guanpj.jreadhub.moduls.test.view;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.base.view.BaseRefreshLCEFragment;
+import com.jeez.guanpj.jreadhub.base.view.BaseRefreshLceFragment;
 import com.jeez.guanpj.jreadhub.base.view.BaseRefreshViewAdapter;
 import com.jeez.guanpj.jreadhub.moduls.test.bean.PostModel;
 import com.jeez.guanpj.jreadhub.moduls.test.presenter.LCETestPresenter;
 
-public class LCETestFragment extends BaseRefreshLCEFragment<PostModel, LCETestView, LCETestPresenter>
+public class LCETestFragment extends BaseRefreshLceFragment<PostModel, LCETestView, LCETestPresenter>
         implements LCETestView {
 
     @Override
