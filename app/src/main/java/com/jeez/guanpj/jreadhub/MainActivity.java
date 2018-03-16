@@ -2,15 +2,18 @@ package com.jeez.guanpj.jreadhub;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 
 import com.jeez.guanpj.jreadhub.base.view.BaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
@@ -49,7 +52,23 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        initToolBar();
+    }
 
+    private void initToolBar() {
+        setSupportActionBar(mToolbar);
+
+        mToolbar.inflateMenu(R.menu.menu_main);
+        Resources.Theme theme = getTheme();
+
+        TypedValue navIcon = new TypedValue();
+        TypedValue overFlowIcon = new TypedValue();
+
+        theme.resolveAttribute(R.attr.navIcon, navIcon, true);
+        theme.resolveAttribute(R.attr.overFlowIcon, overFlowIcon, true);
+
+        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setOverflowIcon(ContextCompat.getDrawable(this, overFlowIcon.resourceId));
     }
 
     @Override

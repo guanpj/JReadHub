@@ -7,7 +7,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_share">Share</string>
-    <string name="action_search">Settings</string>
+    <string name="action_search">Search</string>
 
     <string name="main_essence_text">精华</string>
     <string name="main_mine_text">我</string>

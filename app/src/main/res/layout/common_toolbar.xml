@@ -14,7 +14,7 @@
     app:titleTextAppearance="@style/toolbar_textAppearance"
     app:popupTheme="@style/Theme.ToolBar.Base"
     app:contentInsetStartWithNavigation="0dp"
-    app:navigationIcon="?attr/navBackIcon"
+    app:navigationIcon="?attr/navIcon"
     app:layout_scrollFlags="scroll|enterAlways">
 
     <!--<RelativeLayout

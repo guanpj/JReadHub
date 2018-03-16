@@ -23,11 +23,8 @@
         <item name="navIcon">@mipmap/ic_actionbar_menu_white</item>
         <item name="navBackIcon">@mipmap/ic_action_return_white</item>
         <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more_white</item>
-        <!--<item name="menuSearch">@mipmap/ic_actionbar_search_white</item>
-        <item name="menuNotice">@mipmap/ic_actionbar_notice_white</item>
+        <item name="menuSearch">@mipmap/ic_actionbar_search_white</item>
         <item name="menuShare">@mipmap/ic_action_share_white</item>
-        <item name="menuSend">@mipmap/ic_send_default</item>-->
-
     </style>
 
     <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -48,10 +45,8 @@
         <item name="navIcon">@mipmap/ic_actionbar_menu</item>
         <item name="navBackIcon">@mipmap/ic_action_return</item>
         <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more</item>
-        <!--<item name="menuSearch">@mipmap/ic_actionbar_search</item>
-        <item name="menuNotice">@mipmap/ic_actionbar_notice</item>
+        <item name="menuSearch">@mipmap/ic_actionbar_search</item>
         <item name="menuShare">@mipmap/ic_action_share</item>
-        <item name="menuSend">@mipmap/ic_send_white</item>-->
     </style>
 
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -72,10 +67,8 @@
         <item name="navIcon">@mipmap/ic_actionbar_menu</item>
         <item name="navBackIcon">@mipmap/ic_action_return</item>
         <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more</item>
-        <!--<item name="menuSearch">@mipmap/ic_actionbar_search</item>
-        <item name="menuNotice">@mipmap/ic_actionbar_notice</item>
+        <item name="menuSearch">@mipmap/ic_actionbar_search</item>
         <item name="menuShare">@mipmap/ic_action_share</item>
-        <item name="menuSend">@mipmap/ic_send_white</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar">
