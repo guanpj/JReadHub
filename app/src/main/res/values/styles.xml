@@ -99,15 +99,18 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Tab_TextAppearance" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">@dimen/design_tab_text_size</item>
+        <item name="android:textColor">?attr/readhubToolbarText</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
     <style name="TabLayout" parent="Base.Widget.Design.TabLayout">
         <item name="tabMaxWidth">@dimen/design_tab_max_width</item>
-        <item name="tabIndicatorColor">#FFFFFF</item>
-        <item name="tabIndicatorHeight">2dp</item>
-        <item name="tabPaddingStart">12dp</item>
-        <item name="tabPaddingEnd">12dp</item>
-        <item name="tabBackground">?attr/selectableItemBackground</item>
-        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
-        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+        <item name="tabIndicatorColor">?attr/readhubToolbarText</item>
+        <item name="tabBackground">?attr/readhubTheme</item>
+        <item name="tabTextAppearance">@style/Tab_TextAppearance</item>
+        <item name="tabSelectedTextColor">?attr/readhubToolbarText</item>
     </style>
 
 </resources>
