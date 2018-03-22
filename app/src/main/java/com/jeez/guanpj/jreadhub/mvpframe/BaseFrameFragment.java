@@ -35,8 +35,9 @@ public abstract class BaseFrameFragment<P extends BasePresenter, M extends BaseM
 
     @Override
     public void onDestroy() {
-        if (mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.onDestroy();
+        }
         super.onDestroy();
     }
 }

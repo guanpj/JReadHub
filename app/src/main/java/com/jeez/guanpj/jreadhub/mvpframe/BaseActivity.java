@@ -8,21 +8,17 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BaseFuncIml;
-import com.longrise.jie.jforum.R;
-import com.longrise.jie.jforum.util.Constants;
-import com.longrise.jie.jforum.util.ThemeUtil;
-import com.longrise.jie.jforum.util.UserConstants;
+import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.ThemeUtil;
 
 /**
  * Created by Jie on 2016-10-26.
  */
 
 public class BaseActivity extends AppCompatActivity implements BaseFuncIml, View.OnClickListener {
-    private MaterialDialog.Builder mLoadingDialog;
     public ThemeUtil mThemeUtil;
-    private UserConstants mUserConstants;
 
     private long mExitTime;
     private boolean isExit = false;
@@ -68,18 +64,10 @@ public class BaseActivity extends AppCompatActivity implements BaseFuncIml, View
 
     @Override
     public void initView() {
-        initLoadingDialog();
-    }
-
-    private void initLoadingDialog() {
-        mLoadingDialog = new MaterialDialog.Builder(this);
-        mLoadingDialog.title("请稍候");
-        mLoadingDialog.progress(true, 0);
     }
 
     @Override
     public void initData() {
-        mUserConstants = UserConstants.getInstance(this);
     }
 
     @Override
@@ -92,16 +80,8 @@ public class BaseActivity extends AppCompatActivity implements BaseFuncIml, View
 
     }
 
-    public UserConstants getUserConstants() {
-        return mUserConstants;
-    }
-
     public void setExit(boolean isExit) {
         this.isExit = isExit;
-    }
-
-    public MaterialDialog.Builder getLoadingDialog() {
-        return mLoadingDialog;
     }
 
     @Override

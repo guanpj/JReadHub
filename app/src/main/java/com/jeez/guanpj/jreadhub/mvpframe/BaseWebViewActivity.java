@@ -1,20 +1,11 @@
 package com.jeez.guanpj.jreadhub.mvpframe;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import com.longrise.jie.jforum.api.APIClient;
-import com.longrise.jie.jforum.ui.main.PhotoShowActivity;
-import com.longrise.jie.jforum.util.Constants;
-import com.longrise.jie.jforum.widget.MultiStateView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,15 +20,13 @@ public abstract class BaseWebViewActivity extends BaseActivity {
     protected static class WebAppClient extends WebViewClient {
         private Context context;
 
-        private MultiStateView multiStateView;
-
         private WebView contentView;
 
         private WebSettings settings;
 
-        public WebAppClient(Context context, MultiStateView multiStateView, WebView contentView) {
+        public WebAppClient(Context context, WebView contentView) {
             this.context = context;
-            this.multiStateView = multiStateView;
+            //this.multiStateView = multiStateView;
             this.contentView = contentView;
 
             initSetting();
@@ -53,7 +42,7 @@ public abstract class BaseWebViewActivity extends BaseActivity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            Uri uri = Uri.parse(url);
+            /*Uri uri = Uri.parse(url);
             if (uri.getHost().contains(Constants.PHPHUB_HOST)) {
                 HashMap<String, String> segments = new HashMap<>();
                 String key = null;
@@ -83,27 +72,27 @@ public abstract class BaseWebViewActivity extends BaseActivity {
                     context.startActivity(Intent.createChooser(intent, "请选择浏览器"));
                 }
             } else {
-                /*Intent intentToLaunch = WebViewPageActivity.getCallingIntent(context, webUrl);
+                *//*Intent intentToLaunch = WebViewPageActivity.getCallingIntent(context, webUrl);
                 context.startActivity(intentToLaunch);
-                navigator.navigateToWebView(context, url);*/
-            }
+                navigator.navigateToWebView(context, url);*//*
+            }*/
             return true;
         }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            if (multiStateView != null) {
+            /*if (multiStateView != null) {
                 multiStateView.setViewState(MultiStateView.VIEW_STATE_LOADING);
-            }
+            }*/
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            if (multiStateView != null) {
+            /*if (multiStateView != null) {
                 multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
-            }
+            }*/
             addImageClickEvent();
         }
 
@@ -148,17 +137,17 @@ public abstract class BaseWebViewActivity extends BaseActivity {
 
         @JavascriptInterface
         public void openImage(String url) {
-            Bundle bundle = new Bundle();
+            /*Bundle bundle = new Bundle();
             bundle.putString(Constants.Key.TOPIC_IMAGE_URL, url);
             Intent intent = new Intent(context, PhotoShowActivity.class);
             intent.putExtras(bundle);
-            context.startActivity(intent);
+            context.startActivity(intent);*/
         }
     }
 
     public Map<String, String> getAuth() {
         Map<String, String> header = new HashMap<>();
-        header.put("Authorization", "Bearer " + APIClient.getToken());
+        //header.put("Authorization", "Bearer " + APIClient.getToken());
         return header;
     }
 }

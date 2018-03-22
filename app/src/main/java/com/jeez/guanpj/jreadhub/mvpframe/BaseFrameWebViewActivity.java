@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BaseModel;
 import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BaseView;
-import com.longrise.jie.jforum.util.TUtil;
+import com.jeez.guanpj.jreadhub.util.TUtil;
 
 /**
  * Created by Jie on 2016-11-2.
@@ -35,8 +35,9 @@ public abstract class BaseFrameWebViewActivity<P extends BasePresenter, M extend
 
     @Override
     protected void onDestroy() {
-        if (mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.onDestroy();
+        }
         super.onDestroy();
     }
 }
