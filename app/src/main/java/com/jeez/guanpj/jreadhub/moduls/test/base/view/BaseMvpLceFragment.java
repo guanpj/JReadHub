@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.base.view;
+package com.jeez.guanpj.jreadhub.moduls.test.base.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

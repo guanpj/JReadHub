@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.moduls.test.presenter;
 
 import android.content.Context;
 
-import com.jeez.guanpj.jreadhub.base.presenter.BasePresenter;
+import com.jeez.guanpj.jreadhub.moduls.test.base.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.moduls.test.bean.PostModel;
 import com.jeez.guanpj.jreadhub.moduls.test.model.LCETestModel;
 import com.jeez.guanpj.jreadhub.moduls.test.util.HttpUtils;

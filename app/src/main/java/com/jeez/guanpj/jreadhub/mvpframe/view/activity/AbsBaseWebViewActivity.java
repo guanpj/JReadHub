@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.mvpframe;
+package com.jeez.guanpj.jreadhub.mvpframe.view.activity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,6 +7,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jeez.guanpj.jreadhub.base.BaseActivity;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,7 @@ import java.util.Map;
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class BaseWebViewActivity extends BaseActivity {
+public abstract class AbsBaseWebViewActivity extends BaseActivity {
     protected final static String PLATFORM = "Android";
 
     protected static class WebAppClient extends WebViewClient {

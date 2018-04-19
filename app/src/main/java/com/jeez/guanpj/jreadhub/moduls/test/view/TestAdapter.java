@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.base.view.BaseRefreshViewAdapter;
+import com.jeez.guanpj.jreadhub.moduls.test.base.view.BaseRefreshViewAdapter;
 import com.jeez.guanpj.jreadhub.moduls.test.bean.PostModel;
 import com.jeez.guanpj.jreadhub.moduls.test.util.DateUtils;
 import com.jeez.guanpj.jreadhub.moduls.test.util.ImageLoaderUtils;

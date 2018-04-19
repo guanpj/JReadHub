@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.mvpframe;
+package com.jeez.guanpj.jreadhub.base;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,76 +8,85 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.jeez.guanpj.jreadhub.AppStatusTracker;
+import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BaseFuncIml;
+import com.jeez.guanpj.jreadhub.SplashActivity;
+import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ThemeUtil;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by Jie on 2016-10-26.
  */
 
-public class BaseActivity extends AppCompatActivity implements BaseFuncIml, View.OnClickListener {
-    public ThemeUtil mThemeUtil;
+public abstract class BaseActivity extends AppCompatActivity implements IBaseViewFlow {
 
+    public ThemeUtil mThemeUtil;
+    private Unbinder unBinder;
+    public static final int MODE_BACK = 0;
+    public static final int MODE_DRAWER = 1;
+    public static final int MODE_NONE = 2;
+    public static final int MODE_HOME = 3;
     private long mExitTime;
     private boolean isExit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        initTheme();
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        initTheme();
+        unBinder = ButterKnife.bind(this);
     }
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        initData();
-        initView();
-        initEvent();
+        switch (AppStatusTracker.getInstance().getAppStatus()) {
+            case AppStatus.STATUS_FORCE_KILLED:
+                protectApp();
+                break;
+            case AppStatus.STATUS_KICK_OUT:
+                kickOut();
+                break;
+            case AppStatus.STATUS_LOGOUT:
+            case AppStatus.STATUS_OFFLINE:
+            case AppStatus.STATUS_ONLINE:
+                initView();
+                initDataAndEvent();
+                break;
+            default:
+        }
+    }
+
+    protected void protectApp() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(AppStatus.KEY_HOME_ACTION, AppStatus.ACTION_RESTART_APP);
+        startActivity(intent);
+    }
+
+    protected void kickOut() {
+        Intent intent = new Intent(this, SplashActivity.class);
+        intent.putExtra(AppStatus.KEY_HOME_ACTION, AppStatus.ACTION_KICK_OUT);
+        startActivity(intent);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
+    public abstract int getLayoutId();
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
+    public abstract void initView();
 
     @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
+    public abstract void initDataAndEvent();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    public void initView() {
-    }
-
-    @Override
-    public void initData() {
-    }
-
-    @Override
-    public void initEvent() {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
+        unBinder.unbind();
     }
 
     public void setExit(boolean isExit) {
@@ -91,7 +100,7 @@ public class BaseActivity extends AppCompatActivity implements BaseFuncIml, View
                 showShortToast("再按一次退出程序");
                 mExitTime = System.currentTimeMillis();
             } else {
-                finish();
+                AppStatusTracker.getInstance().exitApp();
             }
             return true;
         }
@@ -103,6 +112,7 @@ public class BaseActivity extends AppCompatActivity implements BaseFuncIml, View
     }
 
     protected void setToolbar(Toolbar toolbar, String title) {
+        setSupportActionBar(toolbar);
         toolbar.setTitle(title);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

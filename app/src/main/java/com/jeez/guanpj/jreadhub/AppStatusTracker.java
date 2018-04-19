@@ -10,9 +10,13 @@ import android.os.Bundle;
 
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class AppStatusTracker implements Application.ActivityLifecycleCallbacks {
     private static final long MAX_INTERVAL = 5 * 60 * 1000;
     private static AppStatusTracker tracker;
+    private Set<Activity> allActivities;
     private Application application;
     private int appStatus = AppStatus.STATUS_FORCE_KILLED;
     private boolean isForground;
@@ -63,9 +67,21 @@ public class AppStatusTracker implements Application.ActivityLifecycleCallbacks 
         this.isScreenOff = isScreenOff;
     }
 
+    public boolean checkIfShowGesture() {
+        if (appStatus == AppStatus.STATUS_ONLINE) {
+            if (isScreenOff) {
+                return true;
+            }
+            if (timestamp != 0l && System.currentTimeMillis() - timestamp > MAX_INTERVAL) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
-
+        addActivity(activity);
     }
 
     @Override
@@ -101,7 +117,32 @@ public class AppStatusTracker implements Application.ActivityLifecycleCallbacks 
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        removeActivity(activity);
+    }
 
+    public void addActivity(Activity act) {
+        if (allActivities == null) {
+            allActivities = new HashSet<>();
+        }
+        allActivities.add(act);
+    }
+
+    public void removeActivity(Activity act) {
+        if (allActivities != null) {
+            allActivities.remove(act);
+        }
+    }
+
+    public void exitApp() {
+        if (allActivities != null) {
+            synchronized (allActivities) {
+                for (Activity act : allActivities) {
+                    act.finish();
+                }
+            }
+        }
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
     }
 
     private class DeamonReceiver extends BroadcastReceiver {

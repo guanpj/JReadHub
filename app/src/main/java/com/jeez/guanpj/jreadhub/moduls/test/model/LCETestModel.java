@@ -3,7 +3,7 @@ package com.jeez.guanpj.jreadhub.moduls.test.model;
 import android.content.Context;
 import android.util.Log;
 
-import com.jeez.guanpj.jreadhub.base.model.BaseModel;
+import com.jeez.guanpj.jreadhub.moduls.test.base.model.BaseModel;
 import com.jeez.guanpj.jreadhub.moduls.test.bean.PostModel;
 import com.jeez.guanpj.jreadhub.moduls.test.util.HttpUtils;
 import com.jeez.guanpj.jreadhub.moduls.test.view.TestAdapter;

@@ -1,17 +1,17 @@
-package com.jeez.guanpj.jreadhub.mvpframe;
+package com.jeez.guanpj.jreadhub.mvpframe.view.activity;
 
 import android.os.Bundle;
 
-import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BaseModel;
-import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BasePresenter;
-import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BaseView;
+import com.jeez.guanpj.jreadhub.mvpframe.model.IBaseModel;
+import com.jeez.guanpj.jreadhub.mvpframe.presenter.AbsBasePresenter;
+import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 import com.jeez.guanpj.jreadhub.util.TUtil;
 
 /**
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class BaseFrameWebViewActivity<P extends BasePresenter, M extends BaseModel> extends BaseWebViewActivity implements BaseView {
+public abstract class AbsBaseMvpWebViewActivity<P extends AbsBasePresenter, M extends IBaseModel> extends AbsBaseWebViewActivity implements IBaseView {
     public P mPresenter;
     public M mModel;
 
@@ -20,7 +20,7 @@ public abstract class BaseFrameWebViewActivity<P extends BasePresenter, M extend
         super.onCreate(savedInstanceState);
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
-        mPresenter.setVM(this, mModel);
+        mPresenter.onAttatch(mModel, this);
     }
 
     @Override
@@ -36,7 +36,7 @@ public abstract class BaseFrameWebViewActivity<P extends BasePresenter, M extend
     @Override
     protected void onDestroy() {
         if (mPresenter != null) {
-            mPresenter.onDestroy();
+            mPresenter.onDetach();
         }
         super.onDestroy();
     }

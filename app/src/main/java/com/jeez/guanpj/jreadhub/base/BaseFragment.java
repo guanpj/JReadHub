@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.mvpframe;
+package com.jeez.guanpj.jreadhub.base;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.mvpframe.baseframe.BaseFuncIml;
+import com.jeez.guanpj.jreadhub.moduls.test.base.view.BaseActivity;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by Jie on 2016-11-1.
  */
 
-public class BaseFragment extends Fragment implements BaseFuncIml {
+public abstract class BaseFragment extends Fragment implements IBaseViewFlow {
+
+    private Unbinder unBinder;
     private View mContentView;
-    private ViewGroup mContainer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,36 +31,22 @@ public class BaseFragment extends Fragment implements BaseFuncIml {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(getLayoutId(), container, false);
+        unBinder = ButterKnife.bind(this, view);
         initView();
-        initEvent();
-        initData();
-
-        this.mContainer = container;
-        return mContentView;
-    }
-
-    public void setContentView(int viewId) {
-        this.mContentView = getActivity().getLayoutInflater().inflate(viewId, mContainer, false);
-    }
-
-    public View getContentView() {
-        return mContentView;
+        initDataAndEvent();
+        return view;
     }
 
     @Override
-    public void initView() {
-
-    }
+    public abstract int getLayoutId();
 
     @Override
-    public void initData() {
-
-    }
+    public abstract void initView();
 
     @Override
-    public void initEvent() {
+    public abstract void initDataAndEvent();
 
-    }
 
     protected void showShortToast(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();

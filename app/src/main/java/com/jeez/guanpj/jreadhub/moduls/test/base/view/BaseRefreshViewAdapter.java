@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.base.view;
+package com.jeez.guanpj.jreadhub.moduls.test.base.view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

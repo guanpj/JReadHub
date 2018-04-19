@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.base.view;
+package com.jeez.guanpj.jreadhub.moduls.test.base.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.jeez.guanpj.jreadhub.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.MainActivity;
-import com.jeez.guanpj.jreadhub.base.view.impl.IBaseFlowImpl;
+import com.jeez.guanpj.jreadhub.moduls.test.base.view.impl.IBaseFlowImpl;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 
 public abstract class BaseActivity extends AppCompatActivity implements IBaseFlowImpl {

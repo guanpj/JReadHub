@@ -15,7 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 
-import com.jeez.guanpj.jreadhub.base.view.BaseActivity;
+import com.jeez.guanpj.jreadhub.moduls.test.base.view.BaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
 import com.jeez.guanpj.jreadhub.util.UncaughtException;

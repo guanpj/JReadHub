@@ -1,10 +1,6 @@
-package com.jeez.guanpj.jreadhub.mvpframe.baseframe;
+package com.jeez.guanpj.jreadhub.moduls.test.base.view.impl;
 
-/**
- * Created by Jie on 2016-10-26.
- */
-
-public interface BaseFuncIml {
+public interface IBaseFlowImpl {
     /**
      * 初始化UI控件方法
      */

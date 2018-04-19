@@ -10,6 +10,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class RxManager {
+    private RxBus mRxBus = RxBus.getInstance();
     private Map<String, Observable<?>> mObservables = new HashMap<>();
     private CompositeDisposable mDisposable = new CompositeDisposable();
 
@@ -30,13 +31,13 @@ public class RxManager {
     }
 
     public void post(Object tag, Object content) {
-        RxBus.getInstance().post(tag, content);
+        mRxBus.post(tag, content);
     }
 
     public void clear() {
         mDisposable.clear();
         for (Map.Entry<String, Observable<?>> entry : mObservables.entrySet()) {
-            RxBus.getInstance().unRegister(entry.getKey(), entry.getValue());
+            mRxBus.unRegister(entry.getKey(), entry.getValue());
         }
     }
 }
