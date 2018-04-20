@@ -2,7 +2,6 @@ package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 
 import android.content.Context;
 
-import com.jeez.guanpj.jreadhub.mvpframe.model.IBaseModel;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxManager;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
@@ -16,17 +15,14 @@ import java.lang.reflect.Proxy;
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBasePresenter<M extends IBaseModel, V extends IBaseView> implements IBasePresenter<M, V> {
+public abstract class AbsBasePresenter<V extends IBaseView> implements IBasePresenter<V> {
     public Context context;
-    private M proxyModel;
     private WeakReference<V> weakView;
     private V proxyView;
     public RxManager mRxManager = new RxManager();
 
     @Override
-    public void onAttatch(M model, V view) {
-        this.proxyModel = (M) Proxy.newProxyInstance(view.getClass().getClassLoader(),
-                view.getClass().getInterfaces(), new MyInvocationHandler(model));
+    public void onAttatch(V view) {
         this.weakView = new WeakReference<>(view);
         proxyView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(),
                 view.getClass().getInterfaces(), new MyInvocationHandler(this.weakView.get()));
@@ -39,21 +35,15 @@ public abstract class AbsBasePresenter<M extends IBaseModel, V extends IBaseView
             this.weakView.clear();
             this.weakView = null;
         }
-        if (null != proxyModel) {
-            proxyModel = null;
-        }
     }
 
-    public M getModel() {
-        return proxyModel;
-    }
 
     public V getView() {
         return proxyView;
     }
 
     public boolean isAttached() {
-        return this.weakView != null && this.weakView.get() != null && this.proxyModel != null;
+        return this.weakView != null && this.weakView.get() != null;
     }
 
     private class MyInvocationHandler<T> implements InvocationHandler {

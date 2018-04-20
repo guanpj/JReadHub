@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.moduls.test.base.view.BaseActivity;
+import com.jeez.guanpj.jreadhub.ui.test.base.view.BaseActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

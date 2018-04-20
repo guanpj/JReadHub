@@ -7,7 +7,7 @@
     android:gravity="center"
     android:visibility="gone">
 
-    <com.jeez.guanpj.jreadhub.moduls.test.widget.LoadingView
+    <com.jeez.guanpj.jreadhub.ui.test.widget.LoadingView
         android:id="@+id/lv_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
