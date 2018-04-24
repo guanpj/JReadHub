@@ -29,16 +29,6 @@ public abstract class AbsBaseMvpActivity<P extends AbsBasePresenter> extends Bas
     protected abstract void performInject();
 
     @Override
-    public void onRequestError(String msg) {
-
-    }
-
-    @Override
-    public void onInternetError() {
-
-    }
-
-    @Override
     protected void onDestroy() {
         if (mPresenter != null) {
             mPresenter.onDetach();

@@ -8,7 +8,7 @@ import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.AppStatusTracker;
+import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.ui.test.base.view.impl.IBaseFlowImpl;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;

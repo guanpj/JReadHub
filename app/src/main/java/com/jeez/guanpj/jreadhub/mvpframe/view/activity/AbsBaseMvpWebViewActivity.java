@@ -24,16 +24,6 @@ public abstract class AbsBaseMvpWebViewActivity<P extends AbsBasePresenter> exte
     }
 
     @Override
-    public void onRequestError(String msg) {
-
-    }
-
-    @Override
-    public void onInternetError() {
-
-    }
-
-    @Override
     protected void onDestroy() {
         if (mPresenter != null) {
             mPresenter.onDetach();

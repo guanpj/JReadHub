@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
 import com.jeez.guanpj.jreadhub.di.scope.FragmentScope;
+import com.jeez.guanpj.jreadhub.ui.hottest.HottestFragment;
 
 import dagger.Component;
 
@@ -11,4 +12,6 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class, modules = FragmentModule.class)
 public interface FragmentComponent {
     Activity getActivity();
+
+    void inject(HottestFragment fragment);
 }

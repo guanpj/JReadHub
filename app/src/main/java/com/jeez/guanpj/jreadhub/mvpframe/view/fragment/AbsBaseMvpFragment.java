@@ -2,7 +2,11 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.fragment;
 
 import android.os.Bundle;
 
+import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.base.BaseFragment;
+import com.jeez.guanpj.jreadhub.di.component.DaggerFragmentComponent;
+import com.jeez.guanpj.jreadhub.di.component.FragmentComponent;
+import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.AbsBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
@@ -26,17 +30,14 @@ public abstract class AbsBaseMvpFragment<P extends AbsBasePresenter> extends Bas
         }
     }
 
+    public FragmentComponent getFragmentComponent() {
+        return DaggerFragmentComponent.builder()
+                .appComponent(ReadhubApplication.getAppComponent())
+                .fragmentModule(new FragmentModule(this))
+                .build();
+    }
+
     protected abstract void performInject();
-
-    @Override
-    public void onRequestError(String msg) {
-
-    }
-
-    @Override
-    public void onInternetError() {
-
-    }
 
     @Override
     public void onDestroy() {

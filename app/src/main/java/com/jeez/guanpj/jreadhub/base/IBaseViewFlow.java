@@ -1,12 +1,10 @@
 package com.jeez.guanpj.jreadhub.base;
 
-import me.yokeyword.fragmentation.ISupportActivity;
-
 /**
  * Created by Jie on 2016-10-26.
  */
 
-public interface IBaseViewFlow extends ISupportActivity {
+public interface IBaseViewFlow {
     /**
      * 获取布局Id
      */

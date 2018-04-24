@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.ui.test.base.view.BaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 

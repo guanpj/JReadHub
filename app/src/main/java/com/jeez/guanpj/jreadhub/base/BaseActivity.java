@@ -8,7 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.AppStatusTracker;
+import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.SplashActivity;
