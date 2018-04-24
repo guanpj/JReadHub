@@ -14,7 +14,12 @@ public class ReadhubApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        sInstance = this;
         AppStatusTracker.init(this);
+    }
+
+    public static synchronized ReadhubApplication getInstance() {
+        return sInstance;
     }
 
     public static synchronized AppComponent getAppComponent() {
