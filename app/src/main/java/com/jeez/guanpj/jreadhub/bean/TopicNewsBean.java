@@ -1,7 +1,5 @@
 package com.jeez.guanpj.jreadhub.bean;
 
-import org.threeten.bp.OffsetDateTime;
-
 public class TopicNewsBean {
 
     /**
@@ -26,7 +24,7 @@ public class TopicNewsBean {
     private String mobileUrl;
     private String authorName;
     private int duplicateId;
-    private OffsetDateTime publishDate;
+    private String publishDate;
 
     public int getId() {
         return id;
@@ -100,11 +98,11 @@ public class TopicNewsBean {
         this.duplicateId = duplicateId;
     }
 
-    public OffsetDateTime getPublishDate() {
+    public String getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(OffsetDateTime publishDate) {
+    public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
     }
 }

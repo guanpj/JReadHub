@@ -2,8 +2,6 @@ package com.jeez.guanpj.jreadhub.bean;
 
 import android.support.annotation.StringDef;
 
-import org.threeten.bp.OffsetDateTime;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -12,7 +10,7 @@ public class NewsBean {
     private String id;
     private String language;
     private String mobileUrl;
-    private OffsetDateTime publishDate;
+    private String publishDate;
     private String siteName;
     private String siteSlug;
     private String summary;
@@ -61,11 +59,11 @@ public class NewsBean {
         this.mobileUrl = mobileUrl;
     }
 
-    public OffsetDateTime getPublishDate() {
+    public String getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(OffsetDateTime publishDate) {
+    public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
     }
 

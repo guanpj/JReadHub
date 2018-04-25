@@ -20,23 +20,6 @@ public class HottestPresenter extends BasePresenter<HottestContract.View> implem
         this.mDataManager = mDataManager;
     }
 
-    private DisposableObserver<DataListBean<TopicBean>> mObserber = new DisposableObserver<DataListBean<TopicBean>>() {
-        @Override
-        public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
-            getView().onRequestEnd(topicBeanDataListBean, false);
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            getView().showError();
-        }
-
-        @Override
-        public void onComplete() {
-            getView().showContent();
-        }
-    };
-
     @Override
     public void doRefresh() {
         mRxManager.add(mDataManager.getTopicList(null, PAGE_SIZE)
