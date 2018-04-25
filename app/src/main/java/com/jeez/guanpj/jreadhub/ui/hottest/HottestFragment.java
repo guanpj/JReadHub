@@ -6,8 +6,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.bean.old.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.old.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicListAdapter;
 import com.jeez.guanpj.jreadhub.ui.test.widget.LoadMoreFooter;
@@ -90,16 +90,16 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
     public void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh) {
         if (isPull2Refresh) {
             listAdapter.getTopicList().clear();
-            listAdapter.getTopicList().addAll(data.getDataList());
+            listAdapter.getTopicList().addAll(data.getData());
             listAdapter.clearExpandStates();
             listAdapter.notifyDataSetChanged();
             refreshLayout.setRefreshing(false);
-            loadMoreFooter.setState(data.getDataList().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
+            loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
         } else {
             int startPosition = listAdapter.getItemCount();
-            listAdapter.getTopicList().addAll(data.getDataList());
-            listAdapter.notifyItemRangeInserted(startPosition, data.getDataList().size());
-            loadMoreFooter.setState(data.getDataList().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
+            listAdapter.getTopicList().addAll(data.getData());
+            listAdapter.notifyItemRangeInserted(startPosition, data.getData().size());
+            loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
         }
     }
 

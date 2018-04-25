@@ -1,5 +1,9 @@
 package com.jeez.guanpj.jreadhub.bean;
 
+import org.threeten.bp.OffsetDateTime;
+
+import java.util.List;
+
 public class TopicBean {
 
     /**
@@ -19,30 +23,92 @@ public class TopicBean {
 
     private String id;
     private String createdAt;
-    private NelDataBean nelData;
     private Object eventData;
-    private int order;
-    private String publishDate;
+    private long order;
+    private OffsetDateTime publishDate;
     private String summary;
     private String title;
     private String updatedAt;
     private Object timeline;
-    private ExtraBean extra;
-    private java.util.List<NewsArrayBean> newsArray;
+    private List<TopicNewsBean> newsArray;
 
-    class NelData{
+    public String getId() {
+        return id;
+    }
 
-        /**
-         * state : true
-         * result : [{"weight":0.2402448058128357,"nerName":"华为","entityId":42,"entityName":"华为","entityType":"company","entityUniqueId":"baike_6455903"},{"weight":0.3688744008541107,"nerName":"EMUI","entityId":216765,"entityName":"EMUI","entityType":"product","entityUniqueId":"baike_6271355"},{"weight":0.23941493034362793,"nerName":"P20","entityId":-1,"entityName":"","entityType":"product","entityUniqueId":-1}]
-         * nerResult : {"person":{},"company":{"华为":{"weight":0.2402448058128357}},"product":{"P20":{"weight":0.23941493034362793},"EMUI":{"weight":0.3688744008541107}},"location":{}}
-         */
+    public void setId(String id) {
+        this.id = id;
+    }
 
-        @com.google.gson.annotations.SerializedName("state")
-        private boolean state;
-        @com.google.gson.annotations.SerializedName("nerResult")
-        private NerResultBean nerResult;
-        @com.google.gson.annotations.SerializedName("result")
-        private java.util.List<ResultBean> result;
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Object getEventData() {
+        return eventData;
+    }
+
+    public void setEventData(Object eventData) {
+        this.eventData = eventData;
+    }
+
+    public long getOrder() {
+        return order;
+    }
+
+    public void setOrder(long order) {
+        this.order = order;
+    }
+
+    public OffsetDateTime getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(OffsetDateTime publishDate) {
+        this.publishDate = publishDate;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Object getTimeline() {
+        return timeline;
+    }
+
+    public void setTimeline(Object timeline) {
+        this.timeline = timeline;
+    }
+
+    public List<TopicNewsBean> getNewsArray() {
+        return newsArray;
+    }
+
+    public void setNewsArray(List<TopicNewsBean> newsArray) {
+        this.newsArray = newsArray;
     }
 }

@@ -1,7 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.hottest;
 
-import com.jeez.guanpj.jreadhub.bean.old.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.old.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
