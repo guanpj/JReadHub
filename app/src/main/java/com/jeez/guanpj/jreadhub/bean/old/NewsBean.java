@@ -1,10 +1,11 @@
-package com.jeez.guanpj.jreadhub.bean;
+package com.jeez.guanpj.jreadhub.bean.old;
 
 import android.support.annotation.StringDef;
 
+import org.threeten.bp.OffsetDateTime;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.time.OffsetDateTime;
 
 public class NewsBean {
 

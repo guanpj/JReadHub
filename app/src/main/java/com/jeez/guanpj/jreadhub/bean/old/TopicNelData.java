@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.bean;
+package com.jeez.guanpj.jreadhub.bean.old;
 
 import com.google.gson.annotations.SerializedName;
 

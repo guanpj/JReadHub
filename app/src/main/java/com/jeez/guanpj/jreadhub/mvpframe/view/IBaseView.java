@@ -5,7 +5,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.view;
  */
 
 public interface IBaseView {
-    void showLoading();
+    void showLoading(boolean isPullToRefresh);
 
     void showContent();
 

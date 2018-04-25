@@ -1,8 +1,8 @@
 package com.jeez.guanpj.jreadhub.core;
 
-import com.jeez.guanpj.jreadhub.bean.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.old.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.old.NewsBean;
+import com.jeez.guanpj.jreadhub.bean.old.TopicBean;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
 
 import io.reactivex.Observable;

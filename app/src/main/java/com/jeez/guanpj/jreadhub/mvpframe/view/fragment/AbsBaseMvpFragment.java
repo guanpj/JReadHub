@@ -7,7 +7,7 @@ import com.jeez.guanpj.jreadhub.base.BaseFragment;
 import com.jeez.guanpj.jreadhub.di.component.DaggerFragmentComponent;
 import com.jeez.guanpj.jreadhub.di.component.FragmentComponent;
 import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
-import com.jeez.guanpj.jreadhub.mvpframe.presenter.AbsBasePresenter;
+import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBaseMvpFragment<P extends AbsBasePresenter> extends BaseFragment implements IBaseView {
+public abstract class AbsBaseMvpFragment<P extends BasePresenter> extends BaseFragment implements IBaseView {
 
     @Inject
     public P mPresenter;

@@ -14,6 +14,13 @@
     <string name="main_newpost_text">新帖</string>
     <string name="main_attention_text">关注</string>
 
+    <string name="load_more_finished">已经到底啦</string>
+    <string name="load_more_failed">加载失败，点击重试</string>
+
+    <string name="site_name___author_name___time">%1$s / %2$s · %3$s</string>
+    <string name="site_name___time">%1$s · %2$s</string>
+    <string name="time___source_count">%1$s · %2$d个数据来源</string>
+
     <array name="essence_tab">
         <item>全部@dream@1</item>
         <item>视频@dream@41</item>

@@ -1,7 +1,7 @@
-package com.jeez.guanpj.jreadhub.bean;
+package com.jeez.guanpj.jreadhub.bean.old;
 
 
-import java.time.OffsetDateTime;
+import org.threeten.bp.OffsetDateTime;
 
 public class TopicNews {
 

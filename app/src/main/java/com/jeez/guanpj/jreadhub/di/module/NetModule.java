@@ -105,6 +105,7 @@ public class NetModule {
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient okHttpClient, String url) {
         return builder
+                .baseUrl(url)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

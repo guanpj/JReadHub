@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.activity;
 
 import android.os.Bundle;
 
-import com.jeez.guanpj.jreadhub.mvpframe.presenter.AbsBasePresenter;
+import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBaseMvpWebViewActivity<P extends AbsBasePresenter> extends AbsBaseWebViewActivity implements IBaseView {
+public abstract class AbsBaseMvpWebViewActivity<P extends BasePresenter> extends AbsBaseWebViewActivity implements IBaseView {
     @Inject
     public P mPresenter;
 

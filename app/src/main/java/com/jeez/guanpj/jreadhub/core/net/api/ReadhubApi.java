@@ -3,9 +3,9 @@ package com.jeez.guanpj.jreadhub.core.net.api;
 import android.os.Build;
 
 import com.jeez.guanpj.jreadhub.BuildConfig;
-import com.jeez.guanpj.jreadhub.bean.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.old.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.old.NewsBean;
+import com.jeez.guanpj.jreadhub.bean.old.TopicBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

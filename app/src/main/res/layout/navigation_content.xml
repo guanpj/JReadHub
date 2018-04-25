@@ -32,12 +32,12 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_16_dp"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@mipmap/top" />
+        app:srcCompat="@mipmap/top" />-->
 
 </android.support.design.widget.CoordinatorLayout>

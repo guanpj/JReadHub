@@ -15,7 +15,7 @@ import java.lang.reflect.Proxy;
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBasePresenter<V extends IBaseView> implements IBasePresenter<V> {
+public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
     public Context context;
     private WeakReference<V> weakView;
     private V proxyView;
@@ -36,7 +36,6 @@ public abstract class AbsBasePresenter<V extends IBaseView> implements IBasePres
             this.weakView = null;
         }
     }
-
 
     public V getView() {
         return proxyView;
