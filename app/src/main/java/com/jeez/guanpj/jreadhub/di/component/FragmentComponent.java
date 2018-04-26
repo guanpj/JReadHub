@@ -4,7 +4,10 @@ import android.app.Activity;
 
 import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
 import com.jeez.guanpj.jreadhub.di.scope.FragmentScope;
+import com.jeez.guanpj.jreadhub.ui.blockchain.BlockChainFragment;
+import com.jeez.guanpj.jreadhub.ui.developer.DeveloperFragment;
 import com.jeez.guanpj.jreadhub.ui.hottest.HottestFragment;
+import com.jeez.guanpj.jreadhub.ui.tech.TechFragment;
 
 import dagger.Component;
 
@@ -13,5 +16,11 @@ import dagger.Component;
 public interface FragmentComponent {
     Activity getActivity();
 
-    void inject(HottestFragment fragment);
+    void inject(HottestFragment hottestFragment);
+
+    void inject(TechFragment techFragment);
+
+    void inject(BlockChainFragment techFragment);
+
+    void inject(DeveloperFragment techFragment);
 }

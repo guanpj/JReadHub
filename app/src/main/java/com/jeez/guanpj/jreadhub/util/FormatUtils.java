@@ -1,9 +1,13 @@
 package com.jeez.guanpj.jreadhub.util;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import org.threeten.bp.Duration;
+import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneOffset;
+import org.threeten.bp.format.DateTimeFormatter;
 
 public final class FormatUtils {
 
@@ -17,7 +21,12 @@ public final class FormatUtils {
     private static final long YEAR = 12 * MONTH;
 
     public static String getRelativeTimeSpanString(@NonNull OffsetDateTime offsetDateTime) {
-        long offset = Duration.between(offsetDateTime, OffsetDateTime.now()).toMillis();
+        long offset = 0;
+        try {
+            offset = Duration.between(offsetDateTime, OffsetDateTime.now()).toMillis();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (offset > YEAR) {
             return (offset / YEAR) + "年前";
         } else if (offset > MONTH) {
@@ -35,4 +44,12 @@ public final class FormatUtils {
         }
     }
 
+    public static OffsetDateTime string2ODT(String timeStr) {
+        if (!TextUtils.isEmpty(timeStr)) {
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            LocalDateTime localDateTime = LocalDateTime.parse(timeStr, df);
+            return OffsetDateTime.of(localDateTime, ZoneOffset.UTC);
+        }
+        return null;
+    }
 }

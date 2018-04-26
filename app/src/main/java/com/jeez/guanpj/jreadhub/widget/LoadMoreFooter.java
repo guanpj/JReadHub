@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.ui.test.widget;
+package com.jeez.guanpj.jreadhub.widget;
 
 import android.content.Context;
 import android.support.annotation.IntDef;

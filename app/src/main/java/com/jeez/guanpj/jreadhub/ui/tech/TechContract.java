@@ -1,13 +1,13 @@
-package com.jeez.guanpj.jreadhub.ui.hottest;
+package com.jeez.guanpj.jreadhub.ui.tech;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
-public interface HottestContract {
+public interface TechContract {
     interface View extends IBaseView {
-        void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh);
+        void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh);
 
         void onRequestError(boolean isPull2Refresh);
     }

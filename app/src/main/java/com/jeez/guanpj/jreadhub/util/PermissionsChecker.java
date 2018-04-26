@@ -79,7 +79,6 @@ public class PermissionsChecker {
         } else {
             return true;
         }
-
     }
 
     // 判断是否缺少权限

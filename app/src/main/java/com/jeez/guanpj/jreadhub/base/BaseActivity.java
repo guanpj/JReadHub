@@ -129,15 +129,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             case Constants.Theme.Blue:
                 setTheme(R.style.BlueTheme);
                 break;
-
             case Constants.Theme.White:
                 setTheme(R.style.WhiteTheme);
                 break;
-
             case Constants.Theme.Gray:
                 setTheme(R.style.GrayTheme);
                 break;
-
             default:
                 setTheme(R.style.BlueTheme);
                 break;

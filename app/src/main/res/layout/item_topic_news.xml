@@ -15,8 +15,7 @@
         android:layout_height="wrap_content"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="14sp"
-        android:ellipsize="end"
-        tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
+        android:ellipsize="end" />
 
     <TextView
         android:id="@+id/tv_info"
@@ -25,7 +24,6 @@
         android:layout_marginTop="8dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
-        android:ellipsize="end"
-        tools:text="Github · 1天前" />
+        android:ellipsize="end" />
 
 </LinearLayout>

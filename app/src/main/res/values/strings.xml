@@ -9,11 +9,6 @@
     <string name="action_share">Share</string>
     <string name="action_search">Search</string>
 
-    <string name="main_essence_text">精华</string>
-    <string name="main_mine_text">我</string>
-    <string name="main_newpost_text">新帖</string>
-    <string name="main_attention_text">关注</string>
-
     <string name="load_more_finished">已经到底啦</string>
     <string name="load_more_failed">加载失败，点击重试</string>
 
@@ -21,13 +16,4 @@
     <string name="site_name___time">%1$s · %2$s</string>
     <string name="time___source_count">%1$s · %2$d个数据来源</string>
 
-    <array name="essence_tab">
-        <item>全部@dream@1</item>
-        <item>视频@dream@41</item>
-        <item>声音@dream@31</item>
-        <item>图片@dream@10</item>
-        <item>段子@dream@29</item>
-        <item>广告@dream@5</item>
-        <item>剧情@dream@6</item>
-    </array>
 </resources>

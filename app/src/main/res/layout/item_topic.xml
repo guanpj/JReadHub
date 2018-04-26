@@ -29,8 +29,7 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
                 android:maxLines="2"
-                android:ellipsize="end"
-                tools:text="这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题这里是标题" />
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/tv_summary"
@@ -39,8 +38,7 @@
                 android:layout_marginTop="8dp"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="14sp"
-                android:ellipsize="end"
-                tools:text="这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要这里是摘要" />
+                android:ellipsize="end" />
 
             <View
                 android:layout_width="match_parent"
@@ -60,8 +58,7 @@
                     android:layout_gravity="center_vertical"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="12sp"
-                    android:ellipsize="end"
-                    tools:text="Github / TakWolf · 8小时前" />
+                    android:ellipsize="end" />
 
                 <ImageView
                     android:id="@+id/img_expand_state"

@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
-import com.jeez.guanpj.jreadhub.ui.test.base.view.BaseActivity;
+import com.jeez.guanpj.jreadhub.base.BaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
+import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,17 +24,16 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
+    public int getLayoutId() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
     public void initView() {
-        setContentView(R.layout.activity_splash);
     }
 
     @Override
-    public void initData() {
-
-    }
-
-    @Override
-    public void initEvent() {
+    public void initDataAndEvent() {
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Long>() {
                     @Override

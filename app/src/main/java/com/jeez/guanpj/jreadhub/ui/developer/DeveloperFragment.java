@@ -1,21 +1,22 @@
-package com.jeez.guanpj.jreadhub.ui.hottest;
+package com.jeez.guanpj.jreadhub.ui.developer;
 
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
-import com.jeez.guanpj.jreadhub.ui.adpter.TopicListAdapter;
+import com.jeez.guanpj.jreadhub.ui.adpter.NewsListAdapter;
 import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
 import com.jeez.guanpj.jreadhub.widget.decoration.GapItemDecoration;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import butterknife.BindView;
 
-public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implements HottestContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
+public class DeveloperFragment extends AbsBaseMvpFragment<DeveloperPresenter> implements DeveloperContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
@@ -25,16 +26,21 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
     FloatingActionButton floatingActionButton;
 
     private LoadMoreFooter loadMoreFooter;
-    private TopicListAdapter listAdapter;
+    private NewsListAdapter listAdapter;
 
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_hottest;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void performInject() {
         getFragmentComponent().inject(this);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_hottest;
     }
 
     @Override
@@ -44,7 +50,7 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
         //recyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
 
         loadMoreFooter = new LoadMoreFooter(getActivity(), recyclerView);
-        listAdapter = new TopicListAdapter(getActivity());
+        listAdapter = new NewsListAdapter(getActivity());
         recyclerView.setAdapter(listAdapter);
     }
 
@@ -77,21 +83,20 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
 
     @Override
     public void onLoadMore() {
-        mPresenter.doLoadMore(listAdapter.getTopicList().get(listAdapter.getTopicList().size() - 1).getOrder());
+        mPresenter.doLoadMore(listAdapter.getNewsList().get(listAdapter.getNewsList().size() - 1).getPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
-    public void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh) {
+    public void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh) {
         if (isPull2Refresh) {
-            listAdapter.getTopicList().clear();
-            listAdapter.getTopicList().addAll(data.getData());
-            listAdapter.clearExpandStates();
+            listAdapter.getNewsList().clear();
+            listAdapter.getNewsList().addAll(data.getData());
             listAdapter.notifyDataSetChanged();
             refreshLayout.setRefreshing(false);
             loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
         } else {
             int startPosition = listAdapter.getItemCount();
-            listAdapter.getTopicList().addAll(data.getData());
+            listAdapter.getNewsList().addAll(data.getData());
             listAdapter.notifyItemRangeInserted(startPosition, data.getData().size());
             loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
         }

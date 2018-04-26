@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.bean.old.TopicNews;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -97,15 +96,15 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
             tvTitle.setText(topic.getTitle());
             tvSummary.setText(topic.getSummary());
             tvSummary.setVisibility(TextUtils.isEmpty(topic.getSummary()) ? View.GONE : View.VISIBLE);
-            //tvInfo.setText(activity.getString(R.string.time___source_count, FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()), topic.getNewsArray().size()));
-            tvInfo.setText(topic.getPublishDate());
+            tvInfo.setText(activity.getString(R.string.time___source_count, FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()), topic.getNewsArray().size()));
+            //tvInfo.setText(topic.getPublishDate());
             boolean expand = expandStateMap.get(position, false);
             imgExpandState.setImageResource(expand ? R.mipmap.ic_expand_less_grey600_18dp : R.mipmap.ic_expand_more_grey600_18dp);
             layoutExpand.setExpanded(expand, false);
             adjustLayoutSourceChildren(topic.getNewsArray().size());
             for (int i = 0; i < layoutSource.getChildCount(); i++) {
                 TopicNewsBean news = topic.getNewsArray().get(i);
-                View   = layoutSource.getChildAt(i);
+                View  view = layoutSource.getChildAt(i);
                 NewsViewHolder holder = (NewsViewHolder) view.getTag();
                 if (holder == null) {
                     holder = new NewsViewHolder(view);
@@ -168,8 +167,8 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
         void bind(@NonNull TopicNewsBean news) {
             this.news = news;
             tvTitle.setText(news.getTitle());
-            //tvInfo.setText(activity.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
-            tvInfo.setText(news.getPublishDate());
+            tvInfo.setText(activity.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
+            //tvInfo.setText(news.getPublishDate());
         }
 
         @OnClick(R.id.btn_item)

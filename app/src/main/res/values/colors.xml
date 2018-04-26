@@ -54,11 +54,4 @@
     <color name="theme_gray_float_btn">#979797</color>
     <color name="theme_gray_toolbar_text">#fff</color>
 
-    <color name="essence_item_color">#DEE1E3</color>
-    <color name="essence_tab_bg">@android:color/white</color>
-    <color name="essence_tab_text_color_normal">#ff847d7b</color>
-    <color name="essence_tab_text_color_press">#D43A32</color>
-    <color name="essence_item_text_normal">#ff847d7b</color>
-    <color name="essence_item_text_select">#ff333333</color>
-
 </resources>

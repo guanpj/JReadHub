@@ -16,9 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.MenuItem;
 
+import com.jeez.guanpj.jreadhub.base.BaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.ui.adpter.FragmentAdapter;
-import com.jeez.guanpj.jreadhub.ui.test.base.view.BaseActivity;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
 import com.jeez.guanpj.jreadhub.util.UncaughtException;
 
@@ -49,7 +49,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermission();
         } else {
@@ -59,8 +58,32 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
     public void initView() {
         initToolBar();
+    }
+
+    @Override
+    public void initDataAndEvent() {
+        List<String> mPageTitles = new ArrayList<>();
+        mPageTitles.add("热门话题");
+        mPageTitles.add("科技动态");
+        mPageTitles.add("开发者资讯");
+        mPageTitles.add("区块链快讯");
+        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), mPageTitles);
+        mViewPager.setAdapter(adapter);
+
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        for (int i = 0; i < mPageTitles.size(); i++) {
+            mTabLayout.addTab(mTabLayout.newTab().setText(mPageTitles.get(i)));
+        }
+        mTabLayout.setupWithViewPager(mViewPager);
+
+        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     private void initToolBar() {
@@ -77,25 +100,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         mToolbar.setNavigationIcon(navIcon.resourceId);
         mToolbar.setOverflowIcon(ContextCompat.getDrawable(this, overFlowIcon.resourceId));
-    }
-
-    @Override
-    public void initData() {
-        List<String> mPageTitles = new ArrayList<>();
-        mPageTitles.add("main");
-        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), mPageTitles);
-        mViewPager.setAdapter(adapter);
-
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        for (int i = 0; i < mPageTitles.size(); i++) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(mPageTitles.get(i)));
-        }
-        mTabLayout.setupWithViewPager(mViewPager);
-    }
-
-    @Override
-    public void initEvent() {
-        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
