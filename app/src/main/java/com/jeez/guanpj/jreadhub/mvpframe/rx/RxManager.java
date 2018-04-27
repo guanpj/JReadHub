@@ -10,12 +10,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class RxManager {
-    private RxBus mRxBus = RxBus.getInstance();
+    private OldRxBus mRxBus = OldRxBus.getInstance();
     private Map<String, Observable<?>> mObservables = new HashMap<>();
     private CompositeDisposable mDisposable = new CompositeDisposable();
 
     public void on(String eventName, Consumer<Object> consumer) {
-        Observable<?> observable = RxBus.getInstance().register(eventName);
+        Observable<?> observable = OldRxBus.getInstance().register(eventName);
         mObservables.put(eventName, observable);
         mDisposable.add(observable.observeOn(AndroidSchedulers.mainThread())
             .subscribe(consumer, new Consumer<Throwable>() {

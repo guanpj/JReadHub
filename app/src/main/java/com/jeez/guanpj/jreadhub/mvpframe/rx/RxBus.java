@@ -1,74 +1,38 @@
 package com.jeez.guanpj.jreadhub.mvpframe.rx;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
-import io.reactivex.subjects.Subject;
+import io.reactivex.Flowable;
+import io.reactivex.processors.FlowableProcessor;
+import io.reactivex.processors.PublishProcessor;
 
 public class RxBus {
-    private static RxBus sInstance;
 
-    public static synchronized RxBus getInstance() {
-        if (null == sInstance) {
-            sInstance = new RxBus();
-        }
-        return sInstance;
+    private final FlowableProcessor<Object> mBus;
+
+    private RxBus() {
+        mBus = PublishProcessor.create().toSerialized();
     }
 
-    private RxBus() {}
-
-    private ConcurrentHashMap<Object, List<Subject>> subjectMapper = new ConcurrentHashMap<>();
-
-    public <T> Observable<T> register(Object tag) {
-        List<Subject> subjectList = subjectMapper.get(tag);
-        if (null == subjectList) {
-            subjectList = new ArrayList<>();
-            subjectMapper.put(tag, subjectList);
-        }
-        Subject<T> subject;
-        subjectList.add(subject = PublishSubject.<T>create());
-        return  subject;
+    public static RxBus get() {
+        return Holder.BUS;
     }
 
-    public void unRegister(Object tag) {
-        List<Subject> subjectList = subjectMapper.get(tag);
-        if (!isEmpty(subjectList)) {
-            subjectList.remove(tag);
-        }
+    private static class Holder {
+        private static final RxBus BUS = new RxBus();
     }
 
-    public RxBus unRegister(Object tag, Observable<?> observable) {
-        if (null == observable) {
-            return getInstance();
-        }
-        List<Subject> subjectList = subjectMapper.get(tag);
-        if (null != subjectList) {
-            subjectList.remove(tag);
-            if (isEmpty(subjectList)) {
-                subjectMapper.remove(observable);
-            }
-        }
-        return getInstance();
+    public void post(Object obj) {
+        mBus.onNext(obj);
     }
 
-    public void post(Object tag, Object content) {
-        List<Subject> subjectList = subjectMapper.get(tag);
-        if (!isEmpty(subjectList)) {
-            for (Subject subject : subjectList) {
-                subject.onNext(content);
-            }
-        }
+    public <T> Flowable<T> toFlowable(Class<T> tClass) {
+        return mBus.ofType(tClass);
     }
 
-    public void post(Object content) {
-        post(content.getClass().getName(), content);
+    public Flowable<Object> toFlowable() {
+        return mBus;
     }
 
-    public static boolean isEmpty(Collection<Subject> collection) {
-        return null == collection || collection.isEmpty();
+    public boolean hasSubscribers() {
+        return mBus.hasSubscribers();
     }
 }

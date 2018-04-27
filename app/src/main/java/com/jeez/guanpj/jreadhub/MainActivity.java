@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             mTabLayout.addTab(mTabLayout.newTab().setText(mPageTitles.get(i)));
         }
         mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         mNavigationView.setNavigationItemSelectedListener(this);
     }

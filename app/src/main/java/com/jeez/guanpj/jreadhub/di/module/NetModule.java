@@ -3,7 +3,6 @@ package com.jeez.guanpj.jreadhub.di.module;
 import com.jeez.guanpj.jreadhub.BuildConfig;
 import com.jeez.guanpj.jreadhub.core.net.api.ReadhubApi;
 import com.jeez.guanpj.jreadhub.core.net.cookies.CookiesManager;
-import com.jeez.guanpj.jreadhub.di.qualifier.ReadhubUrlQualifier;
 import com.jeez.guanpj.jreadhub.util.CommonUtil;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
@@ -30,13 +29,12 @@ public class NetModule {
 
     @Singleton
     @Provides
-    ReadhubApi provideGeeksApi(@ReadhubUrlQualifier Retrofit retrofit) {
+    ReadhubApi provideGeeksApi(Retrofit retrofit) {
         return retrofit.create(ReadhubApi.class);
     }
 
     @Singleton
     @Provides
-    @ReadhubUrlQualifier
     Retrofit provideGeeksRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, ReadhubApi.HOST);
     }
