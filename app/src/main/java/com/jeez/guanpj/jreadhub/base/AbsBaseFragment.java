@@ -16,7 +16,7 @@ import butterknife.Unbinder;
  * Created by Jie on 2016-11-1.
  */
 
-public abstract class BaseFragment extends Fragment implements IBaseViewFlow {
+public abstract class AbsBaseFragment extends Fragment implements IBaseViewFlow {
 
     private Unbinder unBinder;
     private View mContentView;
@@ -50,11 +50,11 @@ public abstract class BaseFragment extends Fragment implements IBaseViewFlow {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    protected void openActivity(Class<? extends BaseActivity> targetActivity) {
+    protected void openActivity(Class<? extends AbsBaseActivity> targetActivity) {
         openActivity(targetActivity, null);
     }
 
-    protected void openActivity(Class<? extends BaseActivity> targetActivity, Bundle parameter) {
+    protected void openActivity(Class<? extends AbsBaseActivity> targetActivity, Bundle parameter) {
         Intent intent = new Intent(getActivity(), targetActivity);
         if (parameter != null) {
             intent.putExtras(parameter);

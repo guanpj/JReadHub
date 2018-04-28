@@ -1,7 +1,5 @@
 package com.jeez.guanpj.jreadhub.ui.developer;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -22,16 +20,9 @@ public class DeveloperFragment extends AbsBaseMvpFragment<DeveloperPresenter> im
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recycler_view)
     HeaderAndFooterRecyclerView recyclerView;
-    @BindView(R.id.floating_action_btn)
-    FloatingActionButton floatingActionButton;
 
     private LoadMoreFooter loadMoreFooter;
     private NewsListAdapter listAdapter;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     protected void performInject() {
@@ -64,19 +55,6 @@ public class DeveloperFragment extends AbsBaseMvpFragment<DeveloperPresenter> im
     }
 
     @Override
-    public void showLoading(boolean isPullToRefresh) {
-    }
-
-    @Override
-    public void showContent() {
-    }
-
-    @Override
-    public void showError() {
-
-    }
-
-    @Override
     public void onRefresh() {
         mPresenter.doRefresh();
     }
@@ -84,6 +62,11 @@ public class DeveloperFragment extends AbsBaseMvpFragment<DeveloperPresenter> im
     @Override
     public void onLoadMore() {
         mPresenter.doLoadMore(listAdapter.getNewsList().get(listAdapter.getNewsList().size() - 1).getPublishDate().toInstant().toEpochMilli());
+    }
+
+    @Override
+    public void onRequestStart() {
+
     }
 
     @Override
@@ -108,6 +91,15 @@ public class DeveloperFragment extends AbsBaseMvpFragment<DeveloperPresenter> im
             refreshLayout.setRefreshing(false);
         } else {
             loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
+        }
+    }
+
+    @Override
+    public void onFabClick() {
+        recyclerView.scrollToPosition(0);
+        if (!refreshLayout.isRefreshing()) {
+            refreshLayout.setRefreshing(true);
+            onRefresh();
         }
     }
 }

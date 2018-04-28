@@ -6,7 +6,9 @@ import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
 public interface DeveloperContract {
-    interface View extends IBaseView {
+    interface View extends IBaseView{
+        void onRequestStart();
+
         void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh);
 
         void onRequestError(boolean isPull2Refresh);

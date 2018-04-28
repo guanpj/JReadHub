@@ -16,4 +16,6 @@
     <string name="site_name___time">%1$s · %2$s</string>
     <string name="time___source_count">%1$s · %2$d个数据来源</string>
 
+    <string name="source_format">来源：%1$s</string>
+
 </resources>

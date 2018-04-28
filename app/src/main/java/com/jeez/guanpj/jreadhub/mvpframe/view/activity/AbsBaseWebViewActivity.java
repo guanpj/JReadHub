@@ -7,7 +7,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.jeez.guanpj.jreadhub.base.BaseActivity;
+import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBaseWebViewActivity extends BaseActivity {
+public abstract class AbsBaseWebViewActivity extends AbsBaseActivity {
     protected final static String PLATFORM = "Android";
 
     protected static class WebAppClient extends WebViewClient {

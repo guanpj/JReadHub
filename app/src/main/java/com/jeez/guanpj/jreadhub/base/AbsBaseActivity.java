@@ -23,7 +23,7 @@ import butterknife.Unbinder;
  * Created by Jie on 2016-10-26.
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements IBaseViewFlow {
+public abstract class AbsBaseActivity extends AppCompatActivity implements IBaseViewFlow {
 
     public ThemeUtil mThemeUtil;
     private Unbinder unBinder;
@@ -141,11 +141,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         }
     }
 
-    protected void openActivity(Class<? extends BaseActivity> targetActivity) {
+    protected void openActivity(Class<? extends AbsBaseActivity> targetActivity) {
         openActivity(targetActivity, null);
     }
 
-    protected void openActivity(Class<? extends BaseActivity> targetActivity, Bundle parameter) {
+    protected void openActivity(Class<? extends AbsBaseActivity> targetActivity, Bundle parameter) {
         Intent intent = new Intent(this, targetActivity);
         if (parameter != null) {
             intent.putExtras(parameter);

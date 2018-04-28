@@ -6,18 +6,20 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.MenuItem;
 
-import com.jeez.guanpj.jreadhub.base.BaseActivity;
+import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
+import com.jeez.guanpj.jreadhub.event.FabClickEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.ui.adpter.FragmentAdapter;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
 import com.jeez.guanpj.jreadhub.util.UncaughtException;
@@ -27,8 +29,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AbsBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.dl_main)
     DrawerLayout mDrawerLayout;
@@ -40,8 +43,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
-    /*@BindView(R.id.fab)
-    FloatingActionButton mFloatingActionButton;*/
+    @BindView(R.id.fab)
+    FloatingActionButton mFloatingActionButton;
 
     private List<Fragment> fragments;
     private FragmentAdapter fragmentAdapter;
@@ -77,7 +80,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), mPageTitles);
         mViewPager.setAdapter(adapter);
 
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         for (int i = 0; i < mPageTitles.size(); i++) {
             mTabLayout.addTab(mTabLayout.newTab().setText(mPageTitles.get(i)));
         }
@@ -99,8 +101,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         theme.resolveAttribute(R.attr.navIcon, navIcon, true);
         theme.resolveAttribute(R.attr.overFlowIcon, overFlowIcon, true);
 
-        mToolbar.setNavigationIcon(navIcon.resourceId);
-        mToolbar.setOverflowIcon(ContextCompat.getDrawable(this, overFlowIcon.resourceId));
+        /*mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setOverflowIcon(ContextCompat.getDrawable(this, overFlowIcon.resourceId));*/
     }
 
     @Override
@@ -153,5 +155,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
+    }
+
+    @OnClick(R.id.fab)
+    void onFabClick() {
+        RxBus.getInstance().post(new FabClickEvent());
     }
 }

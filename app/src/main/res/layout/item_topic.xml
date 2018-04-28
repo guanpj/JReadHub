@@ -17,6 +17,7 @@
         android:elevation="2dp">
 
         <LinearLayout
+            android:id="@+id/ll_item_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -48,6 +49,7 @@
                 android:layout_marginBottom="16dp" />
 
             <FrameLayout
+                android:id="@+id/fl_item_footer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

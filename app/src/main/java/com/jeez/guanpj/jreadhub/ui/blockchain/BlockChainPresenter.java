@@ -21,9 +21,8 @@ public class BlockChainPresenter extends BasePresenter<BlockChainContract.View> 
 
     @Override
     public void doRefresh() {
-        mRxManager.add(mDataManager.getNewsList(NewsBean.TYPE_BLOCKCHAIN, null, PAGE_SIZE)
+        addSubscribe(mDataManager.getNewsList(NewsBean.TYPE_BLOCKCHAIN, null, PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
-                .doOnSubscribe(disposable -> getView().showLoading(true))
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
                     public void onNext(DataListBean<NewsBean> newsBeanDataListBean) {
@@ -37,16 +36,14 @@ public class BlockChainPresenter extends BasePresenter<BlockChainContract.View> 
 
                     @Override
                     public void onComplete() {
-                        getView().showContent();
                     }
                 }));
     }
 
     @Override
     public void doLoadMore(Long lastCursor) {
-        mRxManager.add(mDataManager.getNewsList(NewsBean.TYPE_BLOCKCHAIN, lastCursor, PAGE_SIZE)
+        addSubscribe(mDataManager.getNewsList(NewsBean.TYPE_BLOCKCHAIN, lastCursor, PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
-                .doOnSubscribe(disposable -> getView().showLoading(false))
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
                     public void onNext(DataListBean<NewsBean> newsBeanDataListBean) {
@@ -60,7 +57,6 @@ public class BlockChainPresenter extends BasePresenter<BlockChainContract.View> 
 
                     @Override
                     public void onComplete() {
-                        getView().showContent();
                     }
                 }));
     }

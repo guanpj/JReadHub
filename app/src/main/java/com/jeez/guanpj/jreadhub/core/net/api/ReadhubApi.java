@@ -4,6 +4,7 @@ import android.os.Build;
 
 import com.jeez.guanpj.jreadhub.BuildConfig;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 
@@ -28,4 +29,10 @@ public interface ReadhubApi {
             @Query("lastCursor") Long lastCursor,
             @Query("pageSize") int pageSize
     );
+
+    @GET("/topic/instantview")
+    Observable<InstantReadBean> getTopicInstantRead(@Query("topicId") String topicId);
+
+    @GET("topic/{topic_id}")
+    Observable<TopicBean> getTopicDetail(@Path("topic_id") String topicId);
 }

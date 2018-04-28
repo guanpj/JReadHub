@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.jeez.guanpj.jreadhub.base.BaseActivity;
+import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AbsBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

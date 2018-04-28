@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="@dimen/cardview_default_elevation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txt_instant_source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:textColor="#545454"
+                    android:textSize="@dimen/textSize_18"
+                    tools:text="来源：36Kr" />
+
+                <TextView
+                    android:id="@+id/txt_origin_site"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/selector_instant_read_btn"
+                    android:padding="@dimen/dimen_10_dp"
+                    android:text="访问源网址"
+                    android:textColor="#545454"
+                    android:textSize="@dimen/textSize_18"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EDEDED" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_topic_instant_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#222222"
+                        android:textSize="@dimen/textSize_20"
+                        android:textStyle="bold"
+                        tools:text="欧盟正考虑采取多项措施 向谷歌亚马逊等公司征收更多的税" />
+
+                    <WebView
+                        android:id="@+id/web_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/img_close"
+        android:layout_width="@dimen/dimen_60_dp"
+        android:layout_height="@dimen/dimen_60_dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_close" />
+</LinearLayout>
+

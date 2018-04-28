@@ -14,6 +14,8 @@ public class Constants {
 
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";
 
+    public static final String BUNDLE_TOPIC_ID = "BUNDLE_TOPIC_ID";
+
     public static final int PER_PAGE = 15;
 
     public static final String PHPHUB_HOST = "phphub.org";
@@ -39,51 +41,7 @@ public class Constants {
     public static final String LOGIN_HELP = "http://7xnqwn.com1.z0.glb.clouddn.com/index.html";
 
     public interface Key {
-        String TOPIC = "topic";
-        String TOPIC_TYPE = "topic_type";
-        String USER_DATA = "user_data";
-        String IS_LOGIN = "is_login";
-        String COMMENT_URL = "comment_url";
-        String WEB_URL = "web_url";
-        String WEB_TITLE = "web_title";
-        String TOPIC_IMAGE_URL = "topic_image_url";
-        String TOKEN = "token";
-        String TOPIC_ID = "topic_id";
-        String USER_ID = "user_id";
-        String PREVIEW_TOPIC_TITLE = "preview_topic_title";
-        String PREVIEW_TOPIC_CONTENT = "preview_topic_content";
         String THEME_MODE = "theme_mode";
-    }
-
-    public interface Token {
-        String AUTH_TYPE_GUEST = "client_credentials";
-        String AUTH_TYPE_USER = "login_token";
-        String AUTH_TYPE_REFRESH = "refresh_token";
-    }
-
-    public interface Topic {
-        String RECOMMEND = "excellent";//精华
-        String VOTE = "vote";//投票
-        String NEWEST = "newest";//最新
-        String NOBODY = "nobody";//零回复
-        String JOBS = "jobs";//热门招聘
-        String WIKI = "wiki";//社区WIKI
-    }
-
-    public interface User {
-        int USER_TOPIC_FOLLOW = 1;
-        int USER_TOPIC_VOTES = 2; //赞过话题
-        int USER_TOPIC_MY = 3; //
-    }
-
-    public interface TopicOpt {
-        int TOPIC_VOTE_UP = 5; //赞同话题
-        int TOPIC_VOTE_DOWN = 6;//反对话题
-    }
-
-    public interface Activity {
-        int LoginActivity = 1000;
-        int UserInfoEditActivity = 1001;
     }
 
     public interface Theme {

@@ -21,9 +21,8 @@ public class HottestPresenter extends BasePresenter<HottestContract.View> implem
 
     @Override
     public void doRefresh() {
-        mRxManager.add(mDataManager.getTopicList(null, PAGE_SIZE)
+        addSubscribe(mDataManager.getTopicList(null, PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
-                .doOnSubscribe(disposable -> getView().showLoading(true))
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
                     public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
@@ -37,16 +36,14 @@ public class HottestPresenter extends BasePresenter<HottestContract.View> implem
 
                     @Override
                     public void onComplete() {
-                        getView().showContent();
                     }
                 }));
     }
 
     @Override
     public void doLoadMore(Long lastCursor) {
-        mRxManager.add(mDataManager.getTopicList(lastCursor, PAGE_SIZE)
+        addSubscribe(mDataManager.getTopicList(lastCursor, PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
-                .doOnSubscribe(disposable -> getView().showLoading(false))
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
                     public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
@@ -60,7 +57,6 @@ public class HottestPresenter extends BasePresenter<HottestContract.View> implem
 
                     @Override
                     public void onComplete() {
-                        getView().showContent();
                     }
                 }));
     }

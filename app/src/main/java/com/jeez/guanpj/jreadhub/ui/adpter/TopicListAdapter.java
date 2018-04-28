@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
+import com.jeez.guanpj.jreadhub.ui.instant.InstantReadFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -136,8 +138,14 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
             }
         }
 
-        @OnClick(R.id.btn_item)
-        void onBtnItemClick() {
+        @OnClick(R.id.ll_item_header)
+        void onItemHeaderClick() {
+            InstantReadFragment.newInstance(topic.getId()).show(((MainActivity)activity).getSupportFragmentManager(),
+                    InstantReadFragment.TAG);
+        }
+
+        @OnClick(R.id.fl_item_footer)
+        void onItemFooterClick() {
             if (expandStateMap.get(position, false)) {
                 expandStateMap.put(position, false);
                 imgExpandState.setImageResource(R.mipmap.ic_expand_more_grey600_18dp);

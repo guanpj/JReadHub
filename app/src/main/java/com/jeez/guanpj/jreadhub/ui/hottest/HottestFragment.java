@@ -1,6 +1,5 @@
 package com.jeez.guanpj.jreadhub.ui.hottest;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -21,8 +20,6 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recycler_view)
     HeaderAndFooterRecyclerView recyclerView;
-    @BindView(R.id.floating_action_btn)
-    FloatingActionButton floatingActionButton;
 
     private LoadMoreFooter loadMoreFooter;
     private TopicListAdapter listAdapter;
@@ -55,18 +52,6 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setRefreshing(true);
         onRefresh();
-    }
-
-    @Override
-    public void showLoading(boolean isPullToRefresh) {
-    }
-
-    @Override
-    public void showContent() {
-    }
-
-    @Override
-    public void showError() {
 
     }
 
@@ -78,6 +63,11 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
     @Override
     public void onLoadMore() {
         mPresenter.doLoadMore(listAdapter.getTopicList().get(listAdapter.getTopicList().size() - 1).getOrder());
+    }
+
+    @Override
+    public void onRequestStart() {
+
     }
 
     @Override
@@ -103,6 +93,15 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
             refreshLayout.setRefreshing(false);
         } else {
             loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
+        }
+    }
+
+    @Override
+    public void onFabClick() {
+        recyclerView.scrollToPosition(0);
+        if (!refreshLayout.isRefreshing()) {
+            refreshLayout.setRefreshing(true);
+            onRefresh();
         }
     }
 }

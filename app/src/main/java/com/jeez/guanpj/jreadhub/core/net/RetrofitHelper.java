@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.core.net;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.net.api.ReadhubApi;
@@ -25,5 +26,15 @@ public class RetrofitHelper implements NetHelper{
     @Override
     public Observable<DataListBean<NewsBean>> getNewsList(@NewsBean.Type String type, Long lastCursor, int pageSize) {
         return readhubApi.getNewsList(type, lastCursor, pageSize);
+    }
+
+    @Override
+    public Observable<InstantReadBean> getTopicInstantRead(String topicId) {
+        return readhubApi.getTopicInstantRead(topicId);
+    }
+
+    @Override
+    public Observable<TopicBean> getTopicDetail(String topicId) {
+        return readhubApi.getTopicDetail(topicId);
     }
 }

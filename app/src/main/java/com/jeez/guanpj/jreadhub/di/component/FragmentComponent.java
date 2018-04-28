@@ -7,6 +7,7 @@ import com.jeez.guanpj.jreadhub.di.scope.FragmentScope;
 import com.jeez.guanpj.jreadhub.ui.blockchain.BlockChainFragment;
 import com.jeez.guanpj.jreadhub.ui.developer.DeveloperFragment;
 import com.jeez.guanpj.jreadhub.ui.hottest.HottestFragment;
+import com.jeez.guanpj.jreadhub.ui.instant.InstantReadFragment;
 import com.jeez.guanpj.jreadhub.ui.tech.TechFragment;
 
 import dagger.Component;
@@ -23,4 +24,6 @@ public interface FragmentComponent {
     void inject(BlockChainFragment techFragment);
 
     void inject(DeveloperFragment techFragment);
+
+    void inject(InstantReadFragment fragment);
 }

@@ -20,7 +20,7 @@
     <color name="bg_gray">#979797</color>
 
     <color name="dialog_bg">#6b000000</color>
-
+    <color name="backgroundGrey">#F7F7F7</color>
     <color name="edit_bg">#e0e0e0</color>
 
     <!--

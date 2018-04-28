@@ -12,7 +12,7 @@ public class RxBus {
         mBus = PublishProcessor.create().toSerialized();
     }
 
-    public static RxBus get() {
+    public static RxBus getInstance() {
         return Holder.BUS;
     }
 
