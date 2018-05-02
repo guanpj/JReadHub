@@ -30,7 +30,8 @@
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="16sp"
                 android:maxLines="2"
-                android:ellipsize="end" />
+                android:ellipsize="end"
+                android:text="标题标题"/>
 
             <TextView
                 android:id="@+id/tv_summary"
@@ -39,7 +40,8 @@
                 android:layout_marginTop="8dp"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="14sp"
-                android:ellipsize="end" />
+                android:ellipsize="end"
+                android:text="内容内容"/>
 
             <View
                 android:layout_width="match_parent"
@@ -58,9 +60,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textColor="?attr/colorPrimary"
+                    android:textColor="?attr/readhubTheme"
                     android:textSize="12sp"
-                    android:ellipsize="end" />
+                    android:ellipsize="end"
+                    android:text="时间时间"/>
 
                 <ImageView
                     android:id="@+id/img_expand_state"
@@ -69,7 +72,7 @@
                     android:layout_gravity="center|end"
                     android:src="@mipmap/ic_expand_more_grey600_18dp"
                     android:scaleType="center"
-                    android:adjustViewBounds="true" />
+                    android:adjustViewBounds="true"/>
 
             </FrameLayout>
 
@@ -81,7 +84,7 @@
         android:id="@+id/layout_expand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/readhubTheme"
         app:el_expanded="true">
 
         <LinearLayout
