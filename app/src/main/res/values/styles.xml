@@ -33,7 +33,7 @@
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
         <item name="colorAccent">?attr/readhubTheme</item>
 
-        <item name="readhubBackground">@color/colorPrimary</item>
+        <item name="readhubBackground">@color/theme_blue_background</item>
         <item name="readhubToolbarText">@color/theme_blue_toolbar_text</item>
         <item name="readhubBadge">@color/theme_blue_badge</item>
         <item name="readhubStatus">@color/theme_blue_status</item>
@@ -55,7 +55,7 @@
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
         <item name="colorAccent">?attr/readhubTheme</item>
 
-        <item name="readhubBackground">@color/colorPrimary</item>
+        <item name="readhubBackground">@color/theme_gray_background</item>
         <item name="readhubToolbarText">@color/theme_gray_toolbar_text</item>
         <item name="readhubBadge">@color/theme_gray_badge</item>
         <item name="readhubStatus">@color/theme_gray_status</item>

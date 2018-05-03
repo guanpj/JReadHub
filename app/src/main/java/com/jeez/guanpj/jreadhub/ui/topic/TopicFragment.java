@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.ui.hottest;
+package com.jeez.guanpj.jreadhub.ui.topic;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +14,7 @@ import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import butterknife.BindView;
 
-public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implements HottestContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
+public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
@@ -26,7 +26,7 @@ public class HottestFragment extends AbsBaseMvpFragment<HottestPresenter> implem
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_hottest;
+        return R.layout.fragment_common;
     }
 
     @Override

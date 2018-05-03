@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.ui.instant;
+package com.jeez.guanpj.jreadhub.ui.topic.instant;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

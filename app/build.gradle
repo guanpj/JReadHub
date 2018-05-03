@@ -67,4 +67,8 @@ dependencies {
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+
+    implementation 'org.parceler:parceler-api:1.1.9'
+    annotationProcessor 'org.parceler:parceler:1.1.9'
+    implementation 'org.jsoup:jsoup:1.11.2'
 }

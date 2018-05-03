@@ -41,6 +41,13 @@ public abstract class AbsBaseDialogFragment extends DialogFragment implements IB
     @Override
     public abstract void initDataAndEvent();
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (null != unBinder) {
+            unBinder.unbind();
+        }
+    }
 
     protected void showShortToast(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();

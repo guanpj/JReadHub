@@ -2,28 +2,28 @@ package com.jeez.guanpj.jreadhub.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.SplashActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
+import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ThemeUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * Created by Jie on 2016-10-26.
  */
 
-public abstract class AbsBaseActivity extends AppCompatActivity implements IBaseViewFlow {
+public abstract class AbsBaseActivity extends SupportActivity implements IBaseViewFlow {
 
     public ThemeUtil mThemeUtil;
     private Unbinder unBinder;
@@ -86,7 +86,9 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements IBase
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unBinder.unbind();
+        if (null != unBinder) {
+            unBinder.unbind();
+        }
     }
 
     public void setExit(boolean isExit) {
@@ -152,5 +154,4 @@ public abstract class AbsBaseActivity extends AppCompatActivity implements IBase
         }
         startActivity(intent);
     }
-
 }

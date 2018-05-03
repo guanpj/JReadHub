@@ -8,7 +8,7 @@ import android.support.v4.view.PagerAdapter;
 
 import com.jeez.guanpj.jreadhub.ui.blockchain.BlockChainFragment;
 import com.jeez.guanpj.jreadhub.ui.developer.DeveloperFragment;
-import com.jeez.guanpj.jreadhub.ui.hottest.HottestFragment;
+import com.jeez.guanpj.jreadhub.ui.topic.TopicFragment;
 import com.jeez.guanpj.jreadhub.ui.tech.TechFragment;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initFragments() {
-        mFragments.add(new HottestFragment());
+        mFragments.add(new TopicFragment());
         mFragments.add(new TechFragment());
         mFragments.add(new DeveloperFragment());
         mFragments.add(new BlockChainFragment());

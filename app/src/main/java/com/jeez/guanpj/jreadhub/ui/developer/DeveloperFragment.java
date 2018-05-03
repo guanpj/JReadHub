@@ -31,7 +31,7 @@ public class DeveloperFragment extends AbsBaseMvpFragment<DeveloperPresenter> im
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_hottest;
+        return R.layout.fragment_common;
     }
 
     @Override

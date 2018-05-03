@@ -1,11 +1,11 @@
-package com.jeez.guanpj.jreadhub.ui.hottest;
+package com.jeez.guanpj.jreadhub.ui.topic;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
-public interface HottestContract {
+public interface TopicContract {
     interface View extends IBaseView{
         void onRequestStart();
 

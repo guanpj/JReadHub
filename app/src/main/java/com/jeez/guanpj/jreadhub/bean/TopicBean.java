@@ -2,10 +2,12 @@ package com.jeez.guanpj.jreadhub.bean;
 
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
+import org.parceler.Parcel;
 import org.threeten.bp.OffsetDateTime;
 
-import java.util.List;
+import java.util.ArrayList;
 
+@Parcel
 public class TopicBean {
 
     /**
@@ -31,8 +33,8 @@ public class TopicBean {
     private String summary;
     private String title;
     private String updatedAt;
-    private Object timeline;
-    private List<TopicNewsBean> newsArray;
+    /*private Object timeline;*/
+    private ArrayList<TopicNewsBean> newsArray;
 
     public String getId() {
         return id;
@@ -102,19 +104,19 @@ public class TopicBean {
         this.updatedAt = updatedAt;
     }
 
-    public Object getTimeline() {
+    /*public Object getTimeline() {
         return timeline;
     }
 
     public void setTimeline(Object timeline) {
         this.timeline = timeline;
-    }
+    }*/
 
-    public List<TopicNewsBean> getNewsArray() {
+    public ArrayList<TopicNewsBean> getNewsArray() {
         return newsArray;
     }
 
-    public void setNewsArray(List<TopicNewsBean> newsArray) {
+    public void setNewsArray(ArrayList<TopicNewsBean> newsArray) {
         this.newsArray = newsArray;
     }
 }

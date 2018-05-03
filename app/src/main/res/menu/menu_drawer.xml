@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="实验室">
+    <!--<item android:title="实验室">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -13,7 +13,7 @@
                     android:title="关于"/>
             </group>
         </menu>
-    </item>
+    </item>-->
 
     <item
         android:id="@+id/nav_setting"

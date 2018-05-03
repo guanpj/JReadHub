@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.ui.hottest;
+package com.jeez.guanpj.jreadhub.ui.topic;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
@@ -10,12 +10,12 @@ import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableObserver;
 
-public class HottestPresenter extends BasePresenter<HottestContract.View> implements HottestContract.Presenter {
+public class TopicPresenter extends BasePresenter<TopicContract.View> implements TopicContract.Presenter {
     private DataManager mDataManager;
     private static final int PAGE_SIZE = 20;
 
     @Inject
-    HottestPresenter(DataManager mDataManager) {
+    TopicPresenter(DataManager mDataManager) {
         this.mDataManager = mDataManager;
     }
 

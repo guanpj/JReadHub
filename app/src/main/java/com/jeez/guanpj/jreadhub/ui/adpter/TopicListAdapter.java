@@ -15,7 +15,8 @@ import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.ui.instant.InstantReadFragment;
+import com.jeez.guanpj.jreadhub.ui.topic.TopicFragment;
+import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -140,8 +141,10 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
 
         @OnClick(R.id.ll_item_header)
         void onItemHeaderClick() {
-            InstantReadFragment.newInstance(topic.getId()).show(((MainActivity)activity).getSupportFragmentManager(),
-                    InstantReadFragment.TAG);
+            /*InstantReadFragment.newInstance(topic.getId()).show(((MainActivity)activity).getSupportFragmentManager(),
+                    InstantReadFragment.TAG);*/
+            ((MainActivity) activity).findFragment(TopicFragment.class)
+                    .start(TopicDetailFragment.newInstance(topic));
         }
 
         @OnClick(R.id.fl_item_footer)

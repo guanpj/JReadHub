@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.ui.instant;
+package com.jeez.guanpj.jreadhub.ui.topic.instant;
 
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
