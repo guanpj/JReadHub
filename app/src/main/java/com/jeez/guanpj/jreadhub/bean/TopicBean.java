@@ -25,16 +25,16 @@ public class TopicBean {
      * extra : {"instantView":true}
      */
 
-    private String id;
-    private String createdAt;
-    private Object eventData;
-    private long order;
-    private String publishDate;
-    private String summary;
-    private String title;
-    private String updatedAt;
-    /*private Object timeline;*/
-    private ArrayList<TopicNewsBean> newsArray;
+    String id;
+    String createdAt;
+    /*Object eventData;*/
+    long order;
+    String publishDate;
+    String summary;
+    String title;
+    String updatedAt;
+    /*Object timeline;*/
+    ArrayList<TopicNewsBean> newsArray;
 
     public String getId() {
         return id;
@@ -52,13 +52,13 @@ public class TopicBean {
         this.createdAt = createdAt;
     }
 
-    public Object getEventData() {
+    /*public Object getEventData() {
         return eventData;
     }
 
     public void setEventData(Object eventData) {
         this.eventData = eventData;
-    }
+    }*/
 
     public long getOrder() {
         return order;

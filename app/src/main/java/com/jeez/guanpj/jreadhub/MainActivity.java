@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -48,11 +49,11 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermission();
         } else {
             initErrorLogDetactor();
-        }
+        }*/
         ButterKnife.bind(this);
     }
 

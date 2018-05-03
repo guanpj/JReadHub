@@ -2,6 +2,7 @@ package com.jeez.guanpj.jreadhub.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;

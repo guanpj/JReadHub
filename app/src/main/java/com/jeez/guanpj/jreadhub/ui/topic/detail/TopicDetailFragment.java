@@ -37,8 +37,6 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
 
     public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
     @BindView(R.id.txt_topic_detail_title)
     TextView mTxtTopicTitle;
     @BindView(R.id.txt_topic_time)
@@ -85,15 +83,14 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mTopic = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_TOPIC));
         if (mTopic != null) {
-            onRequestTopicEnd(mTopic);
             return;
         }
-        String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
-        mPresenter.getTopicDetail(topicId);
+        /*String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
+        mPresenter.getTopicDetail(topicId);*/
     }
 
     @Override
@@ -177,8 +174,7 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     @Override
     public void onRequestTopicTraceEnd(List<TopicTraceBean> beans) {
         mTimelineAdapter.addItems(beans);
-        mLinearTimelineContainer.setVisibility(
-                mTimelineAdapter.getItemCount() != 0 ? View.VISIBLE : View.GONE);
+        mLinearTimelineContainer.setVisibility(mTimelineAdapter.getItemCount() != 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override

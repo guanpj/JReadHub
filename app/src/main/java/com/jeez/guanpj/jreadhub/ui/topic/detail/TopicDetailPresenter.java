@@ -33,24 +33,24 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
     @Override
     public void getTopicDetail(String topicId) {
         addSubscribe(mDataManager.getTopicDetail(topicId)
-        .compose(RxSchedulers.io2Main())
-        .doOnSubscribe(disposable -> getView().onRequestStart())
-        .subscribeWith(new DisposableObserver<TopicBean>() {
-            @Override
-            public void onNext(TopicBean bean) {
-                getView().onRequestTopicEnd(bean);
-            }
+                .compose(RxSchedulers.io2Main())
+                .doOnSubscribe(disposable -> getView().onRequestStart())
+                .subscribeWith(new DisposableObserver<TopicBean>() {
+                    @Override
+                    public void onNext(TopicBean bean) {
+                        getView().onRequestTopicEnd(bean);
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                getView().onRequestError();
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        getView().onRequestError();
+                    }
 
-            @Override
-            public void onComplete() {
+                    @Override
+                    public void onComplete() {
 
-            }
-        }));
+                    }
+                }));
     }
 
     public void getTopicTrace(final String topicId) {
@@ -66,7 +66,8 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
             mPresenter = presenter;
         }
 
-        @Override protected Document doInBackground(Void... params) {
+        @Override
+        protected Document doInBackground(Void... params) {
             Document document = null;
             try {
                 document = Jsoup.connect(Constants.TOPIC_DETAIL_URL + mTopicId).get();
@@ -76,7 +77,8 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
             return document;
         }
 
-        @Override protected void onPostExecute(Document document) {
+        @Override
+        protected void onPostExecute(Document document) {
             super.onPostExecute(document);
             if (document == null) return;
             Elements timelineContainer = document.getElementsByClass(

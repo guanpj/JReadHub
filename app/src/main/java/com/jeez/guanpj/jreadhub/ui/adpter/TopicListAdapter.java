@@ -143,7 +143,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
         void onItemHeaderClick() {
             /*InstantReadFragment.newInstance(topic.getId()).show(((MainActivity)activity).getSupportFragmentManager(),
                     InstantReadFragment.TAG);*/
-            ((MainActivity) activity).findFragment(TopicFragment.class)
+            ((MainActivity) activity)
                     .start(TopicDetailFragment.newInstance(topic));
         }
 

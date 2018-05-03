@@ -7,6 +7,7 @@ import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.di.component.AppComponent;
 import com.jeez.guanpj.jreadhub.di.component.DaggerAppComponent;
 import com.jeez.guanpj.jreadhub.di.module.AppModule;
+import com.jeez.guanpj.jreadhub.util.CrashHandler;
 
 public class ReadhubApplication extends Application {
     private static ReadhubApplication sInstance;
@@ -18,6 +19,7 @@ public class ReadhubApplication extends Application {
         sInstance = this;
         AppStatusTracker.init(this);
         AndroidThreeTen.init(this);
+        CrashHandler.getInstance().init(getApplicationContext());
     }
 
     public static synchronized ReadhubApplication getInstance() {

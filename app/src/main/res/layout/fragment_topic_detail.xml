@@ -11,13 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.chihopang.readhub.widget.TopicShareView
-            android:id="@+id/view_topic_share"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true"
-            android:visibility="invisible" />
-
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"

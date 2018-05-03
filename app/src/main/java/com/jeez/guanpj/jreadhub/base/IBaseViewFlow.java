@@ -1,5 +1,8 @@
 package com.jeez.guanpj.jreadhub.base;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 /**
  * Created by Jie on 2016-10-26.
  */
