@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_2_dp"
     android:layout_marginBottom="@dimen/dimen_2_dp"
     android:layout_marginLeft="@dimen/dimen_10_dp"
     android:layout_marginRight="@dimen/dimen_10_dp"
-    android:layout_marginTop="@dimen/dimen_2_dp"
     android:foreground="?attr/selectableItemBackground"
+    app:cardElevation="@dimen/dimen_5_dp"
+    app:cardCornerRadius="@dimen/dimen_5_dp"
     app:cardBackgroundColor="@android:color/white">
 
     <FrameLayout
