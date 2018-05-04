@@ -5,11 +5,12 @@ import android.app.Activity;
 import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
 import com.jeez.guanpj.jreadhub.di.scope.FragmentScope;
 import com.jeez.guanpj.jreadhub.ui.blockchain.BlockChainFragment;
+import com.jeez.guanpj.jreadhub.ui.common.CommonListFragment;
 import com.jeez.guanpj.jreadhub.ui.developer.DeveloperFragment;
-import com.jeez.guanpj.jreadhub.ui.topic.TopicFragment;
-import com.jeez.guanpj.jreadhub.ui.topic.instant.InstantReadFragment;
 import com.jeez.guanpj.jreadhub.ui.tech.TechFragment;
+import com.jeez.guanpj.jreadhub.ui.topic.TopicFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
+import com.jeez.guanpj.jreadhub.ui.topic.instant.InstantReadFragment;
 
 import dagger.Component;
 
@@ -29,4 +30,6 @@ public interface FragmentComponent {
     void inject(InstantReadFragment fragment);
 
     void inject(TopicDetailFragment fragment);
+
+    void inject(CommonListFragment fragment);
 }
