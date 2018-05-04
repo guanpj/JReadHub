@@ -42,13 +42,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txt_time_line_content"
+        android:id="@+id/txt_topic_trace_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_10_dp"
         android:background="?android:selectableItemBackground"
         android:padding="@dimen/dimen_5_dp"
-        android:textColor="?attr/readhubTextCommonColor"
+        android:textColor="?attr/readhubTextContentColor"
         android:textSize="@dimen/textSize_16"
         tools:text="与三星等竞争 高通获准在加州测试自动驾驶汽车" />
 </LinearLayout>

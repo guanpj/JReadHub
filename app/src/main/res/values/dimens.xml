@@ -44,9 +44,6 @@
     <dimen name="textSize_18">18sp</dimen>
     <dimen name="textSize_20">20sp</dimen>
 
-    <dimen name="text_size_12_sp">12sp</dimen>
-    <dimen name="essence_item_name_size">14sp</dimen>
-
     <dimen name="gap_size">8dp</dimen>
 
 </resources>

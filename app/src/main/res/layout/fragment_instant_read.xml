@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/selector_instant_read_btn"
+                    android:background="@drawable/selector_btn_background"
                     android:padding="@dimen/dimen_10_dp"
                     android:text="访问源网址"
                     android:textColor="#545454"

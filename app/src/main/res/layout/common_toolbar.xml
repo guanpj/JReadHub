@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_35_dp"
+    android:layout_height="?attr/actionBarSize"
     android:gravity="center"
     android:background="?attr/readhubTheme"
     android:theme="@style/Custom.Theme.ToolBar"

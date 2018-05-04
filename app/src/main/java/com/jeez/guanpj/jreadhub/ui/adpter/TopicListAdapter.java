@@ -12,10 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.MainActivity;
+import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.ui.topic.TopicFragment;
+import com.jeez.guanpj.jreadhub.ui.common.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
@@ -27,6 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportActivity;
 
 public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.TopicViewHolder> {
 
@@ -69,19 +71,14 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
     class TopicViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_title)
         TextView tvTitle;
-
         @BindView(R.id.tv_summary)
         TextView tvSummary;
-
         @BindView(R.id.tv_info)
         TextView tvInfo;
-
         @BindView(R.id.img_expand_state)
         ImageView imgExpandState;
-
         @BindView(R.id.layout_expand)
         ExpandableLayout layoutExpand;
-
         @BindView(R.id.layout_source)
         ViewGroup layoutSource;
 
@@ -114,6 +111,9 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
                     view.setTag(holder);
                 }
                 holder.bind(news);
+                if (i == layoutSource.getChildCount() - 1) {
+                    holder.line.setBackground(null);
+                }
             }
         }
 
@@ -141,9 +141,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
 
         @OnClick(R.id.ll_item_header)
         void onItemHeaderClick() {
-            /*InstantReadFragment.newInstance(topic.getId()).show(((MainActivity)activity).getSupportFragmentManager(),
-                    InstantReadFragment.TAG);*/
-            ((MainActivity) activity)
+            ((MainActivity) activity).findFragment(MainFragment.class)
                     .start(TopicDetailFragment.newInstance(topic));
         }
 
@@ -165,9 +163,10 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
     class NewsViewHolder {
         @BindView(R.id.tv_title)
         TextView tvTitle;
-
         @BindView(R.id.tv_info)
         TextView tvInfo;
+        @BindView(R.id.line)
+        View line;
 
         private TopicNewsBean news;
 
@@ -184,6 +183,8 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
 
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
+            ((SupportActivity) activity).findFragment(MainFragment.class)
+                    .start(CommonArticleFragment.newInstance(news.getMobileUrl()));
         }
     }
 

@@ -7,6 +7,8 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
+    <include layout="@layout/common_toolbar"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -74,7 +76,7 @@
                     android:orientation="vertical" />
 
                 <LinearLayout
-                    android:id="@+id/linear_time_line_container"
+                    android:id="@+id/linear_topic_trace_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_10_dp"
@@ -97,7 +99,7 @@
                         android:background="#EDEDED" />
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_time_line"
+                        android:id="@+id/recycler_topic_trace"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

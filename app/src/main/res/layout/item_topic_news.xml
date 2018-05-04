@@ -4,7 +4,9 @@
     android:id="@+id/btn_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:paddingTop="@dimen/dimen_8_dp"
+    android:paddingStart="@dimen/dimen_8_dp"
+    android:paddingEnd="@dimen/dimen_8_dp"
     android:orientation="vertical"
     android:background="?attr/selectableItemBackground"
     tools:background="@android:color/white">
@@ -24,15 +26,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="?android:attr/textColorSecondary"
-        android:textSize="12sp"
+        android:textSize="@dimen/textSize_12"
         android:ellipsize="end"
         android:text="内容内容"/>
 
     <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
-        android:background="?attr/colorPrimary" />
+        android:layout_height="@dimen/line_1"
+        android:layout_marginTop="@dimen/dimen_8_dp"
+        android:background="?android:attr/listDivider" />
 
 </LinearLayout>

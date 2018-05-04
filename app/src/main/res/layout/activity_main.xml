@@ -8,7 +8,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/navigation_content"/>
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--<include layout="@layout/fragment_container"/>-->
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nv_main"

@@ -2,12 +2,9 @@ package com.jeez.guanpj.jreadhub.ui.topic.detail;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -25,6 +22,7 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicTraceBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
+import com.jeez.guanpj.jreadhub.ui.common.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import org.parceler.Parcels;
@@ -45,9 +43,9 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     TextView mTxtTopicDescription;
     @BindView(R.id.linear_web_title_container)
     LinearLayout mLinearTitleContainer;
-    @BindView(R.id.linear_time_line_container)
+    @BindView(R.id.linear_topic_trace_container)
     LinearLayout mLinearTimelineContainer;
-    @BindView(R.id.recycler_time_line)
+    @BindView(R.id.recycler_topic_trace)
     RecyclerView mRecyclerTimeline;
     @BindView(R.id.scroll_view)
     NestedScrollView mScrollView;
@@ -87,10 +85,11 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
         super.onCreate(savedInstanceState);
         mTopic = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_TOPIC));
         if (mTopic != null) {
+            mPresenter.getTopicTrace(mTopic.getId());
             return;
         }
-        /*String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
-        mPresenter.getTopicDetail(topicId);*/
+        String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
+        mPresenter.getTopicDetail(topicId);
     }
 
     @Override
@@ -110,6 +109,9 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
 
     @Override
     public void initDataAndEvent() {
+        if (mTopic == null) {
+            return;
+        }
         mTxtTopicTitle.setText(mTopic.getTitle());
         mTxtTopicTime.setText(mTopic.getPublishDate().toString());
         mTxtTopicDescription.setText(mTopic.getSummary());
@@ -118,21 +120,19 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
         mLinearTitleContainer.removeAllViews();
         for (final TopicNewsBean topic : mTopic.getNewsArray()) {
             TextView textView = new TextView(getContext());
-            LinearLayout.LayoutParams params =
-                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(params);
             textView.setPadding(10, 16, 10, 16);
             textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_data, 0, 0, 0);
             textView.setCompoundDrawablePadding(15);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             textView.setTextColor(Color.parseColor("#607D8B"));
-            textView.setBackgroundResource(android.R.drawable.list_selector_background);
+            textView.setBackgroundResource(R.drawable.selector_btn_background);
             if (TextUtils.isEmpty(topic.getSiteName())) {
                 textView.setText(topic.getTitle());
             } else {
-                SpannableString spannableTitle =
-                        SpannableString.valueOf(topic.getTitle() + " " + topic.getSiteName());
+                SpannableString spannableTitle = SpannableString.valueOf(topic.getTitle() + " " + topic.getSiteName());
                 spannableTitle.setSpan(new ForegroundColorSpan(Color.parseColor("#AAACB4")),
                         topic.getTitle().length() + 1,
                         topic.getTitle().length() + topic.getSiteName().length() + 1,
@@ -140,8 +140,9 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
                 textView.setText(spannableTitle);
             }
             textView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    //start(WebViewFragment.newInstance(topic));
+                @Override
+                public void onClick(View v) {
+                    start(CommonArticleFragment.newInstance(topic));
                 }
             });
             mLinearTitleContainer.addView(textView);
@@ -149,13 +150,10 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
         mRecyclerTimeline.setAdapter(mTimelineAdapter);
         mRecyclerTimeline.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerTimeline.setNestedScrollingEnabled(false);
-        mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                /*mTxtToolbarTitle.setVisibility(
-                        scrollY > mTxtTopicTime.getBottom() ? View.VISIBLE : View.GONE);
-                mImgToolbar.setVisibility(scrollY > mTxtTopicTime.getBottom() ? View.GONE : View.VISIBLE);*/
-            }
+        mScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            /*mTxtToolbarTitle.setVisibility(
+                    scrollY > mTxtTopicTime.getBottom() ? View.VISIBLE : View.GONE);
+            mImgToolbar.setVisibility(scrollY > mTxtTopicTime.getBottom() ? View.GONE : View.VISIBLE);*/
         });
     }
 

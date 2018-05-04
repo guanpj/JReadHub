@@ -2,7 +2,6 @@ package com.jeez.guanpj.jreadhub.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
@@ -39,7 +38,7 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        initTheme();
+        //initTheme();
         unBinder = ButterKnife.bind(this);
     }
 

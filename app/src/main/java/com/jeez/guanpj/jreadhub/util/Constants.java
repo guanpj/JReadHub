@@ -16,7 +16,7 @@ public class Constants {
 
     public static final String BUNDLE_TOPIC_ID = "BUNDLE_TOPIC_ID";
     public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
-    public static final String EXTRA__TOPIC_URL = "EXTRA_TOPIC_URL";
+    public static final String EXTRA_TOPIC_URL = "EXTRA_TOPIC_URL";
     public static final String TOPIC_DETAIL_URL = "https://readhub.me/topic/";
 
     public interface Key {

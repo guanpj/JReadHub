@@ -2,8 +2,10 @@ package com.jeez.guanpj.jreadhub.bean;
 
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
+import org.parceler.Parcel;
 import org.threeten.bp.OffsetDateTime;
 
+@Parcel
 public class TopicNewsBean {
 
     /**
@@ -19,16 +21,16 @@ public class TopicNewsBean {
      * publishDate : 2018-04-24T15:40:07.000Z
      */
 
-    private int id;
-    private String url;
-    private String title;
-    private int groupId;
-    private String siteName;
-    private String siteSlug;
-    private String mobileUrl;
-    private String authorName;
-    private int duplicateId;
-    private String publishDate;
+    int id;
+    String url;
+    String title;
+    int groupId;
+    String siteName;
+    String siteSlug;
+    String mobileUrl;
+    String authorName;
+    int duplicateId;
+    String publishDate;
 
     public int getId() {
         return id;
