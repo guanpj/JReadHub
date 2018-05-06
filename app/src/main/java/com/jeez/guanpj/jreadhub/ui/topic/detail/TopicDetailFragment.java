@@ -22,7 +22,7 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicTraceBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
-import com.jeez.guanpj.jreadhub.ui.common.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import org.parceler.Parcels;
@@ -57,7 +57,8 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
             return new TopicTraceViewHolder(getContext(), parent);
         }
 
-        @Override public int getItemViewType(int position) {
+        @Override
+        public int getItemViewType(int position) {
             if (position == 0) return VIEW_TYPE_TOP;
             if (position == getItemCount() - 1) return VIEW_TYPE_BOTTOM;
             return super.getItemViewType(position);

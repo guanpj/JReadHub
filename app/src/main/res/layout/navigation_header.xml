@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="190dp"
     android:fitsSystemWindows="true"
-    android:background="@mipmap/background"
+    android:background="?attr/readhubTheme"
     android:gravity="center">
 
     <ImageView

@@ -37,7 +37,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     @Override
     public void initView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
+        //recyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
         //recyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
 
         loadMoreFooter = new LoadMoreFooter(getActivity(), recyclerView);

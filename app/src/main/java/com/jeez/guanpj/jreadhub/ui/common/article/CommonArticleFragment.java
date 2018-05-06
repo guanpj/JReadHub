@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.ui.common;
+package com.jeez.guanpj.jreadhub.ui.common.article;
 
 import android.graphics.Color;
 import android.os.Bundle;

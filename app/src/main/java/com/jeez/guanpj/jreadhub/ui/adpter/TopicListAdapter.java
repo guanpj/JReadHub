@@ -16,7 +16,7 @@ import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.ui.common.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 

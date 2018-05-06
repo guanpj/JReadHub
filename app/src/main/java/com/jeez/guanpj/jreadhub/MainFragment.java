@@ -1,15 +1,17 @@
 package com.jeez.guanpj.jreadhub;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
+import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.base.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
+import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
+import com.jeez.guanpj.jreadhub.event.ToolbarShareClickEvent;
+import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.ui.adpter.FragmentAdapter;
 
@@ -19,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainFragment extends AbsBaseFragment {
+public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -44,7 +46,7 @@ public class MainFragment extends AbsBaseFragment {
 
     @Override
     public void initView() {
-        initToolBar();
+        mToolbar.inflateMenu(R.menu.menu_main);
     }
 
     @Override
@@ -62,26 +64,29 @@ public class MainFragment extends AbsBaseFragment {
         }
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-    }
 
-    private void initToolBar() {
-        /*((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);*/
-
-        mToolbar.inflateMenu(R.menu.menu_main);
-        Resources.Theme theme = getActivity().getTheme();
-
-        TypedValue navIcon = new TypedValue();
-        TypedValue overFlowIcon = new TypedValue();
-
-        theme.resolveAttribute(R.attr.navIcon, navIcon, true);
-        theme.resolveAttribute(R.attr.overFlowIcon, overFlowIcon, true);
-
-        /*mToolbar.setNavigationIcon(navIcon.resourceId);
-        mToolbar.setOverflowIcon(ContextCompat.getDrawable(this, overFlowIcon.resourceId));*/
+        mToolbar.setNavigationOnClickListener(view -> {
+            RxBus.getInstance().post(new ToolbarNavigationClickEvent());
+        });
+        mToolbar.setOnMenuItemClickListener(this);
     }
 
     @OnClick(R.id.fab)
     void onFabClick() {
         RxBus.getInstance().post(new FabClickEvent());
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                RxBus.getInstance().post(new ToolbarSearchClickEvent());
+                showShortToast("Coming soon...");
+                break;
+            case R.id.action_share:
+                RxBus.getInstance().post(new ToolbarShareClickEvent());
+                break;
+        }
+        return true;
     }
 }

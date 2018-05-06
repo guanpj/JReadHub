@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dimen_2_dp"
-    android:layout_marginBottom="@dimen/dimen_2_dp"
+    android:layout_marginTop="@dimen/dimen_15_dp"
     android:layout_marginLeft="@dimen/dimen_10_dp"
     android:layout_marginRight="@dimen/dimen_10_dp"
     android:foreground="?attr/selectableItemBackground"
@@ -65,8 +64,8 @@
                     android:id="@+id/fl_item_footer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/dimen_10_dp"
-                    android:paddingBottom="@dimen/dimen_3_dp"
+                    android:paddingTop="@dimen/dimen_12_dp"
+                    android:paddingBottom="@dimen/dimen_5_dp"
                     android:layout_gravity="center">
 
                     <TextView
@@ -76,7 +75,7 @@
                         android:layout_gravity="center_vertical"
                         android:ellipsize="end"
                         android:text="时间时间"
-                        android:textColor="?attr/readhubTextCommonColor"
+                        android:textColor="?attr/readhubTheme"
                         android:textSize="@dimen/textSize_14" />
 
                     <ImageView
@@ -98,7 +97,7 @@
             android:id="@+id/layout_expand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/readhubToolbarText"
+            android:background="?attr/readhubTheme"
             app:el_expanded="true">
 
             <LinearLayout

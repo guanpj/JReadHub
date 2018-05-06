@@ -5,11 +5,14 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
+import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
 import com.jeez.guanpj.jreadhub.util.UncaughtException;
 
@@ -49,6 +52,10 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
     @Override
     public void initDataAndEvent() {
         mNavigationView.setNavigationItemSelectedListener(this);
+        RxBus.getInstance().toFlowable(ToolbarNavigationClickEvent.class)
+                .subscribe(navigationClickEvent -> {
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+                });
     }
 
     @Override

@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
+import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportActivity;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
@@ -53,13 +56,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.tv_title)
         TextView tvTitle;
-
         @BindView(R.id.tv_summary)
         TextView tvSummary;
-
         @BindView(R.id.tv_info)
         TextView tvInfo;
 
@@ -86,8 +86,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
 
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
+            ((SupportActivity) activity).findFragment(MainFragment.class)
+                    .start(CommonArticleFragment.newInstance(news.getMobileUrl()));
         }
-
     }
-
 }
