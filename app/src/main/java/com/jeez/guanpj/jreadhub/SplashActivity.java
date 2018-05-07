@@ -1,8 +1,15 @@
 package com.jeez.guanpj.jreadhub;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowManager;
+import android.view.View;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
@@ -10,16 +17,20 @@ import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 
 public class SplashActivity extends AbsBaseActivity {
+
+    @BindView(R.id.txt_name)
+    TextView mAppName;
+    @BindView(R.id.txt_des)
+    TextView mAppDes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppStatusTracker.getInstance().setAppStatus(AppStatus.STATUS_ONLINE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
     }
 
@@ -34,13 +45,29 @@ public class SplashActivity extends AbsBaseActivity {
 
     @Override
     public void initDataAndEvent() {
-        Observable.timer(2, TimeUnit.SECONDS)
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        go2Main();
-                    }
-                });
+        ObjectAnimator desAnim = ObjectAnimator.ofFloat(mAppDes, "translationX", -500f, 0f);
+        desAnim.setDuration(700);
+        desAnim.setInterpolator(new DecelerateInterpolator());
+        desAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mAppName.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mAppName.setVisibility(View.VISIBLE);
+            }
+        });
+        ObjectAnimator nameAnim = ObjectAnimator.ofFloat(mAppName, "translationY", -500f, 0f);
+        nameAnim.setDuration(2000);
+        nameAnim.setInterpolator(new BounceInterpolator());
+
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.play(nameAnim).after(desAnim);
+        animSet.start();
+
+        Observable.timer(3, TimeUnit.SECONDS).subscribe(aLong -> go2Main());
     }
 
     private void go2Main() {

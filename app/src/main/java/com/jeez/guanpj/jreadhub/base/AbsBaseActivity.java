@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Toast;
 
 import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.R;
+import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.SplashActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
@@ -110,18 +110,13 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
     }
 
     protected void showShortToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReadhubApplication.getInstance(), msg, Toast.LENGTH_SHORT).show();
     }
 
     protected void setToolbar(Toolbar toolbar, String title) {
         setSupportActionBar(toolbar);
         toolbar.setTitle(title);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void initTheme() {

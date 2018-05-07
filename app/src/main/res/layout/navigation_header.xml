@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="https://readhub.me"
-        android:textColor="@color/text_common"
+        android:textColor="@color/text_white"
         android:textSize="@dimen/textSize_16"
         android:gravity="center"/>
 

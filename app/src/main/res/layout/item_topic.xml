@@ -85,7 +85,7 @@
                         android:layout_gravity="center|end"
                         android:adjustViewBounds="true"
                         android:scaleType="center"
-                        android:src="@mipmap/ic_expand_more_grey600_18dp" />
+                        android:src="@drawable/ic_more_info" />
 
                 </FrameLayout>
 

@@ -99,7 +99,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
             tvInfo.setText(activity.getString(R.string.time___source_count, FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()), topic.getNewsArray().size()));
             //tvInfo.setText(topic.getPublishDate());
             boolean expand = expandStateMap.get(position, false);
-            imgExpandState.setImageResource(expand ? R.mipmap.ic_expand_less_grey600_18dp : R.mipmap.ic_expand_more_grey600_18dp);
+            imgExpandState.setImageResource(expand ? R.drawable.ic_less_info : R.drawable.ic_more_info);
             layoutExpand.setExpanded(expand, false);
             adjustLayoutSourceChildren(topic.getNewsArray().size());
             for (int i = 0; i < layoutSource.getChildCount(); i++) {
@@ -149,11 +149,11 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
         void onItemFooterClick() {
             if (expandStateMap.get(position, false)) {
                 expandStateMap.put(position, false);
-                imgExpandState.setImageResource(R.mipmap.ic_expand_more_grey600_18dp);
+                imgExpandState.setImageResource(R.drawable.ic_more_info);
                 layoutExpand.setExpanded(false);
             } else {
                 expandStateMap.put(position, true);
-                imgExpandState.setImageResource(R.mipmap.ic_expand_less_grey600_18dp);
+                imgExpandState.setImageResource(R.drawable.ic_less_info);
                 layoutExpand.setExpanded(true);
             }
         }

@@ -51,6 +51,7 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
 
     @Override
     public void initDataAndEvent() {
+        setExit(true);
         mNavigationView.setNavigationItemSelectedListener(this);
         RxBus.getInstance().toFlowable(ToolbarNavigationClickEvent.class)
                 .subscribe(navigationClickEvent -> {
@@ -103,6 +104,11 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
     private void initErrorLogDetactor() {
         UncaughtException mUncaughtException = UncaughtException.getInstance();
         mUncaughtException.init(this, getString(R.string.app_name));
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
     }
 
     @Override

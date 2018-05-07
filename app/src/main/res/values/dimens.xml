@@ -43,6 +43,7 @@
     <dimen name="textSize_16">16sp</dimen>
     <dimen name="textSize_18">18sp</dimen>
     <dimen name="textSize_20">20sp</dimen>
+    <dimen name="textSize_40">40sp</dimen>
 
     <dimen name="gap_size">8dp</dimen>
 
