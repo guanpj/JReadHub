@@ -122,4 +122,11 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="ThemeDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/dialog_bg</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
 </resources>

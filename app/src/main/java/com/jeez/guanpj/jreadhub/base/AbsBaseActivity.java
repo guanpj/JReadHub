@@ -38,7 +38,7 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        //initTheme();
+        initTheme();
         unBinder = ButterKnife.bind(this);
     }
 

@@ -2,29 +2,41 @@ package com.jeez.guanpj.jreadhub;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
+import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
 import com.jeez.guanpj.jreadhub.util.UncaughtException;
+import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AbsBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AbsBaseActivity implements NavigationView.OnNavigationItemSelectedListener, ThemeDialog.OnThemeChangeListener {
 
     @BindView(R.id.dl_main)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nv_main)
     NavigationView mNavigationView;
+
+    private ThemeDialog mThemeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,7 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
 
     @Override
     public void initView() {
+        mThemeDialog = new ThemeDialog(this);
         if (findFragment(MainFragment.class) == null) {
             loadRootFragment(R.id.fl_container, MainFragment.newInstance());
         }
@@ -51,8 +64,8 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
 
     @Override
     public void initDataAndEvent() {
-        setExit(true);
         mNavigationView.setNavigationItemSelectedListener(this);
+        mThemeDialog.setOnThemeChangeListener(this);
         RxBus.getInstance().toFlowable(ToolbarNavigationClickEvent.class)
                 .subscribe(navigationClickEvent -> {
                     mDrawerLayout.openDrawer(GravityCompat.START);
@@ -113,6 +126,69 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        mDrawerLayout.post(() -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_change_theme) {
+                mThemeDialog.show();
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public void onChangeTheme(View view) {
+        switch (view.getId()) {
+            case R.id.theme_blue:
+                setTheme(R.style.BlueTheme);
+                mThemeUtil.setTheme(Constants.Theme.Blue);
+                break;
+            case R.id.theme_gray:
+                setTheme(R.style.GrayTheme);
+                mThemeUtil.setTheme(Constants.Theme.Gray);
+                break;
+            case R.id.theme_white:
+                setTheme(R.style.WhiteTheme);
+                mThemeUtil.setTheme(Constants.Theme.White);
+                break;
+            default:
+        }
+        changeTheme();
+    }
+
+    private void changeTheme() {
+        RxBus.getInstance().post(new ChangeThemeEvent());
+        refreshUI();
+        //mCommonFragment.refreshUI();
+        mDrawerLayout.closeDrawers();
+    }
+
+    private void refreshUI() {
+        TypedValue statusColor = new TypedValue();       //状态栏
+        TypedValue themeColor = new TypedValue();        //主题
+        TypedValue toolbarTextColor = new TypedValue();  //状态栏字体颜色
+        TypedValue navIcon = new TypedValue();           //toolbar 导航图标
+        TypedValue searchIcon = new TypedValue();        //toolbar 搜索图标
+        TypedValue overFlowIcon = new TypedValue();          //toolbar 更多图标
+
+        //获取切换后的主题，以及主题相对应对的属性值
+        Resources.Theme theme = getTheme();
+        theme.resolveAttribute(R.attr.readhubStatus, statusColor, true);
+        theme.resolveAttribute(R.attr.readhubTheme, themeColor, true);
+        theme.resolveAttribute(R.attr.readhubToolbarText, toolbarTextColor, true);
+        theme.resolveAttribute(R.attr.navIcon, navIcon, true);
+        theme.resolveAttribute(R.attr.menuSearch, searchIcon, true);
+        theme.resolveAttribute(R.attr.overFlowIcon, overFlowIcon, true);
+
+        changeStatusColor(statusColor.resourceId);
+    }
+
+    private void changeStatusColor(int colorValue) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, colorValue));
+        }
     }
 }
