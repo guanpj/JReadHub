@@ -3,6 +3,8 @@ package com.jeez.guanpj.jreadhub.widget;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -30,14 +32,21 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
     @BindView(R.id.theme_white)
     ImageView imgThemeWhite;
 
-    public ThemeDialog(Context context) {
+    public ThemeDialog(@NonNull Context context) {
         this(context, R.style.ThemeDialog);
     }
 
-    public ThemeDialog(Context context, int themeResId) {
+    public ThemeDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
         this.mContext = context;
-        mView = LayoutInflater.from(mContext).inflate(R.layout.dialog_theme, null);
+        mView = LayoutInflater.from(mContext).inflate(R.layout.dialog_theme, null, false);
+
+        /*try {
+            mView = LayoutInflater.from(mContext).inflate(R.layout.dialog_theme, null, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        setContentView(mView);
         ButterKnife.bind(this, mView);
         initContentView();
     }
@@ -48,7 +57,6 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         mView.setMinimumWidth((int)(displayRectangle.width() * 0.8f));
         window.setBackgroundDrawableResource(R.color.dialog_bg);
-        setContentView(mView);
 
         imgThemeBlue.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_blue_theme), 25));
         imgThemeGray.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_gray_theme), 25));
