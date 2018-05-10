@@ -18,6 +18,7 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
+import com.jeez.guanpj.jreadhub.ui.topic.instant.InstantReadFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -73,6 +74,10 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
         TextView tvTitle;
         @BindView(R.id.tv_summary)
         TextView tvSummary;
+        @BindView(R.id.tv_time)
+        TextView tvTime;
+        @BindView(R.id.img_instant_read)
+        ImageView imgInstantRead;
         @BindView(R.id.tv_info)
         TextView tvInfo;
         @BindView(R.id.img_expand_state)
@@ -93,10 +98,13 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
         void bind(@NonNull TopicBean topic, int position) {
             this.topic = topic;
             this.position = position;
+
             tvTitle.setText(topic.getTitle());
             tvSummary.setText(topic.getSummary());
             tvSummary.setVisibility(TextUtils.isEmpty(topic.getSummary()) ? View.GONE : View.VISIBLE);
-            tvInfo.setText(activity.getString(R.string.time___source_count, FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()), topic.getNewsArray().size()));
+            tvTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()));
+            imgInstantRead.setVisibility(topic.hasInstantView() ? View.VISIBLE : View.GONE);
+            tvInfo.setText(activity.getString(R.string.source_count, topic.getNewsArray().size()));
             //tvInfo.setText(topic.getPublishDate());
             boolean expand = expandStateMap.get(position, false);
             imgExpandState.setImageResource(expand ? R.drawable.ic_less_info : R.drawable.ic_more_info);
@@ -139,6 +147,14 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
             }
         }
 
+        @OnClick(R.id.img_instant_read)
+        void onInstantReadClick() {
+            /*((MainActivity) activity).findFragment(MainFragment.class)
+                    .start(InstantReadFragment.newInstance(topic.getId()));*/
+            InstantReadFragment.newInstance(topic.getId()).show(((MainActivity)activity).getSupportFragmentManager(),
+                    InstantReadFragment.TAG);
+        }
+
         @OnClick(R.id.ll_item_header)
         void onItemHeaderClick() {
             ((MainActivity) activity).findFragment(MainFragment.class)
@@ -178,7 +194,6 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
             this.news = news;
             tvTitle.setText(news.getTitle());
             tvInfo.setText(activity.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
-            //tvInfo.setText(news.getPublishDate());
         }
 
         @OnClick(R.id.btn_item)

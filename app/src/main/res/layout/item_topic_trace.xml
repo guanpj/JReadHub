@@ -50,5 +50,7 @@
         android:padding="@dimen/dimen_5_dp"
         android:textColor="?attr/readhubTextContentColor"
         android:textSize="@dimen/textSize_16"
+        android:ellipsize="end"
+        android:maxLines="2"
         tools:text="与三星等竞争 高通获准在加州测试自动驾驶汽车" />
 </LinearLayout>

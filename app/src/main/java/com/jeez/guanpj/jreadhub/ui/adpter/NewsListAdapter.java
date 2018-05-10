@@ -77,10 +77,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
             tvSummary.setVisibility(TextUtils.isEmpty(news.getSummaryAuto()) ? View.GONE : View.VISIBLE);
             if (TextUtils.isEmpty(news.getAuthorName())) {
                 tvInfo.setText(activity.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
-                //tvInfo.setText(news.getPublishDate());
             } else {
                 tvInfo.setText(activity.getString(R.string.site_name___author_name___time, news.getSiteName(), news.getAuthorName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
-                //tvInfo.setText(news.getPublishDate());
             }
         }
 

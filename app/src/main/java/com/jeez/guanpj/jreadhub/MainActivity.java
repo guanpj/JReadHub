@@ -12,7 +12,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.TypedValue;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -137,23 +136,30 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
     }
 
     @Override
-    public void onChangeTheme(View view) {
-        switch (view.getId()) {
-            case R.id.theme_blue:
+    public void onChangeTheme(String selectedTheme) {
+        switch (selectedTheme) {
+            case Constants.Theme.Blue:
                 setTheme(R.style.BlueTheme);
                 mThemeUtil.setTheme(Constants.Theme.Blue);
                 break;
-            case R.id.theme_gray:
+            case Constants.Theme.Gray:
                 setTheme(R.style.GrayTheme);
                 mThemeUtil.setTheme(Constants.Theme.Gray);
                 break;
-            case R.id.theme_white:
+            case Constants.Theme.White:
                 setTheme(R.style.WhiteTheme);
                 mThemeUtil.setTheme(Constants.Theme.White);
                 break;
             default:
         }
-        changeTheme();
+        //changeTheme();
+        reStartActivity();
+    }
+
+    private void reStartActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     private void changeTheme() {

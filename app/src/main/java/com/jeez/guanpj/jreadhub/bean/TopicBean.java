@@ -35,6 +35,7 @@ public class TopicBean {
     String updatedAt;
     /*Object timeline;*/
     ArrayList<TopicNewsBean> newsArray;
+    Extra extra;
 
     public String getId() {
         return id;
@@ -118,5 +119,21 @@ public class TopicBean {
 
     public void setNewsArray(ArrayList<TopicNewsBean> newsArray) {
         this.newsArray = newsArray;
+    }
+
+    public Extra getExtra() {
+        return extra;
+    }
+
+    public void setExtra(Extra extra) {
+        this.extra = extra;
+    }
+
+    public boolean hasInstantView() {
+        return extra != null && extra.instantView;
+    }
+
+    @Parcel public static class Extra {
+        boolean instantView;
     }
 }

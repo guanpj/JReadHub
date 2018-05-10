@@ -93,5 +93,6 @@
         android:layout_margin="4dp"
         android:scaleType="centerInside"
         android:src="@mipmap/ic_close" />
+
 </LinearLayout>
 

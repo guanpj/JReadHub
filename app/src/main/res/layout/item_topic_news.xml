@@ -18,6 +18,7 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="14sp"
         android:ellipsize="end"
+        android:maxLines="2"
         android:text="标题标题"/>
 
     <TextView
@@ -28,6 +29,7 @@
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="@dimen/textSize_12"
         android:ellipsize="end"
+        android:maxLines="2"
         android:text="内容内容"/>
 
     <View
