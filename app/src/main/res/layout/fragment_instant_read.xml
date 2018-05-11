@@ -29,7 +29,7 @@
                     android:id="@+id/txt_instant_source"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_10"
+                    android:padding="@dimen/dimen_10_dp"
                     android:textColor="#545454"
                     android:textSize="@dimen/textSize_18"
                     tools:text="来源：36Kr" />

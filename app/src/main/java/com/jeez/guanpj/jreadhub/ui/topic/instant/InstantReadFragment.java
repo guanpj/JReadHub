@@ -94,9 +94,9 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     private void initWebSettings() {
         WebSettings mWebSetting = mWebView.getSettings();
         mWebSetting.setJavaScriptEnabled(true);
-        /*mWebSetting.setUseWideViewPort(true);
+        mWebSetting.setUseWideViewPort(true);
         mWebSetting.setLoadWithOverviewMode(true);
-        mWebSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);*/
+        mWebSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
         mWebSetting.setLoadsImagesAutomatically(true);
 
         mWebView.setWebViewClient(new WebViewClient() {
@@ -129,14 +129,19 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
-            @Override public void onProgressChanged(WebView view, int newProgress) {
-                //更新进度
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 if (newProgress == 100) {
                     mProgressBarWrapper.setVisibility(View.GONE);
                 } else {
                     mProgressBar.setProgress(newProgress);
                 }
+            }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
             }
         });
     }
@@ -161,8 +166,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
             });
         }
         String htmlHead = "<head>"
-                +
-                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> "
+                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> "
                 + "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi.css/dist/mobi.min.css\">"
                 + "<style>"
                 + "img{max-width:100% !important; width:auto; height:auto;}"
