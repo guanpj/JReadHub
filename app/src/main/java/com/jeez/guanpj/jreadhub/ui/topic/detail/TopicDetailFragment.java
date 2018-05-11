@@ -1,15 +1,18 @@
 package com.jeez.guanpj.jreadhub.ui.topic.detail;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -31,10 +34,12 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter> implements TopicDetailContract.View {
+public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
 
     public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.txt_topic_detail_title)
     TextView mTxtTopicTitle;
     @BindView(R.id.txt_topic_time)
@@ -105,7 +110,13 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
 
     @Override
     public void initView() {
+        TypedValue navIcon = new TypedValue();
+        Resources.Theme theme = getActivity().getTheme();
+        theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
 
+        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setNavigationOnClickListener(v -> pop());
+        mToolbar.setOnMenuItemClickListener(this);
     }
 
     @Override
@@ -184,5 +195,10 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     @Override
     public void onFabClick() {
 
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return false;
     }
 }

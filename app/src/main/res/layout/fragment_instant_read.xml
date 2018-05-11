@@ -16,6 +16,7 @@
         app:cardElevation="@dimen/cardview_default_elevation">
 
         <LinearLayout
+            android:id="@+id/ll_content_wrapper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -50,6 +51,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#EDEDED" />
+
+            <LinearLayout
+                android:id="@+id/ll_progress_bar_wrapper"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminateDrawable="@drawable/drawable_instant_read_progress"
+                    android:max="100"
+                    android:progress="20" />
+
+            </LinearLayout>
 
             <ScrollView
                 android:layout_width="match_parent"

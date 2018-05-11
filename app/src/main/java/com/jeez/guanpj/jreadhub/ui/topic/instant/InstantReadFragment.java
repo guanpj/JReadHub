@@ -1,14 +1,20 @@
 package com.jeez.guanpj.jreadhub.ui.topic.instant;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.webkit.URLUtil;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
@@ -26,6 +32,12 @@ import butterknife.OnClick;
 public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPresenter> implements InstantReadContract.View {
 
     public static final String TAG = "InstantReadFragment";
+    @BindView(R.id.ll_content_wrapper)
+    LinearLayout mContentWrapper;
+    @BindView(R.id.ll_progress_bar_wrapper)
+    LinearLayout mProgressBarWrapper;
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
     @BindView(R.id.txt_topic_instant_title)
     TextView mTxtTopicTitle;
     @BindView(R.id.web_view)
@@ -63,7 +75,13 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
 
     @Override
     public void initView() {
+        Rect displayRectangle = new Rect();
+        Window window = getDialog().getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
 
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
+                (int)(displayRectangle.height() * 0.8f));
+        mContentWrapper.setLayoutParams(params);
     }
 
     @Override
@@ -76,9 +94,9 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     private void initWebSettings() {
         WebSettings mWebSetting = mWebView.getSettings();
         mWebSetting.setJavaScriptEnabled(true);
-        mWebSetting.setUseWideViewPort(true);
+        /*mWebSetting.setUseWideViewPort(true);
         mWebSetting.setLoadWithOverviewMode(true);
-        mWebSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
+        mWebSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);*/
         mWebSetting.setLoadsImagesAutomatically(true);
 
         mWebView.setWebViewClient(new WebViewClient() {
@@ -110,11 +128,23 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 return super.shouldInterceptRequest(view, url);
             }
         });
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override public void onProgressChanged(WebView view, int newProgress) {
+                //更新进度
+                super.onProgressChanged(view, newProgress);
+                if (newProgress == 100) {
+                    mProgressBarWrapper.setVisibility(View.GONE);
+                } else {
+                    mProgressBar.setProgress(newProgress);
+                }
+            }
+        });
     }
 
     @Override
     public void onRequestStart() {
-
+        mProgressBarWrapper.setVisibility(View.VISIBLE);
+        mProgressBar.setProgress(20);
     }
 
     @Override

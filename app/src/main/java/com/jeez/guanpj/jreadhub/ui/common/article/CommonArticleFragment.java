@@ -1,11 +1,14 @@
 package com.jeez.guanpj.jreadhub.ui.common.article;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +19,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.Toolbar;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
@@ -30,26 +32,22 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.OnMenuItemClickListener {
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @BindView(R.id.refresh_layout)
-    SwipeRefreshLayout refreshLayout;
+    SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.web_view)
-    WebView webView;
+    WebView mWebView;
     @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
+    ProgressBar mProgressBar;
     private TopicNewsBean mTopic;
     private String mUrl;
     private static final String APP_CACAHE_DIRNAME = "/webcache";
 
     public static CommonArticleFragment newInstance(TopicNewsBean topic) {
         CommonArticleFragment fragment = new CommonArticleFragment();
-        try {
-            Bundle bundle = new Bundle();
-            bundle.putParcelable(Constants.EXTRA_TOPIC, Parcels.wrap(topic));
-            fragment.setArguments(bundle);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.EXTRA_TOPIC, Parcels.wrap(topic));
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -79,52 +77,58 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     }
 
     private void initView() {
-        toolbar.setNavigationOnClickListener(v -> pop());
-        toolbar.inflateMenu(R.menu.menu_topic);
-        toolbar.setOnMenuItemClickListener(this);
+        TypedValue navIcon = new TypedValue();
+        Resources.Theme theme = getActivity().getTheme();
+        theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
 
-        refreshLayout.setColorSchemeColors(Color.parseColor("#607D8B"), Color.BLACK, Color.BLUE);
-        refreshLayout.setOnRefreshListener(() -> {
-            webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-            webView.reload();
+        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setNavigationOnClickListener(v -> pop());
+        mToolbar.inflateMenu(R.menu.menu_topic);
+        mToolbar.setOnMenuItemClickListener(this);
+
+        mRefreshLayout.setColorSchemeColors(Color.parseColor("#607D8B"), Color.BLACK, Color.BLUE);
+        mRefreshLayout.setOnRefreshListener(() -> {
+            mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            mWebView.reload();
         });
     }
 
     private void initWebView() {
         initWebSettings();
-        webView.setWebViewClient(new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (URLUtil.isNetworkUrl(url)) return super.shouldOverrideUrlLoading(view, url);
+                if (URLUtil.isNetworkUrl(url)) {
+                    return super.shouldOverrideUrlLoading(view, url);
+                }
                 return true;
             }
         });
-        webView.setWebChromeClient(new WebChromeClient() {
+        mWebView.setWebChromeClient(new WebChromeClient() {
             @Override public void onProgressChanged(WebView view, int newProgress) {
                 //更新进度
                 super.onProgressChanged(view, newProgress);
                 if (newProgress == 100) {
-                    progressBar.setVisibility(View.GONE);
-                    refreshLayout.setRefreshing(false);
+                    mProgressBar.setVisibility(View.GONE);
+                    mRefreshLayout.setRefreshing(false);
                     return;
                 }
-                progressBar.setVisibility(View.VISIBLE);
-                progressBar.setProgress(newProgress);
+                mProgressBar.setVisibility(View.VISIBLE);
+                mProgressBar.setProgress(newProgress);
             }
 
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                //mTxtTitle.setText(title);
-                toolbar.setTitle(title);
+                mToolbar.setTitle(title);
             }
         });
-        webView.loadUrl(TextUtils.isEmpty(mUrl) ? mTopic.getUrl() : mUrl);
-        refreshLayout.setRefreshing(true);
+        mWebView.loadUrl(TextUtils.isEmpty(mUrl) ? mTopic.getUrl() : mUrl);
+        mRefreshLayout.setRefreshing(true);
     }
 
     private void initWebSettings() {
-        WebSettings mWebSetting = webView.getSettings();
+        WebSettings mWebSetting = mWebView.getSettings();
         if (mWebSetting == null) return;
         mWebSetting.setJavaScriptEnabled(true);
         mWebSetting.setUseWideViewPort(true);
@@ -153,8 +157,8 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
 
     @Override
     public boolean onBackPressedSupport() {
-        if (webView != null && webView.canGoBack()) {
-            webView.goBack();
+        if (mWebView != null && mWebView.canGoBack()) {
+            mWebView.goBack();
             return true;
         }
         return super.onBackPressedSupport();
@@ -163,11 +167,11 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (webView != null) {
-            webView.stopLoading();
-            webView.clearHistory();
-            webView.destroy();
-            webView = null;
+        if (mWebView != null) {
+            mWebView.stopLoading();
+            mWebView.clearHistory();
+            mWebView.destroy();
+            mWebView = null;
         }
     }
 }
