@@ -3,9 +3,7 @@ package com.jeez.guanpj.jreadhub.ui.topic.instant;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceResponse;
@@ -25,6 +23,7 @@ import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,8 +43,6 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     WebView mWebView;
     @BindView(R.id.txt_instant_source)
     TextView mTxtSource;
-    @BindView(R.id.txt_origin_site)
-    TextView mTxtGoOrigin;
 
     private String mTopicId;
 
@@ -76,8 +73,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     @Override
     public void initView() {
         Rect displayRectangle = new Rect();
-        Window window = getDialog().getWindow();
-        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+        Objects.requireNonNull(getDialog().getWindow()).getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
 
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
                 (int)(displayRectangle.height() * 0.8f));
@@ -86,7 +82,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
 
     @Override
     public void initDataAndEvent() {
-        mTopicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
+        mTopicId = Objects.requireNonNull(getArguments()).getString(Constants.BUNDLE_TOPIC_ID);
         initWebSettings();
         mPresenter.getTopicInstantRead(mTopicId);
     }
@@ -157,14 +153,6 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
         if (data == null) return;
         mTxtTopicTitle.setText(data.getTitle());
         mTxtSource.setText(getString(R.string.source_format, data.getSiteName()));
-        if (!TextUtils.isEmpty(data.getUrl())) {
-            mTxtGoOrigin.setVisibility(View.VISIBLE);
-            mTxtGoOrigin.setOnClickListener(v -> {
-                dismiss();
-                /*getContext().findFragment(MainFragment.class)
-                        .start(WebViewFragment.newInstance(data.getUrl()));*/
-            });
-        }
         String htmlHead = "<head>"
                 + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> "
                 + "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi.css/dist/mobi.min.css\">"

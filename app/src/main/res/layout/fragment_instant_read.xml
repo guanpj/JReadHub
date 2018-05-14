@@ -8,9 +8,8 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="30dp"
-        android:layout_weight="1"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="4dp"
         app:cardElevation="@dimen/cardview_default_elevation">
@@ -25,26 +24,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txt_instant_source"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_10_dp"
-                    android:textColor="#545454"
-                    android:textSize="@dimen/textSize_18"
-                    tools:text="来源：36Kr" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/txt_origin_site"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/selector_btn_background"
-                    android:padding="@dimen/dimen_10_dp"
-                    android:text="访问源网址"
-                    android:textColor="#545454"
-                    android:textSize="@dimen/textSize_18"
-                    android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/txt_topic_instant_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#222222"
+                        android:textSize="@dimen/textSize_20"
+                        android:textStyle="bold"
+                        tools:text="欧盟正考虑采取多项措施 向谷歌亚马逊等公司征收更多的税" />
+
+                    <TextView
+                        android:id="@+id/txt_instant_source"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_10_dp"
+                        android:textColor="#545454"
+                        android:textSize="@dimen/textSize_18"
+                        tools:text="来源：36Kr" />
+
+                </LinearLayout>
+
             </RelativeLayout>
 
             <View
@@ -55,6 +63,7 @@
             <LinearLayout
                 android:id="@+id/ll_progress_bar_wrapper"
                 android:gravity="center"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -71,35 +80,20 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:layout_marginBottom="@dimen/dimen_10_dp"
                 android:fillViewport="true">
 
-                <LinearLayout
+                <WebView
+                    android:id="@+id/web_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txt_topic_instant_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:textColor="#222222"
-                        android:textSize="@dimen/textSize_20"
-                        android:textStyle="bold"
-                        tools:text="欧盟正考虑采取多项措施 向谷歌亚马逊等公司征收更多的税" />
-
-                    <WebView
-                        android:id="@+id/web_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp" />
-                </LinearLayout>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
             </ScrollView>
+
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
 
     <ImageView
@@ -109,7 +103,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="4dp"
         android:scaleType="centerInside"
-        android:src="@mipmap/ic_close" />
+        android:src="@drawable/ic_instant_read_close" />
 
 </LinearLayout>
 
