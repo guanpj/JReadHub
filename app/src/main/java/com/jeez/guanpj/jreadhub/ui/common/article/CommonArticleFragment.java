@@ -1,7 +1,9 @@
 package com.jeez.guanpj.jreadhub.ui.common.article;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -152,7 +154,21 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        return false;
+        switch (item.getItemId()) {
+            case R.id.action_open:
+                Intent openIntent = new Intent(Intent.ACTION_VIEW);
+                openIntent.setData(Uri.parse(mUrl));
+                startActivity(Intent.createChooser(openIntent, "在浏览器中打开"));
+                return true;
+            case R.id.action_share:
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, mUrl + "\n——来自 Readhub 客户端");
+                startActivity(Intent.createChooser(shareIntent, "分享"));
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override

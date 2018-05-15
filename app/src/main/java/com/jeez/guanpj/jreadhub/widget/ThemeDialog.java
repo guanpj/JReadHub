@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -29,8 +28,6 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
     ImageView imgThemeBlue;
     @BindView(R.id.theme_gray)
     ImageView imgThemeGray;
-    @BindView(R.id.theme_white)
-    ImageView imgThemeWhite;
 
     public ThemeDialog(@NonNull Context context) {
         this(context, R.style.ThemeDialog);
@@ -60,10 +57,9 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
 
         imgThemeBlue.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_blue_theme), 25));
         imgThemeGray.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_gray_theme), 25));
-        imgThemeWhite.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_white_theme), 25));
     }
 
-    @OnClick({R.id.theme_blue, R.id.theme_gray, R.id.theme_white})
+    @OnClick({R.id.theme_blue, R.id.theme_gray})
     public void onClick(View v) {
         String selectedTheme = null;
         switch (v.getId()) {
@@ -72,9 +68,6 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
                 break;
             case R.id.theme_gray:
                 selectedTheme = Constants.Theme.Gray;
-                break;
-            case R.id.theme_white:
-                selectedTheme = Constants.Theme.White;
                 break;
             default:
                 break;

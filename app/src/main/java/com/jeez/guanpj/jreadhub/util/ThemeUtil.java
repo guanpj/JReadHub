@@ -47,11 +47,4 @@ public class ThemeUtil {
         return getTheme().equals(Constants.Theme.Blue);
     }
 
-    /**
-     * 判断是否是白色主题
-     * @return
-     */
-    public boolean isWhiteTheme() {
-        return getTheme().equals(Constants.Theme.White);
-    }
 }

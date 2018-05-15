@@ -127,9 +127,14 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
         mDrawerLayout.post(() -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_change_theme) {
-                mThemeDialog.show();
+            switch (item.getItemId()) {
+                case R.id.nav_setting:
+                    break;
+                case R.id.nav_about:
+                    break;
+                case R.id.nav_change_theme:
+                    mThemeDialog.show();
+                    break;
             }
         });
         return true;
@@ -145,10 +150,6 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
             case Constants.Theme.Gray:
                 setTheme(R.style.GrayTheme);
                 mThemeUtil.setTheme(Constants.Theme.Gray);
-                break;
-            case Constants.Theme.White:
-                setTheme(R.style.WhiteTheme);
-                mThemeUtil.setTheme(Constants.Theme.White);
                 break;
             default:
         }

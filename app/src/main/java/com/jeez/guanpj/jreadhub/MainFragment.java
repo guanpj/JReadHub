@@ -1,5 +1,6 @@
 package com.jeez.guanpj.jreadhub;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -16,7 +17,6 @@ import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
-import com.jeez.guanpj.jreadhub.event.ToolbarShareClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.ui.adpter.FragmentAdapter;
 
@@ -123,9 +123,16 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
                 showShortToast("Coming soon...");
                 break;
             case R.id.action_share:
-                RxBus.getInstance().post(new ToolbarShareClickEvent());
+                doShare();
                 break;
         }
         return true;
+    }
+
+    private void doShare() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "https://readhub.me\n互联网聚合阅读平台");
+        startActivity(Intent.createChooser(intent, "分享"));
     }
 }

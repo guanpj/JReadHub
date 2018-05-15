@@ -26,8 +26,6 @@ public class Constants {
 
     public interface Theme {
         String Blue = "blue";
-        String White = "white";
         String Gray = "gray";
     }
-
 }
