@@ -37,12 +37,6 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
         super(context, themeResId);
         this.mContext = context;
         mView = LayoutInflater.from(mContext).inflate(R.layout.dialog_theme, null, false);
-
-        /*try {
-            mView = LayoutInflater.from(mContext).inflate(R.layout.dialog_theme, null, false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
         setContentView(mView);
         ButterKnife.bind(this, mView);
         initContentView();

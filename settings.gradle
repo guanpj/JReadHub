@@ -1,1 +1,1 @@
-include ':app', ':MVPFramework'
+include ':app', ':MvpFramework'
