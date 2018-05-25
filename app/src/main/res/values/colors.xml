@@ -9,6 +9,7 @@
     <color name="text_white">#fff</color>
     <color name="text_nav">#b2ebf2</color>
     <color name="text_gray">#cdcdcd</color>
+    <color name="text_topic_detail_news_item">#607D8B</color>
 
     <color name="line_space">#f5f5f5</color>
 
@@ -26,22 +27,22 @@
         <color name="theme_gray_text">#979797</color>
         <color name="theme_gray_status">#bbc6ca</color>-->
 
-    <color name="theme_blue_theme">#6E9AC1</color>
-    <color name="theme_blue_status">#6E9AC1</color>
+    <color name="theme_blue_theme">#5ca1de</color>
+    <color name="theme_blue_status">#5ca1de</color>
     <color name="theme_blue_background">#f5f5f5</color>
-    <color name="theme_blue_badge">#6E9AC1</color>
+    <color name="theme_blue_badge">#5ca1de</color>
     <color name="theme_blue_text_common">#535353</color>
     <color name="theme_blue_text_content">#727272</color>
-    <color name="theme_blue_float_btn">#6E9AC1</color>
+    <color name="theme_blue_float_btn">#5ca1de</color>
     <color name="theme_blue_toolbar_text">#fff</color>
 
-    <color name="theme_gray_theme">#979797</color>
-    <color name="theme_gray_status">#979797</color>
+    <color name="theme_gray_theme">#8f8d86</color>
+    <color name="theme_gray_status">#8f8d86</color>
     <color name="theme_gray_background">#f5f5f5</color>
-    <color name="theme_gray_badge">#979797</color>
+    <color name="theme_gray_badge">#8f8d86</color>
     <color name="theme_gray_text_common">#535353</color>
     <color name="theme_gray_text_content">#727272</color>
-    <color name="theme_gray_float_btn">#979797</color>
+    <color name="theme_gray_float_btn">#8f8d86</color>
     <color name="theme_gray_toolbar_text">#fff</color>
 
 </resources>

@@ -136,10 +136,10 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(params);
             textView.setPadding(10, 16, 10, 16);
-            textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_data, 0, 0, 0);
+            textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_news, 0, 0, 0);
             textView.setCompoundDrawablePadding(15);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            textView.setTextColor(Color.parseColor("#607D8B"));
+            textView.setTextColor(getResources().getColor(R.color.text_topic_detail_news_item));
             textView.setBackgroundResource(R.drawable.selector_btn_background);
             if (TextUtils.isEmpty(topic.getSiteName())) {
                 textView.setText(topic.getTitle());

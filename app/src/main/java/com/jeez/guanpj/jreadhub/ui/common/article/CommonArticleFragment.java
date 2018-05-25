@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -132,7 +133,7 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     private void initWebSettings() {
         WebSettings mWebSetting = mWebView.getSettings();
         if (mWebSetting == null) return;
-        mWebSetting.setJavaScriptEnabled(true);
+        /*mWebSetting.setJavaScriptEnabled(true);
         mWebSetting.setUseWideViewPort(true);
         mWebSetting.setLoadWithOverviewMode(true);
         mWebSetting.setDomStorageEnabled(true);
@@ -149,7 +150,15 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
         mWebSetting.setNeedInitialFocus(true);
         mWebSetting.setJavaScriptCanOpenWindowsAutomatically(true);
         mWebSetting.setLoadsImagesAutomatically(true);
-        mWebSetting.setDefaultTextEncodingName("utf-8");
+        mWebSetting.setDefaultTextEncodingName("utf-8");*/
+
+        mWebSetting.setJavaScriptEnabled(true);
+        mWebSetting.setDomStorageEnabled(true);
+        //noinspection deprecation
+        mWebSetting.setPluginState(WebSettings.PluginState.ON);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mWebSetting.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+        }
     }
 
     @Override

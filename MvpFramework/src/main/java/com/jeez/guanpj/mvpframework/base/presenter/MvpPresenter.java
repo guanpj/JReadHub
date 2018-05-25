@@ -1,8 +1,8 @@
 package com.jeez.guanpj.mvpframework.base.presenter;
 
-import com.jeez.guanpj.mvpframework.base.view.MVPView;
+import com.jeez.guanpj.mvpframework.base.view.MvpView;
 
-public interface MVPPresenter<V extends MVPView> {
+public interface MvpPresenter<V extends MvpView> {
 
     void attachView(V view);
 

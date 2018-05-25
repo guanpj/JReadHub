@@ -20,11 +20,11 @@
         <item name="readhubTheme">@color/theme_blue_theme</item>
         <item name="readhubFloatBtn">@color/theme_blue_float_btn</item>
 
-        <item name="navIcon">@mipmap/ic_actionbar_menu</item>
-        <item name="navBackIcon">@mipmap/ic_action_return</item>
-        <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more</item>
-        <item name="menuSearch">@mipmap/ic_actionbar_search</item>
-        <item name="menuShare">@mipmap/ic_action_share</item>
+        <item name="navIcon">@drawable/ic_menu</item>
+        <item name="navBackIcon">@drawable/ic_back</item>
+        <item name="overFlowIcon">@drawable/ic_more</item>
+        <item name="menuSearch">@drawable/ic_search</item>
+        <item name="menuShare">@drawable/ic_share</item>
     </style>
 
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -42,11 +42,11 @@
         <item name="readhubTheme">@color/theme_gray_theme</item>
         <item name="readhubFloatBtn">@color/theme_gray_float_btn</item>
 
-        <item name="navIcon">@mipmap/ic_actionbar_menu</item>
-        <item name="navBackIcon">@mipmap/ic_action_return</item>
-        <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more</item>
-        <item name="menuSearch">@mipmap/ic_actionbar_search</item>
-        <item name="menuShare">@mipmap/ic_action_share</item>
+        <item name="navIcon">@drawable/ic_menu</item>
+        <item name="navBackIcon">@drawable/ic_back</item>
+        <item name="overFlowIcon">@drawable/ic_more</item>
+        <item name="menuSearch">@drawable/ic_search</item>
+        <item name="menuShare">@drawable/ic_share</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
