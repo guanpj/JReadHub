@@ -1,0 +1,8 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="16dp"
+    android:height="16dp"
+    android:viewportHeight="1024"
+    android:viewportWidth="1024">
+    <path android:fillColor="@color/text_topic_detail_news_item"
+        android:pathData="M512,65.85c-247.03,0 -447.29,199.75 -447.29,446.16 0,246.39 200.26,446.15 447.29,446.15 247.03,0 447.29,-199.75 447.29,-446.15C959.29,265.6 759.03,65.85 512,65.85zM512,751.4c-126.53,0 -229.1,-102.31 -229.1,-228.51 0,-126.21 102.57,-228.51 229.1,-228.51 126.53,0 229.1,102.3 229.1,228.51C741.1,649.09 638.53,751.4 512,751.4zM526.35,379.98l-28.41,-0.3 -0.27,157.49 159.11,58.23 11.61,-30.47 -142.35,-54.24L526.35,379.98z"/>
+</vector>

@@ -27,13 +27,15 @@ public class TopicBean {
 
     String id;
     String createdAt;
+    ArrayList<EntityEventTopicBean> entityEventTopics;
+    ArrayList<EntityTopicBean> entityTopics;
     /*Object eventData;*/
     long order;
     String publishDate;
     String summary;
     String title;
     String updatedAt;
-    /*Object timeline;*/
+    TopicTimelineBean timeline;
     ArrayList<TopicNewsBean> newsArray;
     Extra extra;
 
@@ -51,6 +53,22 @@ public class TopicBean {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public ArrayList<EntityEventTopicBean> getEntityEventTopics() {
+        return entityEventTopics;
+    }
+
+    public void setEntityEventTopics(ArrayList<EntityEventTopicBean> entityEventTopics) {
+        this.entityEventTopics = entityEventTopics;
+    }
+
+    public ArrayList<EntityTopicBean> getEntityTopics() {
+        return entityTopics;
+    }
+
+    public void setEntityTopics(ArrayList<EntityTopicBean> entityTopics) {
+        this.entityTopics = entityTopics;
     }
 
     /*public Object getEventData() {
@@ -105,13 +123,13 @@ public class TopicBean {
         this.updatedAt = updatedAt;
     }
 
-    /*public Object getTimeline() {
+    public TopicTimelineBean getTimeline() {
         return timeline;
     }
 
-    public void setTimeline(Object timeline) {
+    public void setTimeline(TopicTimelineBean timeline) {
         this.timeline = timeline;
-    }*/
+    }
 
     public ArrayList<TopicNewsBean> getNewsArray() {
         return newsArray;

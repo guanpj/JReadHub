@@ -9,12 +9,12 @@ import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
-import com.jeez.guanpj.jreadhub.bean.TopicTraceBean;
+import com.jeez.guanpj.jreadhub.bean.TopicRelativeBean;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class TopicTraceViewHolder extends BaseViewHolder<TopicTraceBean> {
+public class TopicTraceViewHolder extends BaseViewHolder<TopicRelativeBean> {
     @BindView(R.id.txt_date)
     TextView mTxtDate;
     @BindView(R.id.txt_topic_trace_content)
@@ -24,17 +24,17 @@ public class TopicTraceViewHolder extends BaseViewHolder<TopicTraceBean> {
     @BindView(R.id.view_bottom_line)
     View mDividerBottom;
 
-    private TopicTraceBean mTopicTrace;
+    private TopicRelativeBean mTopicTrace;
 
     public TopicTraceViewHolder(Context context, ViewGroup parent) {
         super(context, parent, R.layout.item_topic_trace);
     }
 
     @Override
-    public void bindData(TopicTraceBean value) {
+    public void bindData(TopicRelativeBean value) {
         mTopicTrace = value;
-        mTxtDate.setText(value.date);
-        mTxtContent.setText(value.content);
+        mTxtDate.setText(value.getCreatedAt().toLocalDate().toString());
+        mTxtContent.setText(value.getTitle());
         mDividerTop.setVisibility(getItemViewType() == TopicDetailFragment.VIEW_TYPE_TOP ? View.INVISIBLE : View.VISIBLE);
         mDividerBottom.setVisibility(getItemViewType() == TopicDetailFragment.VIEW_TYPE_BOTTOM ? View.INVISIBLE : View.VISIBLE);
     }
@@ -42,6 +42,6 @@ public class TopicTraceViewHolder extends BaseViewHolder<TopicTraceBean> {
     @OnClick(R.id.txt_topic_trace_content)
     void onClickContent(View view) {
         ((MainActivity) view.getContext()).findFragment(MainFragment.class)
-                .start(TopicDetailFragment.newInstance(mTopicTrace.url));
+                .start(TopicDetailFragment.newInstance(mTopicTrace.getId()));
     }
 }

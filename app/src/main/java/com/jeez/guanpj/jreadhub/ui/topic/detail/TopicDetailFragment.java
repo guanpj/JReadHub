@@ -23,14 +23,12 @@ import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.bean.TopicTraceBean;
+import com.jeez.guanpj.jreadhub.bean.TopicRelativeBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import org.parceler.Parcels;
-
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -56,16 +54,20 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     NestedScrollView mScrollView;
 
     private TopicBean mTopic;
-    private BaseAdapter<TopicTraceBean> mTimelineAdapter = new BaseAdapter<TopicTraceBean>() {
+    private BaseAdapter<TopicRelativeBean> mTimelineAdapter = new BaseAdapter<TopicRelativeBean>() {
         @Override
-        public BaseViewHolder<TopicTraceBean> onCreateViewHolder(ViewGroup parent, int viewType) {
+        public BaseViewHolder<TopicRelativeBean> onCreateViewHolder(ViewGroup parent, int viewType) {
             return new TopicTraceViewHolder(getContext(), parent);
         }
 
         @Override
         public int getItemViewType(int position) {
-            if (position == 0) return VIEW_TYPE_TOP;
-            if (position == getItemCount() - 1) return VIEW_TYPE_BOTTOM;
+            if (position == 0) {
+                return VIEW_TYPE_TOP;
+            }
+            if (position == getItemCount() - 1) {
+                return VIEW_TYPE_BOTTOM;
+            }
             return super.getItemViewType(position);
         }
     };
@@ -91,7 +93,7 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
         super.onCreate(savedInstanceState);
         mTopic = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_TOPIC));
         if (mTopic != null) {
-            mPresenter.getTopicTrace(mTopic.getId());
+            mPresenter.getTopicDetail(mTopic.getId());
             return;
         }
         String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
@@ -125,15 +127,14 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
             return;
         }
         mTxtTopicTitle.setText(mTopic.getTitle());
-        mTxtTopicTime.setText(mTopic.getPublishDate().toString());
+        mTxtTopicTime.setText(mTopic.getPublishDate().toLocalDate().toString() + "  " +
+                mTopic.getPublishDate().toLocalTime().toString().substring(0, 8));
         mTxtTopicDescription.setText(mTopic.getSummary());
-        mTxtTopicDescription.setVisibility(
-                TextUtils.isEmpty(mTopic.getSummary()) ? View.GONE : View.VISIBLE);
+        mTxtTopicDescription.setVisibility(TextUtils.isEmpty(mTopic.getSummary()) ? View.GONE : View.VISIBLE);
         mLinearTitleContainer.removeAllViews();
         for (final TopicNewsBean topic : mTopic.getNewsArray()) {
             TextView textView = new TextView(getContext());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(params);
             textView.setPadding(10, 16, 10, 16);
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_news, 0, 0, 0);
@@ -151,17 +152,18 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 textView.setText(spannableTitle);
             }
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    start(CommonArticleFragment.newInstance(topic));
-                }
-            });
+            textView.setOnClickListener(v -> start(CommonArticleFragment.newInstance(topic)));
             mLinearTitleContainer.addView(textView);
         }
         mRecyclerTimeline.setAdapter(mTimelineAdapter);
         mRecyclerTimeline.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerTimeline.setNestedScrollingEnabled(false);
+        if (null != mTopic.getTimeline() && null != mTopic.getTimeline().getTopics() && 0 < mTopic.getTimeline().getTopics().size()) {
+            mTimelineAdapter.addItems(mTopic.getTimeline().getTopics());
+            mLinearTimelineContainer.setVisibility(View.VISIBLE);
+        } else {
+            mLinearTimelineContainer.setVisibility(View.GONE);
+        }
         mScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             /*mTxtToolbarTitle.setVisibility(
                     scrollY > mTxtTopicTime.getBottom() ? View.VISIBLE : View.GONE);
@@ -178,13 +180,6 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     public void onRequestTopicEnd(TopicBean bean) {
         mTopic = bean;
         initDataAndEvent();
-        mPresenter.getTopicTrace(bean.getId());
-    }
-
-    @Override
-    public void onRequestTopicTraceEnd(List<TopicTraceBean> beans) {
-        mTimelineAdapter.addItems(beans);
-        mLinearTimelineContainer.setVisibility(mTimelineAdapter.getItemCount() != 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
