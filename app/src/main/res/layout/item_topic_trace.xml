@@ -26,7 +26,7 @@
             android:layout_width="@dimen/line_1"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/backgroundGrey" />
+            android:background="@color/bg_topic_trace_item_line" />
 
         <View
             android:layout_width="@dimen/dimen_5_dp"
@@ -38,7 +38,7 @@
             android:layout_width="@dimen/line_1"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/backgroundGrey" />
+            android:background="@color/bg_topic_trace_item_line" />
     </LinearLayout>
 
     <TextView

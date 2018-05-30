@@ -20,7 +20,8 @@
     <color name="bg_gray">#979797</color>
 
     <color name="dialog_bg">#6b000000</color>
-    <color name="backgroundGrey">#F7F7F7</color>
+    <color name="bg_topic_trace_list">#F7F7F7</color>
+    <color name="bg_topic_trace_item_line">#D7D7D7</color>
     <color name="edit_bg">#e0e0e0</color>
 
     <!--

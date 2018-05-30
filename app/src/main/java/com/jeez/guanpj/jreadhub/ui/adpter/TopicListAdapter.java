@@ -1,8 +1,8 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
+import com.jeez.guanpj.jreadhub.base.BaseAdapter;
+import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
@@ -31,7 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportActivity;
 
-public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.TopicViewHolder> {
+public class TopicListAdapter extends BaseAdapter<TopicBean> {
 
     private final Activity activity;
     private final LayoutInflater inflater;
@@ -53,23 +55,13 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
         expandStateMap.clear();
     }
 
-    @Override
-    public int getItemCount() {
-        return topicList.size();
-    }
-
     @NonNull
     @Override
-    public TopicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TopicViewHolder(inflater.inflate(R.layout.item_topic, parent, false));
+    public BaseViewHolder<TopicBean> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new TopicViewHolder(activity, parent);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull TopicViewHolder holder, int position) {
-        holder.bind(topicList.get(position), position);
-    }
-
-    class TopicViewHolder extends RecyclerView.ViewHolder {
+    class TopicViewHolder extends BaseViewHolder<TopicBean> {
         @BindView(R.id.tv_title)
         TextView tvTitle;
         @BindView(R.id.tv_summary)
@@ -90,14 +82,14 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
         private TopicBean topic;
         private int position;
 
-        TopicViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        TopicViewHolder(Context context, ViewGroup parent) {
+            super(context, parent, R.layout.item_topic_trace);
         }
 
-        void bind(@NonNull TopicBean topic, int position) {
+        @Override
+        public void bindData(TopicBean topic) {
             this.topic = topic;
-            this.position = position;
+            this.position = getAdapterPosition();
 
             tvTitle.setText(topic.getTitle());
             tvSummary.setText(topic.getSummary());
@@ -105,7 +97,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
             tvTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()));
             imgInstantRead.setVisibility(topic.hasInstantView() ? View.VISIBLE : View.GONE);
             tvInfo.setText(activity.getString(R.string.source_count, topic.getNewsArray().size()));
-            //tvInfo.setText(topic.getPublishDate());
+
             boolean expand = expandStateMap.get(position, false);
             imgExpandState.setImageResource(expand ? R.drawable.ic_less_info : R.drawable.ic_more_info);
             layoutExpand.setExpanded(expand, false);
@@ -118,7 +110,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
                     holder = new NewsViewHolder(view);
                     view.setTag(holder);
                 }
-                holder.bind(news);
+                holder.bindData(news);
                 if (i == layoutSource.getChildCount() - 1) {
                     holder.line.setBackground(null);
                 }
@@ -176,7 +168,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
 
     }
 
-    class NewsViewHolder {
+    class NewsViewHolder extends BaseViewHolder<TopicNewsBean> {
         @BindView(R.id.tv_title)
         TextView tvTitle;
         @BindView(R.id.tv_info)
@@ -186,11 +178,12 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.Topi
 
         private TopicNewsBean news;
 
-        NewsViewHolder(@NonNull View itemView) {
-            ButterKnife.bind(this, itemView);
+        NewsViewHolder(Context context, ViewGroup parent) {
+            super(context, parent, R.layout.item_topic_news);
         }
 
-        void bind(@NonNull TopicNewsBean news) {
+        @Override
+        public void bindData(TopicNewsBean news) {
             this.news = news;
             tvTitle.setText(news.getTitle());
             tvInfo.setText(activity.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));

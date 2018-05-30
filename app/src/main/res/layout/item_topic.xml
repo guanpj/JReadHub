@@ -100,7 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="5个数据源"
+                        android:text="5 个数据源"
                         android:textColor="?attr/readhubTheme"
                         android:textSize="@dimen/textSize_14" />
 
@@ -134,7 +134,7 @@
                 android:background="@android:color/white"
                 android:orientation="vertical">
 
-                <include layout="@layout/item_topic_news" />
+                <!--<include layout="@layout/item_topic_news" />-->
 
             </LinearLayout>
 
