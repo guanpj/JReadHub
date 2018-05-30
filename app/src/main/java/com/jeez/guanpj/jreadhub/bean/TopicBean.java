@@ -7,7 +7,6 @@ import org.threeten.bp.OffsetDateTime;
 
 import java.util.ArrayList;
 
-@Parcel
 public class TopicBean {
 
     /**
@@ -151,7 +150,7 @@ public class TopicBean {
         return extra != null && extra.instantView;
     }
 
-    @Parcel public static class Extra {
+    public static class Extra {
         boolean instantView;
     }
 }

@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
+
     public BaseViewHolder(Context context, ViewGroup parent, @LayoutRes int layoutRes) {
         super(LayoutInflater.from(context).inflate(layoutRes, parent, false));
         ButterKnife.bind(this, itemView);
     }
 
-    public abstract void bindData(T value);
+    public abstract void bindData(T value, int position);
 }

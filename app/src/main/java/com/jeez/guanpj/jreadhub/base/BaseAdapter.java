@@ -12,13 +12,20 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     @Override
     public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
         if (position < mItemList.size()) {
-            holder.bindData(mItemList.get(position));
+            holder.bindData(mItemList.get(position), position);
         }
     }
 
     @Override
     public int getItemCount() {
         return mItemList.size();
+    }
+
+    public T getItem(int position) {
+        if (position < mItemList.size()) {
+            return mItemList.get(position);
+        }
+        return null;
     }
 
     public void addItem(T value) {

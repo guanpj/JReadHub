@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimen_10_dp"
+        android:paddingBottom="@dimen/dimen_10_dp"
+        android:textSize="@dimen/textSize_14"
+        android:textColor="?attr/readhubTheme"
+        android:text="查看更多"/>
+
+</LinearLayout>

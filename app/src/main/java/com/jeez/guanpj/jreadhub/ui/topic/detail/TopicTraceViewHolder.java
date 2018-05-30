@@ -41,7 +41,7 @@ public class TopicTraceViewHolder extends BaseViewHolder<TopicRelativeBean> {
     }
 
     @Override
-    public void bindData(TopicRelativeBean value) {
+    public void bindData(TopicRelativeBean value, int position) {
         mTopicTrace = value;
         LocalDate date = value.getCreatedAt().toLocalDate();
         int year = date.getYear();

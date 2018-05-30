@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,18 +38,12 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
 
     private final Activity activity;
     private final LayoutInflater inflater;
-    private final List<TopicBean> topicList = new ArrayList<>();
     private final SparseBooleanArray expandStateMap = new SparseBooleanArray();
     private final List<View> newsViewPool = new ArrayList<>();
 
     public TopicListAdapter(@NonNull Activity activity) {
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
-    }
-
-    @NonNull
-    public List<TopicBean> getTopicList() {
-        return topicList;
     }
 
     public void clearExpandStates() {
@@ -62,6 +57,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
     }
 
     class TopicViewHolder extends BaseViewHolder<TopicBean> {
+
         @BindView(R.id.tv_title)
         TextView tvTitle;
         @BindView(R.id.tv_summary)
@@ -82,14 +78,17 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         private TopicBean topic;
         private int position;
 
+        private View newsMoreView;
+
         TopicViewHolder(Context context, ViewGroup parent) {
-            super(context, parent, R.layout.item_topic_trace);
+            super(context, parent, R.layout.item_topic);
+            newsMoreView = inflater.inflate(R.layout.item_topic_news_more, null, false);
         }
 
         @Override
-        public void bindData(TopicBean topic) {
+        public void bindData(TopicBean topic, int position) {
             this.topic = topic;
-            this.position = getAdapterPosition();
+            this.position = position;
 
             tvTitle.setText(topic.getTitle());
             tvSummary.setText(topic.getSummary());
@@ -98,10 +97,48 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
             imgInstantRead.setVisibility(topic.hasInstantView() ? View.VISIBLE : View.GONE);
             tvInfo.setText(activity.getString(R.string.source_count, topic.getNewsArray().size()));
 
-            boolean expand = expandStateMap.get(position, false);
+            boolean expand = expandStateMap.get(this.position, false);
             imgExpandState.setImageResource(expand ? R.drawable.ic_less_info : R.drawable.ic_more_info);
             layoutExpand.setExpanded(expand, false);
-            adjustLayoutSourceChildren(topic.getNewsArray().size());
+
+            layoutSource.removeAllViews();
+            if (topic.getNewsArray().size() > 3) {
+                for (int i = 0; i < 3; i++) {
+                    View newsItemView = inflater.inflate(R.layout.item_topic_news, layoutSource, false);
+                    layoutSource.addView(newsItemView);
+
+                    TopicNewsBean news = topic.getNewsArray().get(i);
+                    NewsViewHolder holder = (NewsViewHolder) newsItemView.getTag();
+                    if (holder == null) {
+                        holder = new NewsViewHolder(newsItemView);
+                        newsItemView.setTag(holder);
+                    }
+                    holder.bindData(news);
+                }
+                newsMoreView.setOnClickListener(v ->
+                    ((MainActivity) activity).findFragment(MainFragment.class)
+                            .start(TopicDetailFragment.newInstance(topic.getId()))
+                );
+                layoutSource.addView(newsMoreView);
+            } else {
+                for (int i = 0; i < topic.getNewsArray().size(); i++) {
+                    View newsItemView = inflater.inflate(R.layout.item_topic_news, layoutSource, false);
+                    layoutSource.addView(newsItemView);
+
+                    TopicNewsBean news = topic.getNewsArray().get(i);
+                    NewsViewHolder holder = (NewsViewHolder) newsItemView.getTag();
+                    if (holder == null) {
+                        holder = new NewsViewHolder(newsItemView);
+                        newsItemView.setTag(holder);
+                    }
+                    holder.bindData(news);
+                    if (i == topic.getNewsArray().size() - 1) {
+                        holder.setLineVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+
+            /*adjustLayoutSourceChildren(topic.getNewsArray().size());
             for (int i = 0; i < layoutSource.getChildCount(); i++) {
                 TopicNewsBean news = topic.getNewsArray().get(i);
                 View  view = layoutSource.getChildAt(i);
@@ -114,7 +151,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
                 if (i == layoutSource.getChildCount() - 1) {
                     holder.line.setBackground(null);
                 }
-            }
+            }*/
         }
 
         void adjustLayoutSourceChildren(int count) {
@@ -150,7 +187,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         @OnClick(R.id.ll_item_header)
         void onItemHeaderClick() {
             ((MainActivity) activity).findFragment(MainFragment.class)
-                    .start(TopicDetailFragment.newInstance(topic));
+                    .start(TopicDetailFragment.newInstance(topic.getId()));
         }
 
         @OnClick(R.id.fl_item_footer)
@@ -168,7 +205,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
 
     }
 
-    class NewsViewHolder extends BaseViewHolder<TopicNewsBean> {
+    class NewsViewHolder {
         @BindView(R.id.tv_title)
         TextView tvTitle;
         @BindView(R.id.tv_info)
@@ -178,15 +215,18 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
 
         private TopicNewsBean news;
 
-        NewsViewHolder(Context context, ViewGroup parent) {
-            super(context, parent, R.layout.item_topic_news);
+        NewsViewHolder(@NonNull View itemView) {
+            ButterKnife.bind(this, itemView);
         }
 
-        @Override
-        public void bindData(TopicNewsBean news) {
+        void bindData(@NonNull TopicNewsBean news) {
             this.news = news;
             tvTitle.setText(news.getTitle());
             tvInfo.setText(activity.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
+        }
+
+        public void setLineVisibility(int visibility) {
+            line.setVisibility(visibility);
         }
 
         @OnClick(R.id.btn_item)

@@ -72,14 +72,6 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
         }
     };
 
-    public static TopicDetailFragment newInstance(TopicBean topic) {
-        TopicDetailFragment fragment = new TopicDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.EXTRA_TOPIC, Parcels.wrap(topic));
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
     public static TopicDetailFragment newInstance(String topicId) {
         TopicDetailFragment fragment = new TopicDetailFragment();
         Bundle bundle = new Bundle();
@@ -91,11 +83,6 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTopic = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_TOPIC));
-        if (mTopic != null) {
-            mPresenter.getTopicDetail(mTopic.getId());
-            return;
-        }
         String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
         mPresenter.getTopicDetail(topicId);
     }

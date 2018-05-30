@@ -62,7 +62,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
     @Override
     public void onLoadMore() {
-        mPresenter.doLoadMore(listAdapter.getTopicList().get(listAdapter.getTopicList().size() - 1).getOrder());
+        mPresenter.doLoadMore(listAdapter.getItem(listAdapter.getItemCount() - 1).getOrder());
     }
 
     @Override
@@ -73,16 +73,13 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     @Override
     public void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh) {
         if (isPull2Refresh) {
-            listAdapter.getTopicList().clear();
-            listAdapter.getTopicList().addAll(data.getData());
+            listAdapter.clear();
             listAdapter.clearExpandStates();
-            listAdapter.notifyDataSetChanged();
+            listAdapter.addItems(data.getData());
             refreshLayout.setRefreshing(false);
             loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
         } else {
-            int startPosition = listAdapter.getItemCount();
-            listAdapter.getTopicList().addAll(data.getData());
-            listAdapter.notifyItemRangeInserted(startPosition, data.getData().size());
+            listAdapter.addItems(data.getData());
             loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
         }
     }

@@ -4,7 +4,6 @@ import org.parceler.Parcel;
 
 import java.util.ArrayList;
 
-@Parcel
 public class TopicTimelineBean {
     int errorCode;
     ArrayList<TopicRelativeBean> topics;

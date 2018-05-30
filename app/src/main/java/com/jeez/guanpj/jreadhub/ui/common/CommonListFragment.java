@@ -83,7 +83,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     @Override
     public void onLoadMore() {
-        mPresenter.doLoadMore(type, listAdapter.getNewsList().get(listAdapter.getNewsList().size() - 1).getPublishDate().toInstant().toEpochMilli());
+        mPresenter.doLoadMore(type, listAdapter.getItem(listAdapter.getItemCount() - 1).getPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
@@ -94,15 +94,12 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
     @Override
     public void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh) {
         if (isPull2Refresh) {
-            listAdapter.getNewsList().clear();
-            listAdapter.getNewsList().addAll(data.getData());
-            listAdapter.notifyDataSetChanged();
+            listAdapter.clear();
+            listAdapter.addItems(data.getData());
             refreshLayout.setRefreshing(false);
             loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
         } else {
-            int startPosition = listAdapter.getItemCount();
-            listAdapter.getNewsList().addAll(data.getData());
-            listAdapter.notifyItemRangeInserted(startPosition, data.getData().size());
+            listAdapter.addItems(data.getData());
             loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
         }
     }
