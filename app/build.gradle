@@ -70,4 +70,5 @@ dependencies {
     implementation 'org.parceler:parceler-api:1.1.9'
     annotationProcessor 'org.parceler:parceler:1.1.9'
     implementation 'org.jsoup:jsoup:1.11.2'
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
 }
