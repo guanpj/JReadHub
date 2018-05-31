@@ -78,7 +78,7 @@
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="内容内容"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:textColor="?attr/readhubTextContentColor"
                     android:textSize="14sp" />
 
                 <View

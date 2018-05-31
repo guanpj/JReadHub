@@ -21,14 +21,18 @@ import android.widget.TextView;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
+import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicRelativeBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
-import org.parceler.Parcels;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -44,12 +48,16 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     TextView mTxtTopicTime;
     @BindView(R.id.txt_topic_description)
     TextView mTxtTopicDescription;
-    @BindView(R.id.linear_web_title_container)
-    LinearLayout mLinearTitleContainer;
-    @BindView(R.id.linear_topic_trace_container)
-    LinearLayout mLinearTimelineContainer;
+    @BindView(R.id.ll_web_title_container)
+    LinearLayout mTitleContainer;
+    @BindView(R.id.ll_topic_trace_container)
+    LinearLayout mTimelineContainer;
     @BindView(R.id.recycler_topic_trace)
     RecyclerView mRecyclerTimeline;
+    @BindView(R.id.ll_relative_topic_container)
+    LinearLayout mRelativeTopicContainer;
+    @BindView(R.id.tfl_relative_topic)
+    TagFlowLayout mRelativeTopic;
     @BindView(R.id.scroll_view)
     NestedScrollView mScrollView;
 
@@ -118,7 +126,7 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
                 mTopic.getPublishDate().toLocalTime().toString().substring(0, 8));
         mTxtTopicDescription.setText(mTopic.getSummary());
         mTxtTopicDescription.setVisibility(TextUtils.isEmpty(mTopic.getSummary()) ? View.GONE : View.VISIBLE);
-        mLinearTitleContainer.removeAllViews();
+        mTitleContainer.removeAllViews();
         for (final TopicNewsBean topic : mTopic.getNewsArray()) {
             TextView textView = new TextView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -127,30 +135,46 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_news, 0, 0, 0);
             textView.setCompoundDrawablePadding(15);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            textView.setTextColor(getResources().getColor(R.color.text_topic_detail_news_item));
+            textView.setTextColor(getResources().getColor(R.color.text_topic_detail_news_title));
             textView.setBackgroundResource(R.drawable.selector_btn_background);
             if (TextUtils.isEmpty(topic.getSiteName())) {
                 textView.setText(topic.getTitle());
             } else {
                 SpannableString spannableTitle = SpannableString.valueOf(topic.getTitle() + " " + topic.getSiteName());
-                spannableTitle.setSpan(new ForegroundColorSpan(Color.parseColor("#AAACB4")),
+                spannableTitle.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_topic_detail_news_author)),
                         topic.getTitle().length() + 1,
                         topic.getTitle().length() + topic.getSiteName().length() + 1,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 textView.setText(spannableTitle);
             }
             textView.setOnClickListener(v -> start(CommonArticleFragment.newInstance(topic)));
-            mLinearTitleContainer.addView(textView);
+            mTitleContainer.addView(textView);
         }
         mRecyclerTimeline.setAdapter(mTimelineAdapter);
         mRecyclerTimeline.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerTimeline.setNestedScrollingEnabled(false);
         if (null != mTopic.getTimeline() && null != mTopic.getTimeline().getTopics() && 0 < mTopic.getTimeline().getTopics().size()) {
             mTimelineAdapter.addItems(mTopic.getTimeline().getTopics());
-            mLinearTimelineContainer.setVisibility(View.VISIBLE);
+            mTimelineContainer.setVisibility(View.VISIBLE);
         } else {
-            mLinearTimelineContainer.setVisibility(View.GONE);
+            mTimelineContainer.setVisibility(View.GONE);
         }
+
+        if (!mTopic.getEntityEventTopics().isEmpty()) {
+            mRelativeTopicContainer.setVisibility(View.VISIBLE);
+            ArrayList<EntityEventTopicBean> entityEventTopics = mTopic.getEntityEventTopics();
+            mRelativeTopic.setAdapter(new TagAdapter<EntityEventTopicBean>(mTopic.getEntityEventTopics()) {
+                @Override
+                public View getView(FlowLayout parent, int position, EntityEventTopicBean entityEventTopicBean) {
+                    TextView item = (TextView) getLayoutInflater().inflate(R.layout.item_relative_topic, mRelativeTopic, false);
+                    item.setText(entityEventTopicBean.getEntityName() + entityEventTopicBean.getEventTypeLabel());
+                    return item;
+                }
+            });
+        } else {
+            mRelativeTopicContainer.setVisibility(View.GONE);
+        }
+
         mScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             /*mTxtToolbarTitle.setVisibility(
                     scrollY > mTxtTopicTime.getBottom() ? View.VISIBLE : View.GONE);
