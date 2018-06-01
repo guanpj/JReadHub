@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module
+@Module(includes = NetModule.class)
 public class AppModule {
     private final ReadhubApplication mApplication;
 

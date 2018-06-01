@@ -1,7 +1,6 @@
 package com.jeez.guanpj.jreadhub.ui.topic.detail;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,17 +21,21 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
+import com.jeez.guanpj.jreadhub.bean.RelateTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.bean.TopicRelativeBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelateTopicWindow;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 import butterknife.BindView;
 
@@ -62,9 +65,9 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     NestedScrollView mScrollView;
 
     private TopicBean mTopic;
-    private BaseAdapter<TopicRelativeBean> mTimelineAdapter = new BaseAdapter<TopicRelativeBean>() {
+    private BaseAdapter<RelateTopicBean> mTimelineAdapter = new BaseAdapter<RelateTopicBean>() {
         @Override
-        public BaseViewHolder<TopicRelativeBean> onCreateViewHolder(ViewGroup parent, int viewType) {
+        public BaseViewHolder<RelateTopicBean> onCreateViewHolder(ViewGroup parent, int viewType) {
             return new TopicTraceViewHolder(getContext(), parent);
         }
 
@@ -166,9 +169,30 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
             mRelativeTopic.setAdapter(new TagAdapter<EntityEventTopicBean>(mTopic.getEntityEventTopics()) {
                 @Override
                 public View getView(FlowLayout parent, int position, EntityEventTopicBean entityEventTopicBean) {
-                    TextView item = (TextView) getLayoutInflater().inflate(R.layout.item_relative_topic, mRelativeTopic, false);
+                    TextView item = (TextView) getLayoutInflater().inflate(R.layout.item_relate_topic, mRelativeTopic, false);
                     item.setText(entityEventTopicBean.getEntityName() + entityEventTopicBean.getEventTypeLabel());
                     return item;
+                }
+            });
+            mRelativeTopic.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+                @Override
+                public void onSelected(Set<Integer> selectPosSet) {
+                    if (!selectPosSet.isEmpty()) {
+                        Iterator<Integer> iterator = selectPosSet.iterator();
+                        if (iterator.hasNext()) {
+
+                        }
+                    }
+                }
+            });
+            mRelativeTopic.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+                @Override
+                public boolean onTagClick(View view, int position, FlowLayout parent) {
+                    String topicId = String.valueOf(entityEventTopics.get(position).getEntityId());
+                    long order = mTopic.getOrder();
+                    RelateTopicWindow window = new RelateTopicWindow(getActivity(), topicId, order);
+                    window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, false);
+                    return true;
                 }
             });
         } else {

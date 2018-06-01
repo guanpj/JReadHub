@@ -13,7 +13,7 @@ import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
-import com.jeez.guanpj.jreadhub.bean.TopicRelativeBean;
+import com.jeez.guanpj.jreadhub.bean.RelateTopicBean;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
@@ -21,7 +21,7 @@ import org.threeten.bp.OffsetDateTime;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class TopicTraceViewHolder extends BaseViewHolder<TopicRelativeBean> {
+public class TopicTraceViewHolder extends BaseViewHolder<RelateTopicBean> {
 
     private Context mContext;
     @BindView(R.id.txt_date)
@@ -33,7 +33,7 @@ public class TopicTraceViewHolder extends BaseViewHolder<TopicRelativeBean> {
     @BindView(R.id.view_bottom_line)
     View mDividerBottom;
 
-    private TopicRelativeBean mTopicTrace;
+    private RelateTopicBean mTopicTrace;
 
     public TopicTraceViewHolder(Context context, ViewGroup parent) {
         super(context, parent, R.layout.item_topic_trace);
@@ -41,7 +41,7 @@ public class TopicTraceViewHolder extends BaseViewHolder<TopicRelativeBean> {
     }
 
     @Override
-    public void bindData(TopicRelativeBean value, int position) {
+    public void bindData(RelateTopicBean value, int position) {
         mTopicTrace = value;
         LocalDate date = value.getCreatedAt().toLocalDate();
         int year = date.getYear();

@@ -29,13 +29,13 @@ public class NetModule {
 
     @Singleton
     @Provides
-    ReadhubApi provideGeeksApi(Retrofit retrofit) {
+    ReadhubApi provideReadhubApi(Retrofit retrofit) {
         return retrofit.create(ReadhubApi.class);
     }
 
     @Singleton
     @Provides
-    Retrofit provideGeeksRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+    Retrofit provideReadhubRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, ReadhubApi.HOST);
     }
 

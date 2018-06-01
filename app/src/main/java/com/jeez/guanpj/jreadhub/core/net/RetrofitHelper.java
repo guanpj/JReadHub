@@ -3,6 +3,7 @@ package com.jeez.guanpj.jreadhub.core.net;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
+import com.jeez.guanpj.jreadhub.bean.RelateTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.net.api.ReadhubApi;
 
@@ -36,5 +37,10 @@ public class RetrofitHelper implements NetHelper{
     @Override
     public Observable<TopicBean> getTopicDetail(String topicId) {
         return readhubApi.getTopicDetail(topicId);
+    }
+
+    @Override
+    public Observable<RelateTopicBean> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
+        return readhubApi.getRelateTopic(topicId, eventType, order, timeStamp);
     }
 }

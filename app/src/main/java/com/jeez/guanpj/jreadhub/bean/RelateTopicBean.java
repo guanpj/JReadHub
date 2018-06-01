@@ -2,13 +2,14 @@ package com.jeez.guanpj.jreadhub.bean;
 
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
-import org.parceler.Parcel;
 import org.threeten.bp.OffsetDateTime;
 
-public class TopicRelativeBean {
+public class RelateTopicBean {
     String createdAt;
     String id;
     String title;
+    String url;
+    String mobileUrl;
 
     public OffsetDateTime getCreatedAt() {
         return FormatUtils.string2ODT(createdAt);
@@ -32,5 +33,21 @@ public class TopicRelativeBean {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getMobileUrl() {
+        return mobileUrl;
+    }
+
+    public void setMobileUrl(String mobileUrl) {
+        this.mobileUrl = mobileUrl;
     }
 }

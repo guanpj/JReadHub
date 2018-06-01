@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@drawable/drawable_topic_detail_relative_bg"
+    android:background="@drawable/drawable_topic_detail_relate_bg"
     android:textColor="?attr/readhubTextContentColor"
     android:textSize="@dimen/textSize_16"
     android:text="Hello World">

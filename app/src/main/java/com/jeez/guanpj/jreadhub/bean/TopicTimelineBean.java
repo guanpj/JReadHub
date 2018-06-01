@@ -1,12 +1,10 @@
 package com.jeez.guanpj.jreadhub.bean;
 
-import org.parceler.Parcel;
-
 import java.util.ArrayList;
 
 public class TopicTimelineBean {
     int errorCode;
-    ArrayList<TopicRelativeBean> topics;
+    ArrayList<RelateTopicBean> topics;
 
     public int getErrorCode() {
         return errorCode;
@@ -16,11 +14,11 @@ public class TopicTimelineBean {
         this.errorCode = errorCode;
     }
 
-    public ArrayList<TopicRelativeBean> getTopics() {
+    public ArrayList<RelateTopicBean> getTopics() {
         return topics;
     }
 
-    public void setTopics(ArrayList<TopicRelativeBean> topics) {
+    public void setTopics(ArrayList<RelateTopicBean> topics) {
         this.topics = topics;
     }
 }

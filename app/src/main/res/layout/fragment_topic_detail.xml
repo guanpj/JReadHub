@@ -85,21 +85,7 @@
                     android:textColor="@color/text_topic_detail_news_author"
                     android:textSize="@dimen/textSize_16" />
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen_10_dp"
-                    android:layout_marginTop="@dimen/dimen_10_dp"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:cardCornerRadius="@dimen/dimen_5_dp"
-                    app:cardBackgroundColor="@color/bg_topic_trace_list">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_topic_trace"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </android.support.v7.widget.CardView>
+                <include layout="@layout/layout_topic_trace"/>
 
             </LinearLayout>
 
@@ -120,7 +106,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_1"
-                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:layout_marginTop="@dimen/dimen_5_dp"
                 android:background="#EDEDED" />
 
             <com.zhy.view.flowlayout.TagFlowLayout
