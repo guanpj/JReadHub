@@ -107,7 +107,6 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
 
     @Override
     public void onRequestTopicEnd(RelevantTopicBean bean) {
-
     }
 
     @Override

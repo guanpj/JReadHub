@@ -18,13 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.base.BaseAdapter;
-import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
-import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
+import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.util.Constants;
@@ -40,8 +38,6 @@ import java.util.Set;
 import butterknife.BindView;
 
 public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
-
-    public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -65,23 +61,7 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     NestedScrollView mScrollView;
 
     private TopicBean mTopic;
-    private BaseAdapter<RelevantTopicBean> mTimelineAdapter = new BaseAdapter<RelevantTopicBean>() {
-        @Override
-        public BaseViewHolder<RelevantTopicBean> onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new TopicTraceViewHolder(getContext(), parent);
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            if (position == 0) {
-                return VIEW_TYPE_TOP;
-            }
-            if (position == getItemCount() - 1) {
-                return VIEW_TYPE_BOTTOM;
-            }
-            return super.getItemViewType(position);
-        }
-    };
+    private TopicTimelineAdapter mTimelineAdapter;
 
     public static TopicDetailFragment newInstance(String topicId) {
         TopicDetailFragment fragment = new TopicDetailFragment();
@@ -153,6 +133,7 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
             textView.setOnClickListener(v -> start(CommonArticleFragment.newInstance(topic)));
             mTitleContainer.addView(textView);
         }
+        mTimelineAdapter = new TopicTimelineAdapter(getContext());
         mRecyclerTimeline.setAdapter(mTimelineAdapter);
         mRecyclerTimeline.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerTimeline.setNestedScrollingEnabled(false);
