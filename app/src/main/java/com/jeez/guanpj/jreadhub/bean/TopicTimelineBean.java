@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TopicTimelineBean {
     int errorCode;
-    ArrayList<RelateTopicBean> topics;
+    ArrayList<RelevantTopicBean> topics;
 
     public int getErrorCode() {
         return errorCode;
@@ -14,11 +14,11 @@ public class TopicTimelineBean {
         this.errorCode = errorCode;
     }
 
-    public ArrayList<RelateTopicBean> getTopics() {
+    public ArrayList<RelevantTopicBean> getTopics() {
         return topics;
     }
 
-    public void setTopics(ArrayList<RelateTopicBean> topics) {
+    public void setTopics(ArrayList<RelevantTopicBean> topics) {
         this.topics = topics;
     }
 }

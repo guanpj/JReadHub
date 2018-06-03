@@ -21,12 +21,12 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
-import com.jeez.guanpj.jreadhub.bean.RelateTopicBean;
+import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
-import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelateTopicWindow;
+import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -65,9 +65,9 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     NestedScrollView mScrollView;
 
     private TopicBean mTopic;
-    private BaseAdapter<RelateTopicBean> mTimelineAdapter = new BaseAdapter<RelateTopicBean>() {
+    private BaseAdapter<RelevantTopicBean> mTimelineAdapter = new BaseAdapter<RelevantTopicBean>() {
         @Override
-        public BaseViewHolder<RelateTopicBean> onCreateViewHolder(ViewGroup parent, int viewType) {
+        public BaseViewHolder<RelevantTopicBean> onCreateViewHolder(ViewGroup parent, int viewType) {
             return new TopicTraceViewHolder(getContext(), parent);
         }
 
@@ -169,7 +169,7 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
             mRelativeTopic.setAdapter(new TagAdapter<EntityEventTopicBean>(mTopic.getEntityEventTopics()) {
                 @Override
                 public View getView(FlowLayout parent, int position, EntityEventTopicBean entityEventTopicBean) {
-                    TextView item = (TextView) getLayoutInflater().inflate(R.layout.item_relate_topic, mRelativeTopic, false);
+                    TextView item = (TextView) getLayoutInflater().inflate(R.layout.item_relevant_topic, mRelativeTopic, false);
                     item.setText(entityEventTopicBean.getEntityName() + entityEventTopicBean.getEventTypeLabel());
                     return item;
                 }
@@ -190,7 +190,7 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
                 public boolean onTagClick(View view, int position, FlowLayout parent) {
                     String topicId = String.valueOf(entityEventTopics.get(position).getEntityId());
                     long order = mTopic.getOrder();
-                    RelateTopicWindow window = new RelateTopicWindow(getActivity(), topicId, order);
+                    RelevantTopicWindow window = new RelevantTopicWindow(getActivity(), topicId, order);
                     window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, false);
                     return true;
                 }

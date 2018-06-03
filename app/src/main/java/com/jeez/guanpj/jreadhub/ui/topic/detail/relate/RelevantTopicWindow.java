@@ -15,23 +15,23 @@ import android.view.ViewGroup;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
-import com.jeez.guanpj.jreadhub.bean.RelateTopicBean;
+import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.di.component.DaggerPopupWindowComponent;
 import com.jeez.guanpj.jreadhub.di.module.PopupWindowModule;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 
 import javax.inject.Inject;
 
-public class RelateTopicWindow extends RelativePopupWindow implements RelateTopicContract.View {
+public class RelevantTopicWindow extends RelativePopupWindow implements RelevantTopicContract.View {
 
     private String mTopicId;
     private RecyclerView mRecyclerView;
     private long mOrder;
 
     @Inject
-    public RelateTopicPresenter mPresenter;
+    public RelevantTopicPresenter mPresenter;
 
-    public RelateTopicWindow(Context context, String topicId, long order) {
+    public RelevantTopicWindow(Context context, String topicId, long order) {
         this.mTopicId = topicId;
         this.mOrder = order;
 
@@ -54,7 +54,7 @@ public class RelateTopicWindow extends RelativePopupWindow implements RelateTopi
 
     private void initData() {
         try {
-            /*mPresenter = new RelateTopicPresenter(new DataManager(new RetrofitHelper()))*/
+            /*mPresenter = new RelevantTopicPresenter(new DataManager(new RetrofitHelper()))*/
             mPresenter.getRelateTopic(mTopicId, 1, mOrder, System.currentTimeMillis());
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,7 +106,7 @@ public class RelateTopicWindow extends RelativePopupWindow implements RelateTopi
     }
 
     @Override
-    public void onRequestTopicEnd(RelateTopicBean bean) {
+    public void onRequestTopicEnd(RelevantTopicBean bean) {
 
     }
 

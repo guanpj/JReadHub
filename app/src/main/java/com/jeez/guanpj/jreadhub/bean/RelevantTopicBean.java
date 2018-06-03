@@ -4,7 +4,7 @@ import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import org.threeten.bp.OffsetDateTime;
 
-public class RelateTopicBean {
+public class RelevantTopicBean {
     String createdAt;
     String id;
     String title;

@@ -13,7 +13,7 @@ import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
-import com.jeez.guanpj.jreadhub.bean.RelateTopicBean;
+import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
@@ -21,7 +21,7 @@ import org.threeten.bp.OffsetDateTime;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class TopicTraceViewHolder extends BaseViewHolder<RelateTopicBean> {
+public class TopicTraceViewHolder extends BaseViewHolder<RelevantTopicBean> {
 
     private Context mContext;
     @BindView(R.id.txt_date)
@@ -33,7 +33,7 @@ public class TopicTraceViewHolder extends BaseViewHolder<RelateTopicBean> {
     @BindView(R.id.view_bottom_line)
     View mDividerBottom;
 
-    private RelateTopicBean mTopicTrace;
+    private RelevantTopicBean mTopicTrace;
 
     public TopicTraceViewHolder(Context context, ViewGroup parent) {
         super(context, parent, R.layout.item_topic_trace);
@@ -41,7 +41,7 @@ public class TopicTraceViewHolder extends BaseViewHolder<RelateTopicBean> {
     }
 
     @Override
-    public void bindData(RelateTopicBean value, int position) {
+    public void bindData(RelevantTopicBean value, int position) {
         mTopicTrace = value;
         LocalDate date = value.getCreatedAt().toLocalDate();
         int year = date.getYear();
@@ -51,7 +51,9 @@ public class TopicTraceViewHolder extends BaseViewHolder<RelateTopicBean> {
             mTxtDate.setText(mContext.getString(R.string.month__day, month, day));
         } else {
             SpannableString spannableTitle = SpannableString.valueOf(mContext.getString(R.string.month__day__year, month, day, year));
-            spannableTitle.setSpan(new ForegroundColorSpan(Color.parseColor("#AAACB4")),5,9,
+            spannableTitle.setSpan(new ForegroundColorSpan(Color.parseColor("#AAACB4")),
+                    spannableTitle.toString().indexOf(" ") + 1,
+                    spannableTitle.toString().indexOf(" ") + 5,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             mTxtDate.setText(spannableTitle);
         }

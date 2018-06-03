@@ -3,7 +3,7 @@ package com.jeez.guanpj.jreadhub.core;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.bean.RelateTopicBean;
+import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
 
@@ -37,7 +37,7 @@ public class DataManager implements NetHelper{
     }
 
     @Override
-    public Observable<RelateTopicBean> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
+    public Observable<RelevantTopicBean> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
         return mNetHelper.getRelateTopic(topicId, eventType, order, timeStamp);
     }
 }

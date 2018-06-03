@@ -1,14 +1,14 @@
 package com.jeez.guanpj.jreadhub.ui.topic.detail.relate;
 
-import com.jeez.guanpj.jreadhub.bean.RelateTopicBean;
+import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
-public interface RelateTopicContract {
+public interface RelevantTopicContract {
     interface View extends IBaseView {
         void onRequestStart();
 
-        void onRequestTopicEnd(RelateTopicBean bean);
+        void onRequestTopicEnd(RelevantTopicBean bean);
 
         void onRequestError();
     }
