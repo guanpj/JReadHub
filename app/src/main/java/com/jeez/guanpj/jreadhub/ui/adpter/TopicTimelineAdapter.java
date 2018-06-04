@@ -26,7 +26,7 @@ import butterknife.OnClick;
 public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
 
     private final Context mContext;
-    public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
+    public static final int VIEW_TYPE_TOP = 1, VIEW_TYPE_BOTTOM = 2, VIEW_TYPE_ONLY_ONE = 3;
 
     public TopicTimelineAdapter(Context context) {
         this.mContext = context;
@@ -39,6 +39,9 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
 
     @Override
     public int getItemViewType(int position) {
+        if (getItemCount() == 1) {
+            return VIEW_TYPE_ONLY_ONE;
+        }
         if (position == 0) {
             return VIEW_TYPE_TOP;
         }
@@ -85,8 +88,8 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
                 mTxtDate.setText(spannableTitle);
             }
             mTxtContent.setText(value.getTitle());
-            mDividerTop.setVisibility(getItemViewType() == VIEW_TYPE_TOP ? View.INVISIBLE : View.VISIBLE);
-            mDividerBottom.setVisibility(getItemViewType() == VIEW_TYPE_BOTTOM ? View.INVISIBLE : View.VISIBLE);
+            mDividerTop.setVisibility(getItemViewType() == VIEW_TYPE_TOP || getItemViewType() == VIEW_TYPE_ONLY_ONE ? View.INVISIBLE : View.VISIBLE);
+            mDividerBottom.setVisibility(getItemViewType() == VIEW_TYPE_BOTTOM || getItemViewType() == VIEW_TYPE_ONLY_ONE ? View.INVISIBLE : View.VISIBLE);
         }
 
         @OnClick(R.id.txt_topic_trace_content)

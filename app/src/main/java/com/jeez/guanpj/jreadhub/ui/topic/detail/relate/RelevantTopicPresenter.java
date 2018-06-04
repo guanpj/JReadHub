@@ -5,6 +5,8 @@ import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableObserver;
@@ -23,10 +25,10 @@ public class RelevantTopicPresenter extends BasePresenter<RelevantTopicContract.
         addSubscribe(mDataManager.getRelateTopic(topicId, eventType, order, timeStamp)
                 .compose(RxSchedulers.io2Main())
                 .doOnSubscribe(disposable -> getView().onRequestStart())
-                .subscribeWith(new DisposableObserver<RelevantTopicBean>() {
+                .subscribeWith(new DisposableObserver<List<RelevantTopicBean>>() {
                     @Override
-                    public void onNext(RelevantTopicBean bean) {
-                        getView().onRequestTopicEnd(bean);
+                    public void onNext(List<RelevantTopicBean> list) {
+                        getView().onRequestTopicEnd(list);
                     }
 
                     @Override

@@ -4,8 +4,10 @@ package com.jeez.guanpj.jreadhub.core.net;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -18,5 +20,5 @@ public interface NetHelper {
 
     Observable<TopicBean> getTopicDetail(String topicId);
 
-    Observable<RelevantTopicBean> getRelateTopic(String topicId, int eventType, long order, long timeStamp);
+    Observable<List<RelevantTopicBean>> getRelateTopic(String topicId, int eventType, long order, long timeStamp);
 }

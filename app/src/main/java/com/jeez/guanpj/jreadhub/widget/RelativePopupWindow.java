@@ -160,6 +160,8 @@ public class RelativePopupWindow extends PopupWindow {
             case VerticalPosition.BELOW:
                 // Default position.
                 break;
+            default:
+                break;
         }
         switch (horizPos) {
             case HorizontalPosition.LEFT:
@@ -176,6 +178,8 @@ public class RelativePopupWindow extends PopupWindow {
                 break;
             case HorizontalPosition.RIGHT:
                 x += anchor.getWidth();
+                break;
+            default:
                 break;
         }
         if (fitInScreen) {

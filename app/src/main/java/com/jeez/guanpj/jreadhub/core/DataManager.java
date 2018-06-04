@@ -7,6 +7,8 @@ import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 
 public class DataManager implements NetHelper{
@@ -37,7 +39,7 @@ public class DataManager implements NetHelper{
     }
 
     @Override
-    public Observable<RelevantTopicBean> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
+    public Observable<List<RelevantTopicBean>> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
         return mNetHelper.getRelateTopic(topicId, eventType, order, timeStamp);
     }
 }

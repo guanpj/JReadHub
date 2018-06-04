@@ -9,6 +9,8 @@ import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -38,8 +40,8 @@ public interface ReadhubApi {
     Observable<TopicBean> getTopicDetail(@Path("topic_id") String topicId);
 
     @GET("topic/related")
-    Observable<RelevantTopicBean> getRelateTopic(@Query("entityId") String topicId,
-                                                 @Query("eventType") int eventType,
-                                                 @Query("order") long order,
-                                                 @Query("t") long timeStamp);
+    Observable<List<RelevantTopicBean>> getRelateTopic(@Query("entityId") String topicId,
+                                                      @Query("eventType") int eventType,
+                                                      @Query("order") long order,
+                                                      @Query("t") long timeStamp);
 }

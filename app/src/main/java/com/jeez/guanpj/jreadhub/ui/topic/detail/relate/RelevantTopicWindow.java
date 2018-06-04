@@ -17,29 +17,51 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.di.component.DaggerPopupWindowComponent;
-import com.jeez.guanpj.jreadhub.di.module.PopupWindowModule;
+import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 public class RelevantTopicWindow extends RelativePopupWindow implements RelevantTopicContract.View {
 
+    private Context mContext;
     private String mTopicId;
     private RecyclerView mRecyclerView;
+    private TopicTimelineAdapter mAdapter;
     private long mOrder;
 
     @Inject
     public RelevantTopicPresenter mPresenter;
 
     public RelevantTopicWindow(Context context, String topicId, long order) {
+        mContext = context;
         this.mTopicId = topicId;
         this.mOrder = order;
 
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_topic_trace, null);
+        performInject();
+        if (null != mPresenter) {
+            mPresenter.onAttatch(this);
+        }
+        /*View view = LayoutInflater.from(context).inflate(R.layout.layout_topic_trace, null);
         mRecyclerView = view.findViewById(R.id.recycler_topic_trace);
-        setContentView(view);
+        mAdapter = new TopicTimelineAdapter(mContext);
+        mRecyclerView.setAdapter(mAdapter);*/
+
+        View view1 = LayoutInflater.from(context).inflate(R.layout.test, null);
+        /*mRecyclerView = view1.findViewById(R.id.recycler_topic_trace);
+        mAdapter = new TopicTimelineAdapter(mContext);
+        mRecyclerView.setAdapter(mAdapter);*/
+
+        setContentView(view1);
+        //setData();
+        /*setWidth(800);
+        setHeight(1200);*/
         setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        /*setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        setHeight(ViewGroup.LayoutParams.MATCH_PARENT);*/
         setFocusable(true);
         setOutsideTouchable(true);
         setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -48,22 +70,24 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setAnimationStyle(0);
         }
-        performInject();
-        initData();
+        //initData();
+    }
+
+    public void setData() {
+        RelevantTopicBean bean = new RelevantTopicBean();
+        bean.setCreatedAt("2018-06-04T06:16:43.401Z");
+        bean.setId("1");
+        bean.setMobileUrl("www.baidu.com");
+        bean.setTitle("Test Title");
+        mAdapter.addItem(bean);
     }
 
     private void initData() {
-        try {
-            /*mPresenter = new RelevantTopicPresenter(new DataManager(new RetrofitHelper()))*/
-            mPresenter.getRelateTopic(mTopicId, 1, mOrder, System.currentTimeMillis());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        mPresenter.getRelateTopic(mTopicId, 1, mOrder, System.currentTimeMillis());
     }
 
     private void performInject() {
         DaggerPopupWindowComponent.builder().appComponent(ReadhubApplication.getAppComponent())
-                .popupWindowModule(new PopupWindowModule(this))
                 .build()
                 .inject(this);
     }
@@ -106,7 +130,8 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
     }
 
     @Override
-    public void onRequestTopicEnd(RelevantTopicBean bean) {
+    public void onRequestTopicEnd(List<RelevantTopicBean> bean) {
+        mAdapter.addItems(bean);
     }
 
     @Override

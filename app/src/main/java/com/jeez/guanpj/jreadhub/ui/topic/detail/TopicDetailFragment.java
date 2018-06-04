@@ -172,7 +172,8 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
                     String topicId = String.valueOf(entityEventTopics.get(position).getEntityId());
                     long order = mTopic.getOrder();
                     RelevantTopicWindow window = new RelevantTopicWindow(getActivity(), topicId, order);
-                    window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, false);
+                    window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, true);
+                    /*window.setData();*/
                     return true;
                 }
             });
