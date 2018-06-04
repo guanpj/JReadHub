@@ -44,7 +44,7 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
         if (null != mPresenter) {
             mPresenter.onAttatch(this);
         }
-        /*View view = LayoutInflater.from(context).inflate(R.layout.layout_topic_trace, null);
+        /*View view = LayoutInflater.from(context).inflate(R.layout.layout_topic_timeline, null);
         mRecyclerView = view.findViewById(R.id.recycler_topic_trace);
         mAdapter = new TopicTimelineAdapter(mContext);
         mRecyclerView.setAdapter(mAdapter);*/

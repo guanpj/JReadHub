@@ -66,7 +66,7 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
         private RelevantTopicBean mTopicTrace;
 
         public ViewHolder(Context context, ViewGroup parent) {
-            super(context, parent, R.layout.item_topic_trace);
+            super(context, parent, R.layout.item_topic_timeline);
             this.mContext = context;
         }
 

@@ -85,7 +85,7 @@
                     android:textColor="@color/text_topic_detail_news_author"
                     android:textSize="@dimen/textSize_16" />
 
-                <include layout="@layout/layout_topic_trace"/>
+                <include layout="@layout/layout_topic_timeline"/>
 
             </LinearLayout>
 
