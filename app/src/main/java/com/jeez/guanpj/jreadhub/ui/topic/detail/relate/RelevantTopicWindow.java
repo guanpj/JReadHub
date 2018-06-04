@@ -50,16 +50,16 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
         mRecyclerView.setAdapter(mAdapter);*/
 
         View view1 = LayoutInflater.from(context).inflate(R.layout.test, null);
-        /*mRecyclerView = view1.findViewById(R.id.recycler_topic_trace);
+        mRecyclerView = view1.findViewById(R.id.recycler_topic_trace);
         mAdapter = new TopicTimelineAdapter(mContext);
-        mRecyclerView.setAdapter(mAdapter);*/
+        mRecyclerView.setAdapter(mAdapter);
 
         setContentView(view1);
-        //setData();
-        /*setWidth(800);
-        setHeight(1200);*/
+        setData();
         setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        /*setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);*/
         /*setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(ViewGroup.LayoutParams.MATCH_PARENT);*/
         setFocusable(true);
