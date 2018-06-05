@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.base.AbsBaseSupportDialogFragment;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
@@ -150,7 +151,9 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
 
     @Override
     public void onRequestEnd(InstantReadBean data) {
-        if (data == null) return;
+        if (data == null) {
+            return;
+        }
         mTxtTopicTitle.setText(data.getTitle());
         mTxtSource.setText(getString(R.string.source_format, data.getSiteName()));
         String htmlHead = "<head>"

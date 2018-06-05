@@ -29,6 +29,8 @@ import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class MainActivity extends AbsBaseActivity implements NavigationView.OnNavigationItemSelectedListener, ThemeDialog.OnThemeChangeListener {
 
@@ -210,5 +212,18 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(ContextCompat.getColor(this, colorValue));
         }
+    }
+
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        // 设置横向(和安卓4.x动画相同)
+         return new DefaultHorizontalAnimator();
+        // 设置无动画
+        // return new DefaultNoAnimator();
+        // 设置自定义动画
+        // return new FragmentAnimator(enter,exit,popEnter,popExit);
+
+        // 默认竖向(和安卓5.0以上的动画相同)
+        //return super.onCreateFragmentAnimator();
     }
 }

@@ -18,6 +18,8 @@ import com.jeez.guanpj.jreadhub.util.ThemeUtil;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * Created by Jie on 2016-10-26.
