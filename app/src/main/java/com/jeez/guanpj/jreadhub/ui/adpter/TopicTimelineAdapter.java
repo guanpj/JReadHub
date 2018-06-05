@@ -15,6 +15,8 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
+import com.jeez.guanpj.jreadhub.event.RelevantTopicItemClickEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
 
 import org.threeten.bp.LocalDate;
@@ -63,7 +65,7 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
         @BindView(R.id.view_bottom_line)
         View mDividerBottom;
 
-        private RelevantTopicBean mTopicTrace;
+        private RelevantTopicBean mRelevantTopicBean;
 
         public ViewHolder(Context context, ViewGroup parent) {
             super(context, parent, R.layout.item_topic_timeline);
@@ -72,7 +74,7 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
 
         @Override
         public void bindData(RelevantTopicBean value, int position) {
-            mTopicTrace = value;
+            mRelevantTopicBean = value;
             LocalDate date = value.getCreatedAt().toLocalDate();
             int year = date.getYear();
             int month = date.getMonthValue();
@@ -95,7 +97,8 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
         @OnClick(R.id.txt_topic_trace_content)
         void onClickContent(View view) {
             ((MainActivity) view.getContext()).findFragment(MainFragment.class)
-                    .start(TopicDetailFragment.newInstance(mTopicTrace.getId()));
+                    .start(TopicDetailFragment.newInstance(mRelevantTopicBean.getId()));
+            RxBus.getInstance().post(new RelevantTopicItemClickEvent());
         }
     }
 }

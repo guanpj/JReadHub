@@ -144,9 +144,10 @@ public class RelativePopupWindow extends PopupWindow {
             x += anchorLocation[0];
             y += anchorLocation[1] + anchor.getHeight();
         }
+        ViewGroup.MarginLayoutParams anchorLP = (ViewGroup.MarginLayoutParams) anchor.getLayoutParams();
         switch (vertPos) {
             case VerticalPosition.ABOVE:
-                y -= measuredH + anchor.getHeight();
+                y -= measuredH + anchor.getHeight() + anchorLP.topMargin;
                 break;
             case VerticalPosition.ALIGN_BOTTOM:
                 y -= measuredH;
@@ -158,14 +159,14 @@ public class RelativePopupWindow extends PopupWindow {
                 y -= anchor.getHeight();
                 break;
             case VerticalPosition.BELOW:
-                // Default position.
+                y += anchorLP.topMargin;
                 break;
             default:
                 break;
         }
         switch (horizPos) {
             case HorizontalPosition.LEFT:
-                x -= measuredW;
+                x -= measuredW + anchorLP.leftMargin;
                 break;
             case HorizontalPosition.ALIGN_RIGHT:
                 x -= measuredW - anchor.getWidth();
@@ -177,7 +178,7 @@ public class RelativePopupWindow extends PopupWindow {
                 // Default position.
                 break;
             case HorizontalPosition.RIGHT:
-                x += anchor.getWidth();
+                x += anchor.getWidth() + anchorLP.rightMargin;
                 break;
             default:
                 break;

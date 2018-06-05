@@ -7,16 +7,18 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.di.component.DaggerPopupWindowComponent;
+import com.jeez.guanpj.jreadhub.event.RelevantTopicItemClickEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 
@@ -36,7 +38,7 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
     public RelevantTopicPresenter mPresenter;
 
     public RelevantTopicWindow(Context context, String topicId, long order) {
-        mContext = context;
+        this.mContext = context;
         this.mTopicId = topicId;
         this.mOrder = order;
 
@@ -44,20 +46,17 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
         if (null != mPresenter) {
             mPresenter.onAttatch(this);
         }
-        /*View view = LayoutInflater.from(context).inflate(R.layout.layout_topic_timeline, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_topic_timeline, null);
         mRecyclerView = view.findViewById(R.id.recycler_topic_trace);
-        mAdapter = new TopicTimelineAdapter(mContext);
-        mRecyclerView.setAdapter(mAdapter);*/
-
-        View view1 = LayoutInflater.from(context).inflate(R.layout.test, null);
-        mRecyclerView = view1.findViewById(R.id.recycler_topic_trace);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        /*mRecyclerView = new RecyclerView(mContext);
+        mRecyclerView.setBackgroundColor(mContext.getColor(R.color.bg_topic_trace_list));*/
         mAdapter = new TopicTimelineAdapter(mContext);
         mRecyclerView.setAdapter(mAdapter);
 
-        setContentView(view1);
-        setData();
-        setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-        setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        setContentView(view);
+        setWidth(800);
+        setHeight(500);
         /*setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);*/
         /*setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -70,20 +69,18 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setAnimationStyle(0);
         }
-        //initData();
-    }
-
-    public void setData() {
-        RelevantTopicBean bean = new RelevantTopicBean();
-        bean.setCreatedAt("2018-06-04T06:16:43.401Z");
-        bean.setId("1");
-        bean.setMobileUrl("www.baidu.com");
-        bean.setTitle("Test Title");
-        mAdapter.addItem(bean);
+        initData();
+        initEvent();
     }
 
     private void initData() {
         mPresenter.getRelateTopic(mTopicId, 1, mOrder, System.currentTimeMillis());
+    }
+
+    private void initEvent() {
+        RxBus.getInstance().toFlowable(RelevantTopicItemClickEvent.class).subscribe(relevantTopicItemClickEvent -> {
+            dismiss();
+        });
     }
 
     private void performInject() {
@@ -96,7 +93,7 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
     public void showOnAnchor(@NonNull View anchor, int vertPos, int horizPos, int x, int y, boolean fitInScreen) {
         super.showOnAnchor(anchor, vertPos, horizPos, x, y, fitInScreen);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            circularReveal(anchor);
+            /*circularReveal(anchor);*/
         }
     }
 

@@ -1,7 +1,9 @@
 package com.jeez.guanpj.jreadhub.ui.topic.detail;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,13 +16,17 @@ import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
+import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
@@ -33,7 +39,6 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 import butterknife.BindView;
 
@@ -75,6 +80,7 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
+        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         mPresenter.getTopicDetail(topicId);
     }
 
@@ -155,27 +161,33 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
                     return item;
                 }
             });
-            mRelativeTopic.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
-                @Override
-                public void onSelected(Set<Integer> selectPosSet) {
-                    if (!selectPosSet.isEmpty()) {
-                        Iterator<Integer> iterator = selectPosSet.iterator();
-                        if (iterator.hasNext()) {
+            mRelativeTopic.setOnSelectListener(selectPosSet -> {
+                if (!selectPosSet.isEmpty()) {
+                    Iterator<Integer> iterator = selectPosSet.iterator();
+                    if (iterator.hasNext()) {
 
-                        }
                     }
                 }
             });
-            mRelativeTopic.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
-                @Override
-                public boolean onTagClick(View view, int position, FlowLayout parent) {
-                    String topicId = String.valueOf(entityEventTopics.get(position).getEntityId());
-                    long order = mTopic.getOrder();
-                    RelevantTopicWindow window = new RelevantTopicWindow(getActivity(), topicId, order);
-                    window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, true);
-                    /*window.setData();*/
-                    return true;
-                }
+            mRelativeTopic.setOnTagClickListener((view, position, parent) -> {
+                String topicId = String.valueOf(entityEventTopics.get(position).getEntityId());
+                long order = mTopic.getOrder();
+                /*if (((TagView) view).isChecked()) {
+                }*/
+                RelevantTopicWindow window = new RelevantTopicWindow(getActivity(), topicId, order);
+                window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, true);
+                WindowManager.LayoutParams lp = ((Activity)getContext()).getWindow().getAttributes();
+                lp.alpha = 0.7f;
+                ((Activity)getContext()).getWindow().setAttributes(lp);
+                window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        WindowManager.LayoutParams lp = ((Activity)getContext()).getWindow().getAttributes();
+                        lp.alpha = 1f;
+                        ((Activity)getContext()).getWindow().setAttributes(lp);
+                    }
+                });
+                return true;
             });
         } else {
             mRelativeTopicContainer.setVisibility(View.GONE);
@@ -207,6 +219,11 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     @Override
     public void onFabClick() {
 
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        return super.onBackPressedSupport();
     }
 
     @Override

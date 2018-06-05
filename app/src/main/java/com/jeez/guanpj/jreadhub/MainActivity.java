@@ -1,5 +1,6 @@
 package com.jeez.guanpj.jreadhub;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -18,6 +19,7 @@ import android.view.WindowManager;
 import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
+import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.Constants;
@@ -61,14 +63,17 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
         }
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void initDataAndEvent() {
         mNavigationView.setNavigationItemSelectedListener(this);
         mThemeDialog.setOnThemeChangeListener(this);
+
         RxBus.getInstance().toFlowable(ToolbarNavigationClickEvent.class)
-                .subscribe(navigationClickEvent -> {
-                    mDrawerLayout.openDrawer(GravityCompat.START);
-                });
+                .subscribe(navigationClickEvent -> mDrawerLayout.openDrawer(GravityCompat.START));
+
+        RxBus.getInstance().toFlowable(SetDrawerStatusEvent.class).subscribe(lockDrawerEvent ->
+                mDrawerLayout.setDrawerLockMode(lockDrawerEvent.getStatus()));
     }
 
     @Override
@@ -135,6 +140,8 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
                 case R.id.nav_change_theme:
                     mThemeDialog.show();
                     break;
+                default:
+                    break;
             }
         });
         return true;
@@ -171,12 +178,18 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
     }
 
     private void refreshUI() {
-        TypedValue statusColor = new TypedValue();       //状态栏
-        TypedValue themeColor = new TypedValue();        //主题
-        TypedValue toolbarTextColor = new TypedValue();  //状态栏字体颜色
-        TypedValue navIcon = new TypedValue();           //toolbar 导航图标
-        TypedValue searchIcon = new TypedValue();        //toolbar 搜索图标
-        TypedValue overFlowIcon = new TypedValue();          //toolbar 更多图标
+        //状态栏
+        TypedValue statusColor = new TypedValue();
+        //主题
+        TypedValue themeColor = new TypedValue();
+        //状态栏字体颜色
+        TypedValue toolbarTextColor = new TypedValue();
+        //toolbar 导航图标
+        TypedValue navIcon = new TypedValue();
+        //toolbar 搜索图标
+        TypedValue searchIcon = new TypedValue();
+        //toolbar 更多图标
+        TypedValue overFlowIcon = new TypedValue();
 
         //获取切换后的主题，以及主题相对应对的属性值
         Resources.Theme theme = getTheme();

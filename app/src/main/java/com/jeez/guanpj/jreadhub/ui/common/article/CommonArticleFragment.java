@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -25,6 +26,8 @@ import android.widget.ProgressBar;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
+import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import org.parceler.Parcels;
@@ -69,6 +72,7 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
         ButterKnife.bind(this, view);
         mTopic = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_TOPIC));
         mUrl = getArguments().getString(Constants.EXTRA_TOPIC_URL);
+        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         return attachToSwipeBack(view);
     }
 
