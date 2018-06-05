@@ -194,6 +194,12 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     }
 
     @Override
+    public void onDestroyView() {
+        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));
+        super.onDestroyView();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mWebView != null) {

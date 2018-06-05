@@ -3,7 +3,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.fragment;
 import android.os.Bundle;
 
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
-import com.jeez.guanpj.jreadhub.base.AbsBaseDialogFragment;
+import com.jeez.guanpj.jreadhub.base.AbsBaseSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.di.component.DaggerFragmentComponent;
 import com.jeez.guanpj.jreadhub.di.component.FragmentComponent;
 import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
@@ -12,7 +12,7 @@ import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 
 import javax.inject.Inject;
 
-public abstract class AbsBaseMvpDialogFragment<P extends BasePresenter> extends AbsBaseDialogFragment implements IBaseView {
+public abstract class AbsBaseMvpSwipeBackFragment<P extends BasePresenter> extends AbsBaseSwipeBackFragment implements IBaseView {
 
     @Inject
     public P mPresenter;

@@ -3,6 +3,7 @@ package com.jeez.guanpj.jreadhub.ui.topic.detail;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
+import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelevantTopicWindow;
@@ -42,7 +45,7 @@ import java.util.Iterator;
 
 import butterknife.BindView;
 
-public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
+public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -79,8 +82,8 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
         RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
+        String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
         mPresenter.getTopicDetail(topicId);
     }
 
@@ -222,8 +225,9 @@ public class TopicDetailFragment extends AbsBaseMvpFragment<TopicDetailPresenter
     }
 
     @Override
-    public boolean onBackPressedSupport() {
-        return super.onBackPressedSupport();
+    public void onDestroy() {
+        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));
+        super.onDestroy();
     }
 
     @Override

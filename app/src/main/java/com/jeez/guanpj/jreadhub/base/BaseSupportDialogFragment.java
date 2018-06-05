@@ -9,7 +9,7 @@ import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class MySupportDialogFragment extends DialogFragment implements ISupportFragment {
+public class BaseSupportDialogFragment extends DialogFragment implements ISupportFragment {
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
 
     @Override

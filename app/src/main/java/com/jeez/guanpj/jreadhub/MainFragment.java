@@ -49,12 +49,6 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_container;
     }
@@ -85,37 +79,45 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
         });
         mToolbar.setOnMenuItemClickListener(this);
 
-        RxBus.getInstance().toFlowable(ChangeThemeEvent.class).subscribe(changeThemeEvent -> {
+        RxBus.getInstance().toFlowable(ChangeThemeEvent.class)
+                .subscribe(changeThemeEvent -> refreshUI());
+    }
 
-            TypedValue themeColor = new TypedValue();        //主题
-            TypedValue statusColor = new TypedValue();       //状态栏
-            TypedValue toolbarTextColor = new TypedValue();  //状态栏字体颜色
-            TypedValue navIcon = new TypedValue();           //toolbar 导航图标
-            TypedValue searchIcon = new TypedValue();        //toolbar 搜索图标
-            TypedValue overFlowIcon = new TypedValue();          //toolbar 更多图标
+    private void refreshUI() {
+        //状态栏
+        TypedValue statusColor = new TypedValue();
+        //主题
+        TypedValue themeColor = new TypedValue();
+        //状态栏字体颜色
+        TypedValue toolbarTextColor = new TypedValue();
+        //toolbar 导航图标
+        TypedValue navIcon = new TypedValue();
+        //toolbar 搜索图标
+        TypedValue searchIcon = new TypedValue();
+        //toolbar 更多图标
+        TypedValue overFlowIcon = new TypedValue();
 
-            //获取切换后的主题，以及主题相对应对的属性值
-            Resources.Theme theme = getActivity().getTheme();
-            theme.resolveAttribute(R.attr.readhubTheme, themeColor, true);
-            theme.resolveAttribute(R.attr.readhubStatus, statusColor, true);
-            theme.resolveAttribute(R.attr.readhubToolbarText, toolbarTextColor, true);
-            theme.resolveAttribute(R.attr.navIcon, navIcon, true);
-            theme.resolveAttribute(R.attr.menuSearch, searchIcon, true);
-            theme.resolveAttribute(R.attr.overFlowIcon, overFlowIcon, true);
+        //获取切换后的主题，以及主题相对应对的属性值
+        Resources.Theme theme = getActivity().getTheme();
+        theme.resolveAttribute(R.attr.readhubTheme, themeColor, true);
+        theme.resolveAttribute(R.attr.readhubStatus, statusColor, true);
+        theme.resolveAttribute(R.attr.readhubToolbarText, toolbarTextColor, true);
+        theme.resolveAttribute(R.attr.navIcon, navIcon, true);
+        theme.resolveAttribute(R.attr.menuSearch, searchIcon, true);
+        theme.resolveAttribute(R.attr.overFlowIcon, overFlowIcon, true);
 
-            //切换到主题相对应的图标以及颜色值
-            mToolbar.getMenu().findItem(R.id.action_search).setIcon(searchIcon.resourceId);
-            mToolbar.setNavigationIcon(navIcon.resourceId);
-            mToolbar.setOverflowIcon(ContextCompat.getDrawable(getActivity(), overFlowIcon.resourceId));
-            mToolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), themeColor.resourceId));
-            mToolbar.setTitleTextColor(ContextCompat.getColor(getActivity(), toolbarTextColor.resourceId));
+        //切换到主题相对应的图标以及颜色值
+        mToolbar.getMenu().findItem(R.id.action_search).setIcon(searchIcon.resourceId);
+        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setOverflowIcon(ContextCompat.getDrawable(getActivity(), overFlowIcon.resourceId));
+        mToolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), themeColor.resourceId));
+        mToolbar.setTitleTextColor(ContextCompat.getColor(getActivity(), toolbarTextColor.resourceId));
 
-            mTabLayout.setTabTextColors(ContextCompat.getColor(getActivity(), toolbarTextColor.resourceId), ContextCompat.getColor(getActivity(), toolbarTextColor.resourceId));
-            mTabLayout.setBackgroundResource(themeColor.resourceId);
-            mTabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getActivity(), toolbarTextColor.resourceId));
+        mTabLayout.setTabTextColors(ContextCompat.getColor(getActivity(), toolbarTextColor.resourceId), ContextCompat.getColor(getActivity(), toolbarTextColor.resourceId));
+        mTabLayout.setBackgroundResource(themeColor.resourceId);
+        mTabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getActivity(), toolbarTextColor.resourceId));
 
-            mAppBarLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), themeColor.resourceId));
-        });
+        mAppBarLayout.setBackgroundColor(ContextCompat.getColor(getActivity(), themeColor.resourceId));
     }
 
     @OnClick(R.id.fab)
@@ -132,6 +134,8 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
                 break;
             case R.id.action_share:
                 doShare();
+                break;
+            default:
                 break;
         }
         return true;

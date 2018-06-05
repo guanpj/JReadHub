@@ -3,7 +3,6 @@ package com.jeez.guanpj.jreadhub.base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,9 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
-public abstract class AbsBaseDialogFragment extends DialogFragment implements IBaseViewFlow {
+public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment implements IBaseViewFlow  {
 
     private Unbinder unBinder;
     private View mContentView;
