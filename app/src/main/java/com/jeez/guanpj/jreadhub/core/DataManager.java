@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.core;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.ExpandTopicBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
@@ -19,7 +20,7 @@ public class DataManager implements NetHelper{
     }
 
     @Override
-    public Observable<DataListBean<TopicBean>> getTopicList(Long lastCursor, int pageSize) {
+    public Observable<DataListBean<ExpandTopicBean>> getTopicList(Long lastCursor, int pageSize) {
         return mNetHelper.getTopicList(lastCursor, pageSize);
     }
 

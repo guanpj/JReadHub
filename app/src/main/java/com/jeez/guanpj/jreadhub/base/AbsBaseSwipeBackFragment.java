@@ -29,7 +29,7 @@ public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment impleme
         unBinder = ButterKnife.bind(this, view);
         initView();
         initDataAndEvent();
-        return view;
+        return attachToSwipeBack(view);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.os.Build;
 
 import com.jeez.guanpj.jreadhub.BuildConfig;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.ExpandTopicBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
@@ -21,7 +22,7 @@ public interface ReadhubApi {
     public static final String USER_AGENT = "Readhub-Material/" + BuildConfig.VERSION_NAME + " (Android " + Build.VERSION.RELEASE + "; " + Build.MODEL + "; " + Build.MANUFACTURER + ")";
 
     @GET("topic")
-    Observable<DataListBean<TopicBean>> getTopicList(
+    Observable<DataListBean<ExpandTopicBean>> getTopicList(
             @Query("lastCursor") Long lastCursor,
             @Query("pageSize") int pageSize
     );

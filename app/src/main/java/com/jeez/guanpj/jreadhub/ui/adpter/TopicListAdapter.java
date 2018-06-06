@@ -1,11 +1,9 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.SparseBooleanArray;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,24 +34,24 @@ import me.yokeyword.fragmentation.SupportActivity;
 
 public class TopicListAdapter extends BaseAdapter<TopicBean> {
 
-    private final Activity activity;
-    private final LayoutInflater inflater;
-    private final SparseBooleanArray expandStateMap = new SparseBooleanArray();
-    private final List<View> newsViewPool = new ArrayList<>();
+    private final Context mContext;
+    private final LayoutInflater mInflater;
+    private final SparseBooleanArray mExtendStateMap = new SparseBooleanArray();
+    private final List<View> mViewCache = new ArrayList<>();
 
-    public TopicListAdapter(@NonNull Activity activity) {
-        this.activity = activity;
-        inflater = LayoutInflater.from(activity);
+    public TopicListAdapter(@NonNull Context context) {
+        this.mContext = context;
+        this.mInflater = LayoutInflater.from(mContext);
     }
 
     public void clearExpandStates() {
-        expandStateMap.clear();
+        mExtendStateMap.clear();
     }
 
     @NonNull
     @Override
     public BaseViewHolder<TopicBean> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TopicViewHolder(activity, parent);
+        return new TopicViewHolder(mContext, parent);
     }
 
     class TopicViewHolder extends BaseViewHolder<TopicBean> {
@@ -81,8 +79,8 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         private View newsMoreView;
 
         TopicViewHolder(Context context, ViewGroup parent) {
-            super(context, parent, R.layout.item_topic);
-            newsMoreView = inflater.inflate(R.layout.item_topic_news_more, null, false);
+            super(context, parent, R.layout.item_topic_expand);
+            newsMoreView = mInflater.inflate(R.layout.item_topic_news_more, null, false);
         }
 
         @Override
@@ -95,16 +93,16 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
             tvSummary.setVisibility(TextUtils.isEmpty(topic.getSummary()) ? View.GONE : View.VISIBLE);
             tvTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()));
             imgInstantRead.setVisibility(topic.hasInstantView() ? View.VISIBLE : View.GONE);
-            tvInfo.setText(activity.getString(R.string.source_count, topic.getNewsArray().size()));
+            tvInfo.setText(mContext.getString(R.string.source_count, topic.getNewsArray().size()));
 
-            boolean expand = expandStateMap.get(this.position, false);
+            boolean expand = mExtendStateMap.get(this.position, false);
             imgExpandState.setImageResource(expand ? R.drawable.ic_less_info : R.drawable.ic_more_info);
             layoutExpand.setExpanded(expand, false);
 
             layoutSource.removeAllViews();
             if (topic.getNewsArray().size() > 3) {
                 for (int i = 0; i < 3; i++) {
-                    View newsItemView = inflater.inflate(R.layout.item_topic_news, layoutSource, false);
+                    View newsItemView = mInflater.inflate(R.layout.item_topic_news, layoutSource, false);
                     layoutSource.addView(newsItemView);
 
                     TopicNewsBean news = topic.getNewsArray().get(i);
@@ -116,13 +114,13 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
                     holder.bindData(news);
                 }
                 newsMoreView.setOnClickListener(v ->
-                    ((MainActivity) activity).findFragment(MainFragment.class)
+                    ((SupportActivity) mContext).findFragment(MainFragment.class)
                             .start(TopicDetailFragment.newInstance(topic.getId()))
                 );
                 layoutSource.addView(newsMoreView);
             } else {
                 for (int i = 0; i < topic.getNewsArray().size(); i++) {
-                    View newsItemView = inflater.inflate(R.layout.item_topic_news, layoutSource, false);
+                    View newsItemView = mInflater.inflate(R.layout.item_topic_news, layoutSource, false);
                     layoutSource.addView(newsItemView);
 
                     TopicNewsBean news = topic.getNewsArray().get(i);
@@ -159,10 +157,10 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
                 int offset = count - layoutSource.getChildCount();
                 for (int i = 0; i < offset; i++) {
                     View view;
-                    if (newsViewPool.isEmpty()) {
-                        view = inflater.inflate(R.layout.item_topic_news, layoutSource, false);
+                    if (mViewCache.isEmpty()) {
+                        view = mInflater.inflate(R.layout.item_topic_news, layoutSource, false);
                     } else {
-                        view = newsViewPool.remove(0);
+                        view = mViewCache.remove(0);
                     }
                     layoutSource.addView(view);
                 }
@@ -171,33 +169,34 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
                 for (int i = 0; i < offset; i++) {
                     View view = layoutSource.getChildAt(0);
                     layoutSource.removeView(view);
-                    newsViewPool.add(view);
+                    mViewCache.add(view);
                 }
             }
         }
 
         @OnClick(R.id.img_instant_read)
         void onInstantReadClick() {
-            /*((MainActivity) activity).findFragment(MainFragment.class)
+            /*((MainActivity) mContext).findFragment(MainFragment.class)
                     .start(InstantReadFragment.newInstance(topic.getId()));*/
-            InstantReadFragment.newInstance(topic.getId()).show(((MainActivity)activity).getSupportFragmentManager(),
+            InstantReadFragment.newInstance(topic.getId()).show(((MainActivity) mContext).getSupportFragmentManager(),
                     InstantReadFragment.TAG);
         }
 
         @OnClick(R.id.ll_item_header)
         void onItemHeaderClick() {
-            ((MainActivity) activity).findFragment(MainFragment.class)
+            ((SupportActivity) mContext).findFragment(MainFragment.class)
                     .start(TopicDetailFragment.newInstance(topic.getId()));
+            /*((MainFragment) mParentFragment).startBrotherFragment(TopicDetailFragment.newInstance(topic.getId()));*/
         }
 
         @OnClick(R.id.fl_item_footer)
         void onItemFooterClick() {
-            if (expandStateMap.get(position, false)) {
-                expandStateMap.put(position, false);
+            if (mExtendStateMap.get(position, false)) {
+                mExtendStateMap.put(position, false);
                 imgExpandState.setImageResource(R.drawable.ic_more_info);
                 layoutExpand.setExpanded(false);
             } else {
-                expandStateMap.put(position, true);
+                mExtendStateMap.put(position, true);
                 imgExpandState.setImageResource(R.drawable.ic_less_info);
                 layoutExpand.setExpanded(true);
             }
@@ -222,7 +221,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         void bindData(@NonNull TopicNewsBean news) {
             this.news = news;
             tvTitle.setText(news.getTitle());
-            tvInfo.setText(activity.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
+            tvInfo.setText(mContext.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
         }
 
         public void setLineVisibility(int visibility) {
@@ -231,7 +230,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
 
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
-            ((SupportActivity) activity).findFragment(MainFragment.class)
+            ((SupportActivity) mContext).findFragment(MainFragment.class)
                     .start(CommonArticleFragment.newInstance(news.getMobileUrl()));
         }
     }

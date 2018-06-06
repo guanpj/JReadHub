@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -16,7 +15,6 @@ import android.view.MenuItem;
 import com.jeez.guanpj.jreadhub.base.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
-import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
@@ -27,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemClickListener {
 
@@ -65,7 +64,7 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
         mPageTitles.add("科技动态");
         mPageTitles.add("开发者资讯");
         mPageTitles.add("区块链快讯");
-        FragmentAdapter adapter = new FragmentAdapter(getFragmentManager(), mPageTitles);
+        FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), mPageTitles);
         mViewPager.setAdapter(adapter);
 
         for (int i = 0; i < mPageTitles.size(); i++) {
@@ -146,5 +145,9 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, "https://readhub.me\n互联网聚合阅读平台");
         startActivity(Intent.createChooser(intent, "分享"));
+    }
+
+    public void startBrotherFragment(SupportFragment targetFragment) {
+        start(targetFragment);
     }
 }

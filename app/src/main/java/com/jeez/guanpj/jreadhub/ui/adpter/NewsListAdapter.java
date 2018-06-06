@@ -1,11 +1,8 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,26 +15,22 @@ import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportActivity;
 
 public class NewsListAdapter extends BaseAdapter<NewsBean> {
 
-    private final Activity activity;
+    private final Context mContext;
 
-    public NewsListAdapter(@NonNull Activity activity) {
-        this.activity = activity;
+    public NewsListAdapter(@NonNull Context context) {
+        this.mContext = context;
     }
 
     @NonNull
     @Override
     public BaseViewHolder<NewsBean> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(activity, parent);
+        return new ViewHolder(mContext, parent);
     }
 
     class ViewHolder extends BaseViewHolder<NewsBean> {
@@ -62,11 +55,11 @@ public class NewsListAdapter extends BaseAdapter<NewsBean> {
             tvSummary.setText(news.getSummaryAuto());
             tvSummary.setVisibility(TextUtils.isEmpty(news.getSummaryAuto()) ? View.GONE : View.VISIBLE);
             if (TextUtils.isEmpty(news.getAuthorName())) {
-                tvInfo.setText(activity.getString(
+                tvInfo.setText(mContext.getString(
                         R.string.site_name___time, news.getSiteName(),
                         FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
             } else {
-                tvInfo.setText(activity.getString(
+                tvInfo.setText(mContext.getString(
                         R.string.site_name___author_name___time,
                         news.getSiteName(),
                         news.getAuthorName(),
@@ -76,7 +69,7 @@ public class NewsListAdapter extends BaseAdapter<NewsBean> {
 
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
-            ((SupportActivity) activity).findFragment(MainFragment.class)
+            ((SupportActivity) mContext).findFragment(MainFragment.class)
                     .start(CommonArticleFragment.newInstance(news.getMobileUrl()));
         }
     }

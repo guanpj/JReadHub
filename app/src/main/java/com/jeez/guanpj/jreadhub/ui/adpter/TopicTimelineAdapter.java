@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jeez.guanpj.jreadhub.MainActivity;
 import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
@@ -24,6 +23,7 @@ import org.threeten.bp.OffsetDateTime;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportActivity;
 
 public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
 
@@ -96,7 +96,7 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
 
         @OnClick(R.id.txt_topic_trace_content)
         void onClickContent(View view) {
-            ((MainActivity) view.getContext()).findFragment(MainFragment.class)
+            ((SupportActivity) mContext).findFragment(MainFragment.class)
                     .start(TopicDetailFragment.newInstance(mRelevantTopicBean.getId()));
             RxBus.getInstance().post(new RelevantTopicItemClickEvent());
         }

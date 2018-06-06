@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -15,11 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.jeez.guanpj.jreadhub.MainActivity;
+import com.jeez.guanpj.jreadhub.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
-import com.jeez.guanpj.jreadhub.base.AbsBaseSupportDialogFragment;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
+import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.io.IOException;
@@ -98,18 +101,18 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (URLUtil.isNetworkUrl(url)) {
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (URLUtil.isNetworkUrl(request.getUrl().toString())) {
                     dismiss();
-                    /*((MainActivity) getContext()).findFragment(MainFragment.class)
-                            .start(WebViewFragment.newInstance(url));*/
+                    ((MainActivity) getContext()).findFragment(MainFragment.class)
+                            .start(CommonArticleFragment.newInstance(request.getUrl().toString()));
                 }
                 return true;
             }
 
             @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-                if (url.endsWith("mobi.min.css")) {
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                if (request.getUrl().toString().endsWith("mobi.min.css")) {
                     //使用本地 css 优化阅读视图
                     WebResourceResponse resourceResponse = null;
                     try {
@@ -122,7 +125,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                         return resourceResponse;
                     }
                 }
-                return super.shouldInterceptRequest(view, url);
+                return super.shouldInterceptRequest(view, request);
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {

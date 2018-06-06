@@ -3,7 +3,6 @@ package com.jeez.guanpj.jreadhub.ui.topic.detail;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,13 +13,10 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
@@ -29,7 +25,6 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
-import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
@@ -45,7 +40,7 @@ import java.util.Iterator;
 
 import butterknife.BindView;
 
-public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
+public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetailPresenter> implements TopicDetailContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -105,7 +100,6 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
 
         mToolbar.setNavigationIcon(navIcon.resourceId);
         mToolbar.setNavigationOnClickListener(v -> pop());
-        mToolbar.setOnMenuItemClickListener(this);
     }
 
     @Override
@@ -139,7 +133,7 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 textView.setText(spannableTitle);
             }
-            textView.setOnClickListener(v -> start(CommonArticleFragment.newInstance(topic)));
+            textView.setOnClickListener(v -> start(CommonArticleFragment.newInstance(topic.getMobileUrl())));
             mTitleContainer.addView(textView);
         }
         mTimelineAdapter = new TopicTimelineAdapter(getContext());
@@ -179,17 +173,8 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
                 }*/
                 RelevantTopicWindow window = new RelevantTopicWindow(getActivity(), topicId, order);
                 window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, true);
-                WindowManager.LayoutParams lp = ((Activity)getContext()).getWindow().getAttributes();
-                lp.alpha = 0.7f;
-                ((Activity)getContext()).getWindow().setAttributes(lp);
-                window.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        WindowManager.LayoutParams lp = ((Activity)getContext()).getWindow().getAttributes();
-                        lp.alpha = 1f;
-                        ((Activity)getContext()).getWindow().setAttributes(lp);
-                    }
-                });
+                setBackgroundAlpha(0.7f);
+                window.setOnDismissListener(() -> setBackgroundAlpha(1f));
                 return true;
             });
         } else {
@@ -201,6 +186,12 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
                     scrollY > mTxtTopicTime.getBottom() ? View.VISIBLE : View.GONE);
             mImgToolbar.setVisibility(scrollY > mTxtTopicTime.getBottom() ? View.GONE : View.VISIBLE);*/
         });
+    }
+
+    private void setBackgroundAlpha(float v) {
+        WindowManager.LayoutParams lp = ((Activity) getContext()).getWindow().getAttributes();
+        lp.alpha = v;
+        ((Activity) getContext()).getWindow().setAttributes(lp);
     }
 
     @Override
@@ -228,10 +219,5 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     public void onDestroy() {
         RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));
         super.onDestroy();
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        return false;
     }
 }

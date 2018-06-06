@@ -37,6 +37,7 @@ import butterknife.ButterKnife;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.OnMenuItemClickListener {
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.refresh_layout)
@@ -48,14 +49,6 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     private TopicNewsBean mTopic;
     private String mUrl;
     private static final String APP_CACAHE_DIRNAME = "/webcache";
-
-    public static CommonArticleFragment newInstance(TopicNewsBean topic) {
-        CommonArticleFragment fragment = new CommonArticleFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.EXTRA_TOPIC, Parcels.wrap(topic));
-        fragment.setArguments(bundle);
-        return fragment;
-    }
 
     public static CommonArticleFragment newInstance(String url) {
         CommonArticleFragment fragment = new CommonArticleFragment();
@@ -136,7 +129,9 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
 
     private void initWebSettings() {
         WebSettings mWebSetting = mWebView.getSettings();
-        if (mWebSetting == null) return;
+        if (mWebSetting == null) {
+            return;
+        }
         /*mWebSetting.setJavaScriptEnabled(true);
         mWebSetting.setUseWideViewPort(true);
         mWebSetting.setLoadWithOverviewMode(true);

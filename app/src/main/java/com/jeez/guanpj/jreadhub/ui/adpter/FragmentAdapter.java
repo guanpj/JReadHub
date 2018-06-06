@@ -49,7 +49,7 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initFragments() {
-        mFragments.add(new TopicFragment());
+        mFragments.add(TopicFragment.newInstance());
         mFragments.add(CommonListFragment.newInstance(NewsBean.TYPE_NEWS));
         mFragments.add(CommonListFragment.newInstance(NewsBean.TYPE_TECHNEWS));
         mFragments.add(CommonListFragment.newInstance(NewsBean.TYPE_BLOCKCHAIN));

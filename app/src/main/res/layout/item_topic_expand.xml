@@ -119,6 +119,26 @@
 
         </FrameLayout>
 
-    </LinearLayout>
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/layout_expand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/readhubTheme"
+            app:el_expanded="true">
 
+            <LinearLayout
+                android:id="@+id/layout_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8_dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <!--<include layout="@layout/item_topic_news" />-->
+
+            </LinearLayout>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+    </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -12,7 +12,6 @@ import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.NewsListAdapter;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
-import com.jeez.guanpj.jreadhub.widget.decoration.GapItemDecoration;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import butterknife.BindView;
@@ -21,9 +20,9 @@ import butterknife.BindView;
 public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> implements CommonContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
 
     @BindView(R.id.refresh_layout)
-    SwipeRefreshLayout refreshLayout;
+    SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.recycler_view)
-    HeaderAndFooterRecyclerView recyclerView;
+    HeaderAndFooterRecyclerView mRecyclerView;
 
     private LoadMoreFooter loadMoreFooter;
     private NewsListAdapter listAdapter;
@@ -58,21 +57,21 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     @Override
     public void initView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //recyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
-        //recyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
+        //mRecyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
 
-        loadMoreFooter = new LoadMoreFooter(getActivity(), recyclerView);
-        listAdapter = new NewsListAdapter(getActivity());
-        recyclerView.setAdapter(listAdapter);
+        loadMoreFooter = new LoadMoreFooter(getActivity(), mRecyclerView);
+        listAdapter = new NewsListAdapter(getContext());
+        mRecyclerView.setAdapter(listAdapter);
     }
 
     @Override
     public void initDataAndEvent() {
-        refreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setOnRefreshListener(this);
         loadMoreFooter.setOnLoadMoreListener(this);
-        refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setRefreshing(true);
+        mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setRefreshing(true);
         onRefresh();
     }
 
@@ -96,7 +95,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         if (isPull2Refresh) {
             listAdapter.clear();
             listAdapter.addItems(data.getData());
-            refreshLayout.setRefreshing(false);
+            mRefreshLayout.setRefreshing(false);
             loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
         } else {
             listAdapter.addItems(data.getData());
@@ -107,7 +106,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
     @Override
     public void onRequestError(boolean isPull2Refresh) {
         if (isPull2Refresh) {
-            refreshLayout.setRefreshing(false);
+            mRefreshLayout.setRefreshing(false);
         } else {
             loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
         }
@@ -115,9 +114,9 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     @Override
     public void onFabClick() {
-        recyclerView.scrollToPosition(0);
-        if (!refreshLayout.isRefreshing()) {
-            refreshLayout.setRefreshing(true);
+        mRecyclerView.scrollToPosition(0);
+        if (!mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.setRefreshing(true);
             onRefresh();
         }
     }

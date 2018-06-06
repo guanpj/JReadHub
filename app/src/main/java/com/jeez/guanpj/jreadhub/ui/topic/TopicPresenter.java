@@ -1,7 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.topic;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.ExpandTopicBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
@@ -23,9 +23,9 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     public void doRefresh() {
         addSubscribe(mDataManager.getTopicList(null, PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
-                .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
+                .subscribeWith(new DisposableObserver<DataListBean<ExpandTopicBean>>() {
                     @Override
-                    public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
+                    public void onNext(DataListBean<ExpandTopicBean> topicBeanDataListBean) {
                         getView().onRequestEnd(topicBeanDataListBean, true);
                     }
 
@@ -44,9 +44,9 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     public void doLoadMore(Long lastCursor) {
         addSubscribe(mDataManager.getTopicList(lastCursor, PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
-                .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
+                .subscribeWith(new DisposableObserver<DataListBean<ExpandTopicBean>>() {
                     @Override
-                    public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
+                    public void onNext(DataListBean<ExpandTopicBean> topicBeanDataListBean) {
                         getView().onRequestEnd(topicBeanDataListBean, false);
                     }
 
