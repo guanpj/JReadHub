@@ -16,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.jeez.guanpj.jreadhub.MainActivity;
-import com.jeez.guanpj.jreadhub.MainFragment;
+import com.jeez.guanpj.jreadhub.ui.activity.MainActivity;
+import com.jeez.guanpj.jreadhub.ui.activity.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;

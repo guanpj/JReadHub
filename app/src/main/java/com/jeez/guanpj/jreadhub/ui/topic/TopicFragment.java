@@ -4,18 +4,15 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.ExpandTopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.AnimatorAdapter;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicListAdapter;
 import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -54,6 +51,11 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         //recyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
 
         loadMoreFooter = new LoadMoreFooter(getContext(), recyclerView);
+        animatorAdapter = new AnimatorAdapter(getContext());
+        animatorAdapter.isFirstOnly(false);
+        animatorAdapter.setNotDoAnimationCount(3);
+        animatorAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        recyclerView.setAdapter(animatorAdapter);
         /*listAdapter = new TopicListAdapter(getContext());
         recyclerView.setAdapter(listAdapter);*/
     }
@@ -75,7 +77,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
     @Override
     public void onLoadMore() {
-        mPresenter.doLoadMore(listAdapter.getItem(listAdapter.getItemCount() - 1).getOrder());
+        mPresenter.doLoadMore(animatorAdapter.getItem(animatorAdapter.getItemCount() - 1).getOrder());
     }
 
     @Override
@@ -84,7 +86,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     }
 
     @Override
-    public void onRequestEnd(DataListBean<ExpandTopicBean> data, boolean isPull2Refresh) {
+    public void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh) {
         /*if (isPull2Refresh) {
             listAdapter.clear();
             listAdapter.clearExpandStates();
@@ -96,28 +98,12 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
             loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
         }*/
         if (isPull2Refresh) {
-            if (null != animatorAdapter) {
-                animatorAdapter.addData(data.getData());
-            } else {
-                List<MultiItemEntity> needed = new ArrayList<>();
-                needed.addAll(data.getData());
-                animatorAdapter = new AnimatorAdapter(getContext(), needed);
-                recyclerView.setAdapter(animatorAdapter);
-            }
-
+            animatorAdapter.replaceData(data.getData());
             refreshLayout.setRefreshing(false);
-            loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
         } else {
-            if (null != animatorAdapter) {
-                animatorAdapter.addData(data.getData());
-            } else {
-                List<MultiItemEntity> needed = new ArrayList<>();
-                needed.addAll(data.getData());
-                animatorAdapter = new AnimatorAdapter(getContext(), needed);
-                recyclerView.setAdapter(animatorAdapter);
-            }
-            loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
+            animatorAdapter.addData(data.getData());
         }
+        loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
     }
 
     @Override

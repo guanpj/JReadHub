@@ -6,10 +6,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.MainActivity;
+import com.jeez.guanpj.jreadhub.ui.activity.MainActivity;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
-import com.jeez.guanpj.jreadhub.SplashActivity;
+import com.jeez.guanpj.jreadhub.ui.activity.SplashActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.util.Constants;
@@ -18,8 +18,6 @@ import com.jeez.guanpj.jreadhub.util.ThemeUtil;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportActivity;
-import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
-import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * Created by Jie on 2016-10-26.

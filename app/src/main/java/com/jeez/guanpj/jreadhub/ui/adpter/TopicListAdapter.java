@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jeez.guanpj.jreadhub.MainActivity;
-import com.jeez.guanpj.jreadhub.MainFragment;
+import com.jeez.guanpj.jreadhub.ui.activity.MainActivity;
+import com.jeez.guanpj.jreadhub.ui.activity.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;

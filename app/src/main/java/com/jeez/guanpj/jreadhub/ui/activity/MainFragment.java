@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub;
+package com.jeez.guanpj.jreadhub.ui.activity;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.MenuItem;
 
+import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;

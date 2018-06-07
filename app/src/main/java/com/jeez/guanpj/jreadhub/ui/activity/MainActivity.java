@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub;
+package com.jeez.guanpj.jreadhub.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,12 +16,14 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.ui.settting.SettingActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
 import com.jeez.guanpj.jreadhub.util.UncaughtException;
@@ -136,6 +138,7 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
         mDrawerLayout.post(() -> {
             switch (item.getItemId()) {
                 case R.id.nav_setting:
+                    SettingActivity.start(MainActivity.this);
                     break;
                 case R.id.nav_about:
                     break;
