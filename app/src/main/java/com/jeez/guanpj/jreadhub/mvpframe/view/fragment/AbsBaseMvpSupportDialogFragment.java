@@ -13,6 +13,7 @@ import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 import javax.inject.Inject;
 
 public abstract class AbsBaseMvpSupportDialogFragment<P extends BasePresenter> extends AbsBaseSupportDialogFragment implements IBaseView {
+
     @Inject
     public P mPresenter;
 

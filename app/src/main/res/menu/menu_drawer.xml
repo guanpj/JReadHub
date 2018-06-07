@@ -11,11 +11,4 @@
             android:icon="@drawable/ic_about"
             android:title="关于" />
     </group>
-
-    <group>
-        <item
-            android:id="@+id/nav_change_theme"
-            android:icon="@drawable/ic_theme"
-            android:title="切换主题" />
-    </group>
 </menu>

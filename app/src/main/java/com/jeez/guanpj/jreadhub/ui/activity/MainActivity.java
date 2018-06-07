@@ -34,14 +34,12 @@ import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class MainActivity extends AbsBaseActivity implements NavigationView.OnNavigationItemSelectedListener, ThemeDialog.OnThemeChangeListener {
+public class MainActivity extends AbsBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.dl_main)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nv_main)
     NavigationView mNavigationView;
-
-    private ThemeDialog mThemeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,6 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
 
     @Override
     public void initView() {
-        mThemeDialog = new ThemeDialog(this);
         if (findFragment(MainFragment.class) == null) {
             loadRootFragment(R.id.fl_container, MainFragment.newInstance());
         }
@@ -71,7 +68,6 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
     @Override
     public void initDataAndEvent() {
         mNavigationView.setNavigationItemSelectedListener(this);
-        mThemeDialog.setOnThemeChangeListener(this);
 
         RxBus.getInstance().toFlowable(ToolbarNavigationClickEvent.class)
                 .subscribe(navigationClickEvent -> mDrawerLayout.openDrawer(GravityCompat.START));
@@ -142,79 +138,11 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
                     break;
                 case R.id.nav_about:
                     break;
-                case R.id.nav_change_theme:
-                    mThemeDialog.show();
-                    break;
                 default:
                     break;
             }
         });
         return true;
-    }
-
-    @Override
-    public void onChangeTheme(String selectedTheme) {
-        switch (selectedTheme) {
-            case Constants.Theme.Blue:
-                setTheme(R.style.BlueTheme);
-                mThemeUtil.setTheme(Constants.Theme.Blue);
-                break;
-            case Constants.Theme.Gray:
-                setTheme(R.style.GrayTheme);
-                mThemeUtil.setTheme(Constants.Theme.Gray);
-                break;
-            default:
-        }
-        //changeTheme();
-        reStartActivity();
-    }
-
-    private void reStartActivity() {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
-
-    private void changeTheme() {
-        RxBus.getInstance().post(new ChangeThemeEvent());
-        refreshUI();
-        //mCommonFragment.refreshUI();
-        mDrawerLayout.closeDrawers();
-    }
-
-    private void refreshUI() {
-        //状态栏
-        TypedValue statusColor = new TypedValue();
-        //主题
-        TypedValue themeColor = new TypedValue();
-        //状态栏字体颜色
-        TypedValue toolbarTextColor = new TypedValue();
-        //toolbar 导航图标
-        TypedValue navIcon = new TypedValue();
-        //toolbar 搜索图标
-        TypedValue searchIcon = new TypedValue();
-        //toolbar 更多图标
-        TypedValue overFlowIcon = new TypedValue();
-
-        //获取切换后的主题，以及主题相对应对的属性值
-        Resources.Theme theme = getTheme();
-        theme.resolveAttribute(R.attr.readhubStatus, statusColor, true);
-        theme.resolveAttribute(R.attr.readhubTheme, themeColor, true);
-        theme.resolveAttribute(R.attr.readhubToolbarText, toolbarTextColor, true);
-        theme.resolveAttribute(R.attr.navIcon, navIcon, true);
-        theme.resolveAttribute(R.attr.menuSearch, searchIcon, true);
-        theme.resolveAttribute(R.attr.overFlowIcon, overFlowIcon, true);
-
-        changeStatusColor(statusColor.resourceId);
-    }
-
-    private void changeStatusColor(int colorValue) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, colorValue));
-        }
     }
 
     @Override

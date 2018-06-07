@@ -46,7 +46,6 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     WebView mWebView;
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
-    private TopicNewsBean mTopic;
     private String mUrl;
     private static final String APP_CACAHE_DIRNAME = "/webcache";
 
@@ -63,7 +62,6 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_web, container, false);
         ButterKnife.bind(this, view);
-        mTopic = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_TOPIC));
         mUrl = getArguments().getString(Constants.EXTRA_TOPIC_URL);
         RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         return attachToSwipeBack(view);
@@ -123,7 +121,7 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
                 mToolbar.setTitle(title);
             }
         });
-        mWebView.loadUrl(TextUtils.isEmpty(mUrl) ? mTopic.getUrl() : mUrl);
+        mWebView.loadUrl(mUrl);
         mRefreshLayout.setRefreshing(true);
     }
 

@@ -5,7 +5,6 @@ import com.jeez.guanpj.jreadhub.util.FormatUtils;
 import org.parceler.Parcel;
 import org.threeten.bp.OffsetDateTime;
 
-@Parcel
 public class TopicNewsBean {
 
     /**
