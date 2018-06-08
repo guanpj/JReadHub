@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.ui.activity;
+package com.jeez.guanpj.jreadhub.ui.main;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -74,13 +74,10 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
 
-        mToolbar.setNavigationOnClickListener(view -> {
-            RxBus.getInstance().post(new ToolbarNavigationClickEvent());
-        });
+        mToolbar.setNavigationOnClickListener(view -> RxBus.getInstance().post(new ToolbarNavigationClickEvent()));
         mToolbar.setOnMenuItemClickListener(this);
 
-        RxBus.getInstance().toFlowable(ChangeThemeEvent.class)
-                .subscribe(changeThemeEvent -> refreshUI());
+        RxBus.getInstance().toFlowable(ChangeThemeEvent.class).subscribe(changeThemeEvent -> refreshUI());
     }
 
     private void refreshUI() {

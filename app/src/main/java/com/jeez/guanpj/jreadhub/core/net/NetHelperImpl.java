@@ -13,11 +13,12 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
-public class RetrofitHelper implements NetHelper{
+public class NetHelperImpl implements NetHelper {
+
     private ReadhubApi readhubApi;
 
     @Inject
-    public RetrofitHelper(ReadhubApi readhubApi) {
+    public NetHelperImpl(ReadhubApi readhubApi) {
         this.readhubApi = readhubApi;
     }
 

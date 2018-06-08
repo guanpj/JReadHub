@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jeez.guanpj.jreadhub.ui.activity.MainActivity;
-import com.jeez.guanpj.jreadhub.ui.activity.MainFragment;
+import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
@@ -79,7 +79,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         private View newsMoreView;
 
         TopicViewHolder(Context context, ViewGroup parent) {
-            super(context, parent, R.layout.item_topic_expand);
+            super(context, parent, R.layout.item_topic);
             newsMoreView = mInflater.inflate(R.layout.item_topic_news_more, null, false);
         }
 

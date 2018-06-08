@@ -2,10 +2,9 @@ package com.jeez.guanpj.jreadhub.ui.settting;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
+import com.jeez.guanpj.jreadhub.util.Constants;
 
 import javax.inject.Inject;
-
-import io.reactivex.disposables.Disposable;
 
 public class SettingPresenter extends BasePresenter<SettingContract.View> implements SettingContract.Presenter {
 
@@ -13,21 +12,17 @@ public class SettingPresenter extends BasePresenter<SettingContract.View> implem
 
     @Inject
     SettingPresenter(DataManager dataManager) {
+        super(dataManager);
         this.mDataManager = mDataManager;
     }
 
     @Override
-    public void onAttatch(SettingContract.View view) {
-
+    public void setTheme(@Constants.Theme String theme) {
+        mDataManager.setTheme(theme);
     }
 
     @Override
-    public void onDetach() {
-
-    }
-
-    @Override
-    public void addRxBindingSubscribe(Disposable disposable) {
-
+    public void setUserSystemBrowser(boolean b) {
+        mDataManager.setUseSystemBrowser(b);
     }
 }

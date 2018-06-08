@@ -5,7 +5,9 @@ import android.content.Context;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
-import com.jeez.guanpj.jreadhub.core.net.RetrofitHelper;
+import com.jeez.guanpj.jreadhub.core.net.NetHelperImpl;
+import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelper;
+import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelperImpl;
 
 import javax.inject.Singleton;
 
@@ -28,13 +30,19 @@ public class AppModule {
 
     @Provides
     @Singleton
-    NetHelper provideNetHelper(RetrofitHelper retrofitHelper) {
+    NetHelper provideNetHelper(NetHelperImpl retrofitHelper) {
         return retrofitHelper;
     }
 
     @Provides
     @Singleton
-    DataManager provideDataManager(NetHelper netHelper) {
-        return new DataManager(netHelper);
+    PreferenceHelper providePreferenceHelper(PreferenceHelperImpl preferenceHelper){
+        return preferenceHelper;
+    }
+
+    @Provides
+    @Singleton
+    DataManager provideDataManager(NetHelper netHelper, PreferenceHelper preferenceHelper) {
+        return new DataManager(netHelper, preferenceHelper);
     }
 }

@@ -55,13 +55,13 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
 
     @OnClick({R.id.theme_blue, R.id.theme_gray})
     public void onClick(View v) {
-        String selectedTheme = null;
+        @Constants.Theme String selectedTheme = null;
         switch (v.getId()) {
             case R.id.theme_blue:
-                selectedTheme = Constants.Theme.Blue;
+                selectedTheme = Constants.ThemeType.Blue;
                 break;
             case R.id.theme_gray:
-                selectedTheme = Constants.Theme.Gray;
+                selectedTheme = Constants.ThemeType.Gray;
                 break;
             default:
                 break;
@@ -74,7 +74,7 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
     }
 
     public interface OnThemeChangeListener {
-        void onChangeTheme(String selectedTheme);
+        void onChangeTheme(@Constants.Theme String selectedTheme);
     }
 
     public void setOnThemeChangeListener(OnThemeChangeListener onThemeChangeListener) {

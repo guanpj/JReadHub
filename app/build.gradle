@@ -71,4 +71,7 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.9'
     implementation 'org.jsoup:jsoup:1.11.2'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
@@ -26,8 +24,9 @@ import butterknife.OnClick;
 
 public class SettingActivity extends AbsBaseMvpActivity<SettingPresenter> implements SettingContract.View, ThemeDialog.OnThemeChangeListener {
 
-    LinearLayout changeThemeView;
     private ThemeDialog mThemeDialog;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     public static void start(@NonNull Activity activity) {
         Intent intent = new Intent(activity, SettingActivity.class);
@@ -41,7 +40,13 @@ public class SettingActivity extends AbsBaseMvpActivity<SettingPresenter> implem
 
     @Override
     public void initView() {
+        TypedValue navIcon = new TypedValue();
+        Resources.Theme theme = getTheme();
+        theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
+
         mThemeDialog = new ThemeDialog(this);
+        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setNavigationOnClickListener(v -> finish());
     }
 
     @Override
@@ -70,20 +75,25 @@ public class SettingActivity extends AbsBaseMvpActivity<SettingPresenter> implem
     }
 
     @Override
-    public void onChangeTheme(String selectedTheme) {
+    public void onChangeTheme(@Constants.Theme String selectedTheme) {
+        mPresenter.setTheme(selectedTheme);
         switch (selectedTheme) {
-            case Constants.Theme.Blue:
+            case Constants.ThemeType.Blue:
                 setTheme(R.style.BlueTheme);
-                mThemeUtil.setTheme(Constants.Theme.Blue);
                 break;
-            case Constants.Theme.Gray:
+            case Constants.ThemeType.Gray:
                 setTheme(R.style.GrayTheme);
-                mThemeUtil.setTheme(Constants.Theme.Gray);
                 break;
             default:
         }
         //changeTheme();
-        recreate();
+        reStartActivity();
+    }
+
+    private void reStartActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     private void changeTheme() {

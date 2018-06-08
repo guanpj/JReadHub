@@ -1,45 +1,42 @@
-package com.jeez.guanpj.jreadhub.ui.activity;
+package com.jeez.guanpj.jreadhub.ui.main;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.TypedValue;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
-import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
-import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
+import com.jeez.guanpj.jreadhub.ui.about.AboutActivity;
+import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.ui.settting.SettingActivity;
-import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
 import com.jeez.guanpj.jreadhub.util.UncaughtException;
-import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class MainActivity extends AbsBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements MainContract.View, NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.dl_main)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nv_main)
     NavigationView mNavigationView;
+
+    public static void start(@NonNull Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +47,11 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
             initErrorLogDetactor();
         }*/
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void performInject() {
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -64,16 +66,9 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
         }
     }
 
-    @SuppressLint("CheckResult")
     @Override
     public void initDataAndEvent() {
         mNavigationView.setNavigationItemSelectedListener(this);
-
-        RxBus.getInstance().toFlowable(ToolbarNavigationClickEvent.class)
-                .subscribe(navigationClickEvent -> mDrawerLayout.openDrawer(GravityCompat.START));
-
-        RxBus.getInstance().toFlowable(SetDrawerStatusEvent.class).subscribe(lockDrawerEvent ->
-                mDrawerLayout.setDrawerLockMode(lockDrawerEvent.getStatus()));
     }
 
     @Override
@@ -134,9 +129,10 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
         mDrawerLayout.post(() -> {
             switch (item.getItemId()) {
                 case R.id.nav_setting:
-                    SettingActivity.start(MainActivity.this);
+                    SettingActivity.start(this);
                     break;
                 case R.id.nav_about:
+                    AboutActivity.start(this);
                     break;
                 default:
                     break;
@@ -156,5 +152,20 @@ public class MainActivity extends AbsBaseActivity implements NavigationView.OnNa
 
         // 默认竖向(和安卓5.0以上的动画相同)
         //return super.onCreateFragmentAnimator();
+    }
+
+    @Override
+    public void onToolbarNavigationClickEvent(ToolbarNavigationClickEvent event) {
+        mDrawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    @Override
+    public void onSetDrawerStatusEvent(SetDrawerStatusEvent event) {
+        mDrawerLayout.setDrawerLockMode(event.getStatus());
+    }
+
+    @Override
+    public void onFabClick() {
+
     }
 }

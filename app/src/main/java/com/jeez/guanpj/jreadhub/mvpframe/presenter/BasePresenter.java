@@ -2,9 +2,11 @@ package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 
 import android.content.Context;
 
+import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
+import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationHandler;
@@ -20,10 +22,16 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
+
     public Context context;
     private WeakReference<V> weakView;
     private V proxyView;
     private CompositeDisposable compositeDisposable;
+    private DataManager mDataManager;
+
+    public BasePresenter(DataManager dataManager) {
+        this.mDataManager = dataManager;
+    }
 
     @Override
     public void onAttatch(V view) {
@@ -49,16 +57,20 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
         }
     }
 
-    protected void addSubscribe(Disposable disposable) {
+    public @Constants.Theme String getTheme() {
+        return mDataManager.getTheme();
+    }
+
+    public boolean isUserSystemBrowser() {
+        return mDataManager.isUseSystemBrowser();
+    }
+
+    @Override
+    public void addSubscribe(Disposable disposable) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
         compositeDisposable.add(disposable);
-    }
-
-    @Override
-    public void addRxBindingSubscribe(Disposable disposable) {
-        addSubscribe(disposable);
     }
 
     public V getView() {

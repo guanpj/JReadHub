@@ -1,10 +1,9 @@
-package com.jeez.guanpj.jreadhub.ui.activity;
+package com.jeez.guanpj.jreadhub.ui.splash;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
@@ -15,6 +14,7 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
+import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -72,7 +72,7 @@ public class SplashActivity extends AbsBaseActivity {
     }
 
     private void go2Main() {
-        startActivity(new Intent(this, MainActivity.class));
+        MainActivity.start(this);
         finish();
     }
 }

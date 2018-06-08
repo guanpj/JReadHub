@@ -6,14 +6,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.ui.activity.MainActivity;
-import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
-import com.jeez.guanpj.jreadhub.ui.activity.SplashActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
-import com.jeez.guanpj.jreadhub.util.Constants;
-import com.jeez.guanpj.jreadhub.util.ThemeUtil;
+import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
+import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -25,7 +22,6 @@ import me.yokeyword.fragmentation.SupportActivity;
 
 public abstract class AbsBaseActivity extends SupportActivity implements IBaseViewFlow {
 
-    public ThemeUtil mThemeUtil;
     private Unbinder unBinder;
     public static final int MODE_BACK = 0;
     public static final int MODE_DRAWER = 1;
@@ -37,7 +33,6 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTheme();
         setContentView(getLayoutId());
         unBinder = ButterKnife.bind(this);
     }
@@ -117,22 +112,6 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
         setSupportActionBar(toolbar);
         toolbar.setTitle(title);
         toolbar.setNavigationOnClickListener(v -> finish());
-    }
-
-    private void initTheme() {
-        mThemeUtil = ThemeUtil.getInstance(this);
-        String theme = mThemeUtil.getTheme();
-        switch (theme) {
-            case Constants.Theme.Blue:
-                setTheme(R.style.BlueTheme);
-                break;
-            case Constants.Theme.Gray:
-                setTheme(R.style.GrayTheme);
-                break;
-            default:
-                setTheme(R.style.BlueTheme);
-                break;
-        }
     }
 
     protected void openActivity(Class<? extends AbsBaseActivity> targetActivity) {

@@ -15,8 +15,9 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     private static final int PAGE_SIZE = 20;
 
     @Inject
-    CommonPresenter(DataManager mDataManager) {
-        this.mDataManager = mDataManager;
+    CommonPresenter(DataManager dataManager) {
+        super(dataManager);
+        this.mDataManager = dataManager;
     }
 
     @Override

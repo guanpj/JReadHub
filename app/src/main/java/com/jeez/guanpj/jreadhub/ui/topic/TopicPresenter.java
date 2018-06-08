@@ -15,8 +15,9 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     private static final int PAGE_SIZE = 20;
 
     @Inject
-    TopicPresenter(DataManager mDataManager) {
-        this.mDataManager = mDataManager;
+    TopicPresenter(DataManager dataManager) {
+        super(dataManager);
+        this.mDataManager = dataManager;
     }
 
     @Override

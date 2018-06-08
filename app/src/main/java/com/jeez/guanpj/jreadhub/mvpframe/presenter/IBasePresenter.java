@@ -9,5 +9,5 @@ public interface IBasePresenter<V extends IBaseView> {
 
     void onDetach();
 
-    void addRxBindingSubscribe(Disposable disposable);
+    void addSubscribe(Disposable disposable);
 }

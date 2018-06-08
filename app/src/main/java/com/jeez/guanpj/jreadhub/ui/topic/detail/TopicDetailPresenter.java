@@ -14,8 +14,9 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
     private DataManager mDataManager;
 
     @Inject
-    public TopicDetailPresenter(DataManager mDataManager) {
-        this.mDataManager = mDataManager;
+    public TopicDetailPresenter(DataManager dataManager) {
+        super(dataManager);
+        this.mDataManager = dataManager;
     }
 
     @Override

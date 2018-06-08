@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.jeez.guanpj.jreadhub.ui.activity.MainActivity;
-import com.jeez.guanpj.jreadhub.ui.activity.MainFragment;
+import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
@@ -41,7 +41,7 @@ public class AnimatorAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder>
     private final SparseBooleanArray mExtendStateMap = new SparseBooleanArray();
 
     public AnimatorAdapter(Context context) {
-        super(R.layout.item_topic_expand);
+        super(R.layout.item_topic);
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
     }

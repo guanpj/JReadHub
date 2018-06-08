@@ -13,8 +13,9 @@ public class InstantReadPresenter extends BasePresenter<InstantReadContract.View
     private DataManager mDataManager;
 
     @Inject
-    public InstantReadPresenter(DataManager mDataManager) {
-        this.mDataManager = mDataManager;
+    public InstantReadPresenter(DataManager dataManager) {
+        super(dataManager);
+        this.mDataManager = dataManager;
     }
 
     @Override

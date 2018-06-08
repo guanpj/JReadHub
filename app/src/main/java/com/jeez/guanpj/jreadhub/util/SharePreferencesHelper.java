@@ -19,23 +19,20 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharePreferencesHelper {
-    private static final String TAG = "SharePreferencesHelper";
 
     private SharedPreferences mPreferences;
-
     private SharedPreferences.Editor mEditor;
-
     private static SharePreferencesHelper mSPHelper;
 
     public static SharePreferencesHelper getInstance(Context context) {
-        if (mSPHelper == null)
+        if (mSPHelper == null) {
             mSPHelper = new SharePreferencesHelper(context);
-
+        }
         return mSPHelper;
     }
 
     private SharePreferencesHelper(Context context) {
-        mPreferences = context.getSharedPreferences(TAG, Context.MODE_APPEND);
+        mPreferences = context.getSharedPreferences(Constants.KEY_SHARED_PREFERENCE, Context.MODE_PRIVATE);
     }
 
     public boolean putString(String key, String value) {

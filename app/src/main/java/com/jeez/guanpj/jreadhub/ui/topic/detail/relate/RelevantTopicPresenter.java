@@ -16,8 +16,9 @@ public class RelevantTopicPresenter extends BasePresenter<RelevantTopicContract.
     private DataManager mDataManager;
 
     @Inject
-    public RelevantTopicPresenter(DataManager mDataManager) {
-        this.mDataManager = mDataManager;
+    public RelevantTopicPresenter(DataManager dataManager) {
+        super(dataManager);
+        this.mDataManager = dataManager;
     }
 
     @Override

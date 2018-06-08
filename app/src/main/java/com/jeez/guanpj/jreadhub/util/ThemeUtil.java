@@ -36,7 +36,7 @@ public class ThemeUtil {
      * @return 主题
      */
     public String getTheme() {
-        return mSPHelper.getString(Constants.Key.THEME_MODE, Constants.Theme.Blue);
+        return mSPHelper.getString(Constants.Key.THEME_MODE, Constants.ThemeType.Blue);
     }
 
     /**
@@ -44,7 +44,7 @@ public class ThemeUtil {
      * @return
      */
     public boolean isBlueTheme() {
-        return getTheme().equals(Constants.Theme.Blue);
+        return getTheme().equals(Constants.ThemeType.Blue);
     }
 
 }
