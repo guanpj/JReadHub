@@ -31,19 +31,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportActivity;
 
-public class AnimatorAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder> {
+public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder> {
 
     public static final int TYPE_LEVEL_0 = 0;
     public static final int TYPE_LEVEL_1 = 1;
 
-    private Context mContext;
-    private LayoutInflater mInflater;
     private final SparseBooleanArray mExtendStateMap = new SparseBooleanArray();
 
-    public AnimatorAdapter(Context context) {
+    public AnimTopicListAdapter() {
         super(R.layout.item_topic);
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
     }
 
     @Override
@@ -86,7 +82,7 @@ public class AnimatorAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder>
         LinearLayout layoutSource = holder.getView(R.id.layout_source);
         layoutSource.removeAllViews();
         for (int i = 0; i < newsList.size(); i++) {
-            View newsItemView = mInflater.inflate(R.layout.item_topic_news, null, false);
+            View newsItemView = mLayoutInflater.inflate(R.layout.item_topic_news, null, false);
             layoutSource.addView(newsItemView);
 
             TopicNewsBean news = newsList.get(i);
@@ -97,7 +93,7 @@ public class AnimatorAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder>
             }
             newsViewHolder.bindData(news);
             if (i == 2) {
-                View newsMoreView = mInflater.inflate(R.layout.item_topic_news_more, null, false);
+                View newsMoreView = mLayoutInflater.inflate(R.layout.item_topic_news_more, null, false);
                 newsMoreView.setOnClickListener(v ->
                         ((SupportActivity) mContext).findFragment(MainFragment.class)
                                 .start(TopicDetailFragment.newInstance(topicBean.getId()))
@@ -110,6 +106,16 @@ public class AnimatorAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder>
                 }
             }
         }
+    }
+
+    public interface OnNewItemClickListener {
+        void onNewItemClick(String newsUrl);
+    }
+
+    OnNewItemClickListener onNewItemClickListener;
+
+    public void setOnNewItemClickListener(OnNewItemClickListener listener) {
+        this.onNewItemClickListener = listener;
     }
 
     class NewsViewHolder {
@@ -130,7 +136,8 @@ public class AnimatorAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder>
         void bindData(@NonNull TopicNewsBean news) {
             this.news = news;
             tvTitle.setText(news.getTitle());
-            tvInfo.setText(mContext.getString(R.string.site_name___time, news.getSiteName(), FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
+            tvInfo.setText(mContext.getString(R.string.site_name___time, news.getSiteName(),
+                    FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
         }
 
         public void setLineVisibility(int visibility) {
@@ -139,8 +146,11 @@ public class AnimatorAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder>
 
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
-            ((SupportActivity) mContext).findFragment(MainFragment.class)
-                    .start(CommonArticleFragment.newInstance(news.getMobileUrl()));
+            if (null != onNewItemClickListener) {
+                onNewItemClickListener.onNewItemClick(news.getMobileUrl());
+            }
+            /*((SupportActivity) mContext).findFragment(MainFragment.class)
+                    .start(CommonArticleFragment.newInstance(news.getMobileUrl()));*/
         }
     }
 }

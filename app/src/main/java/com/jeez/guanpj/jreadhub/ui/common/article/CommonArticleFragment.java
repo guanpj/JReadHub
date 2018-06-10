@@ -29,6 +29,7 @@ import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
 import org.parceler.Parcels;
 
@@ -162,15 +163,10 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_open:
-                Intent openIntent = new Intent(Intent.ACTION_VIEW);
-                openIntent.setData(Uri.parse(mUrl));
-                startActivity(Intent.createChooser(openIntent, "在浏览器中打开"));
+                NavigationUtil.openByApp(getActivity(), mUrl);
                 return true;
             case R.id.action_share:
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, mUrl + "\n——来自 Readhub 客户端");
-                startActivity(Intent.createChooser(shareIntent, "分享"));
+                NavigationUtil.shareToApp(getActivity(), mUrl);
                 return true;
             default:
                 return false;

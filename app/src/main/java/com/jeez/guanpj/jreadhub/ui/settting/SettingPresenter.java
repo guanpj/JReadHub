@@ -16,7 +16,7 @@ public class SettingPresenter extends BasePresenter<SettingContract.View> implem
         this.mDataManager = mDataManager;
     }
 
-    @Override
+    /*@Override
     public void setTheme(@Constants.Theme String theme) {
         mDataManager.setTheme(theme);
     }
@@ -24,5 +24,5 @@ public class SettingPresenter extends BasePresenter<SettingContract.View> implem
     @Override
     public void setUserSystemBrowser(boolean b) {
         mDataManager.setUseSystemBrowser(b);
-    }
+    }*/
 }

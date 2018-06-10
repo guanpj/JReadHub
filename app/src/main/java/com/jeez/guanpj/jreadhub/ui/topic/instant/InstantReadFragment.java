@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
 import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
@@ -24,6 +25,7 @@ import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +33,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.SupportActivity;
 
 public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPresenter> implements InstantReadContract.View {
 
@@ -104,8 +107,12 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 if (URLUtil.isNetworkUrl(request.getUrl().toString())) {
                     dismiss();
-                    ((MainActivity) getContext()).findFragment(MainFragment.class)
-                            .start(CommonArticleFragment.newInstance(request.getUrl().toString()));
+                    if (mPresenter.isUseSystemBrowser()) {
+                        NavigationUtil.openInBrowser(getActivity(), request.getUrl().toString());
+                    } else {
+                        ((SupportActivity) getContext()).findFragment(MainFragment.class)
+                                .start(CommonArticleFragment.newInstance(request.getUrl().toString()));
+                    }
                 }
                 return true;
             }

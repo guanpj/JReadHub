@@ -10,8 +10,8 @@ public interface SettingContract {
     }
 
     interface Presenter extends IBasePresenter<View> {
-        void setTheme(@Constants.Theme String theme);
+        /*void setTheme(@Constants.Theme String theme);
 
-        void setUserSystemBrowser(boolean b);
+        void setUserSystemBrowser(boolean b);*/
     }
 }

@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Window;
@@ -27,6 +28,8 @@ public class SettingActivity extends AbsBaseMvpActivity<SettingPresenter> implem
     private ThemeDialog mThemeDialog;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.switch_browser)
+    SwitchCompat mSwithCompat;
 
     public static void start(@NonNull Activity activity) {
         Intent intent = new Intent(activity, SettingActivity.class);
@@ -51,12 +54,13 @@ public class SettingActivity extends AbsBaseMvpActivity<SettingPresenter> implem
 
     @Override
     public void initDataAndEvent() {
+        mSwithCompat.setChecked(mPresenter.isUseSystemBrowser());
         mThemeDialog.setOnThemeChangeListener(this);
     }
 
     @OnCheckedChanged(R.id.switch_browser)
     void swithBrowser() {
-
+        mPresenter.setUseSystemBrowser(mSwithCompat.isChecked());
     }
 
     @OnClick(R.id.ll_change_theme)

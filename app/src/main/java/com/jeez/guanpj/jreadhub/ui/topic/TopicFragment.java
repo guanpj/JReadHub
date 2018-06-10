@@ -7,25 +7,32 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
-import com.jeez.guanpj.jreadhub.ui.adpter.AnimatorAdapter;
+import com.jeez.guanpj.jreadhub.ui.adpter.AnimTopicListAdapter;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicListAdapter;
+import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
+import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
+import com.jeez.guanpj.jreadhub.widget.decoration.GapItemDecoration;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
-import butterknife.BindView;
+import java.util.List;
 
-public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
+import butterknife.BindView;
+import me.yokeyword.fragmentation.SupportActivity;
+
+public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener, AnimTopicListAdapter.OnNewItemClickListener {
 
     @BindView(R.id.refresh_layout)
-    SwipeRefreshLayout refreshLayout;
+    SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.recycler_view)
-    HeaderAndFooterRecyclerView recyclerView;
+    HeaderAndFooterRecyclerView mRecyclerView;
 
-    private LoadMoreFooter loadMoreFooter;
-    private TopicListAdapter listAdapter;
-    private AnimatorAdapter animatorAdapter;
+    private LoadMoreFooter mLoadMoreFooter;
+    private AnimTopicListAdapter mAdapter;
 
     public static TopicFragment newInstance() {
         Bundle args = new Bundle();
@@ -46,26 +53,24 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
     @Override
     public void initView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //recyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
-        //recyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
 
-        loadMoreFooter = new LoadMoreFooter(getContext(), recyclerView);
-        animatorAdapter = new AnimatorAdapter(getContext());
-        animatorAdapter.isFirstOnly(false);
-        animatorAdapter.setNotDoAnimationCount(3);
-        animatorAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        recyclerView.setAdapter(animatorAdapter);
-        /*listAdapter = new TopicListAdapter(getContext());
-        recyclerView.setAdapter(listAdapter);*/
+        mLoadMoreFooter = new LoadMoreFooter(getContext(), mRecyclerView);
+        mAdapter = new AnimTopicListAdapter();
+        mAdapter.isFirstOnly(false);
+        mAdapter.setNotDoAnimationCount(3);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.setOnNewItemClickListener(this);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void initDataAndEvent() {
-        refreshLayout.setOnRefreshListener(this);
-        loadMoreFooter.setOnLoadMoreListener(this);
-        refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setRefreshing(true);
+        mRefreshLayout.setOnRefreshListener(this);
+        mLoadMoreFooter.setOnLoadMoreListener(this);
+        mRefreshLayout.setOnRefreshListener(this);
+        mRefreshLayout.setRefreshing(true);
         onRefresh();
 
     }
@@ -77,7 +82,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
     @Override
     public void onLoadMore() {
-        mPresenter.doLoadMore(animatorAdapter.getItem(animatorAdapter.getItemCount() - 1).getOrder());
+        mPresenter.doLoadMore(mAdapter.getItem(mAdapter.getItemCount() - 1).getOrder());
     }
 
     @Override
@@ -87,40 +92,44 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
     @Override
     public void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh) {
-        /*if (isPull2Refresh) {
-            listAdapter.clear();
-            listAdapter.clearExpandStates();
-            listAdapter.addItems(data.getData());
-            refreshLayout.setRefreshing(false);
-            loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
+        List<TopicBean> dataList = data.getData();
+        if (null != dataList && !dataList.isEmpty()) {
+            mAdapter.addData(dataList);
+            mLoadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
         } else {
-            listAdapter.addItems(data.getData());
-            loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
-        }*/
-        if (isPull2Refresh) {
-            animatorAdapter.replaceData(data.getData());
-            refreshLayout.setRefreshing(false);
-        } else {
-            animatorAdapter.addData(data.getData());
+            mLoadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
         }
-        loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
+
+        if (isPull2Refresh) {
+            mRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override
     public void onRequestError(boolean isPull2Refresh) {
         if (isPull2Refresh) {
-            refreshLayout.setRefreshing(false);
+            mRefreshLayout.setRefreshing(false);
         } else {
-            loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
+            mLoadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
         }
     }
 
     @Override
     public void onFabClick() {
-        recyclerView.scrollToPosition(0);
-        if (!refreshLayout.isRefreshing()) {
-            refreshLayout.setRefreshing(true);
+        mRecyclerView.scrollToPosition(0);
+        if (!mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.setRefreshing(true);
             onRefresh();
+        }
+    }
+
+    @Override
+    public void onNewItemClick(String newsUrl) {
+        if (mPresenter.isUseSystemBrowser()) {
+            NavigationUtil.openInBrowser(getActivity(), newsUrl);
+        } else {
+            ((SupportActivity) getContext()).findFragment(MainFragment.class)
+                    .start(CommonArticleFragment.newInstance(newsUrl));
         }
     }
 }

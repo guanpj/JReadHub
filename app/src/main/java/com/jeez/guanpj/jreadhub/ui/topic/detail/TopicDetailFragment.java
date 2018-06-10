@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
+import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
@@ -28,8 +29,10 @@ import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -39,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import butterknife.BindView;
+import me.yokeyword.fragmentation.SupportActivity;
 
 public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetailPresenter> implements TopicDetailContract.View {
 
@@ -133,7 +137,13 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 textView.setText(spannableTitle);
             }
-            textView.setOnClickListener(v -> start(CommonArticleFragment.newInstance(topic.getMobileUrl())));
+            textView.setOnClickListener(v -> {
+                if (mPresenter.isUseSystemBrowser()) {
+                    NavigationUtil.openInBrowser(getActivity(), topic.getMobileUrl());
+                } else {
+                    start(CommonArticleFragment.newInstance(topic.getMobileUrl()));
+                }
+            });
             mTitleContainer.addView(textView);
         }
         mTimelineAdapter = new TopicTimelineAdapter(getContext());

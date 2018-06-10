@@ -15,7 +15,7 @@
     <string name="source_format">来源：%1$s</string>
     <string name="month__day">%1$d-%2$d</string>
     <string name="month__day__year">%1$d-%2$d %3$d</string>
-    <string name="use_system_browser">使用内置浏览器</string>
+    <string name="use_system_browser">使用系统内置浏览器</string>
     <string name="use_system_browser_des">开启后，将使用系统内置的浏览器打开网页内容</string>
     <string name="change_theme">切换主题</string>
     <string name="readhub_site"><a href="" target="_blank">https://readhub.me</a></string>

@@ -4,29 +4,38 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
+import com.jeez.guanpj.jreadhub.ui.adpter.AnimNewsListAdapter;
 import com.jeez.guanpj.jreadhub.ui.adpter.NewsListAdapter;
+import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
+import java.util.List;
+
 import butterknife.BindView;
+import me.yokeyword.fragmentation.SupportActivity;
 
 
-public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> implements CommonContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
+public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> implements CommonContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.recycler_view)
     HeaderAndFooterRecyclerView mRecyclerView;
 
-    private LoadMoreFooter loadMoreFooter;
-    private NewsListAdapter listAdapter;
-    private @NewsBean.Type String type;
+    private LoadMoreFooter mLoadMoreFooter;
+    private AnimNewsListAdapter mAdapter;
+    private @NewsBean.Type String mNewsType;
 
     public static CommonListFragment newInstance(@NewsBean.Type String type) {
         CommonListFragment fragment = new CommonListFragment();
@@ -41,7 +50,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (null != bundle && !TextUtils.isEmpty(bundle.getString(Constants.BUNDLE_NEWS_TYPE))) {
-            type = bundle.getString(Constants.BUNDLE_NEWS_TYPE);
+            mNewsType = bundle.getString(Constants.BUNDLE_NEWS_TYPE);
         }
     }
 
@@ -61,15 +70,19 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
         //mRecyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
 
-        loadMoreFooter = new LoadMoreFooter(getActivity(), mRecyclerView);
-        listAdapter = new NewsListAdapter(getContext());
-        mRecyclerView.setAdapter(listAdapter);
+        mLoadMoreFooter = new LoadMoreFooter(getActivity(), mRecyclerView);
+        mAdapter = new AnimNewsListAdapter();
+        mAdapter.isFirstOnly(false);
+        mAdapter.setNotDoAnimationCount(3);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.setOnItemClickListener(this);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void initDataAndEvent() {
         mRefreshLayout.setOnRefreshListener(this);
-        loadMoreFooter.setOnLoadMoreListener(this);
+        mLoadMoreFooter.setOnLoadMoreListener(this);
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setRefreshing(true);
         onRefresh();
@@ -77,12 +90,12 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     @Override
     public void onRefresh() {
-        mPresenter.doRefresh(type);
+        mPresenter.doRefresh(mNewsType);
     }
 
     @Override
     public void onLoadMore() {
-        mPresenter.doLoadMore(type, listAdapter.getItem(listAdapter.getItemCount() - 1).getPublishDate().toInstant().toEpochMilli());
+        mPresenter.doLoadMore(mNewsType, mAdapter.getItem(mAdapter.getItemCount() - 1).getPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
@@ -92,14 +105,16 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     @Override
     public void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh) {
-        if (isPull2Refresh) {
-            listAdapter.clear();
-            listAdapter.addItems(data.getData());
-            mRefreshLayout.setRefreshing(false);
-            loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_DISABLED : LoadMoreFooter.STATE_ENDLESS);
+        List<NewsBean> dataList = data.getData();
+        if (null != dataList && !dataList.isEmpty()) {
+            mAdapter.addData(dataList);
+            mLoadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
         } else {
-            listAdapter.addItems(data.getData());
-            loadMoreFooter.setState(data.getData().isEmpty() ? LoadMoreFooter.STATE_FINISHED : LoadMoreFooter.STATE_ENDLESS);
+            mLoadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
+        }
+
+        if (isPull2Refresh) {
+            mRefreshLayout.setRefreshing(false);
         }
     }
 
@@ -108,7 +123,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         if (isPull2Refresh) {
             mRefreshLayout.setRefreshing(false);
         } else {
-            loadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
+            mLoadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
         }
     }
 
@@ -118,6 +133,16 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         if (!mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(true);
             onRefresh();
+        }
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if (mPresenter.isUseSystemBrowser()) {
+            NavigationUtil.openInBrowser(getActivity(), ((NewsBean) adapter.getData().get(position)).getMobileUrl());
+        } else {
+            ((SupportActivity) getContext()).findFragment(MainFragment.class)
+                    .start(CommonArticleFragment.newInstance(((NewsBean) adapter.getData().get(position)).getMobileUrl()));
         }
     }
 }

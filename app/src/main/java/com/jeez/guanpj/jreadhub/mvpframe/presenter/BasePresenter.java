@@ -57,12 +57,24 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
         }
     }
 
+    @Override
     public @Constants.Theme String getTheme() {
         return mDataManager.getTheme();
     }
 
-    public boolean isUserSystemBrowser() {
+    @Override
+    public void setTheme(String theme) {
+        mDataManager.setTheme(theme);
+    }
+
+    @Override
+    public boolean isUseSystemBrowser() {
         return mDataManager.isUseSystemBrowser();
+    }
+
+    @Override
+    public void setUseSystemBrowser(boolean b) {
+        mDataManager.setUseSystemBrowser(b);
     }
 
     @Override
