@@ -1,17 +1,13 @@
 package com.jeez.guanpj.jreadhub.ui.common.article;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,13 +21,8 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
-import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
-
-import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +55,6 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
         View view = inflater.inflate(R.layout.fragment_web, container, false);
         ButterKnife.bind(this, view);
         mUrl = getArguments().getString(Constants.EXTRA_TOPIC_URL);
-        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         return attachToSwipeBack(view);
     }
 
@@ -180,12 +170,6 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
             return true;
         }
         return super.onBackPressedSupport();
-    }
-
-    @Override
-    public void onDestroyView() {
-        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));
-        super.onDestroyView();
     }
 
     @Override

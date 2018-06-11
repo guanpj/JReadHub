@@ -24,7 +24,7 @@
     <string name="version">V 1.0.0</string>
     <string name="text_version">版本</string>
     <string name="text_readhub_site">官网</string>
-    <string name="readhub_desc">Readhub 是由个人基于无码科技（杭州）有限公司的产品 Readhub 开发的非官方 app。</string>
+    <string name="readhub_desc">此 app 是由个人基于无码科技（杭州）有限公司的产品 Readhub 开发的非官方 app。</string>
     <string name="text_readhub_desc">简介</string>
 
 </resources>

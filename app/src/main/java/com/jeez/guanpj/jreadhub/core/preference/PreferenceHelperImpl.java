@@ -34,6 +34,6 @@ public class PreferenceHelperImpl implements PreferenceHelper {
 
     @Override
     public boolean isUseSystemBrowser() {
-        return mPreferences.getBoolean(Constants.Key.USE_SYS_BROWSER, true);
+        return mPreferences.getBoolean(Constants.Key.USE_SYS_BROWSER, false);
     }
 }

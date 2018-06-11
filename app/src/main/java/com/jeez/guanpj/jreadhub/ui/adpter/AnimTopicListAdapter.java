@@ -1,10 +1,8 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.SparseBooleanArray;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,12 +10,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
-import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.instant.InstantReadFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
@@ -108,16 +107,6 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
         }
     }
 
-    public interface OnNewItemClickListener {
-        void onNewItemClick(String newsUrl);
-    }
-
-    OnNewItemClickListener onNewItemClickListener;
-
-    public void setOnNewItemClickListener(OnNewItemClickListener listener) {
-        this.onNewItemClickListener = listener;
-    }
-
     class NewsViewHolder {
 
         @BindView(R.id.tv_title)
@@ -146,11 +135,7 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
 
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
-            if (null != onNewItemClickListener) {
-                onNewItemClickListener.onNewItemClick(news.getMobileUrl());
-            }
-            /*((SupportActivity) mContext).findFragment(MainFragment.class)
-                    .start(CommonArticleFragment.newInstance(news.getMobileUrl()));*/
+            RxBus.getInstance().post(new OpenWebSiteEvent(news.getMobileUrl()));
         }
     }
 }

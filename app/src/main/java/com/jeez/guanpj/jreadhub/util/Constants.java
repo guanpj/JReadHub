@@ -14,6 +14,8 @@ import java.lang.annotation.RetentionPolicy;
 
 public class Constants {
 
+    public static final String READHUB_HOST = "https://readhub.me";
+    public static final String CODE_SITE = "https://github.com/guanpj/JReadHub";
     public static final String PATH_DATA = ReadhubApplication.getInstance().getCacheDir().getAbsolutePath() + File.separator + "data";
 
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";

@@ -15,7 +15,7 @@ import android.view.WindowManager;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
-import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
+import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpSwipeBackActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
 
@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
-public class SettingActivity extends AbsBaseMvpActivity<SettingPresenter> implements SettingContract.View, ThemeDialog.OnThemeChangeListener {
+public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresenter> implements SettingContract.View, ThemeDialog.OnThemeChangeListener {
 
     private ThemeDialog mThemeDialog;
     @BindView(R.id.toolbar)

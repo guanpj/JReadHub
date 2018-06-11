@@ -60,7 +60,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:checked="false"/>
 
             </LinearLayout>
 

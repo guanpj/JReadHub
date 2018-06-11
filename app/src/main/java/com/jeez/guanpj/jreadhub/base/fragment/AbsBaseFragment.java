@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.base;
+package com.jeez.guanpj.jreadhub.base.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
+import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
+import me.yokeyword.fragmentation.SupportFragment;
 
-public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment implements IBaseViewFlow  {
+/**
+ * Created by Jie on 2016-11-1.
+ */
+
+public abstract class AbsBaseFragment extends SupportFragment implements IBaseViewFlow {
 
     private Unbinder unBinder;
     private View mContentView;
@@ -29,7 +36,7 @@ public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment impleme
         unBinder = ButterKnife.bind(this, view);
         initView();
         initDataAndEvent();
-        return attachToSwipeBack(view);
+        return view;
     }
 
     @Override
@@ -42,8 +49,8 @@ public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment impleme
     public abstract void initDataAndEvent();
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (null != unBinder) {
             unBinder.unbind();
         }

@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.base;
+package com.jeez.guanpj.jreadhub.base.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,20 +7,21 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
-import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
+import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
 /**
  * Created by Jie on 2016-10-26.
  */
 
-public abstract class AbsBaseActivity extends SupportActivity implements IBaseViewFlow {
+public abstract class AbsBaseSwipeBackActivity extends SwipeBackActivity implements IBaseViewFlow {
 
     private Unbinder unBinder;
     public static final int MODE_BACK = 0;
@@ -114,11 +115,11 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
-    protected void openActivity(Class<? extends AbsBaseActivity> targetActivity) {
+    protected void openActivity(Class<? extends AbsBaseSwipeBackActivity> targetActivity) {
         openActivity(targetActivity, null);
     }
 
-    protected void openActivity(Class<? extends AbsBaseActivity> targetActivity, Bundle parameter) {
+    protected void openActivity(Class<? extends AbsBaseSwipeBackActivity> targetActivity, Bundle parameter) {
         Intent intent = new Intent(this, targetActivity);
         if (parameter != null) {
             intent.putExtras(parameter);

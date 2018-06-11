@@ -1,5 +1,6 @@
 package com.jeez.guanpj.jreadhub.ui.main;
 
+import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
@@ -10,6 +11,8 @@ public interface MainContract {
         void onToolbarNavigationClickEvent(ToolbarNavigationClickEvent event);
 
         void onSetDrawerStatusEvent(SetDrawerStatusEvent event);
+
+        void onOpenWebSiteEvent(OpenWebSiteEvent event);
     }
 
     interface Presenter extends IBasePresenter<View> {

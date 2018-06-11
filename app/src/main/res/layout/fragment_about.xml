@@ -10,8 +10,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textSize_15"
-        android:layout_marginHorizontal="@dimen/dimen_15_dp"
+        android:layout_marginTop="@dimen/dimen_10_dp"
+        android:layout_marginHorizontal="@dimen/dimen_10_dp"
         app:cardBackgroundColor="@color/bg_topic_trace_list"
         app:cardCornerRadius="@dimen/dimen_5_dp"
         app:cardElevation="@dimen/dimen_3_dp">
@@ -59,6 +59,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_readhub_des"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/dimen_10_dp"
@@ -100,6 +101,7 @@
                 android:background="?android:attr/listDivider"/>
 
             <LinearLayout
+                android:id="@+id/ll_readhub_site"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/dimen_10_dp"
@@ -143,8 +145,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textSize_15"
-        android:layout_marginHorizontal="@dimen/dimen_15_dp"
+        android:layout_marginTop="@dimen/dimen_10_dp"
+        android:layout_marginHorizontal="@dimen/dimen_10_dp"
         android:padding="@dimen/dimen_10_dp"
         app:cardBackgroundColor="@color/bg_topic_trace_list"
         app:cardCornerRadius="@dimen/dimen_5_dp"
@@ -169,6 +171,7 @@
                     android:src="@drawable/ic_version" />
 
                 <LinearLayout
+                    android:id="@+id/ll_version"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_20_dp"
@@ -198,6 +201,7 @@
                 android:background="?android:attr/listDivider"/>
 
             <LinearLayout
+                android:id="@+id/ll_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/dimen_10_dp"

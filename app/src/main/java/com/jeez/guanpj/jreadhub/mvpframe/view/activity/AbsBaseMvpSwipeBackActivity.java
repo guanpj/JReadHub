@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
-import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
+import com.jeez.guanpj.jreadhub.base.activity.AbsBaseSwipeBackActivity;
 import com.jeez.guanpj.jreadhub.di.component.ActivityComponent;
 import com.jeez.guanpj.jreadhub.di.component.DaggerActivityComponent;
 import com.jeez.guanpj.jreadhub.di.module.ActivityModule;
@@ -14,11 +14,13 @@ import com.jeez.guanpj.jreadhub.util.Constants;
 
 import javax.inject.Inject;
 
+import me.yokeyword.fragmentation.SwipeBackLayout;
+
 /**
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBaseMvpActivity<P extends BasePresenter> extends AbsBaseActivity implements IBaseView {
+public abstract class AbsBaseMvpSwipeBackActivity<P extends BasePresenter> extends AbsBaseSwipeBackActivity implements IBaseView {
 
     @Inject
     public P mPresenter;
@@ -28,6 +30,7 @@ public abstract class AbsBaseMvpActivity<P extends BasePresenter> extends AbsBas
         super.onCreate(savedInstanceState);
         performInject();
         initTheme();
+        getSwipeBackLayout().setEdgeOrientation(SwipeBackLayout.EDGE_ALL);
         if (null != mPresenter) {
             mPresenter.onAttatch(this);
         }

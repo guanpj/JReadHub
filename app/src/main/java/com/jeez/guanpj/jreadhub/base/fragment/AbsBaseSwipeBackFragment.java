@@ -1,18 +1,28 @@
-package com.jeez.guanpj.jreadhub.base;
+package com.jeez.guanpj.jreadhub.base.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
+import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
+import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+
+import java.util.concurrent.TimeUnit;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
-public abstract class AbsBaseDialogFragment extends DialogFragment implements IBaseViewFlow {
+public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment implements IBaseViewFlow {
 
     private Unbinder unBinder;
     private View mContentView;
@@ -20,6 +30,7 @@ public abstract class AbsBaseDialogFragment extends DialogFragment implements IB
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
     }
 
     @Nullable
@@ -29,7 +40,7 @@ public abstract class AbsBaseDialogFragment extends DialogFragment implements IB
         unBinder = ButterKnife.bind(this, view);
         initView();
         initDataAndEvent();
-        return view;
+        return attachToSwipeBack(view);
     }
 
     @Override
@@ -47,6 +58,15 @@ public abstract class AbsBaseDialogFragment extends DialogFragment implements IB
         if (null != unBinder) {
             unBinder.unbind();
         }
+        Log.e("gpj", System.currentTimeMillis() + "  onDestroy");
+        /*RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));*/
+        Observable.timer(50, TimeUnit.MILLISECONDS).subscribe(timeout -> RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED)));
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.e("gpj", System.currentTimeMillis() + "  onDestroyView");
+        super.onDestroyView();
     }
 
     protected void showShortToast(String msg) {

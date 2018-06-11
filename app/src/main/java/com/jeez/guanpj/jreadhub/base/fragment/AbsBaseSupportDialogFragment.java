@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.base;
+package com.jeez.guanpj.jreadhub.base.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
+import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

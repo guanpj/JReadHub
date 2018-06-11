@@ -6,12 +6,13 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.base.AbsBaseActivity;
+import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
@@ -31,7 +32,7 @@ public class SplashActivity extends AbsBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppStatusTracker.getInstance().setAppStatus(AppStatus.STATUS_ONLINE);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
     }
 

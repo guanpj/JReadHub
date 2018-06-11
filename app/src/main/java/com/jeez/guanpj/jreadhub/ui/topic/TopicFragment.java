@@ -7,14 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
-import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.AnimTopicListAdapter;
-import com.jeez.guanpj.jreadhub.ui.adpter.TopicListAdapter;
-import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
-import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
-import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
 import com.jeez.guanpj.jreadhub.widget.decoration.GapItemDecoration;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
@@ -22,9 +17,8 @@ import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 import java.util.List;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportActivity;
 
-public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener, AnimTopicListAdapter.OnNewItemClickListener {
+public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
@@ -61,7 +55,6 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         mAdapter.isFirstOnly(false);
         mAdapter.setNotDoAnimationCount(3);
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-        mAdapter.setOnNewItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -72,7 +65,6 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setRefreshing(true);
         onRefresh();
-
     }
 
     @Override
@@ -120,16 +112,6 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         if (!mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(true);
             onRefresh();
-        }
-    }
-
-    @Override
-    public void onNewItemClick(String newsUrl) {
-        if (mPresenter.isUseSystemBrowser()) {
-            NavigationUtil.openInBrowser(getActivity(), newsUrl);
-        } else {
-            ((SupportActivity) getContext()).findFragment(MainFragment.class)
-                    .start(CommonArticleFragment.newInstance(newsUrl));
         }
     }
 }

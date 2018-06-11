@@ -1,6 +1,5 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,10 +17,11 @@ public class AnimNewsListAdapter extends BaseQuickAdapter<NewsBean, BaseViewHold
     @Override
     protected void convert(BaseViewHolder holder, NewsBean newsBean) {
         holder.setText(R.id.tv_title, newsBean.getTitle());
-        if (TextUtils.isEmpty(newsBean.getSummaryAuto())) {
+        if (!TextUtils.isEmpty(newsBean.getSummaryAuto())) {
+            holder.setGone(R.id.tv_summary, true);
             holder.setText(R.id.tv_summary, newsBean.getSummaryAuto());
         } else {
-            holder.setVisible(R.id.tv_summary, TextUtils.isEmpty(newsBean.getSummaryAuto()) ? false : true);
+            holder.setGone(R.id.tv_summary, false);
         }
         if (TextUtils.isEmpty(newsBean.getAuthorName())) {
             holder.setText(R.id.tv_info, mContext.getString(

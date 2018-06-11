@@ -10,20 +10,17 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
+import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.AnimNewsListAdapter;
-import com.jeez.guanpj.jreadhub.ui.adpter.NewsListAdapter;
-import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
-import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
-import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import java.util.List;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportActivity;
 
 
 public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> implements CommonContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener, BaseQuickAdapter.OnItemClickListener {
@@ -138,11 +135,17 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        if (mPresenter.isUseSystemBrowser()) {
-            NavigationUtil.openInBrowser(getActivity(), ((NewsBean) adapter.getData().get(position)).getMobileUrl());
-        } else {
-            ((SupportActivity) getContext()).findFragment(MainFragment.class)
-                    .start(CommonArticleFragment.newInstance(((NewsBean) adapter.getData().get(position)).getMobileUrl()));
+        if (null != adapter.getData() && null != adapter.getData().get(position)) {
+            NewsBean newsBean = (NewsBean) adapter.getData().get(position);
+            String url = null;
+            if (!TextUtils.isEmpty(newsBean.getMobileUrl())) {
+                url = newsBean.getMobileUrl();
+            } else {
+                url = newsBean.getUrl();
+            }
+            if (!TextUtils.isEmpty(url)) {
+                RxBus.getInstance().post(new OpenWebSiteEvent(url));
+            }
         }
     }
 }

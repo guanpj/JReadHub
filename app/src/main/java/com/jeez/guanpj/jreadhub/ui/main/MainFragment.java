@@ -13,7 +13,7 @@ import android.util.TypedValue;
 import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.base.AbsBaseFragment;
+import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;

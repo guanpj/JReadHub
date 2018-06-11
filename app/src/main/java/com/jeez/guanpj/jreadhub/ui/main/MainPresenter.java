@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.main;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
@@ -30,5 +31,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
         addSubscribe(RxBus.getInstance().toFlowable(SetDrawerStatusEvent.class)
                 .subscribe(setDrawerStatusEvent ->  getView().onSetDrawerStatusEvent(setDrawerStatusEvent)));
+
+        addSubscribe(RxBus.getInstance().toFlowable(OpenWebSiteEvent.class)
+                .subscribe(openWebSiteEvent -> getView().onOpenWebSiteEvent(openWebSiteEvent)));
     }
 }

@@ -3,7 +3,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.fragment;
 import android.os.Bundle;
 
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
-import com.jeez.guanpj.jreadhub.base.AbsBaseFragment;
+import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.di.component.DaggerFragmentComponent;
 import com.jeez.guanpj.jreadhub.di.component.FragmentComponent;
 import com.jeez.guanpj.jreadhub.di.module.FragmentModule;

@@ -3,7 +3,6 @@ package com.jeez.guanpj.jreadhub.ui.topic.detail;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,18 +20,14 @@ import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
-import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
+import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
-import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
-import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.util.Constants;
-import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -42,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import butterknife.BindView;
-import me.yokeyword.fragmentation.SupportActivity;
 
 public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetailPresenter> implements TopicDetailContract.View {
 
@@ -81,7 +75,7 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
+        /*RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));*/
         String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
         mPresenter.getTopicDetail(topicId);
     }
@@ -138,10 +132,14 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
                 textView.setText(spannableTitle);
             }
             textView.setOnClickListener(v -> {
-                if (mPresenter.isUseSystemBrowser()) {
-                    NavigationUtil.openInBrowser(getActivity(), topic.getMobileUrl());
+                String url = null;
+                if (!TextUtils.isEmpty(topic.getMobileUrl())) {
+                    url = topic.getMobileUrl();
                 } else {
-                    start(CommonArticleFragment.newInstance(topic.getMobileUrl()));
+                    url = topic.getUrl();
+                }
+                if (!TextUtils.isEmpty(url)) {
+                    RxBus.getInstance().post(new OpenWebSiteEvent(url));
                 }
             });
             mTitleContainer.addView(textView);
@@ -227,7 +225,7 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
 
     @Override
     public void onDestroy() {
-        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));
+        /*RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));*/
         super.onDestroy();
     }
 }
