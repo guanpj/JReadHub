@@ -13,6 +13,9 @@ import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
+import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class AboutFragment extends AbsBaseSwipeBackFragment {
 
@@ -56,5 +59,13 @@ public class AboutFragment extends AbsBaseSwipeBackFragment {
     @OnClick(R.id.ll_code)
     void go2CodeSite(View view) {
         RxBus.getInstance().post(new OpenWebSiteEvent("https://github.com/guanpj/JReadHub"));
+    }
+
+    /**
+     * 单独设置转场动画
+     */
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultVerticalAnimator();
     }
 }

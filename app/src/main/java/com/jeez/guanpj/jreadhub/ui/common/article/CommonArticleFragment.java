@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -21,11 +22,16 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.jeez.guanpj.jreadhub.R;
+import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.OnMenuItemClickListener {
@@ -54,6 +60,7 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_web, container, false);
         ButterKnife.bind(this, view);
+        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         mUrl = getArguments().getString(Constants.EXTRA_TOPIC_URL);
         return attachToSwipeBack(view);
     }
@@ -170,6 +177,12 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
             return true;
         }
         return super.onBackPressedSupport();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Observable.timer(50, TimeUnit.MILLISECONDS).subscribe(timeout -> RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED)));
     }
 
     @Override

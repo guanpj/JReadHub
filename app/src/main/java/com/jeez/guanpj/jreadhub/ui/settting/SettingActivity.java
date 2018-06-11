@@ -22,6 +22,8 @@ import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresenter> implements SettingContract.View, ThemeDialog.OnThemeChangeListener {
 

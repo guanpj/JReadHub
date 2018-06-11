@@ -7,16 +7,21 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
+import android.text.TextUtils;
 
 import com.jeez.guanpj.jreadhub.R;
 
 public class NavigationUtil {
 
     public static void openInBrowser(@NonNull Activity context, @NonNull String url) {
-        new CustomTabsIntent.Builder()
-                .setToolbarColor(ResourceUtil.getThemeAttrColor(context, R.attr.readhubStatus))
-                .build()
-                .launchUrl(context, Uri.parse(url));
+        //过滤不规则网站防止出现异常
+        String useableUrl = RegularUtil.matchWebSite(url);
+        if (!TextUtils.isEmpty(useableUrl)) {
+            new CustomTabsIntent.Builder()
+                    .setToolbarColor(ResourceUtil.getThemeAttrColor(context, R.attr.readhubStatus))
+                    .build()
+                    .launchUrl(context, Uri.parse(useableUrl));
+        }
     }
 
     public static void openByApp(@NonNull Activity activity, @NonNull String url) {

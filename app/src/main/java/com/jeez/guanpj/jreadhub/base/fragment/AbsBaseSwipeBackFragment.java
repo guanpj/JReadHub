@@ -27,17 +27,12 @@ public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment impleme
     private Unbinder unBinder;
     private View mContentView;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
         unBinder = ButterKnife.bind(this, view);
+        RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         initView();
         initDataAndEvent();
         return attachToSwipeBack(view);
@@ -58,15 +53,12 @@ public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment impleme
         if (null != unBinder) {
             unBinder.unbind();
         }
-        Log.e("gpj", System.currentTimeMillis() + "  onDestroy");
-        /*RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));*/
-        Observable.timer(50, TimeUnit.MILLISECONDS).subscribe(timeout -> RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED)));
     }
 
     @Override
     public void onDestroyView() {
-        Log.e("gpj", System.currentTimeMillis() + "  onDestroyView");
         super.onDestroyView();
+        Observable.timer(50, TimeUnit.MILLISECONDS).subscribe(timeout -> RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED)));
     }
 
     protected void showShortToast(String msg) {
