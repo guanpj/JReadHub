@@ -149,6 +149,9 @@ public class CommonArticleFragment extends SwipeBackFragment implements Toolbar.
 
         mWebSetting.setJavaScriptEnabled(true);
         mWebSetting.setDomStorageEnabled(true);
+        mWebSetting.setSupportZoom(true);
+        mWebSetting.setBuiltInZoomControls(true);
+        mWebSetting.setDisplayZoomControls(false);
         //noinspection deprecation
         mWebSetting.setPluginState(WebSettings.PluginState.ON);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
