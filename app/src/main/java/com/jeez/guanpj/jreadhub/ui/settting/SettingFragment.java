@@ -1,29 +1,24 @@
 package com.jeez.guanpj.jreadhub.ui.settting;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
-import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpSwipeBackActivity;
+import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresenter> implements SettingContract.View, ThemeDialog.OnThemeChangeListener {
+public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresenter> implements SettingContract.View, ThemeDialog.OnThemeChangeListener {
 
     private ThemeDialog mThemeDialog;
     @BindView(R.id.toolbar)
@@ -31,9 +26,9 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
     @BindView(R.id.switch_browser)
     SwitchCompat mSwithCompat;
 
-    public static void start(@NonNull Activity activity) {
-        Intent intent = new Intent(activity, SettingActivity.class);
-        activity.startActivity(intent);
+    public static SettingFragment newInstance() {
+        SettingFragment fragment = new SettingFragment();
+        return fragment;
     }
 
     @Override
@@ -44,12 +39,12 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
     @Override
     public void initView() {
         TypedValue navIcon = new TypedValue();
-        Resources.Theme theme = getTheme();
+        Resources.Theme theme = getActivity().getTheme();
         theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
 
-        mThemeDialog = new ThemeDialog(this);
+        mThemeDialog = new ThemeDialog(getActivity());
         mToolbar.setNavigationIcon(navIcon.resourceId);
-        mToolbar.setNavigationOnClickListener(v -> finish());
+        mToolbar.setNavigationOnClickListener(v -> pop());
     }
 
     @Override
@@ -70,7 +65,7 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
 
     @Override
     protected void performInject() {
-        getActivityComponent().inject(this);
+        getFragmentComponent().inject(this);
     }
 
     @Override
@@ -81,32 +76,18 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
     @Override
     public void onChangeTheme(@Constants.Theme String selectedTheme) {
         mPresenter.setTheme(selectedTheme);
-        switch (selectedTheme) {
-            case Constants.ThemeType.Blue:
-                setTheme(R.style.BlueTheme);
-                break;
-            case Constants.ThemeType.Gray:
-                setTheme(R.style.GrayTheme);
-                break;
-            default:
-                setTheme(R.style.BlueTheme);
-        }
-        //changeTheme();
-        restartActivity();
-    }
-
-    private void restartActivity() {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
-
-    private void changeTheme() {
         RxBus.getInstance().post(new ChangeThemeEvent());
-        refreshUI();
     }
 
-    private void refreshUI() {
+    /**
+     * 单独设置转场动画
+     */
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultVerticalAnimator();
+    }
+
+    /*private void refreshUI() {
         //状态栏
         TypedValue statusColor = new TypedValue();
         //主题
@@ -139,5 +120,5 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(ContextCompat.getColor(this, colorValue));
         }
-    }
+    }*/
 }

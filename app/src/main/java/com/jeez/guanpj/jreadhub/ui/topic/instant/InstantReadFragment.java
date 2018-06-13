@@ -16,14 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
-import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
-import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.common.CommonWebViewFragment;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
@@ -111,7 +109,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                         NavigationUtil.openInBrowser(getActivity(), request.getUrl().toString());
                     } else {
                         ((SupportActivity) getContext()).findFragment(MainFragment.class)
-                                .start(CommonArticleFragment.newInstance(request.getUrl().toString()));
+                                .start(CommonWebViewFragment.newInstance(request.getUrl().toString()));
                     }
                 }
                 return true;

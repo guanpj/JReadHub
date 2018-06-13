@@ -1,7 +1,11 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.StyleSpan;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,12 +48,27 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
     @Override
     protected void convert(BaseViewHolder holder, TopicBean topicBean) {
         int position = holder.getAdapterPosition();
+        int newsCount = 0;
+        String mediaName = "";
+        if (null != topicBean.getNewsArray() && !topicBean.getNewsArray().isEmpty()) {
+            newsCount = topicBean.getNewsArray().size();
+            mediaName = topicBean.getNewsArray().get(0).getSiteName();
+        }
 
         holder.setText(R.id.tv_title, topicBean.getTitle());
         holder.setText(R.id.tv_summary, topicBean.getSummary());
         holder.setVisible(R.id.tv_summary, TextUtils.isEmpty(topicBean.getSummary()) ? false : true);
         holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(topicBean.getPublishDate()));
-        holder.setText(R.id.tv_info, mContext.getString(R.string.source_count, topicBean.getNewsArray().size()));
+
+        if (newsCount == 0) {
+            holder.setGone(R.id.line, true);
+            holder.setGone(R.id.fl_item_footer, true);
+        } else if (newsCount == 1){
+            holder.setText(R.id.tv_info, mContext.getString(R.string.single__media___report, mediaName));
+        } else {
+            holder.setText(R.id.tv_info, mContext.getString(R.string.multi__media___report, mediaName, newsCount));
+        }
+
         holder.setVisible(R.id.img_instant_read, topicBean.hasInstantView() ? true : false);
         holder.setOnClickListener(R.id.img_instant_read, v ->
                 InstantReadFragment.newInstance(topicBean.getId()).show(((MainActivity) mContext).getSupportFragmentManager(),
@@ -91,7 +110,7 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
                 newsItemView.setTag(newsViewHolder);
             }
             newsViewHolder.bindData(news);
-            if (i == 2) {
+            if (newsList.size() > 3 && i == 2) {
                 View newsMoreView = mLayoutInflater.inflate(R.layout.item_topic_news_more, null, false);
                 newsMoreView.setOnClickListener(v ->
                         ((SupportActivity) mContext).findFragment(MainFragment.class)
@@ -124,9 +143,14 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
 
         void bindData(@NonNull TopicNewsBean news) {
             this.news = news;
+            String infoText = mContext.getString(R.string.site_name___time, news.getSiteName(),
+                    FormatUtils.getRelativeTimeSpanString(news.getPublishDate()));
             tvTitle.setText(news.getTitle());
-            tvInfo.setText(mContext.getString(R.string.site_name___time, news.getSiteName(),
-                    FormatUtils.getRelativeTimeSpanString(news.getPublishDate())));
+
+            SpannableString spannableInfoText = new SpannableString(infoText);
+            spannableInfoText.setSpan(new StyleSpan(Typeface.BOLD),
+                    0, news.getSiteName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvInfo.setText(spannableInfoText);
         }
 
         public void setLineVisibility(int visibility) {

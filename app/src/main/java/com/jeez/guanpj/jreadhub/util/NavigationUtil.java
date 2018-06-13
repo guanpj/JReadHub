@@ -2,7 +2,6 @@ package com.jeez.guanpj.jreadhub.util;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -30,10 +29,10 @@ public class NavigationUtil {
         activity.startActivity(Intent.createChooser(openIntent, "选择应用打开"));
     }
 
-    public static void shareToApp(@NonNull Activity activity, @NonNull String url) {
+    public static void shareToApp(@NonNull Activity activity, @NonNull String content) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, url + "\n——来自 Readhub 客户端");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, content + "\n——来自 Readhub 客户端");
         activity.startActivity(Intent.createChooser(shareIntent, "分享"));
     }
 }

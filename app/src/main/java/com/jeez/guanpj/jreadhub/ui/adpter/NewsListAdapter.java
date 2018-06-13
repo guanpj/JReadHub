@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.common.CommonWebViewFragment;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import butterknife.BindView;
@@ -70,7 +70,7 @@ public class NewsListAdapter extends BaseAdapter<NewsBean> {
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
             ((SupportActivity) mContext).findFragment(MainFragment.class)
-                    .start(CommonArticleFragment.newInstance(news.getMobileUrl()));
+                    .start(CommonWebViewFragment.newInstance(news.getMobileUrl()));
         }
     }
 }

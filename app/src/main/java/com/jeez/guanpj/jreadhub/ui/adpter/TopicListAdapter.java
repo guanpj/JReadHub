@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
-import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
-import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
+import com.jeez.guanpj.jreadhub.ui.common.CommonWebViewFragment;
+import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.instant.InstantReadFragment;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
@@ -87,13 +87,24 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         public void bindData(TopicBean topic, int position) {
             this.topic = topic;
             this.position = position;
+            int newsCount = 0;
+            String mediaName = "";
+            if (null != this.topic.getNewsArray() && !this.topic.getNewsArray().isEmpty()) {
+                newsCount = this.topic.getNewsArray().size();
+                mediaName = this.topic.getNewsArray().get(0).getSiteName();
+            }
 
             tvTitle.setText(topic.getTitle());
             tvSummary.setText(topic.getSummary());
             tvSummary.setVisibility(TextUtils.isEmpty(topic.getSummary()) ? View.GONE : View.VISIBLE);
             tvTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()));
             imgInstantRead.setVisibility(topic.hasInstantView() ? View.VISIBLE : View.GONE);
-            tvInfo.setText(mContext.getString(R.string.source_count, topic.getNewsArray().size()));
+
+            if (newsCount == 1){
+                tvInfo.setText( mContext.getString(R.string.single__media___report, mediaName));
+            } else {
+                tvInfo.setText( mContext.getString(R.string.multi__media___report, mediaName, newsCount));
+            }
 
             boolean expand = mExtendStateMap.get(this.position, false);
             imgExpandState.setImageResource(expand ? R.drawable.ic_less_info : R.drawable.ic_more_info);
@@ -231,7 +242,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
             ((SupportActivity) mContext).findFragment(MainFragment.class)
-                    .start(CommonArticleFragment.newInstance(news.getMobileUrl()));
+                    .start(CommonWebViewFragment.newInstance(news.getMobileUrl()));
         }
     }
 

@@ -1,6 +1,5 @@
 package com.jeez.guanpj.jreadhub.ui.main;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -14,12 +13,12 @@ import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
-import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.ui.adpter.FragmentAdapter;
+import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +76,7 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
         mToolbar.setNavigationOnClickListener(view -> RxBus.getInstance().post(new ToolbarNavigationClickEvent()));
         mToolbar.setOnMenuItemClickListener(this);
 
-        RxBus.getInstance().toFlowable(ChangeThemeEvent.class).subscribe(changeThemeEvent -> refreshUI());
+        //RxBus.getInstance().toFlowable(ChangeThemeEvent.class).subscribe(changeThemeEvent -> refreshUI());
     }
 
     private void refreshUI() {
@@ -130,19 +129,12 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
                 showShortToast("Coming soon...");
                 break;
             case R.id.action_share:
-                doShare();
+                NavigationUtil.shareToApp(getActivity(), "https://readhub.me\n互联网聚合阅读平台");
                 break;
             default:
                 break;
         }
         return true;
-    }
-
-    private void doShare() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "https://readhub.me\n互联网聚合阅读平台");
-        startActivity(Intent.createChooser(intent, "分享"));
     }
 
     public void startBrotherFragment(SupportFragment targetFragment) {

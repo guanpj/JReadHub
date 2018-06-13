@@ -13,6 +13,8 @@ public interface MainContract {
         void onSetDrawerStatusEvent(SetDrawerStatusEvent event);
 
         void onOpenWebSiteEvent(OpenWebSiteEvent event);
+
+        void changeTheme();
     }
 
     interface Presenter extends IBasePresenter<View> {

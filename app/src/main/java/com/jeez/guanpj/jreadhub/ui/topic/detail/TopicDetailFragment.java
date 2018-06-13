@@ -75,7 +75,6 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));*/
         String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
         mPresenter.getTopicDetail(topicId);
     }
@@ -190,9 +189,6 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
         }
 
         mScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            /*mTxtToolbarTitle.setVisibility(
-                    scrollY > mTxtTopicTime.getBottom() ? View.VISIBLE : View.GONE);
-            mImgToolbar.setVisibility(scrollY > mTxtTopicTime.getBottom() ? View.GONE : View.VISIBLE);*/
         });
     }
 
@@ -221,11 +217,5 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     @Override
     public void onFabClick() {
 
-    }
-
-    @Override
-    public void onDestroy() {
-        /*RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED));*/
-        super.onDestroy();
     }
 }

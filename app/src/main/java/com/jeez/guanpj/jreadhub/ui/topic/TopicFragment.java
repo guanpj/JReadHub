@@ -11,7 +11,6 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.AnimTopicListAdapter;
 import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
-import com.jeez.guanpj.jreadhub.widget.decoration.GapItemDecoration;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import java.util.List;
@@ -48,7 +47,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     @Override
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
+        //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
 
         mLoadMoreFooter = new LoadMoreFooter(getContext(), mRecyclerView);
         mAdapter = new AnimTopicListAdapter();

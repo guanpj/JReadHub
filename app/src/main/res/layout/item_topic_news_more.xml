@@ -14,6 +14,6 @@
         android:paddingBottom="@dimen/dimen_10_dp"
         android:textSize="@dimen/textSize_14"
         android:textColor="?attr/readhubTheme"
-        android:text="查看更多"/>
+        android:text="查看全部"/>
 
 </LinearLayout>

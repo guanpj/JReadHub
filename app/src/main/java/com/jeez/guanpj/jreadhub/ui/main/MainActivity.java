@@ -17,8 +17,8 @@ import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
 import com.jeez.guanpj.jreadhub.ui.about.AboutFragment;
-import com.jeez.guanpj.jreadhub.ui.common.article.CommonArticleFragment;
-import com.jeez.guanpj.jreadhub.ui.settting.SettingActivity;
+import com.jeez.guanpj.jreadhub.ui.common.CommonWebViewFragment;
+import com.jeez.guanpj.jreadhub.ui.settting.SettingFragment;
 import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
@@ -132,7 +132,8 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         mDrawerLayout.post(() -> {
             switch (item.getItemId()) {
                 case R.id.nav_setting:
-                    SettingActivity.start(this);
+                    //SettingActivity.start(this);
+                    findFragment(MainFragment.class).start(SettingFragment.newInstance());
                     break;
                 case R.id.nav_about:
                     findFragment(MainFragment.class).start(AboutFragment.newInstance());
@@ -178,8 +179,20 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         if (mPresenter.isUseSystemBrowser()) {
             NavigationUtil.openInBrowser(this, event.getUrl());
         } else {
-            findFragment(MainFragment.class).start(CommonArticleFragment.newInstance(event.getUrl()));
+            //findFragment(MainFragment.class).start(CommonArticleFragment.newInstance(event.getUrl()));
+            findFragment(MainFragment.class).start(CommonWebViewFragment.newInstance(event.getUrl()));
         }
+    }
+
+    @Override
+    public void changeTheme() {
+        restartActivity();
+    }
+
+    private void restartActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     @Override

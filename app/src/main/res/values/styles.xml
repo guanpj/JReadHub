@@ -11,8 +11,6 @@
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
         <item name="colorAccent">?attr/readhubTheme</item>
 
-        <item name="android:windowIsTranslucent">true</item>
-
         <item name="readhubBackground">@color/theme_blue_background</item>
         <item name="readhubToolbarText">@color/theme_blue_toolbar_text</item>
         <item name="readhubBadge">@color/theme_blue_badge</item>
@@ -34,8 +32,6 @@
         <item name="colorPrimary">?attr/readhubTheme</item>
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
         <item name="colorAccent">?attr/readhubTheme</item>
-
-        <item name="android:windowIsTranslucent">true</item>
 
         <item name="readhubBackground">@color/theme_gray_background</item>
         <item name="readhubToolbarText">@color/theme_gray_toolbar_text</item>

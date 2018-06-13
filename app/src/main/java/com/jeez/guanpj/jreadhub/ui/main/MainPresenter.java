@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.main;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
@@ -34,5 +35,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
         addSubscribe(RxBus.getInstance().toFlowable(OpenWebSiteEvent.class)
                 .subscribe(openWebSiteEvent -> getView().onOpenWebSiteEvent(openWebSiteEvent)));
+
+        addSubscribe(RxBus.getInstance().toFlowable(ChangeThemeEvent.class).subscribe(changeThemeEvent -> getView().changeTheme()));
     }
 }

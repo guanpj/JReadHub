@@ -6,12 +6,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
 import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
+import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.SharePreferencesHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -34,6 +37,7 @@ public abstract class AbsBaseSwipeBackActivity extends SwipeBackActivity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initTheme();
         setContentView(getLayoutId());
         unBinder = ButterKnife.bind(this);
     }
@@ -68,6 +72,21 @@ public abstract class AbsBaseSwipeBackActivity extends SwipeBackActivity impleme
         Intent intent = new Intent(this, SplashActivity.class);
         intent.putExtra(AppStatus.KEY_HOME_ACTION, AppStatus.ACTION_KICK_OUT);
         startActivity(intent);
+    }
+
+    private void initTheme() {
+        String theme = SharePreferencesHelper.getInstance(this).getString(Constants.Key.THEME_MODE);
+        switch (theme) {
+            case Constants.ThemeType.Blue:
+                setTheme(R.style.BlueTheme);
+                break;
+            case Constants.ThemeType.Gray:
+                setTheme(R.style.GrayTheme);
+                break;
+            default:
+                setTheme(R.style.BlueTheme);
+                break;
+        }
     }
 
     @Override

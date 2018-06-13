@@ -30,7 +30,8 @@
         </activity>
 
         <activity
-            android:name=".ui.settting.SettingActivity" />
+            android:name=".ui.settting.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar.SwipeBack"/>
 
     </application>
 

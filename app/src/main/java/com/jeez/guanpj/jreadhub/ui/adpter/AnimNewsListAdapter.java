@@ -1,6 +1,10 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.StyleSpan;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -23,16 +27,25 @@ public class AnimNewsListAdapter extends BaseQuickAdapter<NewsBean, BaseViewHold
         } else {
             holder.setGone(R.id.tv_summary, false);
         }
+
         if (TextUtils.isEmpty(newsBean.getAuthorName())) {
-            holder.setText(R.id.tv_info, mContext.getString(
-                    R.string.site_name___time, newsBean.getSiteName(),
-                    FormatUtils.getRelativeTimeSpanString(newsBean.getPublishDate())));
+            String infoText = mContext.getString(R.string.site_name___time,
+                    newsBean.getSiteName(),
+                    FormatUtils.getRelativeTimeSpanString(newsBean.getPublishDate()));
+            SpannableString spannableInfoText = new SpannableString(infoText);
+            spannableInfoText.setSpan(new StyleSpan(Typeface.BOLD),
+                    0, newsBean.getSiteName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holder.setText(R.id.tv_info, spannableInfoText);
         } else {
-            holder.setText(R.id.tv_info, mContext.getString(
-                    R.string.site_name___author_name___time,
+            String infoText = mContext.getString(R.string.site_name___author_name___time,
                     newsBean.getSiteName(),
                     newsBean.getAuthorName(),
-                    FormatUtils.getRelativeTimeSpanString(newsBean.getPublishDate())));
+                    FormatUtils.getRelativeTimeSpanString(newsBean.getPublishDate()));
+            SpannableString spannableInfoText = new SpannableString(infoText);
+            spannableInfoText.setSpan(new StyleSpan(Typeface.BOLD),
+                    0, newsBean.getSiteName().length() + newsBean.getAuthorName().length() + 3,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holder.setText(R.id.tv_info, spannableInfoText);
         }
     }
 }

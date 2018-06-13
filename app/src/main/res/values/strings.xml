@@ -9,9 +9,10 @@
     <string name="load_more_finished">已经到底啦</string>
     <string name="load_more_failed">加载失败，点击重试</string>
 
-    <string name="site_name___author_name___time">%1$s / %2$s · %3$s</string>
-    <string name="site_name___time"><strong>%1$s</strong> · %2$s</string>
-    <string name="source_count">%1$d个数据来源</string>
+    <string name="site_name___author_name___time">%1$s / %2$s   %3$s</string>
+    <string name="site_name___time">%1$s  %2$s</string>
+    <string name="single__media___report">%1$s 报道</string>
+    <string name="multi__media___report">%1$s 等 %2$d 家媒体报道</string>
     <string name="source_format">来源：%1$s</string>
     <string name="month__day">%1$d-%2$d</string>
     <string name="month__day__year">%1$d-%2$d %3$d</string>

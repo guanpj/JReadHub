@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/dimen_10_dp"
     android:layout_marginRight="@dimen/dimen_10_dp"
-    android:layout_marginTop="@dimen/dimen_15_dp"
+    android:layout_marginTop="@dimen/dimen_12_dp"
     android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="@dimen/dimen_5_dp"
@@ -82,6 +81,7 @@
                     android:textSize="14sp" />
 
                 <View
+                    android:id="@+id/line"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line_1"
                     android:layout_marginTop="@dimen/dimen_10_dp"
@@ -100,7 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="5 个数据源"
+                        android:text="腾讯科技 等 5 家媒体报道"
                         android:textColor="?attr/readhubTheme"
                         android:textSize="@dimen/textSize_14" />
 
