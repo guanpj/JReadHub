@@ -1,8 +1,11 @@
 package com.jeez.guanpj.jreadhub.ui.topic.instant;
 
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
@@ -37,6 +40,7 @@ import me.yokeyword.fragmentation.SupportActivity;
 public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPresenter> implements InstantReadContract.View {
 
     public static final String TAG = "InstantReadFragment";
+
     @BindView(R.id.ll_content_wrapper)
     LinearLayout mContentWrapper;
     @BindView(R.id.ll_progress_bar_wrapper)
@@ -166,7 +170,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
         if (data == null) {
             return;
         }
-        /*mProgressBarWrapper.setVisibility(View.GONE);*/
+        //mProgressBarWrapper.setVisibility(View.GONE);
         mTxtTopicTitle.setText(data.getTitle());
         mTxtSource.setText(getString(R.string.source_format, data.getSiteName()));
         String htmlHead = "<head>"
@@ -184,8 +188,19 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 + "</body></html>";
         mWebView.loadData(htmlContent, "text/html; charset=UTF-8", null);
         /*mTxtContent.setMovementMethod(ScrollingMovementMethod.getInstance());//滚动
-        mTxtContent.setText(Html.fromHtml(data.getContent(), Html.FROM_HTML_MODE_LEGACY));*/
+        mTxtContent.setText(Html.fromHtml(data.getContent(), imageGetter, null));*/
     }
+
+    /*private final Html.ImageGetter imageGetter = new Html.ImageGetter() {
+        @Override
+        public Drawable getDrawable(String source) {
+            Drawable drawable = null;
+            drawable = Drawable.createFromPath(source); //显示本地图片
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable
+                    .getIntrinsicHeight());
+            return drawable;
+        }
+    };*/
 
     @Override
     public void onRequestError() {

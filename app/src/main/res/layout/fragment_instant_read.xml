@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginVertical="@dimen/dimen_30_dp"
+        android:layout_marginHorizontal="@dimen/dimen_15_dp"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="@dimen/dimen_4_dp"
         app:cardElevation="@dimen/cardview_default_elevation">
 
         <LinearLayout
@@ -81,8 +81,6 @@
                 android:id="@+id/sv_web_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dimen_10_dp"
-                android:layout_marginBottom="@dimen/dimen_10_dp"
                 android:fillViewport="true">
 
                 <!--<TextView
@@ -93,9 +91,7 @@
                 <WebView
                     android:id="@+id/web_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
+                    android:layout_height="wrap_content"/>
             </ScrollView>
 
         </LinearLayout>
@@ -104,12 +100,12 @@
 
     <ImageView
         android:id="@+id/img_close"
-        android:layout_width="@dimen/dimen_60_dp"
-        android:layout_height="@dimen/dimen_60_dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="4dp"
+        android:layout_width="@dimen/dimen_35_dp"
+        android:layout_height="@dimen/dimen_35_dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:scaleType="centerInside"
         android:src="@drawable/ic_instant_read_close" />
 
-</LinearLayout>
+</RelativeLayout>
 

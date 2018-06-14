@@ -2,7 +2,6 @@ package com.jeez.guanpj.jreadhub.ui.main;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -21,8 +20,6 @@ import com.jeez.guanpj.jreadhub.ui.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.ui.settting.SettingFragment;
 import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
-import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
-import com.jeez.guanpj.jreadhub.util.UncaughtException;
 import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
@@ -45,11 +42,6 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermission();
-        } else {
-            initErrorLogDetactor();
-        }*/
         ButterKnife.bind(this);
         Beta.checkUpgrade();
     }
@@ -98,29 +90,6 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
     protected void protectApp() {
         startActivity(new Intent(this, SplashActivity.class));
         finish();
-    }
-
-    private void requestPermission() {
-        if (PermissionsChecker.checkPermissions(this, PermissionsChecker.storagePermissions)) {
-            initErrorLogDetactor();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PermissionsChecker.REQUEST_STORAGE_PERMISSION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initErrorLogDetactor();
-            } else {
-                showShortToast("权限获取失败");
-            }
-        }
-    }
-
-    private void initErrorLogDetactor() {
-        UncaughtException mUncaughtException = UncaughtException.getInstance();
-        mUncaughtException.init(this, getString(R.string.app_name));
     }
 
     @Override

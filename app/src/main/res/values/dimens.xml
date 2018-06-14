@@ -20,6 +20,7 @@
     <dimen name="dimen_20_dp">20dp</dimen>
     <dimen name="dimen_24_dp">24dp</dimen>
     <dimen name="dimen_25_dp">25dp</dimen>
+    <dimen name="dimen_30_dp">30dp</dimen>
     <dimen name="dimen_35_dp">35dp</dimen>
     <dimen name="dimen_45_dp">45dp</dimen>
     <dimen name="dimen_48_dp">48dp</dimen>
