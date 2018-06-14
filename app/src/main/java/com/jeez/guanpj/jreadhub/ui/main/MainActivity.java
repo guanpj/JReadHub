@@ -23,6 +23,7 @@ import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.util.PermissionsChecker;
 import com.jeez.guanpj.jreadhub.util.UncaughtException;
+import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +51,7 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
             initErrorLogDetactor();
         }*/
         ButterKnife.bind(this);
+        Beta.checkUpgrade();
     }
 
     @Override

@@ -24,6 +24,7 @@ import com.jeez.guanpj.jreadhub.ui.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
+import com.just.agentweb.AgentWeb;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,10 +47,13 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     TextView mTxtTopicTitle;
     @BindView(R.id.web_view)
     WebView mWebView;
+    /*@BindView(R.id.txt_content)
+    TextView mTxtContent;*/
     @BindView(R.id.txt_instant_source)
     TextView mTxtSource;
 
     private String mTopicId;
+    private AgentWeb mAgentWeb;
 
     public static InstantReadFragment newInstance(String topicId) {
         InstantReadFragment fragment = new InstantReadFragment();
@@ -162,6 +166,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
         if (data == null) {
             return;
         }
+        /*mProgressBarWrapper.setVisibility(View.GONE);*/
         mTxtTopicTitle.setText(data.getTitle());
         mTxtSource.setText(getString(R.string.source_format, data.getSiteName()));
         String htmlHead = "<head>"
@@ -178,6 +183,8 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 + data.getContent()
                 + "</body></html>";
         mWebView.loadData(htmlContent, "text/html; charset=UTF-8", null);
+        /*mTxtContent.setMovementMethod(ScrollingMovementMethod.getInstance());//滚动
+        mTxtContent.setText(Html.fromHtml(data.getContent(), Html.FROM_HTML_MODE_LEGACY));*/
     }
 
     @Override

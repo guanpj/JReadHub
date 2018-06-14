@@ -5,15 +5,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.jeez.guanpj.jreadhub.BuildConfig;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
@@ -25,6 +27,8 @@ public class AboutFragment extends AbsBaseSwipeBackFragment {
     LinearLayout mSiteLayout;
     @BindView(R.id.ll_code)
     LinearLayout mCodeLayout;
+    @BindView(R.id.txt_version)
+    TextView mVersion;
 
     public static AboutFragment newInstance() {
         AboutFragment fragment = new AboutFragment();
@@ -44,6 +48,8 @@ public class AboutFragment extends AbsBaseSwipeBackFragment {
 
         mToolbar.setNavigationIcon(navIcon.resourceId);
         mToolbar.setNavigationOnClickListener(v -> pop());
+
+        mVersion.setText(BuildConfig.VERSION_NAME);
     }
 
     @Override
@@ -59,6 +65,11 @@ public class AboutFragment extends AbsBaseSwipeBackFragment {
     @OnClick(R.id.ll_code)
     void go2CodeSite(View view) {
         RxBus.getInstance().post(new OpenWebSiteEvent("https://github.com/guanpj/JReadHub"));
+    }
+
+    @OnClick(R.id.ll_version)
+    void check4Update() {
+        Beta.checkUpgrade();
     }
 
     /**

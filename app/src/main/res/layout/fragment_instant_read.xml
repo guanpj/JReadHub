@@ -58,7 +58,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#EDEDED" />
+                android:background="@color/bg_topic_trace_item_line" />
 
             <LinearLayout
                 android:id="@+id/ll_progress_bar_wrapper"
@@ -78,16 +78,22 @@
             </LinearLayout>
 
             <ScrollView
+                android:id="@+id/sv_web_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dimen_10_dp"
                 android:layout_marginBottom="@dimen/dimen_10_dp"
                 android:fillViewport="true">
 
+                <!--<TextView
+                    android:id="@+id/txt_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />-->
+
                 <WebView
                     android:id="@+id/web_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp" />
             </ScrollView>
