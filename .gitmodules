@@ -1,0 +1,3 @@
+[submodule "JDatabase"]
+	path = JDatabase
+	url = git@github.com:guanpj/JDatabase

@@ -1,1 +1,1 @@
-include ':app', ':MvpFramework'
+include ':app', ':MvpFramework', 'JDatabase'

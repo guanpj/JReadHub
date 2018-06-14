@@ -64,12 +64,16 @@ public class SplashActivity extends AbsBaseActivity {
         ObjectAnimator nameAnim = ObjectAnimator.ofFloat(mAppName, "translationY", -500f, 0f);
         nameAnim.setDuration(2000);
         nameAnim.setInterpolator(new BounceInterpolator());
+        nameAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Observable.timer(1, TimeUnit.SECONDS).subscribe(aLong -> go2Main());
+            }
+        });
 
         AnimatorSet animSet = new AnimatorSet();
         animSet.play(nameAnim).after(desAnim);
         animSet.start();
-
-        Observable.timer(3, TimeUnit.SECONDS).subscribe(aLong -> go2Main());
     }
 
     private void go2Main() {
