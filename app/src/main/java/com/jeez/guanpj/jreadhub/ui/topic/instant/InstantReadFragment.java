@@ -1,11 +1,8 @@
 package com.jeez.guanpj.jreadhub.ui.topic.instant;
 
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.text.Html;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
@@ -145,9 +142,9 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                if (newProgress == 100) {
+                if (newProgress == 100 && mProgressBarWrapper != null) {
                     mProgressBarWrapper.setVisibility(View.GONE);
-                } else {
+                } else if (mProgressBar != null) {
                     mProgressBar.setProgress(newProgress);
                 }
             }
@@ -170,7 +167,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
         if (data == null) {
             return;
         }
-        //mProgressBarWrapper.setVisibility(View.GONE);
+        mProgressBarWrapper.setVisibility(View.GONE);
         mTxtTopicTitle.setText(data.getTitle());
         mTxtSource.setText(getString(R.string.source_format, data.getSiteName()));
         String htmlHead = "<head>"
@@ -186,7 +183,8 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 + "<body style:'height:auto;max-width: 100%; width:auto;'>"
                 + data.getContent()
                 + "</body></html>";
-        mWebView.loadData(htmlContent, "text/html; charset=UTF-8", null);
+        /*mWebView.loadData(htmlContent, "text/html; charset=UTF-8", null);*/
+        mWebView.loadUrl("https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_9770737319180586108%22%7D&n_type=0&p_from=1");
         /*mTxtContent.setMovementMethod(ScrollingMovementMethod.getInstance());//滚动
         mTxtContent.setText(Html.fromHtml(data.getContent(), imageGetter, null));*/
     }

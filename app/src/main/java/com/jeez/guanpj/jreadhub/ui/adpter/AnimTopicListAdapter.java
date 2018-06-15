@@ -72,7 +72,8 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
         holder.setVisible(R.id.img_instant_read, topicBean.hasInstantView() ? true : false);
         holder.setOnClickListener(R.id.img_instant_read, v ->
                 InstantReadFragment.newInstance(topicBean.getId()).show(((MainActivity) mContext).getSupportFragmentManager(),
-                InstantReadFragment.TAG));
+                InstantReadFragment.TAG)
+        );
         holder.setOnClickListener(R.id.ll_item_header, v -> ((SupportActivity) mContext).findFragment(MainFragment.class)
                 .start(TopicDetailFragment.newInstance(topicBean.getId())));
 
