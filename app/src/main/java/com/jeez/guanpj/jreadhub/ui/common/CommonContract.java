@@ -12,6 +12,8 @@ public interface CommonContract {
         void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh);
 
         void onRequestError(boolean isPull2Refresh);
+
+        void onFabClick();
     }
 
     interface Presenter extends IBasePresenter<View> {

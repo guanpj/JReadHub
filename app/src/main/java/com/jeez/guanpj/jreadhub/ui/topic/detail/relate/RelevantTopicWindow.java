@@ -135,9 +135,4 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
     public void onRequestError() {
 
     }
-
-    @Override
-    public void onFabClick() {
-
-    }
 }

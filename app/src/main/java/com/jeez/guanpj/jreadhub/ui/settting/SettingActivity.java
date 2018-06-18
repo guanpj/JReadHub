@@ -74,11 +74,6 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
     }
 
     @Override
-    public void onFabClick() {
-
-    }
-
-    @Override
     public void onChangeTheme(@Constants.Theme String selectedTheme) {
         mPresenter.setTheme(selectedTheme);
         switch (selectedTheme) {

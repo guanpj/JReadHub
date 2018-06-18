@@ -213,9 +213,4 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     public void onRequestError() {
         showShortToast("请求错误");
     }
-
-    @Override
-    public void onFabClick() {
-
-    }
 }

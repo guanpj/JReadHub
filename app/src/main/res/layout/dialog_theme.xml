@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_bg_style">
+    android:background="@drawable/drawable_dialog_bg_style">
 
     <TextView
         android:layout_width="match_parent"

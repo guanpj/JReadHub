@@ -69,11 +69,6 @@ public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresente
     }
 
     @Override
-    public void onFabClick() {
-
-    }
-
-    @Override
     public void onChangeTheme(@Constants.Theme String selectedTheme) {
         mPresenter.setTheme(selectedTheme);
         RxBus.getInstance().post(new ChangeThemeEvent());

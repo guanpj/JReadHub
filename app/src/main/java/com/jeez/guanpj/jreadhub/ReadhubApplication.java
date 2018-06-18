@@ -38,8 +38,8 @@ public class ReadhubApplication extends Application {
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(this);
         strategy.setUploadProcess(processName == null || processName.equals(packageName));
 
-        Beta.storageDir = Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        Beta.storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        Beta.autoCheckUpgrade = false;
         Beta.canShowUpgradeActs.add(MainActivity.class);
 
         Bugly.init(sInstance, "c16799f8bc", false, strategy);

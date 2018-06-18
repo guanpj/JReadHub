@@ -43,7 +43,6 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        Beta.checkUpgrade();
     }
 
     @Override
@@ -164,10 +163,5 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         Intent intent = getIntent();
         finish();
         startActivity(intent);
-    }
-
-    @Override
-    public void onFabClick() {
-
     }
 }

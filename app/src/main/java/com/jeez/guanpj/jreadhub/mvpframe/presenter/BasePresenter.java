@@ -38,12 +38,6 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
         this.weakView = new WeakReference<>(view);
         proxyView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(),
                 view.getClass().getInterfaces(), new MyInvocationHandler(this.weakView.get()));
-        initEvent();
-    }
-
-    private void initEvent() {
-        addSubscribe(RxBus.getInstance().toFlowable(FabClickEvent.class)
-            .subscribe(fabClickEvent -> getView().onFabClick()));
     }
 
     @Override

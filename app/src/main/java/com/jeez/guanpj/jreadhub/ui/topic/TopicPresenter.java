@@ -3,7 +3,9 @@ package com.jeez.guanpj.jreadhub.ui.topic;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 
 import javax.inject.Inject;
@@ -18,6 +20,12 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     TopicPresenter(DataManager dataManager) {
         super(dataManager);
         this.mDataManager = dataManager;
+        initEvent();
+    }
+
+    private void initEvent() {
+        addSubscribe(RxBus.getInstance().toFlowable(FabClickEvent.class)
+                .subscribe(fabClickEvent -> getView().onFabClick()));
     }
 
     @Override

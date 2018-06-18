@@ -38,8 +38,6 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
 
     public static final String TAG = "InstantReadFragment";
 
-    @BindView(R.id.ll_content_wrapper)
-    LinearLayout mContentWrapper;
     @BindView(R.id.ll_progress_bar_wrapper)
     LinearLayout mProgressBarWrapper;
     @BindView(R.id.progress_bar)
@@ -48,13 +46,12 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     TextView mTxtTopicTitle;
     @BindView(R.id.web_view)
     WebView mWebView;
-    /*@BindView(R.id.txt_content)
-    TextView mTxtContent;*/
     @BindView(R.id.txt_instant_source)
     TextView mTxtSource;
+    @BindView(R.id.txt_go_source)
+    TextView mTxtJump2Source;
 
     private String mTopicId;
-    private AgentWeb mAgentWeb;
 
     public static InstantReadFragment newInstance(String topicId) {
         InstantReadFragment fragment = new InstantReadFragment();
@@ -82,12 +79,6 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
 
     @Override
     public void initView() {
-        Rect displayRectangle = new Rect();
-        Objects.requireNonNull(getDialog().getWindow()).getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
-
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
-                (int)(displayRectangle.height() * 0.8f));
-        mContentWrapper.setLayoutParams(params);
     }
 
     @Override
@@ -164,12 +155,14 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
 
     @Override
     public void onRequestEnd(InstantReadBean data) {
-        if (data == null) {
-            return;
-        }
-        mProgressBarWrapper.setVisibility(View.GONE);
         mTxtTopicTitle.setText(data.getTitle());
         mTxtSource.setText(getString(R.string.source_format, data.getSiteName()));
+        mTxtJump2Source.setOnClickListener(v -> {
+            dismiss();
+            ((SupportActivity) getContext()).findFragment(MainFragment.class)
+                .start(CommonWebViewFragment.newInstance(data.getUrl()));
+        });
+
         String htmlHead = "<head>"
                 + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> "
                 + "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi.css/dist/mobi.min.css\">"
@@ -183,22 +176,8 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 + "<body style:'height:auto;max-width: 100%; width:auto;'>"
                 + data.getContent()
                 + "</body></html>";
-        /*mWebView.loadData(htmlContent, "text/html; charset=UTF-8", null);*/
-        mWebView.loadUrl("https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_9770737319180586108%22%7D&n_type=0&p_from=1");
-        /*mTxtContent.setMovementMethod(ScrollingMovementMethod.getInstance());//滚动
-        mTxtContent.setText(Html.fromHtml(data.getContent(), imageGetter, null));*/
+        mWebView.loadData(htmlContent, "text/html; charset=UTF-8", null);
     }
-
-    /*private final Html.ImageGetter imageGetter = new Html.ImageGetter() {
-        @Override
-        public Drawable getDrawable(String source) {
-            Drawable drawable = null;
-            drawable = Drawable.createFromPath(source); //显示本地图片
-            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable
-                    .getIntrinsicHeight());
-            return drawable;
-        }
-    };*/
 
     @Override
     public void onRequestError() {
@@ -206,12 +185,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
         dismiss();
     }
 
-    @Override
-    public void onFabClick() {
-
-    }
-
-    @OnClick(R.id.img_close)
+    @OnClick(R.id.imb_close)
     void onCloseClick() {
         dismiss();
     }

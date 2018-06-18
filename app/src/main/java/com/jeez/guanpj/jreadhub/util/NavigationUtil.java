@@ -14,12 +14,12 @@ public class NavigationUtil {
 
     public static void openInBrowser(@NonNull Activity context, @NonNull String url) {
         //过滤不规则网站防止出现异常
-        String useableUrl = RegularUtil.matchWebSite(url);
-        if (!TextUtils.isEmpty(useableUrl)) {
+        String validedUrl = RegularUtil.matchWebSite(url);
+        if (!TextUtils.isEmpty(validedUrl)) {
             new CustomTabsIntent.Builder()
                     .setToolbarColor(ResourceUtil.getThemeAttrColor(context, R.attr.readhubStatus))
                     .build()
-                    .launchUrl(context, Uri.parse(useableUrl));
+                    .launchUrl(context, Uri.parse(validedUrl));
         }
     }
 

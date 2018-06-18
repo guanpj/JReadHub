@@ -67,7 +67,7 @@ public class SplashActivity extends AbsBaseActivity {
         nameAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                Observable.timer(1, TimeUnit.SECONDS).subscribe(aLong -> go2Main());
+                Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(aLong -> go2Main());
             }
         });
 
