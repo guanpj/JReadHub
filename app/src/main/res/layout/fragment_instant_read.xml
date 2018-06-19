@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/drawable_instant_read_dialog_bg"
         android:layout_marginVertical="@dimen/dimen_30_dp"
-        android:layout_marginHorizontal="@dimen/dimen_15_dp">
+        android:layout_marginHorizontal="@dimen/dimen_10_dp">
 
         <LinearLayout
             android:id="@+id/ll_content_wrapper"
@@ -27,7 +27,7 @@
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/textSize_20"
                 android:textStyle="bold"
-                tools:text="欧盟正考虑采取多项措施 向谷歌亚马逊等公司征收更多的税" />
+                android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/textSize_18"
-                    android:text="来源：腾讯科技" />
+                    android:text="来源 : 腾讯科技" />
 
                 <TextView
                     android:id="@+id/txt_go_source"

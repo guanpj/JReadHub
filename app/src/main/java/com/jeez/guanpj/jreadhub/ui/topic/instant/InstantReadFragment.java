@@ -1,6 +1,5 @@
 package com.jeez.guanpj.jreadhub.ui.topic.instant;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,7 +22,6 @@ import com.jeez.guanpj.jreadhub.ui.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
-import com.just.agentweb.AgentWeb;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -166,6 +163,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
         String htmlHead = "<head>"
                 + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> "
                 + "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi.css/dist/mobi.min.css\">"
+                /*+ "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi-plugin-color/dist/mobi-plugin-color.min.css\">"*/
                 + "<style>"
                 + "img{max-width:100% !important; width:auto; height:auto;}"
                 + "body {font-size: 110%;word-spacing:110%；}"

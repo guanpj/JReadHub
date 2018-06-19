@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/dimen_16_dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_browser" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_20_dp"
+        android:layout_marginRight="@dimen/dimen_15_dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/use_system_browser"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/textSize_16" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_3_dp"
+            android:text="@string/use_system_browser_des"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/textSize_14" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/switch_browser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:checked="false"
+        android:clickable="true"
+        android:visibility="gone"/>
+
+</LinearLayout>

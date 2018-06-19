@@ -1,7 +1,6 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -9,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.BaseAdapter;
 import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.event.RelevantTopicItemClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.ui.main.MainFragment;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
 
 import org.threeten.bp.LocalDate;
@@ -83,9 +82,9 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
                 mTxtDate.setText(mContext.getString(R.string.month__day, month, day));
             } else {
                 SpannableString spannableTitle = SpannableString.valueOf(mContext.getString(R.string.month__day__year, month, day, year));
-                spannableTitle.setSpan(new ForegroundColorSpan(Color.parseColor("#AAACB4")),
-                        spannableTitle.toString().indexOf(" ") + 1,
-                        spannableTitle.toString().indexOf(" ") + 5,
+                spannableTitle.setSpan(new ForegroundColorSpan(mContext.getColor(R.color.text_topic_detail_news_author)),
+                        spannableTitle.toString().indexOf("\n") + 1,
+                        spannableTitle.toString().indexOf("\n") + 5,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 mTxtDate.setText(spannableTitle);
             }

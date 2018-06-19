@@ -32,9 +32,9 @@ import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+import com.zhy.view.flowlayout.TagView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import butterknife.BindView;
 
@@ -115,18 +115,18 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(params);
             textView.setPadding(10, 16, 10, 16);
-            textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_news, 0, 0, 0);
+            textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_ring, 0, 0, 0);
             textView.setCompoundDrawablePadding(15);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            textView.setTextColor(getResources().getColor(R.color.text_topic_detail_news_title));
+            textView.setTextColor(getContext().getColor(R.color.text_topic_detail_news_title));
             textView.setBackgroundResource(R.drawable.selector_btn_background);
             if (TextUtils.isEmpty(topic.getSiteName())) {
                 textView.setText(topic.getTitle());
             } else {
-                SpannableString spannableTitle = SpannableString.valueOf(topic.getTitle() + " " + topic.getSiteName());
-                spannableTitle.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.text_topic_detail_news_author)),
-                        topic.getTitle().length() + 1,
-                        topic.getTitle().length() + topic.getSiteName().length() + 1,
+                SpannableString spannableTitle = SpannableString.valueOf(getContext().getString(R.string.title___site_name, topic.getTitle(), topic.getSiteName()));
+                spannableTitle.setSpan(new ForegroundColorSpan(getContext().getColor(R.color.text_topic_detail_news_author)),
+                        topic.getTitle().length(),
+                        topic.getTitle().length() + topic.getSiteName().length() + 2,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 textView.setText(spannableTitle);
             }
@@ -165,23 +165,19 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
                     return item;
                 }
             });
-            mRelativeTopic.setOnSelectListener(selectPosSet -> {
-                if (!selectPosSet.isEmpty()) {
-                    Iterator<Integer> iterator = selectPosSet.iterator();
-                    if (iterator.hasNext()) {
-
-                    }
-                }
-            });
             mRelativeTopic.setOnTagClickListener((view, position, parent) -> {
                 String topicId = String.valueOf(entityEventTopics.get(position).getEntityId());
                 long order = mTopic.getOrder();
-                /*if (((TagView) view).isChecked()) {
-                }*/
+
                 RelevantTopicWindow window = new RelevantTopicWindow(getActivity(), topicId, order);
                 window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, true);
                 setBackgroundAlpha(0.7f);
-                window.setOnDismissListener(() -> setBackgroundAlpha(1f));
+                window.setOnDismissListener(() -> {
+                    setBackgroundAlpha(1f);
+                    if (((TagView) view).isChecked()) {
+                        ((TagView) view).setChecked(false);
+                    }
+                });
                 return true;
             });
         } else {

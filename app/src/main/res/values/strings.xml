@@ -9,13 +9,14 @@
     <string name="load_more_finished">已经到底啦</string>
     <string name="load_more_failed">加载失败，点击重试</string>
 
+    <string name="title___site_name">%1$s&#160;&#160;%2$s</string>
     <string name="site_name___author_name___time">%1$s&#160;/&#160;%2$s&#160;&#160;&#160;%3$s</string>
     <string name="site_name___time">%1$s&#160;&#160;&#160;%2$s</string>
     <string name="single__media___report">%1$s&#160;报道</string>
     <string name="multi__media___report">%1$s&#160;等&#160;%2$d&#160;家媒体报道</string>
-    <string name="source_format">来源：%1$s</string>
+    <string name="source_format">来源&#160;:&#160;%1$s</string>
     <string name="month__day">%1$d-%2$d</string>
-    <string name="month__day__year">%1$d-%2$d %3$d</string>
+    <string name="month__day__year">%1$d-%2$d\n%3$d</string>
     <string name="use_system_browser">使用系统内置浏览器</string>
     <string name="use_system_browser_des">开启后，将使用系统内置的浏览器打开网页内容</string>
     <string name="change_theme">切换主题</string>

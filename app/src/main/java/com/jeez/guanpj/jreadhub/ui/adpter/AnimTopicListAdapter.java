@@ -6,7 +6,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,10 +35,8 @@ import me.yokeyword.fragmentation.SupportActivity;
 
 public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder> {
 
-    public static final int TYPE_LEVEL_0 = 0;
-    public static final int TYPE_LEVEL_1 = 1;
-
-    private final SparseBooleanArray mExtendStateMap = new SparseBooleanArray();
+    //每个 Topic 下显示报道的最大数量
+    private static final int MOST_NEWS_COUNT_PER_ITEM = 3;
 
     public AnimTopicListAdapter() {
         super(R.layout.item_topic);
@@ -47,7 +44,6 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
 
     @Override
     protected void convert(BaseViewHolder holder, TopicBean topicBean) {
-        int position = holder.getAdapterPosition();
         int newsCount = 0;
         String mediaName = "";
         if (null != topicBean.getNewsArray() && !topicBean.getNewsArray().isEmpty()) {
@@ -77,23 +73,19 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
         holder.setOnClickListener(R.id.ll_item_header, v -> ((SupportActivity) mContext).findFragment(MainFragment.class)
                 .start(TopicDetailFragment.newInstance(topicBean.getId())));
 
-        boolean expand = mExtendStateMap.get(position, false);
-
         ImageView imgExpandState = holder.getView(R.id.img_expand_state);
-        holder.setImageResource(R.id.img_expand_state, expand ? R.drawable.ic_less_info  : R.drawable.ic_more_info);
+        holder.setImageResource(R.id.img_expand_state, R.drawable.ic_more_info);
 
         ExpandableLayout layoutExpand = holder.getView(R.id.layout_expand);
-        layoutExpand.setExpanded(expand, false);
+        layoutExpand.setExpanded(false);
 
         holder.setOnClickListener(R.id.fl_item_footer, v -> {
-            if (mExtendStateMap.get(position, false)) {
-                mExtendStateMap.put(position, false);
-                imgExpandState.setImageResource(R.drawable.ic_more_info);
-                layoutExpand.setExpanded(false);
-            } else {
-                mExtendStateMap.put(position, true);
+            if (layoutExpand.getState() == ExpandableLayout.State.COLLAPSED) {
                 imgExpandState.setImageResource(R.drawable.ic_less_info);
                 layoutExpand.setExpanded(true);
+            } else if (layoutExpand.getState() == ExpandableLayout.State.EXPANDED) {
+                imgExpandState.setImageResource(R.drawable.ic_more_info);
+                layoutExpand.setExpanded(false);
             }
         });
 
@@ -111,7 +103,7 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
                 newsItemView.setTag(newsViewHolder);
             }
             newsViewHolder.bindData(news);
-            if (newsList.size() > 3 && i == 2) {
+            if (newsList.size() > MOST_NEWS_COUNT_PER_ITEM && i == MOST_NEWS_COUNT_PER_ITEM - 1) {
                 View newsMoreView = mLayoutInflater.inflate(R.layout.item_topic_news_more, null, false);
                 newsMoreView.setOnClickListener(v ->
                         ((SupportActivity) mContext).findFragment(MainFragment.class)
