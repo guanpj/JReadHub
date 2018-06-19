@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.settting;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelper;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
@@ -14,6 +15,16 @@ public class SettingPresenter extends BasePresenter<SettingContract.View> implem
     SettingPresenter(DataManager dataManager) {
         super(dataManager);
         this.mDataManager = mDataManager;
+    }
+
+    @Override
+    public void setAutoCheckUpgrade(boolean b) {
+        PreferenceHelper.getInstant().setAutoUpgrade(b);
+    }
+
+    @Override
+    public boolean isAutoUpgrade() {
+        return PreferenceHelper.getInstant().isAutoUpgrade();
     }
 
     /*@Override

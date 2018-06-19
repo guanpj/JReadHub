@@ -29,6 +29,7 @@ public class Constants {
     public interface Key {
         String THEME_MODE = "theme_mode";
         String USE_SYS_BROWSER = "user_sys_browser";
+        String AUTO_UPGRADE = "auto_upgrade";
     }
 
     @StringDef({ThemeType.Blue, ThemeType.Gray})

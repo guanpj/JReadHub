@@ -6,8 +6,8 @@ import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
 import com.jeez.guanpj.jreadhub.core.net.NetHelperImpl;
+import com.jeez.guanpj.jreadhub.core.preference.IPreferenceHelper;
 import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelper;
-import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelperImpl;
 
 import javax.inject.Singleton;
 
@@ -36,13 +36,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    PreferenceHelper providePreferenceHelper(PreferenceHelperImpl preferenceHelper){
-        return preferenceHelper;
-    }
-
-    @Provides
-    @Singleton
-    DataManager provideDataManager(NetHelper netHelper, PreferenceHelper preferenceHelper) {
-        return new DataManager(netHelper, preferenceHelper);
+    DataManager provideDataManager(NetHelper netHelper) {
+        return new DataManager(netHelper);
     }
 }

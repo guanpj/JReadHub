@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Window;
@@ -17,10 +16,11 @@ import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpSwipeBackActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.widget.custom.SettingItemView;
 import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
+import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresenter> implements SettingContract.View, ThemeDialog.OnThemeChangeListener {
@@ -28,8 +28,10 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
     private ThemeDialog mThemeDialog;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.switch_browser)
-    SwitchCompat mSwithCompat;
+    @BindView(R.id.item_use_system_browser)
+    SettingItemView mUserSystemBrowserItem;
+    @BindView(R.id.item_auto_update)
+    SettingItemView mAutoUpdateItem;
 
     public static void start(@NonNull Activity activity) {
         Intent intent = new Intent(activity, SettingActivity.class);
@@ -54,16 +56,18 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
 
     @Override
     public void initDataAndEvent() {
-        mSwithCompat.setChecked(mPresenter.isUseSystemBrowser());
+        mUserSystemBrowserItem.setChecked(mPresenter.isUseSystemBrowser());
+        mUserSystemBrowserItem.setOnCheckedChangedListener(isChecked ->
+            mPresenter.setUseSystemBrowser(isChecked));
+
+        mAutoUpdateItem.setChecked(mPresenter.isAutoUpgrade());
+        mAutoUpdateItem.setOnCheckedChangedListener(isChecked ->
+                Beta.autoCheckUpgrade = isChecked);
+
         mThemeDialog.setOnThemeChangeListener(this);
     }
 
-    @OnCheckedChanged(R.id.switch_browser)
-    void swithBrowser() {
-        mPresenter.setUseSystemBrowser(mSwithCompat.isChecked());
-    }
-
-    @OnClick(R.id.ll_change_theme)
+    @OnClick(R.id.item_switch_theme)
     void change() {
         mThemeDialog.show();
     }

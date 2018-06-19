@@ -15,4 +15,15 @@
     <attr name="overFlowIcon" format="reference" />
     <attr name="menuSearch" format="reference" />
     <attr name="menuShare" format="reference" />
+
+    <declare-styleable name="SettingItemView">
+        <attr name="icon" format="reference" />
+        <attr name="title" format="string" />
+        <attr name="description" format="string" />
+        <attr name="type" format="enum">
+            <enum name="none" value="0" />
+            <enum name="switcher" value="1" />
+            <enum name="checkbox" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

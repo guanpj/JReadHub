@@ -6,20 +6,16 @@ import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
-import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelper;
-import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 
-public class DataManager implements NetHelper, PreferenceHelper {
+public class DataManager implements NetHelper {
     private NetHelper mNetHelper;
-    private PreferenceHelper mPrefHelper;
 
-    public DataManager(NetHelper mNetHelper, PreferenceHelper preferenceHelper) {
+    public DataManager(NetHelper mNetHelper) {
         this.mNetHelper = mNetHelper;
-        this.mPrefHelper = preferenceHelper;
     }
 
     @Override
@@ -45,26 +41,5 @@ public class DataManager implements NetHelper, PreferenceHelper {
     @Override
     public Observable<List<RelevantTopicBean>> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
         return mNetHelper.getRelateTopic(topicId, eventType, order, timeStamp);
-    }
-
-
-    @Override
-    public void setTheme(@Constants.Theme String theme) {
-        mPrefHelper.setTheme(theme);
-    }
-
-    @Override
-    public String getTheme() {
-        return mPrefHelper.getTheme();
-    }
-
-    @Override
-    public void setUseSystemBrowser(boolean b) {
-        mPrefHelper.setUseSystemBrowser(b);
-    }
-
-    @Override
-    public boolean isUseSystemBrowser() {
-        return mPrefHelper.isUseSystemBrowser();
     }
 }

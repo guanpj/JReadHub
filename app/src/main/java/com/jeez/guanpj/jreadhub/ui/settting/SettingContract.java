@@ -13,5 +13,8 @@ public interface SettingContract {
         /*void setTheme(@Constants.Theme String theme);
 
         void setUserSystemBrowser(boolean b);*/
+        void setAutoCheckUpgrade(boolean b);
+
+        boolean isAutoUpgrade();
     }
 }

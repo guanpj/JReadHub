@@ -1,7 +1,6 @@
 package com.jeez.guanpj.jreadhub.ui.settting;
 
 import android.content.res.Resources;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 
@@ -10,10 +9,11 @@ import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.widget.custom.SettingItemView;
 import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
+import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
@@ -23,8 +23,10 @@ public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresente
     private ThemeDialog mThemeDialog;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.switch_browser)
-    SwitchCompat mSwithCompat;
+    @BindView(R.id.item_use_system_browser)
+    SettingItemView mUserSystemBrowserItem;
+    @BindView(R.id.item_auto_update)
+    SettingItemView mAutoUpdateItem;
 
     public static SettingFragment newInstance() {
         SettingFragment fragment = new SettingFragment();
@@ -49,16 +51,19 @@ public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresente
 
     @Override
     public void initDataAndEvent() {
-        mSwithCompat.setChecked(mPresenter.isUseSystemBrowser());
+        mUserSystemBrowserItem.setChecked(mPresenter.isUseSystemBrowser());
+        mUserSystemBrowserItem.setOnCheckedChangedListener(isChecked ->
+                mPresenter.setUseSystemBrowser(isChecked));
+
+        mAutoUpdateItem.setChecked(mPresenter.isAutoUpgrade());
+        mAutoUpdateItem.setOnCheckedChangedListener(isChecked -> {
+                Beta.autoCheckUpgrade = isChecked;
+                mPresenter.setAutoCheckUpgrade(isChecked);
+        });
         mThemeDialog.setOnThemeChangeListener(this);
     }
 
-    @OnCheckedChanged(R.id.switch_browser)
-    void swithBrowser() {
-        mPresenter.setUseSystemBrowser(mSwithCompat.isChecked());
-    }
-
-    @OnClick(R.id.ll_change_theme)
+    @OnClick(R.id.item_switch_theme)
     void change() {
         mThemeDialog.show();
     }

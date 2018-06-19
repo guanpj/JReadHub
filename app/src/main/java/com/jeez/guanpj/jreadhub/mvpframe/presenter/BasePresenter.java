@@ -3,6 +3,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 import android.content.Context;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelper;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
@@ -53,22 +54,22 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
 
     @Override
     public @Constants.Theme String getTheme() {
-        return mDataManager.getTheme();
+        return PreferenceHelper.getInstant().getTheme();
     }
 
     @Override
     public void setTheme(String theme) {
-        mDataManager.setTheme(theme);
+        PreferenceHelper.getInstant().setTheme(theme);
     }
 
     @Override
     public boolean isUseSystemBrowser() {
-        return mDataManager.isUseSystemBrowser();
+        return PreferenceHelper.getInstant().isUseSystemBrowser();
     }
 
     @Override
     public void setUseSystemBrowser(boolean b) {
-        mDataManager.setUseSystemBrowser(b);
+        PreferenceHelper.getInstant().setUseSystemBrowser(b);
     }
 
     @Override
