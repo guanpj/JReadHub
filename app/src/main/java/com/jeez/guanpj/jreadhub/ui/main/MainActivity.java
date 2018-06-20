@@ -20,7 +20,6 @@ import com.jeez.guanpj.jreadhub.ui.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.ui.settting.SettingFragment;
 import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
-import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
