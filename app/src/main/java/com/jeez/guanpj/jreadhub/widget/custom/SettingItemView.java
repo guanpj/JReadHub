@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.me.guanpj.jdatabase.utility.TextUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
