@@ -1,1 +1,1 @@
-include ':app', 'JHttp', 'JDatabase', 'material-about-library'
+include ':app'

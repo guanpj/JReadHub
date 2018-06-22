@@ -33,9 +33,9 @@
 
 项目名称 | 简介
   -------- | ------
-[RxJava](https://github.com/ReactiveX/RxJava) | 一个专注于异步编程与控制可观察数据（或者事件）流的API
-[RxAndroid](https://github.com/ReactiveX/RxAndroid) | 在Android中使用RxJava
-[Retrofit](https://github.com/square/retrofit) | 安全的HTTP请求工具库
+[RxJava](https://github.com/ReactiveX/RxJava) | 一个专注于异步编程与控制可观察数据（或者事件）流的 API
+[RxAndroid](https://github.com/ReactiveX/RxAndroid) | 在 Android 中使用 RxJava
+[Retrofit](https://github.com/square/retrofit) | HTTP 请求工具库
 [ButterKnife](https://github.com/JakeWharton/butterknife) | 强大的注解框架，提供视图和事件绑定
 [Dagger](https://github.com/google/dagger) | 依赖注入框架
 [Fragmentation](https://github.com/YoKeyword/Fragmentation) | 强大的 Fragment 管理库
