@@ -8,7 +8,7 @@
 [![Google Play](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/google_play.png?raw=true)](https://play.google.com/store/apps/details?id=com.jeez.guanpj.jreadhub)
 [![Coolapk](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/coolapk.png?raw=true)](https://www.coolapk.com/apk/com.jeez.guanpj.jreadhub)
 
-##特点
+## 特点
 
 - [x] 采用Google Material Design 风格
 - [x] 采用 MVP + dagger 2 架构进行解耦
@@ -17,5 +17,14 @@
 - [x] 应用内更新
 - [x] 侧滑返回
 - [x] 支持 CustomTabs
-- [] 话题收藏功能
+- [ ] 话题收藏功能
 
+## 项目预览
+
+| 主页 | 话题详情 |
+|:-:|:-:|
+| ![news](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/main.jpg?raw=true) | ![drawer](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/topic.jpg?raw=true) | 
+
+| 即时查看 | 文章浏览 |
+|:-:|:-:|
+| ![news](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/instant.jpg?raw=true) | ![drawer](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/article.jpg?raw=true) | 
