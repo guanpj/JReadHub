@@ -10,7 +10,7 @@
 
 ## 特点
 
-- [x] 采用Google Material Design 风格
+- [x] 采用 Google Material Design 风格
 - [x] 采用 MVP + dagger 2 架构进行解耦
 - [x] 网络请求使用 Retrofit + RxJava 
 - [x] 主题切换
