@@ -5,3 +5,5 @@
 
 #### 此项目是个人基于 [Readhub](https://readhub.me) 开发一的一款非官方 Android 客户端，旨在为用户提供一个互联网资讯阅读平台和良好的用户体验。
 
+[![Google Play](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/google_play.png?raw=true)](https://play.google.com/store/apps/details?id=com.jeez.guanpj.jreadhub)
+[![Coolapk](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/coolapk.png?raw=true)](https://www.coolapk.com/apk/com.jeez.guanpj.jreadhub)
