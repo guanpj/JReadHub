@@ -65,7 +65,6 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
     implementation 'com.takwolf.android:hf-recyclerview:0.3.2'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
-    implementation 'com.just.agentweb:agentweb:4.0.2'
 
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 
