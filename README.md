@@ -45,6 +45,17 @@
 [AgentWeb](https://github.com/Justson/AgentWeb) | Android WebView 框架
 [Android-HeaderAndFooterRecyclerView](https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView) | 支持添加头部和尾部的 RecyclerView
 
+## 使用到的工具/网站
+
+网站名称 | 简介
+  -------- | ------
+[Iconfont](http://www.iconfont.cn/) | 阿里巴巴矢量图标库，提供了本项目中的大部分矢量图
+[aconvert](https://www.aconvert.com/cn/image/resize/) | 在线调整图片大小（PNG, JPG 和 GIF）
+[convertio](https://convertio.co/zh/png-converter/) | 在线图像文件转换器，支持 SVG 转换成 PNG
+[logoko](http://www.logoko.com.cn/design) | 在线 logo 设计
+[图帮主](http://www.tubangzhu.com/) | 在线平面设计
+[shields](https://shields.io/) | metadata 图标设计
+
 ## 感谢
 
 - [ReadHub](https://github.com/BryantPang/ReadHub)
