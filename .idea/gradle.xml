@@ -10,8 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/JDatabase" />
             <option value="$PROJECT_DIR$/JHttp" />
-            <option value="$PROJECT_DIR$/MvpFramework" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/material-about-library" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
