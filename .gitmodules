@@ -1,6 +1,8 @@
 [submodule "JDatabase"]
 	path = JDatabase
 	url = git@github.com:guanpj/JDatabase
+	ignore = dirty
 [submodule "JHttp"]
 	path = JHttp
 	url = git@github.com:guanpj/JHttp.git
+	ignore = dirty
