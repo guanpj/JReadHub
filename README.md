@@ -23,8 +23,8 @@
 
 | 主页 | 话题详情 |
 |:-:|:-:|
-| ![news](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/main.jpg?raw=true) | ![drawer](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/topic.jpg?raw=true) | 
+| ![news](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/main.png?raw=true) | ![drawer](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/topic.png?raw=true) | 
 
 | 即时查看 | 文章浏览 |
 |:-:|:-:|
-| ![news](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/instant.jpg?raw=true) | ![drawer](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/article.jpg?raw=true) | 
+| ![news](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/instant.png?raw=true) | ![drawer](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/article.png?raw=true) | 
