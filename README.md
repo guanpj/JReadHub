@@ -67,4 +67,4 @@
 ## License
 > Copyright (C) 2018 guanpj.
 > Licensed under the [GPL-3.0](https://www.gnu.org/licenses/gpl.html).
-> (See the [LICENSE](https://github.com/guanpj/JReadhub/blob/master/LICENSE) file for the whole license text.)
+> (See the [LICENSE](https://github.com/guanpj/JReadhub/blob/master/LICENSE) file for the whole license text)
