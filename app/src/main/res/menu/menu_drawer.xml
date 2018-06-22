@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="实验室">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_change_theme"
-                    android:icon="@mipmap/ic_menu_settings"
-                    android:title="设置"/>
-                <item
-                    android:id="@+id/nav_help"
-                    android:icon="@mipmap/ic_menu_about"
-                    android:title="关于"/>
-            </group>
-        </menu>
-    </item>
+    <group>
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings"
+            android:title="设置" />
 
-    <item
-        android:id="@+id/nav_setting"
-        android:icon="@mipmap/ic_menu_settings"
-        android:title="设置"/>
-
-    <item
-        android:id="@+id/nav_about"
-        android:icon="@mipmap/ic_menu_about"
-        android:title="关于"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="关于" />
+    </group>
 </menu>

@@ -7,8 +7,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha11'
-
+        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -26,9 +26,9 @@ task clean(type: Delete) {
 }
 
 ext {
-    compileSdkVersion = 27
+    compileSdkVersion = 26
     buildToolsVersion = "27.0.3"
     minSdkVersion = 21
-    targetSdkVersion = 27
-    supportLibraryVersion = "27.1.0"
+    targetSdkVersion = 26
+    supportLibraryVersion = "27.1.1"
 }

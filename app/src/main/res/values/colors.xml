@@ -1,64 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6E9AC1</color>
+    <!--<color name="colorPrimary">#6E9AC1</color>
     <color name="colorPrimaryDark">#6E9AC1</color>
-    <color name="colorAccent">#6E9AC1</color>
+    <color name="colorAccent">#6E9AC1</color>-->
 
     <color name="text_common">#535353</color>
     <color name="text_content">#727272</color>
     <color name="text_white">#fff</color>
     <color name="text_nav">#b2ebf2</color>
     <color name="text_gray">#cdcdcd</color>
+    <color name="text_topic_detail_news_title">#607D8B</color>
+    <color name="text_topic_detail_news_author">#AAACB4</color>
 
     <color name="line_space">#f5f5f5</color>
 
     <color name="main_bg">#E9EAED</color>
-
     <color name="btn_green_bg">#5cb85c</color>
     <color name="btn_green_border">#4cae4c</color>
 
     <color name="bg_gray">#979797</color>
 
     <color name="dialog_bg">#6b000000</color>
-
+    <color name="bg_topic_trace_list">#F7F7F7</color>
+    <color name="bg_topic_trace_item_line">#D7D7D7</color>
+    <color name="bg_instant_read_close_bg">#e7e7e7</color>
     <color name="edit_bg">#e0e0e0</color>
 
-    <!--
-        <color name="theme_gray_text">#979797</color>
-        <color name="theme_gray_status">#bbc6ca</color>-->
-
-    <color name="theme_blue_theme">#6E9AC1</color>
-    <color name="theme_blue_status">#6E9AC1</color>
+    <color name="theme_blue_theme">#5ca1de</color>
+    <color name="theme_blue_status">#5ca1de</color>
     <color name="theme_blue_background">#f5f5f5</color>
-    <color name="theme_blue_badge">#6E9AC1</color>
+    <color name="theme_blue_badge">#5ca1de</color>
     <color name="theme_blue_text_common">#535353</color>
     <color name="theme_blue_text_content">#727272</color>
-    <color name="theme_blue_float_btn">#6E9AC1</color>
+    <color name="theme_blue_float_btn">#5ca1de</color>
     <color name="theme_blue_toolbar_text">#fff</color>
 
-    <color name="theme_white_theme">#fff</color>
-    <color name="theme_white_status">#CDCDCD</color>
-    <color name="theme_white_background">#f5f5f5</color>
-    <color name="theme_white_badge">#979797</color>
-    <color name="theme_white_text_common">#535353</color>
-    <color name="theme_white_text_content">#727272</color>
-    <color name="theme_white_float_btn">#979797</color>
-    <color name="theme_white_toolbar_text">#979797</color>
-
-    <color name="theme_gray_theme">#979797</color>
-    <color name="theme_gray_status">#979797</color>
+    <color name="theme_gray_theme">#8f8d86</color>
+    <color name="theme_gray_status">#8f8d86</color>
     <color name="theme_gray_background">#f5f5f5</color>
-    <color name="theme_gray_badge">#979797</color>
+    <color name="theme_gray_badge">#8f8d86</color>
     <color name="theme_gray_text_common">#535353</color>
     <color name="theme_gray_text_content">#727272</color>
-    <color name="theme_gray_float_btn">#979797</color>
+    <color name="theme_gray_float_btn">#8f8d86</color>
     <color name="theme_gray_toolbar_text">#fff</color>
-
-    <color name="essence_item_color">#DEE1E3</color>
-    <color name="essence_tab_bg">@android:color/white</color>
-    <color name="essence_tab_text_color_normal">#ff847d7b</color>
-    <color name="essence_tab_text_color_press">#D43A32</color>
-    <color name="essence_item_text_normal">#ff847d7b</color>
-    <color name="essence_item_text_select">#ff333333</color>
 
 </resources>

@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_35_dp"
+    android:layout_height="?attr/actionBarSize"
+    android:gravity="center"
     android:background="?attr/readhubTheme"
     android:theme="@style/Custom.Theme.ToolBar"
     app:title="@string/app_name"
@@ -17,53 +17,13 @@
     app:navigationIcon="?attr/navIcon"
     app:layout_scrollFlags="scroll|enterAlways">
 
-    <!--<RelativeLayout
-        android:id="@+id/layout_user_info"
+    <TextView
+        android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <com.longrise.jie.jforum.widget.MySimpleDraweeView
-            android:id="@+id/img_user"
-            android:layout_width="@dimen/space_35"
-            android:layout_height="@dimen/space_35"
-            android:layout_centerVertical="true"
-            app:backgroundImage="@color/main_bg"
-            app:roundAsCircle="true"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/img_user"
-            android:paddingLeft="@dimen/dimen_8_dp"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/txt_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                tools:text="JForum"
-                android:textSize="@dimen/textSize_14"
-                android:textColor="?attr/readhubToolbarText"/>
-
-            <TextView
-                android:id="@+id/txt_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                tools:text="我的描述"
-                android:textSize="@dimen/textSize_11"
-                android:textColor="?attr/readhubToolbarText"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:visibility="gone"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>-->
+        android:gravity="center"
+        tools:text="Readhub"
+        android:textSize="@dimen/textSize_14"
+        android:textColor="?attr/readhubToolbarText"/>
 
 </android.support.v7.widget.Toolbar>

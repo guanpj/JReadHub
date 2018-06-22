@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_12_dp"
+    android:layout_marginLeft="@dimen/dimen_10_dp"
+    android:layout_marginRight="@dimen/dimen_10_dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardElevation="@dimen/dimen_5_dp"
+    app:cardCornerRadius="@dimen/dimen_5_dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <FrameLayout
+        android:id="@+id/btn_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="@dimen/dimen_2_dp"
+        android:foreground="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_8_dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="标题标题"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/textSize_16" />
+
+            <TextView
+                android:id="@+id/tv_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8_dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:text="内容内容"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/textSize_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1"
+                android:layout_marginBottom="@dimen/dimen_8_dp"
+                android:layout_marginTop="@dimen/dimen_12_dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="时间时间"
+                android:textColor="?attr/readhubTheme"
+                android:textSize="@dimen/textSize_14" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

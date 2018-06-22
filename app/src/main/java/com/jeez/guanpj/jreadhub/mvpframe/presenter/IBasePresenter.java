@@ -1,10 +1,22 @@
 package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 
-import com.jeez.guanpj.jreadhub.mvpframe.model.IBaseModel;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
+import com.jeez.guanpj.jreadhub.util.Constants;
 
-public interface IBasePresenter<M extends IBaseModel, V extends IBaseView> {
-    void onAttatch(M model, V view);
+import io.reactivex.disposables.Disposable;
+
+public interface IBasePresenter<V extends IBaseView> {
+    void onAttatch(V view);
 
     void onDetach();
+
+    void addSubscribe(Disposable disposable);
+
+    @Constants.Theme String getTheme();
+
+    void setTheme(@Constants.Theme String theme);
+
+    boolean isUseSystemBrowser();
+
+    void setUseSystemBrowser(boolean b);
 }

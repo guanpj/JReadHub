@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.jeez.guanpj.jreadhub.widget.custom.SettingItemView
+                android:id="@+id/item_use_system_browser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_browser"
+                app:title="@string/use_system_browser"
+                app:description="@string/use_system_browser_des"
+                app:type="switcher"/>
+
+            <com.jeez.guanpj.jreadhub.widget.custom.SettingItemView
+                android:id="@+id/item_auto_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_update"
+                app:title="自动检查更新"
+                app:description="自动获取更新内容并提示"
+                app:type="checkbox"/>
+
+            <com.jeez.guanpj.jreadhub.widget.custom.SettingItemView
+                android:id="@+id/item_switch_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_theme"
+                app:title="@string/change_theme"
+                app:type="none"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

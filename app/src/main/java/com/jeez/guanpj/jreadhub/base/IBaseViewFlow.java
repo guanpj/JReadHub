@@ -1,12 +1,13 @@
 package com.jeez.guanpj.jreadhub.base;
 
-import me.yokeyword.fragmentation.ISupportActivity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Jie on 2016-10-26.
  */
 
-public interface IBaseViewFlow extends ISupportActivity {
+public interface IBaseViewFlow {
     /**
      * 获取布局Id
      */

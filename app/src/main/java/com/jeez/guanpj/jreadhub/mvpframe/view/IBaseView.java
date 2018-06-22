@@ -5,11 +5,4 @@ package com.jeez.guanpj.jreadhub.mvpframe.view;
  */
 
 public interface IBaseView {
-    void onRequestStart();
-
-    void onRequestError(String msg);
-
-    void onRequestEnd();
-
-    void onInternetError();
 }

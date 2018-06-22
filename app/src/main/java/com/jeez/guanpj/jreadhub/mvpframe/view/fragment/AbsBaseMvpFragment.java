@@ -2,37 +2,42 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.fragment;
 
 import android.os.Bundle;
 
-import com.jeez.guanpj.jreadhub.base.BaseFragment;
-import com.jeez.guanpj.jreadhub.mvpframe.model.IBaseModel;
-import com.jeez.guanpj.jreadhub.mvpframe.presenter.AbsBasePresenter;
+import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
+import com.jeez.guanpj.jreadhub.di.component.DaggerFragmentComponent;
+import com.jeez.guanpj.jreadhub.di.component.FragmentComponent;
+import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
+import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
-import com.jeez.guanpj.jreadhub.util.TUtil;
+
+import javax.inject.Inject;
 
 /**
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBaseMvpFragment<P extends AbsBasePresenter, M extends IBaseModel> extends BaseFragment implements IBaseView {
+public abstract class AbsBaseMvpFragment<P extends BasePresenter> extends AbsBaseFragment implements IBaseView {
+
+    @Inject
     public P mPresenter;
-    public M mModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = TUtil.getT(this, 0);
-        mModel = TUtil.getT(this, 1);
-        mPresenter.onAttatch(mModel, this);
+        performInject();
+        if (null != mPresenter) {
+            mPresenter.onAttatch(this);
+        }
     }
 
-    @Override
-    public void onRequestError(String msg) {
-
+    public FragmentComponent getFragmentComponent() {
+        return DaggerFragmentComponent.builder()
+                .appComponent(ReadhubApplication.getAppComponent())
+                .fragmentModule(new FragmentModule(this))
+                .build();
     }
 
-    @Override
-    public void onInternetError() {
-
-    }
+    protected abstract void performInject();
 
     @Override
     public void onDestroy() {

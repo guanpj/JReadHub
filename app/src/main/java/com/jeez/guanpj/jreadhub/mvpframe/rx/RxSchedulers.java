@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxSchedulers {
     public static <T>ObservableTransformer<T, T> io2Main() {
-        return  new ObservableTransformer<T, T>() {
+        return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> tObservable) {
                 return tObservable.subscribeOn(Schedulers.io())

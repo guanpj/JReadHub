@@ -30,4 +30,8 @@ public class TUtil {
         }
         return null;
     }
+
+    public static <T> T cast(Object object) {
+        return (T) object;
+    }
 }

@@ -5,35 +5,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="WhiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">?attr/readhubStatus</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="readhubBackground">@android:color/white</item>
-        <item name="readhubToolbarText">@color/theme_white_toolbar_text</item>
-        <item name="readhubBadge">@color/theme_white_badge</item>
-        <item name="readhubStatus">@color/theme_white_status</item>
-        <item name="readhubTextCommonColor">@color/theme_white_text_common</item>
-        <item name="readhubTextContentColor">@color/theme_white_text_content</item>
-        <item name="readhubTheme">@color/theme_white_theme</item>
-        <item name="readhubFloatBtn">@color/theme_white_float_btn</item>
-
-        <item name="navIcon">@mipmap/ic_actionbar_menu_white</item>
-        <item name="navBackIcon">@mipmap/ic_action_return_white</item>
-        <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more_white</item>
-        <item name="menuSearch">@mipmap/ic_actionbar_search_white</item>
-        <item name="menuShare">@mipmap/ic_action_share_white</item>
-    </style>
-
     <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">?attr/readhubTheme</item>
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">?attr/readhubTheme</item>
 
-        <item name="readhubBackground">@color/colorPrimary</item>
+        <item name="readhubBackground">@color/theme_blue_background</item>
         <item name="readhubToolbarText">@color/theme_blue_toolbar_text</item>
         <item name="readhubBadge">@color/theme_blue_badge</item>
         <item name="readhubStatus">@color/theme_blue_status</item>
@@ -42,20 +20,20 @@
         <item name="readhubTheme">@color/theme_blue_theme</item>
         <item name="readhubFloatBtn">@color/theme_blue_float_btn</item>
 
-        <item name="navIcon">@mipmap/ic_actionbar_menu</item>
-        <item name="navBackIcon">@mipmap/ic_action_return</item>
-        <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more</item>
-        <item name="menuSearch">@mipmap/ic_actionbar_search</item>
-        <item name="menuShare">@mipmap/ic_action_share</item>
+        <item name="navIcon">@drawable/ic_menu</item>
+        <item name="navBackIcon">@drawable/ic_back</item>
+        <item name="overFlowIcon">@drawable/ic_more</item>
+        <item name="menuSearch">@drawable/ic_search</item>
+        <item name="menuShare">@drawable/ic_share</item>
     </style>
 
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">?attr/readhubTheme</item>
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">?attr/readhubTheme</item>
 
-        <item name="readhubBackground">@color/colorPrimary</item>
+        <item name="readhubBackground">@color/theme_gray_background</item>
         <item name="readhubToolbarText">@color/theme_gray_toolbar_text</item>
         <item name="readhubBadge">@color/theme_gray_badge</item>
         <item name="readhubStatus">@color/theme_gray_status</item>
@@ -64,11 +42,15 @@
         <item name="readhubTheme">@color/theme_gray_theme</item>
         <item name="readhubFloatBtn">@color/theme_gray_float_btn</item>
 
-        <item name="navIcon">@mipmap/ic_actionbar_menu</item>
-        <item name="navBackIcon">@mipmap/ic_action_return</item>
-        <item name="overFlowIcon">@mipmap/ic_actionbar_menu_more</item>
-        <item name="menuSearch">@mipmap/ic_actionbar_search</item>
-        <item name="menuShare">@mipmap/ic_action_share</item>
+        <item name="navIcon">@drawable/ic_menu</item>
+        <item name="navBackIcon">@drawable/ic_back</item>
+        <item name="overFlowIcon">@drawable/ic_more</item>
+        <item name="menuSearch">@drawable/ic_search</item>
+        <item name="menuShare">@drawable/ic_share</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.SwipeBack">
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -111,6 +93,23 @@
         <item name="tabBackground">?attr/readhubTheme</item>
         <item name="tabTextAppearance">@style/Tab_TextAppearance</item>
         <item name="tabSelectedTextColor">?attr/readhubToolbarText</item>
+    </style>
+
+    <style name="AlertDialogStyle" parent="@android:style/Theme.Holo.Light.Dialog.MinWidth">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="ThemeDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/dialog_bg</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
 </resources>

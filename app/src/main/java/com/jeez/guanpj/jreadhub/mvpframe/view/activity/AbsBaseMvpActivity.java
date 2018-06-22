@@ -2,37 +2,42 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.activity;
 
 import android.os.Bundle;
 
-import com.jeez.guanpj.jreadhub.base.BaseActivity;
-import com.jeez.guanpj.jreadhub.mvpframe.model.IBaseModel;
-import com.jeez.guanpj.jreadhub.mvpframe.presenter.AbsBasePresenter;
+import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
+import com.jeez.guanpj.jreadhub.di.component.ActivityComponent;
+import com.jeez.guanpj.jreadhub.di.component.DaggerActivityComponent;
+import com.jeez.guanpj.jreadhub.di.module.ActivityModule;
+import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
-import com.jeez.guanpj.jreadhub.util.TUtil;
+
+import javax.inject.Inject;
 
 /**
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBaseMvpActivity<M extends IBaseModel, P extends AbsBasePresenter> extends BaseActivity implements IBaseView {
+public abstract class AbsBaseMvpActivity<P extends BasePresenter> extends AbsBaseActivity implements IBaseView {
+
+    @Inject
     public P mPresenter;
-    public M mModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = TUtil.getT(this, 0);
-        mModel = TUtil.getT(this, 1);
-        mPresenter.onAttatch(mModel, this);
+        performInject();
+        if (null != mPresenter) {
+            mPresenter.onAttatch(this);
+        }
     }
 
-    @Override
-    public void onRequestError(String msg) {
-
+    public ActivityComponent getActivityComponent() {
+        return DaggerActivityComponent.builder()
+                .appComponent(ReadhubApplication.getAppComponent())
+                .activityModule(new ActivityModule(this))
+                .build();
     }
 
-    @Override
-    public void onInternetError() {
-
-    }
+    protected abstract void performInject();
 
     @Override
     protected void onDestroy() {

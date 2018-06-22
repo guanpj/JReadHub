@@ -1,1 +1,1 @@
-include ':app', ':MVPFramework'
+include ':app', 'JHttp', 'JDatabase', 'material-about-library'

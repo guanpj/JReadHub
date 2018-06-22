@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mal_title_about">Про застосунок</string>
+    <string name="mal_title_licenses">Ліцензії</string>
+
+    <string name="mal_close">Закрити</string>
+    <string name="mal_send_email">Надіслати e-mail</string>
+
+    <string name="mal_activity_exception">Немає програм для обробки дій</string>
+</resources>

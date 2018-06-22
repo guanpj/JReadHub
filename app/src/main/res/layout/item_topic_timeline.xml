@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:id="@+id/txt_date"
+        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dimen_60_dp"
+        android:text="6-19 2018"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/textSize_16" />
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:background="@color/bg_topic_trace_item_line"
+            android:id="@+id/view_top_line"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_width="@dimen/line_1" />
+
+        <View
+            android:background="@drawable/drawable_topic_trace_oval"
+            android:layout_height="@dimen/dimen_5_dp"
+            android:layout_width="@dimen/dimen_5_dp" />
+
+        <View
+            android:background="@color/bg_topic_trace_item_line"
+            android:id="@+id/view_bottom_line"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_width="@dimen/line_1" />
+    </LinearLayout>
+
+    <TextView
+        android:background="?android:selectableItemBackground"
+        android:ellipsize="end"
+        android:id="@+id/txt_topic_trace_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_10_dp"
+        android:layout_width="wrap_content"
+        android:maxLines="2"
+        android:padding="@dimen/dimen_5_dp"
+        android:text="标题标题标题"
+        android:textColor="@color/text_topic_detail_news_title"
+        android:textSize="@dimen/textSize_16" />
+
+</LinearLayout>
