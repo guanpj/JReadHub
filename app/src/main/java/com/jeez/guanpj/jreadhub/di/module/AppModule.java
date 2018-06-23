@@ -6,8 +6,6 @@ import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
 import com.jeez.guanpj.jreadhub.core.net.NetHelperImpl;
-import com.jeez.guanpj.jreadhub.core.preference.IPreferenceHelper;
-import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelper;
 
 import javax.inject.Singleton;
 

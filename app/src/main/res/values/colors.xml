@@ -24,6 +24,7 @@
     <color name="bg_topic_trace_list">#F7F7F7</color>
     <color name="bg_topic_trace_item_line">#D7D7D7</color>
     <color name="bg_instant_read_close_bg">#e7e7e7</color>
+    <color name="bg_new_topic_bar">#d7f46ea4</color>
     <color name="edit_bg">#e0e0e0</color>
 
     <color name="theme_blue_theme">#5ca1de</color>

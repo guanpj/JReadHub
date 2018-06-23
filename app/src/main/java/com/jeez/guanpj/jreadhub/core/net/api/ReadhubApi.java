@@ -5,6 +5,7 @@ import android.os.Build;
 import com.jeez.guanpj.jreadhub.BuildConfig;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
+import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
@@ -44,4 +45,7 @@ public interface ReadhubApi {
                                                       @Query("eventType") int eventType,
                                                       @Query("order") long order,
                                                       @Query("t") long timeStamp);
+
+    @GET("topic/newCount")
+    Observable<NewTopicCountBean> getNewTopicCount(@Query("latestCursor") Long lastCursor);
 }

@@ -50,5 +50,6 @@
     <dimen name="textSize_40">40sp</dimen>
 
     <dimen name="gap_size">8dp</dimen>
+    <dimen name="new_topic_bar_height">25dp</dimen>
 
 </resources>

@@ -1,12 +1,11 @@
-package com.jeez.guanpj.jreadhub.core.preference;
+package com.jeez.guanpj.jreadhub.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.jeez.guanpj.jreadhub.ReadhubApplication;
-import com.jeez.guanpj.jreadhub.util.Constants;
 
-public class PreferenceHelper implements IPreferenceHelper {
+public class PreferenceHelper {
 
     private SharedPreferences mPreferences;
     private static PreferenceHelper sInstance;
@@ -22,32 +21,26 @@ public class PreferenceHelper implements IPreferenceHelper {
         mPreferences = ReadhubApplication.getInstance().getSharedPreferences(Constants.KEY_SHARED_PREFERENCE, Context.MODE_PRIVATE);
     }
 
-    @Override
     public void setTheme(String theme) {
         mPreferences.edit().putString(Constants.Key.THEME_MODE, theme).apply();
     }
 
-    @Override
     public String getTheme() {
         return mPreferences.getString(Constants.Key.THEME_MODE, Constants.ThemeType.Blue);
     }
 
-    @Override
     public void setUseSystemBrowser(boolean b) {
         mPreferences.edit().putBoolean(Constants.Key.USE_SYS_BROWSER, b).apply();
     }
 
-    @Override
     public boolean isUseSystemBrowser() {
         return mPreferences.getBoolean(Constants.Key.USE_SYS_BROWSER, false);
     }
 
-    @Override
     public void setAutoUpgrade(boolean b) {
         mPreferences.edit().putBoolean(Constants.Key.AUTO_UPGRADE, b).apply();
     }
 
-    @Override
     public boolean isAutoUpgrade() {
         return mPreferences.getBoolean(Constants.Key.AUTO_UPGRADE, false);
     }

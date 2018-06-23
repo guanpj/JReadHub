@@ -1,9 +1,8 @@
 package com.jeez.guanpj.jreadhub.ui.settting;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
-import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelper;
+import com.jeez.guanpj.jreadhub.util.PreferenceHelper;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
-import com.jeez.guanpj.jreadhub.util.Constants;
 
 import javax.inject.Inject;
 

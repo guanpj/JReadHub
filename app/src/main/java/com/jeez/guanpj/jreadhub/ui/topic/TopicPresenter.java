@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.topic;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
+import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
@@ -66,6 +67,28 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
 
                     @Override
                     public void onComplete() {
+                    }
+                }));
+    }
+
+    @Override
+    public void getNewTopicCount(Long latestCursor) {
+        addSubscribe(mDataManager.getNewTopicCount(latestCursor)
+                .compose(RxSchedulers.io2Main())
+                .subscribeWith(new DisposableObserver<NewTopicCountBean>() {
+                    @Override
+                    public void onNext(NewTopicCountBean newTopicCountBean) {
+                        getView().showNewTopicCount(newTopicCountBean.getCount());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 }));
     }

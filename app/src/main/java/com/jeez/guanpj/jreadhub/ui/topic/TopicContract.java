@@ -14,6 +14,8 @@ public interface TopicContract {
         void onRequestError(boolean isPull2Refresh);
 
         void onFabClick();
+
+        void showNewTopicCount(int newTopicCount);
     }
 
     interface Presenter extends IBasePresenter<View> {
@@ -27,5 +29,11 @@ public interface TopicContract {
          * @param lastCursor
          */
         void doLoadMore(Long lastCursor);
+
+        /**
+         * 获取新话题数量
+         * @param latestCursor
+         */
+        void getNewTopicCount(Long latestCursor);
     }
 }

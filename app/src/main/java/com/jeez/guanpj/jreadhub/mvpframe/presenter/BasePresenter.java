@@ -3,9 +3,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 import android.content.Context;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
-import com.jeez.guanpj.jreadhub.core.preference.PreferenceHelper;
-import com.jeez.guanpj.jreadhub.event.FabClickEvent;
-import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.util.PreferenceHelper;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 import com.jeez.guanpj.jreadhub.util.Constants;
 

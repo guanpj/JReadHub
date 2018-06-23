@@ -2,6 +2,7 @@ package com.jeez.guanpj.jreadhub.core.net;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
+import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
@@ -45,5 +46,10 @@ public class NetHelperImpl implements NetHelper {
     @Override
     public Observable<List<RelevantTopicBean>> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
         return readhubApi.getRelateTopic(topicId, eventType, order, timeStamp);
+    }
+
+    @Override
+    public Observable<NewTopicCountBean> getNewTopicCount(Long latestCursor) {
+        return readhubApi.getNewTopicCount(latestCursor);
     }
 }
