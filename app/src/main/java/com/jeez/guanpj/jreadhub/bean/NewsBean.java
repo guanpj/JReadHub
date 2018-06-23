@@ -9,9 +9,8 @@ import org.threeten.bp.OffsetDateTime;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class NewsBean {
+public class NewsBean extends BaseItemBean{
     private String authorName;
-    private String id;
     private String language;
     private String mobileUrl;
     private String publishDate;
@@ -19,7 +18,6 @@ public class NewsBean {
     private String siteSlug;
     private String summary;
     private String summaryAuto;
-    private String title;
     private String url;
 
     public static final String TYPE_NEWS = "news";
@@ -37,14 +35,6 @@ public class NewsBean {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getLanguage() {
@@ -105,14 +95,6 @@ public class NewsBean {
 
     public void setSummaryAuto(String summaryAuto) {
         this.summaryAuto = summaryAuto;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getUrl() {

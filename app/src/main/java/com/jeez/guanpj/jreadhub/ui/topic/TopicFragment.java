@@ -2,6 +2,8 @@ package com.jeez.guanpj.jreadhub.ui.topic;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.util.DiffUtil;
+import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
@@ -12,9 +14,11 @@ import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.AnimTopicListAdapter;
-import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
+import com.jeez.guanpj.jreadhub.ui.adpter.DiffCallback;
+import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +26,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 
-public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener {
+public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
@@ -31,7 +35,6 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     @BindView(R.id.txt_new)
     TextView mTxtNew;
 
-    private LoadMoreFooter mLoadMoreFooter;
     private AnimTopicListAdapter mAdapter;
 
     public static TopicFragment newInstance() {
@@ -56,18 +59,17 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
 
-        mLoadMoreFooter = new LoadMoreFooter(getContext(), mRecyclerView);
         mAdapter = new AnimTopicListAdapter();
         mAdapter.isFirstOnly(false);
         mAdapter.setNotDoAnimationCount(3);
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.setLoadMoreView(new CustomLoadMoreView());
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void initDataAndEvent() {
-        mRefreshLayout.setOnRefreshListener(this);
-        mLoadMoreFooter.setOnLoadMoreListener(this);
+        mAdapter.setOnLoadMoreListener(() -> doMore(), mRecyclerView);
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setRefreshing(true);
         onRefresh();
@@ -78,12 +80,12 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
     @Override
     public void onRefresh() {
+        mAdapter.setEnableLoadMore(false);
         mPresenter.doRefresh();
     }
 
-    @Override
-    public void onLoadMore() {
-        mPresenter.doLoadMore(mAdapter.getItem(mAdapter.getItemCount() - 1).getOrder());
+    public void doMore() {
+        mPresenter.doLoadMore(mAdapter.getItem(mAdapter.getItemCount() - 2).getOrder());
     }
 
     @Override
@@ -95,15 +97,45 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     public void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh) {
         List<TopicBean> dataList = data.getData();
         if (null != dataList && !dataList.isEmpty()) {
-            mAdapter.addData(dataList);
-            mLoadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
-        } else {
-            mLoadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
-        }
+            if (isPull2Refresh) {
+                mRefreshLayout.setRefreshing(false);
+                DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCallback(mAdapter.getData(), dataList), false);
+                diffResult.dispatchUpdatesTo(mAdapter);
+                diffResult.dispatchUpdatesTo(new ListUpdateCallback() {
+                    @Override
+                    public void onInserted(int position, int count) {
+                        List<TopicBean> changeList = new ArrayList<>();
+                        for (int i = position; i < position + count; i++) {
+                            changeList.add(dataList.get(i));
+                        }
+                        mAdapter.addData(position, changeList);
+                    }
 
-        if (isPull2Refresh) {
-            mRefreshLayout.setRefreshing(false);
+                    @Override
+                    public void onRemoved(int position, int count) {
+
+                    }
+
+                    @Override
+                    public void onMoved(int fromPosition, int toPosition) {
+
+                    }
+
+                    @Override
+                    public void onChanged(int position, int count, Object payload) {
+
+                    }
+                });
+            } else {
+                mAdapter.addData(dataList);
+                mAdapter.loadMoreComplete();
+            }
+        } else {
+            if (!isPull2Refresh) {
+                mAdapter.loadMoreEnd(true);
+            }
         }
+        mAdapter.setEnableLoadMore(true);
     }
 
     @Override
@@ -111,7 +143,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         if (isPull2Refresh) {
             mRefreshLayout.setRefreshing(false);
         } else {
-            mLoadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
+            mAdapter.loadMoreFail();
         }
     }
 

@@ -6,7 +6,7 @@ import org.threeten.bp.OffsetDateTime;
 
 import java.util.ArrayList;
 
-public class TopicBean {
+public class TopicBean extends BaseItemBean{
 
     /**
      * id : 1mY1Lpcntvs
@@ -23,7 +23,6 @@ public class TopicBean {
      * extra : {"instantView":true}
      */
 
-    String id;
     String createdAt;
     ArrayList<EntityEventTopicBean> entityEventTopics;
     ArrayList<EntityTopicBean> entityTopics;
@@ -31,19 +30,10 @@ public class TopicBean {
     long order;
     String publishDate;
     String summary;
-    String title;
     String updatedAt;
     TopicTimelineBean timeline;
     ArrayList<TopicNewsBean> newsArray;
     Extra extra;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCreatedAt() {
         return createdAt;
@@ -103,14 +93,6 @@ public class TopicBean {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getUpdatedAt() {

@@ -29,6 +29,9 @@
     <string name="readhub_desc">此 app 是由个人基于无码科技（杭州）有限公司的产品 Readhub 开发的非官方 app。</string>
     <string name="text_readhub_desc">简介</string>
     <string name="jump_source">访问原网址</string>
-    <string name="new_topic_tips">有&#160;%1$d&#160;条新话题，点击查看</string>
+    <string name="new_topic_tips">有&#160;%1$d&#160;个新话题，点击查看</string>
+    <string name="brvah_loading">正在加载...</string>
+    <string name="brvah_load_failed">加载失败，点击重试</string>
+    <string name="brvah_load_end">没有更多数据</string>
 
 </resources>

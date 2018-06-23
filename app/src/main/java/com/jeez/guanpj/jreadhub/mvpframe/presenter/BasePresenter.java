@@ -1,11 +1,9 @@
 package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 
-import android.content.Context;
-
 import com.jeez.guanpj.jreadhub.core.DataManager;
-import com.jeez.guanpj.jreadhub.util.PreferenceHelper;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.PreferenceHelper;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationHandler;
@@ -22,11 +20,10 @@ import io.reactivex.disposables.Disposable;
 
 public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
 
-    public Context context;
     private WeakReference<V> weakView;
     private V proxyView;
     private CompositeDisposable compositeDisposable;
-    private DataManager mDataManager;
+    protected DataManager mDataManager;
 
     public BasePresenter(DataManager dataManager) {
         this.mDataManager = dataManager;

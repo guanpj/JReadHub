@@ -78,7 +78,9 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
                 .subscribeWith(new DisposableObserver<NewTopicCountBean>() {
                     @Override
                     public void onNext(NewTopicCountBean newTopicCountBean) {
-                        getView().showNewTopicCount(newTopicCountBean.getCount());
+                        if (newTopicCountBean.getCount() > 0) {
+                            getView().showNewTopicCount(newTopicCountBean.getCount());
+                        }
                     }
 
                     @Override

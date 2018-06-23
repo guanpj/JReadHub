@@ -15,7 +15,7 @@ import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.AnimNewsListAdapter;
 import com.jeez.guanpj.jreadhub.util.Constants;
-import com.jeez.guanpj.jreadhub.widget.LoadMoreFooter;
+import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import java.util.List;
@@ -23,14 +23,13 @@ import java.util.List;
 import butterknife.BindView;
 
 
-public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> implements CommonContract.View, SwipeRefreshLayout.OnRefreshListener, LoadMoreFooter.OnLoadMoreListener, BaseQuickAdapter.OnItemClickListener {
+public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> implements CommonContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.recycler_view)
     HeaderAndFooterRecyclerView mRecyclerView;
 
-    private LoadMoreFooter mLoadMoreFooter;
     private AnimNewsListAdapter mAdapter;
     private @NewsBean.Type String mNewsType;
 
@@ -67,19 +66,18 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
         //mRecyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
 
-        mLoadMoreFooter = new LoadMoreFooter(getActivity(), mRecyclerView);
         mAdapter = new AnimNewsListAdapter();
         mAdapter.isFirstOnly(false);
         mAdapter.setNotDoAnimationCount(3);
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.setLoadMoreView(new CustomLoadMoreView());
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void initDataAndEvent() {
-        mRefreshLayout.setOnRefreshListener(this);
-        mLoadMoreFooter.setOnLoadMoreListener(this);
+        mAdapter.setOnLoadMoreListener(() -> doMore(), mRecyclerView);
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setRefreshing(true);
         onRefresh();
@@ -87,12 +85,12 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     @Override
     public void onRefresh() {
+        mAdapter.setEnableLoadMore(false);
         mPresenter.doRefresh(mNewsType);
     }
 
-    @Override
-    public void onLoadMore() {
-        mPresenter.doLoadMore(mNewsType, mAdapter.getItem(mAdapter.getItemCount() - 1).getPublishDate().toInstant().toEpochMilli());
+    public void doMore() {
+        mPresenter.doLoadMore(mNewsType, mAdapter.getItem(mAdapter.getItemCount() - 2).getPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
@@ -104,15 +102,19 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
     public void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh) {
         List<NewsBean> dataList = data.getData();
         if (null != dataList && !dataList.isEmpty()) {
-            mAdapter.addData(dataList);
-            mLoadMoreFooter.setState(LoadMoreFooter.STATE_ENDLESS);
+            if (isPull2Refresh) {
+                mAdapter.setNewData(dataList);
+                mRefreshLayout.setRefreshing(false);
+            } else {
+                mAdapter.addData(dataList);
+                mAdapter.loadMoreComplete();
+            }
         } else {
-            mLoadMoreFooter.setState(LoadMoreFooter.STATE_FINISHED);
+            if (!isPull2Refresh) {
+                mAdapter.loadMoreEnd(true);
+            }
         }
-
-        if (isPull2Refresh) {
-            mRefreshLayout.setRefreshing(false);
-        }
+        mAdapter.setEnableLoadMore(true);
     }
 
     @Override
@@ -120,7 +122,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         if (isPull2Refresh) {
             mRefreshLayout.setRefreshing(false);
         } else {
-            mLoadMoreFooter.setState(LoadMoreFooter.STATE_FAILED);
+            mAdapter.loadMoreFail();
         }
     }
 
