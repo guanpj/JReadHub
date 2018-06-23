@@ -2,6 +2,8 @@ package com.jeez.guanpj.jreadhub.ui.common;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.util.DiffUtil;
+import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,10 +16,12 @@ import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.AnimNewsListAdapter;
+import com.jeez.guanpj.jreadhub.ui.adpter.DiffCallback;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -103,8 +107,30 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         List<NewsBean> dataList = data.getData();
         if (null != dataList && !dataList.isEmpty()) {
             if (isPull2Refresh) {
-                mAdapter.setNewData(dataList);
                 mRefreshLayout.setRefreshing(false);
+                DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCallback(mAdapter.getData(), dataList), false);
+                diffResult.dispatchUpdatesTo(new ListUpdateCallback() {
+                    @Override
+                    public void onInserted(int position, int count) {
+                        List<NewsBean> changeList = new ArrayList<>();
+                        for (int i = position; i < position + count; i++) {
+                            changeList.add(dataList.get(i));
+                        }
+                        mAdapter.addData(position, changeList);
+                    }
+
+                    @Override
+                    public void onRemoved(int position, int count) {
+                    }
+
+                    @Override
+                    public void onMoved(int fromPosition, int toPosition) {
+                    }
+
+                    @Override
+                    public void onChanged(int position, int count, Object payload) {
+                    }
+                });
             } else {
                 mAdapter.addData(dataList);
                 mAdapter.loadMoreComplete();

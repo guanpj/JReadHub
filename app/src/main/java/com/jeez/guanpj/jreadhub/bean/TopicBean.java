@@ -6,7 +6,7 @@ import org.threeten.bp.OffsetDateTime;
 
 import java.util.ArrayList;
 
-public class TopicBean extends BaseItemBean{
+public class TopicBean extends BaseItemBean implements Cloneable {
 
     /**
      * id : 1mY1Lpcntvs
@@ -34,6 +34,10 @@ public class TopicBean extends BaseItemBean{
     TopicTimelineBean timeline;
     ArrayList<TopicNewsBean> newsArray;
     Extra extra;
+
+    public TopicBean(String id, String title) {
+        super(id, title);
+    }
 
     public String getCreatedAt() {
         return createdAt;
@@ -133,5 +137,16 @@ public class TopicBean extends BaseItemBean{
 
     public static class Extra {
         boolean instantView;
+    }
+
+    @Override
+    public TopicBean clone() {
+        TopicBean bean = null;
+        try {
+            bean = (TopicBean) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return bean;
     }
 }

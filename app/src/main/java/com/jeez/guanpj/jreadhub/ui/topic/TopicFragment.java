@@ -100,7 +100,6 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
             if (isPull2Refresh) {
                 mRefreshLayout.setRefreshing(false);
                 DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCallback(mAdapter.getData(), dataList), false);
-                diffResult.dispatchUpdatesTo(mAdapter);
                 diffResult.dispatchUpdatesTo(new ListUpdateCallback() {
                     @Override
                     public void onInserted(int position, int count) {
@@ -113,17 +112,14 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
                     @Override
                     public void onRemoved(int position, int count) {
-
                     }
 
                     @Override
                     public void onMoved(int fromPosition, int toPosition) {
-
                     }
 
                     @Override
                     public void onChanged(int position, int count, Object payload) {
-
                     }
                 });
             } else {

@@ -2,16 +2,21 @@ package com.jeez.guanpj.jreadhub.ui.adpter;
 
 import android.support.v7.util.DiffUtil;
 
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.BaseItemBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class DiffCallback extends DiffUtil.Callback {
-    private List<TopicBean> mOldData, mNewData;
+public class DiffCallback<T extends BaseItemBean> extends DiffUtil.Callback {
+    private List<BaseItemBean> mOldData, mNewData;
 
-    public DiffCallback(List<TopicBean> oldData, List<TopicBean> newData) {
-        this.mOldData = oldData;
-        this.mNewData = newData;
+    public DiffCallback(List<T> oldData, List<T> newData) {
+        List<BaseItemBean> temp = new ArrayList<>();
+        temp.addAll(oldData);
+        this.mOldData = temp;
+        temp = new ArrayList<>();
+        temp.addAll(newData);
+        this.mNewData = temp;
     }
 
     @Override
