@@ -14,7 +14,6 @@ import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.AnimTopicListAdapter;
-import com.jeez.guanpj.jreadhub.ui.adpter.DiffCallback;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
@@ -99,29 +98,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         if (null != dataList && !dataList.isEmpty()) {
             if (isPull2Refresh) {
                 mRefreshLayout.setRefreshing(false);
-                DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCallback(mAdapter.getData(), dataList), false);
-                diffResult.dispatchUpdatesTo(new ListUpdateCallback() {
-                    @Override
-                    public void onInserted(int position, int count) {
-                        List<TopicBean> changeList = new ArrayList<>();
-                        for (int i = position; i < position + count; i++) {
-                            changeList.add(dataList.get(i));
-                        }
-                        mAdapter.addData(position, changeList);
-                    }
-
-                    @Override
-                    public void onRemoved(int position, int count) {
-                    }
-
-                    @Override
-                    public void onMoved(int fromPosition, int toPosition) {
-                    }
-
-                    @Override
-                    public void onChanged(int position, int count, Object payload) {
-                    }
-                });
+                mPresenter.getDiffResult(mAdapter.getData(), dataList);
             } else {
                 mAdapter.addData(dataList);
                 mAdapter.loadMoreComplete();
@@ -141,6 +118,35 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         } else {
             mAdapter.loadMoreFail();
         }
+    }
+
+    @Override
+    public void onDiffResult(DiffUtil.DiffResult diffResult, List<TopicBean> newData) {
+        diffResult.dispatchUpdatesTo(new ListUpdateCallback() {
+            /**
+             * 只处理插入的数据
+             */
+            @Override
+            public void onInserted(int position, int count) {
+                List<TopicBean> changeList = new ArrayList<>();
+                for (int i = position; i < position + count; i++) {
+                    changeList.add(newData.get(i));
+                }
+                mAdapter.addData(position, changeList);
+            }
+
+            @Override
+            public void onRemoved(int position, int count) {
+            }
+
+            @Override
+            public void onMoved(int fromPosition, int toPosition) {
+            }
+
+            @Override
+            public void onChanged(int position, int count, Object payload) {
+            }
+        });
     }
 
     @Override

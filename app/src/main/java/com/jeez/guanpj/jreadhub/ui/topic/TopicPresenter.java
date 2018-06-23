@@ -1,5 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.topic;
 
+import android.support.v7.util.DiffUtil;
+
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
@@ -8,9 +10,13 @@ import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
+import com.jeez.guanpj.jreadhub.ui.adpter.DiffCallback;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 
 public class TopicPresenter extends BasePresenter<TopicContract.View> implements TopicContract.Presenter {
@@ -81,6 +87,27 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
                         if (newTopicCountBean.getCount() > 0) {
                             getView().showNewTopicCount(newTopicCountBean.getCount());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @Override
+    public void getDiffResult(List<TopicBean> oldData, List<TopicBean> newData) {
+        addSubscribe(Observable.just(DiffUtil.calculateDiff(new DiffCallback(oldData, newData), false))
+                .subscribeWith(new DisposableObserver<DiffUtil.DiffResult>() {
+                    @Override
+                    public void onNext(DiffUtil.DiffResult diffResult) {
+                        getView().onDiffResult(diffResult, newData);
                     }
 
                     @Override
