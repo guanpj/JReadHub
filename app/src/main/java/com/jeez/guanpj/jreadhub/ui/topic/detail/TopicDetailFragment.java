@@ -3,6 +3,7 @@ package com.jeez.guanpj.jreadhub.ui.topic.detail;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -118,13 +119,13 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_ring, 0, 0, 0);
             textView.setCompoundDrawablePadding(15);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            textView.setTextColor(getContext().getColor(R.color.text_topic_detail_news_title));
+            textView.setTextColor(ContextCompat.getColor(getContext(), R.color.text_topic_detail_news_title));
             textView.setBackgroundResource(R.drawable.selector_btn_background);
             if (TextUtils.isEmpty(topic.getSiteName())) {
                 textView.setText(topic.getTitle());
             } else {
                 SpannableString spannableTitle = SpannableString.valueOf(getContext().getString(R.string.title___site_name, topic.getTitle(), topic.getSiteName()));
-                spannableTitle.setSpan(new ForegroundColorSpan(getContext().getColor(R.color.text_topic_detail_news_author)),
+                spannableTitle.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.text_topic_detail_news_author)),
                         topic.getTitle().length(),
                         topic.getTitle().length() + topic.getSiteName().length() + 2,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

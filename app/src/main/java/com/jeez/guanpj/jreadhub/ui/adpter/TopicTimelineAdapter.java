@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -82,7 +83,7 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
                 mTxtDate.setText(mContext.getString(R.string.month__day, month, day));
             } else {
                 SpannableString spannableTitle = SpannableString.valueOf(mContext.getString(R.string.month__day__year, month, day, year));
-                spannableTitle.setSpan(new ForegroundColorSpan(mContext.getColor(R.color.text_topic_detail_news_author)),
+                spannableTitle.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.text_topic_detail_news_author)),
                         spannableTitle.toString().indexOf("\n") + 1,
                         spannableTitle.toString().indexOf("\n") + 5,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
