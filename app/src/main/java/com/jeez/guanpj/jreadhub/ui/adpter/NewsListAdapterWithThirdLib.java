@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -12,10 +13,22 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
-public class AnimNewsListAdapter extends BaseQuickAdapter<NewsBean, BaseViewHolder> {
+import java.util.List;
 
-    public AnimNewsListAdapter() {
+public class NewsListAdapterWithThirdLib extends BaseQuickAdapter<NewsBean, BaseViewHolder> {
+
+    public NewsListAdapterWithThirdLib() {
         super(R.layout.item_news);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position);
+        } else {
+            //局部刷新，这里只刷新时间
+            setInfo(holder, getItem(position));
+        }
     }
 
     @Override
@@ -28,24 +41,28 @@ public class AnimNewsListAdapter extends BaseQuickAdapter<NewsBean, BaseViewHold
             holder.setGone(R.id.tv_summary, false);
         }
 
+        setInfo(holder, newsBean);
+    }
+
+    private void setInfo(BaseViewHolder holder, NewsBean newsBean) {
+        SpannableString spannableInfoText = null;
         if (TextUtils.isEmpty(newsBean.getAuthorName())) {
             String infoText = mContext.getString(R.string.site_name___time,
                     newsBean.getSiteName(),
                     FormatUtils.getRelativeTimeSpanString(newsBean.getPublishDate()));
-            SpannableString spannableInfoText = new SpannableString(infoText);
+            spannableInfoText = new SpannableString(infoText);
             spannableInfoText.setSpan(new StyleSpan(Typeface.BOLD),
                     0, newsBean.getSiteName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            holder.setText(R.id.tv_info, spannableInfoText);
         } else {
             String infoText = mContext.getString(R.string.site_name___author_name___time,
                     newsBean.getSiteName(),
                     newsBean.getAuthorName(),
                     FormatUtils.getRelativeTimeSpanString(newsBean.getPublishDate()));
-            SpannableString spannableInfoText = new SpannableString(infoText);
+            spannableInfoText = new SpannableString(infoText);
             spannableInfoText.setSpan(new StyleSpan(Typeface.BOLD),
                     0, newsBean.getSiteName().length() + newsBean.getAuthorName().length() + 3,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            holder.setText(R.id.tv_info, spannableInfoText);
         }
+        holder.setText(R.id.tv_info, spannableInfoText);
     }
 }

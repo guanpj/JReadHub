@@ -102,7 +102,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                         NavigationUtil.openInBrowser(getActivity(), request.getUrl().toString());
                     } else {
                         ((SupportActivity) getContext()).findFragment(MainFragment.class)
-                                .start(CommonWebViewFragment.newInstance(request.getUrl().toString()));
+                                .start(CommonWebViewFragment.newInstance(request.getUrl().toString(), ""));
                     }
                 }
                 return true;
@@ -157,7 +157,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
         mTxtJump2Source.setOnClickListener(v -> {
             dismiss();
             ((SupportActivity) getContext()).findFragment(MainFragment.class)
-                .start(CommonWebViewFragment.newInstance(data.getUrl()));
+                .start(CommonWebViewFragment.newInstance(data.getUrl(), data.getTitle()));
         });
 
         String htmlHead = "<head>"

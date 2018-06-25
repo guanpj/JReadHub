@@ -1,16 +1,15 @@
 package com.jeez.guanpj.jreadhub.ui.settting;
 
-import android.content.res.Resources;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
-import com.jeez.guanpj.jreadhub.widget.custom.SettingItemView;
+import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
+import com.jeez.guanpj.jreadhub.widget.custom.SettingItemView;
 import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
@@ -40,12 +39,9 @@ public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresente
 
     @Override
     public void initView() {
-        TypedValue navIcon = new TypedValue();
-        Resources.Theme theme = getActivity().getTheme();
-        theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
-
         mThemeDialog = new ThemeDialog(getActivity());
-        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
+        mToolbar.setTitle(getText(R.string.menu_setting));
         mToolbar.setNavigationOnClickListener(v -> pop());
     }
 

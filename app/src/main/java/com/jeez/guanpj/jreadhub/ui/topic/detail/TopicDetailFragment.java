@@ -1,7 +1,6 @@
 package com.jeez.guanpj.jreadhub.ui.topic.detail;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
@@ -29,6 +28,7 @@ import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragme
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -61,14 +61,18 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     TagFlowLayout mRelativeTopic;
     @BindView(R.id.scroll_view)
     NestedScrollView mScrollView;
+    @BindView(R.id.txt_toolbar_header)
+    TextView mToolbarHeader;
 
     private TopicBean mTopic;
+    private String mTitle;
     private TopicTimelineAdapter mTimelineAdapter;
 
-    public static TopicDetailFragment newInstance(String topicId) {
+    public static TopicDetailFragment newInstance(String topicId, String title) {
         TopicDetailFragment fragment = new TopicDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_TOPIC_ID, topicId);
+        bundle.putString(Constants.EXTRA_TOPIC_TITLE, title);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -77,6 +81,7 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
+        mTitle = getArguments().getString(Constants.EXTRA_TOPIC_TITLE);
         mPresenter.getTopicDetail(topicId);
     }
 
@@ -92,12 +97,12 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
 
     @Override
     public void initView() {
-        TypedValue navIcon = new TypedValue();
-        Resources.Theme theme = getActivity().getTheme();
-        theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
-
-        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
+        mToolbar.inflateMenu(R.menu.menu_topic_detail);
+        mToolbar.setTitle(getText(R.string.topic_detail));
         mToolbar.setNavigationOnClickListener(v -> pop());
+        mToolbarHeader.setText(mTitle);
+        mToolbarHeader.setVisibility(View.GONE);
     }
 
     @Override
@@ -139,7 +144,7 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
                     url = topic.getUrl();
                 }
                 if (!TextUtils.isEmpty(url)) {
-                    RxBus.getInstance().post(new OpenWebSiteEvent(url));
+                    RxBus.getInstance().post(new OpenWebSiteEvent(url, topic.getTitle()));
                 }
             });
             mTitleContainer.addView(textView);
@@ -186,6 +191,13 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
         }
 
         mScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > mTxtTopicTime.getBottom()) {
+                mToolbarHeader.setVisibility(View.VISIBLE);
+                mToolbar.setTitle("");
+            } else {
+                mToolbarHeader.setVisibility(View.GONE);
+                mToolbar.setTitle(getText(R.string.topic_detail));
+            }
         });
     }
 

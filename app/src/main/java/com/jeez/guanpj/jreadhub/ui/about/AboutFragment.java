@@ -1,8 +1,6 @@
 package com.jeez.guanpj.jreadhub.ui.about;
 
-import android.content.res.Resources;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,6 +10,7 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
@@ -42,13 +41,9 @@ public class AboutFragment extends AbsBaseSwipeBackFragment {
 
     @Override
     public void initView() {
-        TypedValue navIcon = new TypedValue();
-        Resources.Theme theme = getActivity().getTheme();
-        theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
-
-        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
+        mToolbar.setTitle(getText(R.string.menu_about));
         mToolbar.setNavigationOnClickListener(v -> pop());
-
         mVersion.setText(BuildConfig.VERSION_NAME);
     }
 
@@ -59,12 +54,12 @@ public class AboutFragment extends AbsBaseSwipeBackFragment {
 
     @OnClick(R.id.ll_readhub_site)
     void go2ReadhubSite(View view) {
-        RxBus.getInstance().post(new OpenWebSiteEvent("https://readhub.me"));
+        RxBus.getInstance().post(new OpenWebSiteEvent("https://readhub.me", "Readhub 官网"));
     }
 
     @OnClick(R.id.ll_code)
     void go2CodeSite(View view) {
-        RxBus.getInstance().post(new OpenWebSiteEvent("https://github.com/guanpj/JReadHub"));
+        RxBus.getInstance().post(new OpenWebSiteEvent("https://github.com/guanpj/JReadHub", "项目源码"));
     }
 
     @OnClick(R.id.ll_version)

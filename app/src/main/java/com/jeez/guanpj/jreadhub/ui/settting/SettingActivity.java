@@ -16,6 +16,7 @@ import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpSwipeBackActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.SettingItemView;
 import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
 import com.tencent.bugly.beta.Beta;
@@ -45,12 +46,8 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
 
     @Override
     public void initView() {
-        TypedValue navIcon = new TypedValue();
-        Resources.Theme theme = getTheme();
-        theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
-
         mThemeDialog = new ThemeDialog(this);
-        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setNavigationIcon(ResourceUtil.getResource(this, R.attr.navBackIcon));
         mToolbar.setNavigationOnClickListener(v -> finish());
     }
 

@@ -149,7 +149,7 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
             NavigationUtil.openInBrowser(this, event.getUrl());
         } else {
             //findFragment(MainFragment.class).start(CommonArticleFragment.newInstance(event.getUrl()));
-            findFragment(MainFragment.class).start(CommonWebViewFragment.newInstance(event.getUrl()));
+            findFragment(MainFragment.class).start(CommonWebViewFragment.newInstance(event.getUrl(), event.getTitle()));
         }
     }
 

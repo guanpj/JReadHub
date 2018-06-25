@@ -97,7 +97,7 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
         @OnClick(R.id.txt_topic_trace_content)
         void onClickContent(View view) {
             ((SupportActivity) mContext).findFragment(MainFragment.class)
-                    .start(TopicDetailFragment.newInstance(mRelevantTopicBean.getId()));
+                    .start(TopicDetailFragment.newInstance(mRelevantTopicBean.getId(), mRelevantTopicBean.getTitle()));
             RxBus.getInstance().post(new RelevantTopicItemClickEvent());
         }
     }

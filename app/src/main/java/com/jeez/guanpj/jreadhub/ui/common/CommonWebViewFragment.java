@@ -1,16 +1,15 @@
 package com.jeez.guanpj.jreadhub.ui.common;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseSwipeBackFragment;
@@ -18,6 +17,7 @@ import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
+import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.just.agentweb.AgentWeb;
 
 import java.util.concurrent.TimeUnit;
@@ -31,13 +31,17 @@ public class CommonWebViewFragment extends AbsBaseSwipeBackFragment implements T
     Toolbar mToolbar;
     @BindView(R.id.fl_web_container)
     FrameLayout mWebContainer;
+    @BindView(R.id.txt_toolbar_header)
+    TextView mToolbarHeader;
     AgentWeb mAgentWeb;
     private String mUrl;
+    private String mTitle;
 
-    public static CommonWebViewFragment newInstance(String url) {
+    public static CommonWebViewFragment newInstance(String url, String title) {
         CommonWebViewFragment fragment = new CommonWebViewFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.EXTRA_TOPIC_URL, url);
+        bundle.putString(Constants.EXTRA_TOPIC_TITLE, title);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -47,6 +51,7 @@ public class CommonWebViewFragment extends AbsBaseSwipeBackFragment implements T
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         mUrl = getArguments().getString(Constants.EXTRA_TOPIC_URL);
+        mTitle = getArguments().getString(Constants.EXTRA_TOPIC_TITLE);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -57,14 +62,12 @@ public class CommonWebViewFragment extends AbsBaseSwipeBackFragment implements T
 
     @Override
     public void initView() {
-        TypedValue navIcon = new TypedValue();
-        Resources.Theme theme = getActivity().getTheme();
-        theme.resolveAttribute(R.attr.navBackIcon, navIcon, true);
-
-        mToolbar.setNavigationIcon(navIcon.resourceId);
+        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
         mToolbar.setNavigationOnClickListener(v -> pop());
-        mToolbar.inflateMenu(R.menu.menu_topic);
+        mToolbar.inflateMenu(R.menu.menu_web);
+        mToolbar.setTitle("");
         mToolbar.setOnMenuItemClickListener(this);
+        mToolbarHeader.setText(mTitle);
     }
 
     @Override

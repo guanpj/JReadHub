@@ -18,12 +18,14 @@
     app:layout_scrollFlags="scroll|enterAlways">
 
     <TextView
-        android:id="@+id/txt_name"
+        android:id="@+id/txt_toolbar_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:maxLines="2"
+        android:ellipsize="end"
         tools:text="Readhub"
-        android:textSize="@dimen/textSize_14"
+        android:textSize="@dimen/textSize_16"
         android:textColor="?attr/readhubToolbarText"/>
 
 </android.support.v7.widget.Toolbar>

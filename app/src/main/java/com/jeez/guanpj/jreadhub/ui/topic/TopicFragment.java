@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.topic;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
@@ -13,7 +14,8 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
-import com.jeez.guanpj.jreadhub.ui.adpter.AnimTopicListAdapter;
+import com.jeez.guanpj.jreadhub.ui.adpter.TopicListAdapterWithThirdLib;
+import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
@@ -34,7 +36,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     @BindView(R.id.txt_new)
     TextView mTxtNew;
 
-    private AnimTopicListAdapter mAdapter;
+    private TopicListAdapterWithThirdLib mAdapter;
 
     public static TopicFragment newInstance() {
         Bundle args = new Bundle();
@@ -57,13 +59,14 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
-
-        mAdapter = new AnimTopicListAdapter();
+        mAdapter = new TopicListAdapterWithThirdLib();
         mAdapter.isFirstOnly(false);
         mAdapter.setNotDoAnimationCount(3);
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         mAdapter.setLoadMoreView(new CustomLoadMoreView());
         mRecyclerView.setAdapter(mAdapter);
+        mRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(),
+                ResourceUtil.getResource(getActivity(), R.attr.readhubTheme)));
     }
 
     @Override
@@ -98,6 +101,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         if (null != dataList && !dataList.isEmpty()) {
             if (isPull2Refresh) {
                 mRefreshLayout.setRefreshing(false);
+                //mAdapter.setNewData(dataList);
                 mPresenter.getDiffResult(mAdapter.getData(), dataList);
             } else {
                 mAdapter.addData(dataList);
@@ -145,6 +149,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
             @Override
             public void onChanged(int position, int count, Object payload) {
+                mAdapter.notifyItemRangeChanged(position, count, payload);
             }
         });
     }

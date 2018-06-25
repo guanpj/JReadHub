@@ -1,5 +1,6 @@
 package com.jeez.guanpj.jreadhub.ui.adpter;
 
+import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 
 import com.jeez.guanpj.jreadhub.bean.BaseItemBean;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiffCallback<T extends BaseItemBean> extends DiffUtil.Callback {
+    public static final String UPDATE_TIME_SIGNAL = "update_time";
+
     private List<BaseItemBean> mOldData, mNewData;
 
     public DiffCallback(List<T> oldData, List<T> newData) {
@@ -36,9 +39,16 @@ public class DiffCallback<T extends BaseItemBean> extends DiffUtil.Callback {
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        if (!mOldData.get(oldItemPosition).getTitle().equals(mNewData.get(newItemPosition).getTitle())) {
+        /*if (!mOldData.get(oldItemPosition).getTitle().equals(mNewData.get(newItemPosition).getTitle())) {
             return false;
         }
-        return true;
+        return true;*/
+        return  false;
+    }
+
+    @Nullable
+    @Override
+    public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+        return UPDATE_TIME_SIGNAL;
     }
 }

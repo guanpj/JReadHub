@@ -27,19 +27,30 @@ import com.jeez.guanpj.jreadhub.util.FormatUtils;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportActivity;
 
-public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHolder> {
+public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, BaseViewHolder> {
 
     //每个 Topic 下显示报道的最大数量
     private static final int MOST_NEWS_COUNT_PER_ITEM = 3;
 
-    public AnimTopicListAdapter() {
+    public TopicListAdapterWithThirdLib() {
         super(R.layout.item_topic);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (payloads.isEmpty()) {
+            onBindViewHolder(holder, position);
+        } else {
+            //局部刷新，这里只刷新时间
+            holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(getItem(position).getPublishDate()));
+        }
     }
 
     @Override
@@ -71,13 +82,13 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
                 InstantReadFragment.TAG)
         );
         holder.setOnClickListener(R.id.ll_item_header, v -> ((SupportActivity) mContext).findFragment(MainFragment.class)
-                .start(TopicDetailFragment.newInstance(topicBean.getId())));
-
-        ImageView imgExpandState = holder.getView(R.id.img_expand_state);
-        holder.setImageResource(R.id.img_expand_state, R.drawable.ic_more_info);
+                .start(TopicDetailFragment.newInstance(topicBean.getId(), topicBean.getTitle())));
 
         ExpandableLayout layoutExpand = holder.getView(R.id.layout_expand);
         layoutExpand.setExpanded(false);
+
+        ImageView imgExpandState = holder.getView(R.id.img_expand_state);
+        imgExpandState.setImageResource(R.drawable.ic_more_info);
 
         holder.setOnClickListener(R.id.fl_item_footer, v -> {
             if (layoutExpand.getState() == ExpandableLayout.State.COLLAPSED) {
@@ -107,7 +118,7 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
                 View newsMoreView = mLayoutInflater.inflate(R.layout.item_topic_news_more, null, false);
                 newsMoreView.setOnClickListener(v ->
                         ((SupportActivity) mContext).findFragment(MainFragment.class)
-                                .start(TopicDetailFragment.newInstance(topicBean.getId()))
+                                .start(TopicDetailFragment.newInstance(topicBean.getId(), topicBean.getTitle()))
                 );
                 layoutSource.addView(newsMoreView);
                 break;
@@ -136,9 +147,9 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
 
         void bindData(@NonNull TopicNewsBean news) {
             this.news = news;
+            tvTitle.setText(news.getTitle());
             String infoText = mContext.getString(R.string.site_name___time, news.getSiteName(),
                     FormatUtils.getRelativeTimeSpanString(news.getPublishDate()));
-            tvTitle.setText(news.getTitle());
 
             SpannableString spannableInfoText = new SpannableString(infoText);
             spannableInfoText.setSpan(new StyleSpan(Typeface.BOLD),
@@ -152,7 +163,7 @@ public class AnimTopicListAdapter extends BaseQuickAdapter<TopicBean, BaseViewHo
 
         @OnClick(R.id.btn_item)
         void onBtnItemClick() {
-            RxBus.getInstance().post(new OpenWebSiteEvent(news.getMobileUrl()));
+            RxBus.getInstance().post(new OpenWebSiteEvent(news.getMobileUrl(), news.getTitle()));
         }
     }
 }

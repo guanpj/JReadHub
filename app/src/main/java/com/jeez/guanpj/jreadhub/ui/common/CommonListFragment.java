@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.ui.common;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
@@ -15,8 +16,9 @@ import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
-import com.jeez.guanpj.jreadhub.ui.adpter.AnimNewsListAdapter;
+import com.jeez.guanpj.jreadhub.ui.adpter.NewsListAdapterWithThirdLib;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
@@ -33,7 +35,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
     @BindView(R.id.recycler_view)
     HeaderAndFooterRecyclerView mRecyclerView;
 
-    private AnimNewsListAdapter mAdapter;
+    private NewsListAdapterWithThirdLib mAdapter;
     private @NewsBean.Type String mNewsType;
 
     public static CommonListFragment newInstance(@NewsBean.Type String type) {
@@ -69,13 +71,15 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
         //mRecyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
 
-        mAdapter = new AnimNewsListAdapter();
+        mAdapter = new NewsListAdapterWithThirdLib();
         mAdapter.isFirstOnly(false);
         mAdapter.setNotDoAnimationCount(3);
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         mAdapter.setLoadMoreView(new CustomLoadMoreView());
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
+        mRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(),
+                ResourceUtil.getResource(getActivity(), R.attr.readhubTheme)));
     }
 
     @Override
@@ -107,6 +111,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         if (null != dataList && !dataList.isEmpty()) {
             if (isPull2Refresh) {
                 mRefreshLayout.setRefreshing(false);
+                //mAdapter.setNewData(dataList);
                 mPresenter.getDiffResult(mAdapter.getData(), dataList);
             } else {
                 mAdapter.addData(dataList);
@@ -151,6 +156,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
             @Override
             public void onChanged(int position, int count, Object payload) {
+                mAdapter.notifyItemRangeChanged(position, count, payload);
             }
         });
     }
@@ -175,7 +181,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
                 url = newsBean.getUrl();
             }
             if (!TextUtils.isEmpty(url)) {
-                RxBus.getInstance().post(new OpenWebSiteEvent(url));
+                RxBus.getInstance().post(new OpenWebSiteEvent(url, newsBean.getTitle()));
             }
         }
     }
