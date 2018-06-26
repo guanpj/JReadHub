@@ -30,12 +30,12 @@ public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment impleme
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), container, false);
-        unBinder = ButterKnife.bind(this, view);
+        mContentView = inflater.inflate(getLayoutId(), container, false);
+        unBinder = ButterKnife.bind(this, mContentView);
         RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         initView();
         initDataAndEvent();
-        return attachToSwipeBack(view);
+        return attachToSwipeBack(mContentView);
     }
 
     @Override

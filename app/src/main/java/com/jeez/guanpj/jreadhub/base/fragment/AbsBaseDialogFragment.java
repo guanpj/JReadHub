@@ -28,11 +28,11 @@ public abstract class AbsBaseDialogFragment extends DialogFragment implements IB
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), container, false);
-        unBinder = ButterKnife.bind(this, view);
+        mContentView = inflater.inflate(getLayoutId(), container, false);
+        unBinder = ButterKnife.bind(this, mContentView);
         initView();
         initDataAndEvent();
-        return view;
+        return mContentView;
     }
 
     @Override

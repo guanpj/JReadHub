@@ -85,7 +85,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
     @Override
     public void initDataAndEvent() {
-        mAdapter.setOnLoadMoreListener(() -> doMore(), mRecyclerView);
+        mAdapter.setOnLoadMoreListener(() -> doLoadMore(), mRecyclerView);
         mRefreshLayout.setOnRefreshListener(this);
 
         mEmptyView.setOnClickListener(v -> onRefresh());
@@ -94,7 +94,8 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         onRefresh();
         // 30 秒轮询获取新话题数量
         mPresenter.addSubscribe(Observable.interval(15, TimeUnit.SECONDS)
-                .subscribe(aLong -> mPresenter.getNewTopicCount(mAdapter.getItem(Constants.TOPIC_TOP_COUNT).getOrder())));
+                .filter(time -> Constants.TOPIC_TOP_COUNT > 0)
+                .subscribe(time -> mPresenter.getNewTopicCount(mAdapter.getItem(Constants.TOPIC_TOP_COUNT).getOrder())));
     }
 
 
@@ -105,7 +106,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         mPresenter.doRefresh();
     }
 
-    public void doMore() {
+    public void doLoadMore() {
         mPresenter.doLoadMore(mAdapter.getItem(mAdapter.getItemCount() - 2).getOrder());
     }
 
@@ -176,6 +177,7 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
 
             @Override
             public void onMoved(int fromPosition, int toPosition) {
+                mAdapter.notifyItemMoved(fromPosition, toPosition);
             }
 
             @Override

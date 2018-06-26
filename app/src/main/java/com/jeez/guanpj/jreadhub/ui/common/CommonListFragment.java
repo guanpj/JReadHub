@@ -7,7 +7,9 @@ import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
@@ -37,6 +39,10 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     private NewsListAdapterWithThirdLib mAdapter;
     private @NewsBean.Type String mNewsType;
+
+    private View mLoadingView;
+    private View mErrorView;
+    private View mEmptyView;
 
     public static CommonListFragment newInstance(@NewsBean.Type String type) {
         CommonListFragment fragment = new CommonListFragment();
@@ -80,29 +86,36 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(),
                 ResourceUtil.getResource(getActivity(), R.attr.readhubTheme)));
+
+        mLoadingView = LayoutInflater.from(getContext()).inflate(R.layout.view_loading, (ViewGroup) mRecyclerView.getParent(), false);
+        mEmptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, (ViewGroup) mRecyclerView.getParent(), false);
+        mErrorView = LayoutInflater.from(getContext()).inflate(R.layout.view_error, (ViewGroup) mRecyclerView.getParent(), false);
     }
 
     @Override
     public void initDataAndEvent() {
-        mAdapter.setOnLoadMoreListener(() -> doMore(), mRecyclerView);
+        mAdapter.setOnLoadMoreListener(() -> doLoadMore(), mRecyclerView);
         mRefreshLayout.setOnRefreshListener(this);
-        mRefreshLayout.setRefreshing(true);
+
+        mEmptyView.setOnClickListener(v -> onRefresh());
+        mErrorView.setOnClickListener(v -> onRefresh());
         onRefresh();
     }
 
     @Override
     public void onRefresh() {
+        mRefreshLayout.setRefreshing(true);
         mAdapter.setEnableLoadMore(false);
         mPresenter.doRefresh(mNewsType);
     }
 
-    public void doMore() {
+    public void doLoadMore() {
         mPresenter.doLoadMore(mNewsType, mAdapter.getItem(mAdapter.getItemCount() - 2).getPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
     public void onRequestStart() {
-
+        mAdapter.setEmptyView(mLoadingView);
     }
 
     @Override
@@ -118,7 +131,9 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
                 mAdapter.loadMoreComplete();
             }
         } else {
-            if (!isPull2Refresh) {
+            if (isPull2Refresh) {
+                mAdapter.setEmptyView(mEmptyView);
+            } else {
                 mAdapter.loadMoreEnd(true);
             }
         }
@@ -129,6 +144,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
     public void onRequestError(boolean isPull2Refresh) {
         if (isPull2Refresh) {
             mRefreshLayout.setRefreshing(false);
+            mAdapter.setEmptyView(mErrorView);
         } else {
             mAdapter.loadMoreFail();
         }
@@ -148,10 +164,14 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
             @Override
             public void onRemoved(int position, int count) {
+                if (position < Constants.TOPIC_PAGE_SIZE) {
+                    mAdapter.notifyItemRangeRemoved(position, count);
+                }
             }
 
             @Override
             public void onMoved(int fromPosition, int toPosition) {
+                mAdapter.notifyItemMoved(fromPosition, toPosition);
             }
 
             @Override
