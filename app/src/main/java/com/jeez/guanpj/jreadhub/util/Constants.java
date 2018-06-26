@@ -25,6 +25,9 @@ public class Constants {
     public static final String EXTRA_TOPIC_URL = "EXTRA_TOPIC_URL";
     public static final String EXTRA_TOPIC_TITLE = "EXTRA_TOPIC_TITLE";
 
+    public static final int TOPIC_PAGE_SIZE = 20;
+    public static int TOPIC_TOP_COUNT = 0;
+
     public static final String KEY_SHARED_PREFERENCE = "readhub_preference";
 
     public interface Key {

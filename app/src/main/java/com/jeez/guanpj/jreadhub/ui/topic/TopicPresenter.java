@@ -11,6 +11,7 @@ import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 import com.jeez.guanpj.jreadhub.ui.adpter.DiffCallback;
+import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
 
@@ -21,7 +22,6 @@ import io.reactivex.observers.DisposableObserver;
 
 public class TopicPresenter extends BasePresenter<TopicContract.View> implements TopicContract.Presenter {
     private DataManager mDataManager;
-    private static final int PAGE_SIZE = 20;
 
     @Inject
     TopicPresenter(DataManager dataManager) {
@@ -37,7 +37,7 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
 
     @Override
     public void doRefresh() {
-        addSubscribe(mDataManager.getTopicList(null, PAGE_SIZE)
+        addSubscribe(mDataManager.getTopicList(null, Constants.TOPIC_PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
@@ -58,7 +58,7 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
 
     @Override
     public void doLoadMore(Long lastCursor) {
-        addSubscribe(mDataManager.getTopicList(lastCursor, PAGE_SIZE)
+        addSubscribe(mDataManager.getTopicList(lastCursor, Constants.TOPIC_PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
@@ -84,8 +84,9 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
                 .subscribeWith(new DisposableObserver<NewTopicCountBean>() {
                     @Override
                     public void onNext(NewTopicCountBean newTopicCountBean) {
-                        if (newTopicCountBean.getCount() > 0) {
-                            getView().showNewTopicCount(newTopicCountBean.getCount());
+                        //返回的置顶话题个数包括置顶的话题
+                        if (newTopicCountBean.getCount() > Constants.TOPIC_TOP_COUNT) {
+                            getView().showNewTopicCount(newTopicCountBean.getCount() - Constants.TOPIC_TOP_COUNT);
                         }
                     }
 

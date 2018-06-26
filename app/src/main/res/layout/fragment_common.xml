@@ -24,8 +24,11 @@
             android:id="@+id/txt_new"
             android:layout_width="match_parent"
             android:layout_height="@dimen/new_topic_bar_height"
+            android:drawableRight="@drawable/ic_close_white"
+            android:paddingRight="@dimen/dimen_8_dp"
             android:gravity="center"
             android:background="@color/bg_new_topic_bar"
+            android:textSize="@dimen/textSize_14"
             android:textColor="@color/white"
             android:visibility="gone"/>
 

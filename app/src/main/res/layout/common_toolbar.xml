@@ -24,8 +24,8 @@
         android:gravity="center"
         android:maxLines="2"
         android:ellipsize="end"
-        tools:text="Readhub"
         android:textSize="@dimen/textSize_16"
-        android:textColor="?attr/readhubToolbarText"/>
+        android:textColor="?attr/readhubToolbarText"
+        android:textStyle="bold"/>
 
 </android.support.v7.widget.Toolbar>

@@ -10,6 +10,7 @@ import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 import com.jeez.guanpj.jreadhub.ui.adpter.DiffCallback;
+import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
 
@@ -20,7 +21,6 @@ import io.reactivex.observers.DisposableObserver;
 
 public class CommonPresenter extends BasePresenter<CommonContract.View> implements CommonContract.Presenter {
     private DataManager mDataManager;
-    private static final int PAGE_SIZE = 20;
 
     @Inject
     CommonPresenter(DataManager dataManager) {
@@ -36,7 +36,7 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
 
     @Override
     public void doRefresh(@NewsBean.Type String type) {
-        addSubscribe(mDataManager.getNewsList(type, null, PAGE_SIZE)
+        addSubscribe(mDataManager.getNewsList(type, null, Constants.TOPIC_PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
@@ -57,7 +57,7 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
 
     @Override
     public void doLoadMore(@NewsBean.Type String type, Long lastCursor) {
-        addSubscribe(mDataManager.getNewsList(type, lastCursor, PAGE_SIZE)
+        addSubscribe(mDataManager.getNewsList(type, lastCursor, Constants.TOPIC_PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override

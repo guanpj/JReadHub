@@ -10,9 +10,6 @@
     <string name="action_open">在浏览器中打开</string>
     <string name="action_collect">收藏</string>
 
-    <string name="load_more_finished">已经到底啦</string>
-    <string name="load_more_failed">加载失败，点击重试</string>
-
     <string name="title___site_name">%1$s&#160;&#160;%2$s</string>
     <string name="site_name___author_name___time">%1$s&#160;/&#160;%2$s&#160;&#160;&#160;%3$s</string>
     <string name="site_name___time">%1$s&#160;&#160;&#160;%2$s</string>
@@ -37,5 +34,6 @@
     <string name="brvah_loading">正在加载...</string>
     <string name="brvah_load_failed">加载失败，点击重试</string>
     <string name="brvah_load_end">没有更多数据</string>
+    <string name="brvah_empty">暂无数据，点击重试</string>
 
 </resources>
