@@ -4,11 +4,11 @@ import android.app.Activity;
 
 import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
 import com.jeez.guanpj.jreadhub.di.scope.FragmentScope;
-import com.jeez.guanpj.jreadhub.ui.common.CommonListFragment;
-import com.jeez.guanpj.jreadhub.ui.settting.SettingFragment;
-import com.jeez.guanpj.jreadhub.ui.topic.TopicFragment;
-import com.jeez.guanpj.jreadhub.ui.topic.detail.TopicDetailFragment;
-import com.jeez.guanpj.jreadhub.ui.topic.instant.InstantReadFragment;
+import com.jeez.guanpj.jreadhub.module.common.CommonListFragment;
+import com.jeez.guanpj.jreadhub.module.settting.SettingFragment;
+import com.jeez.guanpj.jreadhub.module.topic.TopicFragment;
+import com.jeez.guanpj.jreadhub.module.topic.detail.TopicDetailFragment;
+import com.jeez.guanpj.jreadhub.module.topic.instant.InstantReadFragment;
 
 import dagger.Component;
 

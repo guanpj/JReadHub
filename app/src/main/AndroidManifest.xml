@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.splash.SplashActivity">
+        <activity android:name=".module.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,12 +23,12 @@
         </activity>
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".module.main.MainActivity"
             android:launchMode="singleTask">
         </activity>
 
         <activity
-            android:name=".ui.settting.SettingActivity"
+            android:name=".module.settting.SettingActivity"
             android:theme="@style/AppTheme.NoActionBar.SwipeBack"/>
 
         <provider

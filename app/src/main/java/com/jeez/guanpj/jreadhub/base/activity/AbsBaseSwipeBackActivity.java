@@ -11,8 +11,8 @@ import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
-import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
-import com.jeez.guanpj.jreadhub.ui.splash.SplashActivity;
+import com.jeez.guanpj.jreadhub.module.main.MainActivity;
+import com.jeez.guanpj.jreadhub.module.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.SharePreferencesHelper;
 

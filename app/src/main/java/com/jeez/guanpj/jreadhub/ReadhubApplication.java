@@ -9,7 +9,7 @@ import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.di.component.AppComponent;
 import com.jeez.guanpj.jreadhub.di.component.DaggerAppComponent;
 import com.jeez.guanpj.jreadhub.di.module.AppModule;
-import com.jeez.guanpj.jreadhub.ui.main.MainActivity;
+import com.jeez.guanpj.jreadhub.module.main.MainActivity;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
