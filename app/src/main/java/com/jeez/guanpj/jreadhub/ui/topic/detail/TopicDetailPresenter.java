@@ -20,24 +20,25 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
     }
 
     @Override
-    public void getTopicDetail(String topicId) {
+    public void getTopicDetail(String topicId, boolean isPullToRefresh) {
         addSubscribe(mDataManager.getTopicDetail(topicId)
                 .compose(RxSchedulers.io2Main())
-                .doOnSubscribe(disposable -> getView().onRequestStart())
+                .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .subscribeWith(new DisposableObserver<TopicBean>() {
                     @Override
                     public void onNext(TopicBean bean) {
-                        getView().onRequestTopicEnd(bean);
+                        getView().bindData(bean);
+                        //getView().onRequestTopicEnd(bean);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().onRequestError();
+                        getView().showError();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        getView().showContent();
                     }
                 }));
     }

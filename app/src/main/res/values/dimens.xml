@@ -52,4 +52,6 @@
     <dimen name="gap_size">8dp</dimen>
     <dimen name="new_topic_bar_height">25dp</dimen>
 
+    <dimen name="lce_content_view_animation_translate_y">40dp</dimen>
+
 </resources>

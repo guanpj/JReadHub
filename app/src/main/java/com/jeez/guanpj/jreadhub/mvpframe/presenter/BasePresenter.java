@@ -1,7 +1,7 @@
 package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
-import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
+import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.PreferenceHelper;
 
@@ -18,7 +18,7 @@ import io.reactivex.disposables.Disposable;
  * Created by Jie on 2016-11-2.
  */
 
-public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
+public class BasePresenter<V extends IBaseMvpView> implements IBasePresenter<V> {
 
     private WeakReference<V> weakView;
     private V proxyView;

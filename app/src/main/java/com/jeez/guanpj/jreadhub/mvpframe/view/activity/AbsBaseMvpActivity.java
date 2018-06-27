@@ -8,7 +8,7 @@ import com.jeez.guanpj.jreadhub.di.component.ActivityComponent;
 import com.jeez.guanpj.jreadhub.di.component.DaggerActivityComponent;
 import com.jeez.guanpj.jreadhub.di.module.ActivityModule;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
-import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
+import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
 
 import javax.inject.Inject;
 
@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBaseMvpActivity<P extends BasePresenter> extends AbsBaseActivity implements IBaseView {
+public abstract class AbsBaseMvpActivity<P extends BasePresenter> extends AbsBaseActivity implements IBaseMvpView {
 
     @Inject
     public P mPresenter;

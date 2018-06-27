@@ -1,6 +1,5 @@
 package com.jeez.guanpj.jreadhub.ui.topic.detail;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
@@ -24,7 +23,7 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
-import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.AbsBaseMvpLceSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.ui.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.ui.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.util.Constants;
@@ -39,7 +38,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetailPresenter> implements TopicDetailContract.View {
+public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBean, TopicDetailPresenter> implements TopicDetailContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -59,13 +58,13 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     LinearLayout mRelativeTopicContainer;
     @BindView(R.id.tfl_relative_topic)
     TagFlowLayout mRelativeTopic;
-    @BindView(R.id.scroll_view)
+    @BindView(R.id.content_view)
     NestedScrollView mScrollView;
     @BindView(R.id.txt_toolbar_header)
     TextView mToolbarHeader;
 
-    private TopicBean mTopic;
-    private String mTitle;
+    private String mTopicTitle;
+    private String mTopicId;
     private TopicTimelineAdapter mTimelineAdapter;
 
     public static TopicDetailFragment newInstance(String topicId, String title) {
@@ -80,9 +79,14 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String topicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
-        mTitle = getArguments().getString(Constants.EXTRA_TOPIC_TITLE);
-        mPresenter.getTopicDetail(topicId);
+        mTopicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
+        mTopicTitle = getArguments().getString(Constants.EXTRA_TOPIC_TITLE);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mPresenter.getTopicDetail(mTopicId, false);
     }
 
     @Override
@@ -101,22 +105,37 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
         mToolbar.inflateMenu(R.menu.menu_topic_detail);
         mToolbar.setTitle(getText(R.string.topic_detail));
         mToolbar.setNavigationOnClickListener(v -> pop());
-        mToolbarHeader.setText(mTitle);
+        mToolbarHeader.setText(mTopicTitle);
         mToolbarHeader.setVisibility(View.GONE);
     }
 
     @Override
     public void initDataAndEvent() {
-        if (mTopic == null) {
-            return;
-        }
-        mTxtTopicTitle.setText(mTopic.getTitle());
-        mTxtTopicTime.setText(mTopic.getPublishDate().toLocalDate().toString() + "  " +
-                mTopic.getPublishDate().toLocalTime().toString().substring(0, 8));
-        mTxtTopicDescription.setText(mTopic.getSummary());
-        mTxtTopicDescription.setVisibility(TextUtils.isEmpty(mTopic.getSummary()) ? View.GONE : View.VISIBLE);
+        mTimelineAdapter = new TopicTimelineAdapter(getContext());
+        mRecyclerTimeline.setAdapter(mTimelineAdapter);
+        mRecyclerTimeline.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerTimeline.setNestedScrollingEnabled(false);
+
+        mScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > mTxtTopicTime.getBottom()) {
+                mToolbarHeader.setVisibility(View.VISIBLE);
+                mToolbar.setTitle("");
+            } else {
+                mToolbarHeader.setVisibility(View.GONE);
+                mToolbar.setTitle(getText(R.string.topic_detail));
+            }
+        });
+    }
+
+    @Override
+    public void bindData(TopicBean topicBean) {
+        mTxtTopicTitle.setText(topicBean.getTitle());
+        mTxtTopicTime.setText(topicBean.getPublishDate().toLocalDate().toString() + "  " +
+                topicBean.getPublishDate().toLocalTime().toString().substring(0, 8));
+        mTxtTopicDescription.setText(topicBean.getSummary());
+        mTxtTopicDescription.setVisibility(TextUtils.isEmpty(topicBean.getSummary()) ? View.GONE : View.VISIBLE);
         mTitleContainer.removeAllViews();
-        for (final TopicNewsBean topic : mTopic.getNewsArray()) {
+        for (final TopicNewsBean topic : topicBean.getNewsArray()) {
             TextView textView = new TextView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(params);
@@ -149,21 +168,18 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
             });
             mTitleContainer.addView(textView);
         }
-        mTimelineAdapter = new TopicTimelineAdapter(getContext());
-        mRecyclerTimeline.setAdapter(mTimelineAdapter);
-        mRecyclerTimeline.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerTimeline.setNestedScrollingEnabled(false);
-        if (null != mTopic.getTimeline() && null != mTopic.getTimeline().getTopics() && 0 < mTopic.getTimeline().getTopics().size()) {
-            mTimelineAdapter.addItems(mTopic.getTimeline().getTopics());
+
+        if (null != topicBean.getTimeline() && null != topicBean.getTimeline().getTopics() && 0 < topicBean.getTimeline().getTopics().size()) {
+            mTimelineAdapter.addItems(topicBean.getTimeline().getTopics());
             mTimelineContainer.setVisibility(View.VISIBLE);
         } else {
             mTimelineContainer.setVisibility(View.GONE);
         }
 
-        if (!mTopic.getEntityEventTopics().isEmpty()) {
+        if (!topicBean.getEntityEventTopics().isEmpty()) {
             mRelativeTopicContainer.setVisibility(View.VISIBLE);
-            ArrayList<EntityEventTopicBean> entityEventTopics = mTopic.getEntityEventTopics();
-            mRelativeTopic.setAdapter(new TagAdapter<EntityEventTopicBean>(mTopic.getEntityEventTopics()) {
+            ArrayList<EntityEventTopicBean> entityEventTopics = topicBean.getEntityEventTopics();
+            mRelativeTopic.setAdapter(new TagAdapter<EntityEventTopicBean>(entityEventTopics) {
                 @Override
                 public View getView(FlowLayout parent, int position, EntityEventTopicBean entityEventTopicBean) {
                     TextView item = (TextView) getLayoutInflater().inflate(R.layout.item_relevant_topic, mRelativeTopic, false);
@@ -173,7 +189,7 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
             });
             mRelativeTopic.setOnTagClickListener((view, position, parent) -> {
                 String topicId = String.valueOf(entityEventTopics.get(position).getEntityId());
-                long order = mTopic.getOrder();
+                long order = topicBean.getOrder();
 
                 RelevantTopicWindow window = new RelevantTopicWindow(getActivity(), topicId, order);
                 window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, true);
@@ -189,37 +205,11 @@ public class TopicDetailFragment extends AbsBaseMvpSwipeBackFragment<TopicDetail
         } else {
             mRelativeTopicContainer.setVisibility(View.GONE);
         }
-
-        mScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (scrollY > mTxtTopicTime.getBottom()) {
-                mToolbarHeader.setVisibility(View.VISIBLE);
-                mToolbar.setTitle("");
-            } else {
-                mToolbarHeader.setVisibility(View.GONE);
-                mToolbar.setTitle(getText(R.string.topic_detail));
-            }
-        });
     }
 
     private void setBackgroundAlpha(float v) {
-        WindowManager.LayoutParams lp = ((Activity) getContext()).getWindow().getAttributes();
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = v;
-        ((Activity) getContext()).getWindow().setAttributes(lp);
-    }
-
-    @Override
-    public void onRequestStart() {
-
-    }
-
-    @Override
-    public void onRequestTopicEnd(TopicBean bean) {
-        mTopic = bean;
-        initDataAndEvent();
-    }
-
-    @Override
-    public void onRequestError() {
-        showShortToast("请求错误");
+        getActivity().getWindow().setAttributes(lp);
     }
 }

@@ -1,11 +1,10 @@
 package com.jeez.guanpj.jreadhub.ui.settting;
 
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
-import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
-import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
 
 public interface SettingContract {
-    interface View extends IBaseView {
+    interface View extends IBaseMvpView {
 
     }
 

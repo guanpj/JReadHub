@@ -1,11 +1,11 @@
 package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 
-import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
+import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import io.reactivex.disposables.Disposable;
 
-public interface IBasePresenter<V extends IBaseView> {
+public interface IBasePresenter<V extends IBaseMvpView> {
     void onAttatch(V view);
 
     void onDetach();

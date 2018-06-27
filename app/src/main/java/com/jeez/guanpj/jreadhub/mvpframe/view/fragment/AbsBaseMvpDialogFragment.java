@@ -8,11 +8,11 @@ import com.jeez.guanpj.jreadhub.di.component.DaggerFragmentComponent;
 import com.jeez.guanpj.jreadhub.di.component.FragmentComponent;
 import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
-import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseView;
+import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
 
 import javax.inject.Inject;
 
-public abstract class AbsBaseMvpDialogFragment<P extends BasePresenter> extends AbsBaseDialogFragment implements IBaseView {
+public abstract class AbsBaseMvpDialogFragment<P extends BasePresenter> extends AbsBaseDialogFragment implements IBaseMvpView {
 
     @Inject
     public P mPresenter;
