@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.activity;
 
 import android.os.Bundle;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.base.activity.AbsBaseSwipeBackActivity;
 import com.jeez.guanpj.jreadhub.di.component.ActivityComponent;
 import com.jeez.guanpj.jreadhub.di.component.DaggerActivityComponent;
@@ -35,7 +35,7 @@ public abstract class AbsBaseMvpSwipeBackActivity<P extends BasePresenter> exten
 
     public ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder()
-                .appComponent(ReadhubApplication.getAppComponent())
+                .appComponent(ReadhubApplicationLike.getAppComponent())
                 .activityModule(new ActivityModule(this))
                 .build();
     }

@@ -7,18 +7,16 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
-import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicListAdapterWithThirdLib;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
@@ -33,7 +31,7 @@ import butterknife.OnClick;
 import butterknife.OnTouch;
 import io.reactivex.Observable;
 
-public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements TopicContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>, TopicPresenter> implements TopicContract.View<DataListBean<TopicBean>>, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
@@ -42,11 +40,8 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
     @BindView(R.id.txt_new)
     TextView mTxtNew;
 
-    private View mLoadingView;
-    private View mErrorView;
-    private View mEmptyView;
-
     private TopicListAdapterWithThirdLib mAdapter;
+    private boolean isPullToRefresh;
 
     public static TopicFragment newInstance() {
         Bundle args = new Bundle();
@@ -78,9 +73,6 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         mRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(),
                 ResourceUtil.getResource(getActivity(), R.attr.readhubTheme)));
 
-        mLoadingView = LayoutInflater.from(getContext()).inflate(R.layout.view_loading, (ViewGroup) mRecyclerView.getParent(), false);
-        mEmptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, (ViewGroup) mRecyclerView.getParent(), false);
-        mErrorView = LayoutInflater.from(getContext()).inflate(R.layout.view_error, (ViewGroup) mRecyclerView.getParent(), false);
     }
 
     @Override
@@ -88,38 +80,36 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
         mAdapter.setOnLoadMoreListener(() -> doLoadMore(), mRecyclerView);
         mRefreshLayout.setOnRefreshListener(this);
 
-        mEmptyView.setOnClickListener(v -> onRefresh());
-        mErrorView.setOnClickListener(v -> onRefresh());
-
-        onRefresh();
         // 30 秒轮询获取新话题数量
         mPresenter.addSubscribe(Observable.interval(15, TimeUnit.SECONDS)
                 .filter(time -> Constants.TOPIC_TOP_COUNT >= 0)
                 .subscribe(time -> mPresenter.getNewTopicCount(mAdapter.getItem(Constants.TOPIC_TOP_COUNT).getOrder())));
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mPresenter.doRefresh(false);
+    }
 
     @Override
     public void onRefresh() {
+        isPullToRefresh = true;
         mRefreshLayout.setRefreshing(true);
         mAdapter.setEnableLoadMore(false);
-        mPresenter.doRefresh();
+        mPresenter.doRefresh(true);
     }
 
     public void doLoadMore() {
+        isPullToRefresh = false;
         mPresenter.doLoadMore(mAdapter.getItem(mAdapter.getItemCount() - 2).getOrder());
     }
 
     @Override
-    public void onRequestStart() {
-        mAdapter.setEmptyView(mLoadingView);
-    }
-
-    @Override
-    public void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh) {
+    public void bindData(DataListBean<TopicBean> data) {
         List<TopicBean> dataList = data.getData();
         if (null != dataList && !dataList.isEmpty()) {
-            if (isPull2Refresh) {
+            if (isPullToRefresh) {
                 mRefreshLayout.setRefreshing(false);
                 //mAdapter.setNewData(dataList);
                 mPresenter.getDiffResult(mAdapter.getData(), dataList);
@@ -128,23 +118,12 @@ public class TopicFragment extends AbsBaseMvpFragment<TopicPresenter> implements
                 mAdapter.loadMoreComplete();
             }
         } else {
-            if (isPull2Refresh) {
-                mAdapter.setEmptyView(mEmptyView);
+            if (isPullToRefresh) {
             } else {
                 mAdapter.loadMoreEnd(true);
             }
         }
         mAdapter.setEnableLoadMore(true);
-    }
-
-    @Override
-    public void onRequestError(boolean isPull2Refresh) {
-        if (isPull2Refresh) {
-            mRefreshLayout.setRefreshing(false);
-            mAdapter.setEmptyView(mErrorView);
-        } else {
-            mAdapter.loadMoreFail();
-        }
     }
 
     @Override

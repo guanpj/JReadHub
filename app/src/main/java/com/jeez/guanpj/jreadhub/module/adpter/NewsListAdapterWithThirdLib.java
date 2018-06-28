@@ -15,6 +15,9 @@ import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import java.util.List;
 
+/**
+ * 使用 BRVAH 库的 Adapter
+ */
 public class NewsListAdapterWithThirdLib extends BaseQuickAdapter<NewsBean, BaseViewHolder> {
 
     public NewsListAdapterWithThirdLib() {

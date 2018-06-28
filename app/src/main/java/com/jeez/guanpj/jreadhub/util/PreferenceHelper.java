@@ -3,7 +3,7 @@ package com.jeez.guanpj.jreadhub.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
 
 public class PreferenceHelper {
 
@@ -18,7 +18,7 @@ public class PreferenceHelper {
     }
 
     private PreferenceHelper() {
-        mPreferences = ReadhubApplication.getInstance().getSharedPreferences(Constants.KEY_SHARED_PREFERENCE, Context.MODE_PRIVATE);
+        mPreferences = ReadhubApplicationLike.getInstance().getSharedPreferences(Constants.KEY_SHARED_PREFERENCE, Context.MODE_PRIVATE);
     }
 
     public void setTheme(String theme) {

@@ -35,22 +35,24 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     }
 
     @Override
-    public void doRefresh(@NewsBean.Type String type) {
+    public void doRefresh(@NewsBean.Type String type, boolean isPullToRefresh) {
         addSubscribe(mDataManager.getNewsList(type, null, Constants.TOPIC_PAGE_SIZE)
+                .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .compose(RxSchedulers.io2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
                     public void onNext(DataListBean<NewsBean> newsBeanDataListBean) {
-                        getView().onRequestEnd(newsBeanDataListBean, true);
+                        getView().bindData(newsBeanDataListBean);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().onRequestError(true);
+                        getView().showError();
                     }
 
                     @Override
                     public void onComplete() {
+                        getView().showContent();
                     }
                 }));
     }
@@ -62,16 +64,17 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
                     public void onNext(DataListBean<NewsBean> newsBeanDataListBean) {
-                        getView().onRequestEnd(newsBeanDataListBean, false);
+                        getView().bindData(newsBeanDataListBean);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().onRequestError(false);
+                        getView().showError();
                     }
 
                     @Override
                     public void onComplete() {
+                        getView().showContent();
                     }
                 }));
     }

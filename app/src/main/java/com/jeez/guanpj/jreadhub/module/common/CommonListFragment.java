@@ -7,18 +7,16 @@ import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
-import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
-import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpFragment;
 import com.jeez.guanpj.jreadhub.module.adpter.NewsListAdapterWithThirdLib;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
@@ -30,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 
 
-public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> implements CommonContract.View, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemClickListener {
+public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsBean>, CommonPresenter> implements CommonContract.View<DataListBean<NewsBean>>, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
@@ -39,10 +37,7 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
 
     private NewsListAdapterWithThirdLib mAdapter;
     private @NewsBean.Type String mNewsType;
-
-    private View mLoadingView;
-    private View mErrorView;
-    private View mEmptyView;
+    private boolean isPullToRefresh;
 
     public static CommonListFragment newInstance(@NewsBean.Type String type) {
         CommonListFragment fragment = new CommonListFragment();
@@ -86,43 +81,38 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(),
                 ResourceUtil.getResource(getActivity(), R.attr.readhubTheme)));
-
-        mLoadingView = LayoutInflater.from(getContext()).inflate(R.layout.view_loading, (ViewGroup) mRecyclerView.getParent(), false);
-        mEmptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, (ViewGroup) mRecyclerView.getParent(), false);
-        mErrorView = LayoutInflater.from(getContext()).inflate(R.layout.view_error, (ViewGroup) mRecyclerView.getParent(), false);
     }
 
     @Override
     public void initDataAndEvent() {
         mAdapter.setOnLoadMoreListener(() -> doLoadMore(), mRecyclerView);
         mRefreshLayout.setOnRefreshListener(this);
+    }
 
-        mEmptyView.setOnClickListener(v -> onRefresh());
-        mErrorView.setOnClickListener(v -> onRefresh());
-        onRefresh();
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mPresenter.doRefresh(mNewsType, false);
     }
 
     @Override
     public void onRefresh() {
+        isPullToRefresh = true;
         mRefreshLayout.setRefreshing(true);
         mAdapter.setEnableLoadMore(false);
-        mPresenter.doRefresh(mNewsType);
+        mPresenter.doRefresh(mNewsType, true);
     }
 
     public void doLoadMore() {
+        isPullToRefresh = false;
         mPresenter.doLoadMore(mNewsType, mAdapter.getItem(mAdapter.getItemCount() - 2).getPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
-    public void onRequestStart() {
-        mAdapter.setEmptyView(mLoadingView);
-    }
-
-    @Override
-    public void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh) {
+    public void bindData(DataListBean<NewsBean> data) {
         List<NewsBean> dataList = data.getData();
         if (null != dataList && !dataList.isEmpty()) {
-            if (isPull2Refresh) {
+            if (isPullToRefresh) {
                 mRefreshLayout.setRefreshing(false);
                 //mAdapter.setNewData(dataList);
                 mPresenter.getDiffResult(mAdapter.getData(), dataList);
@@ -131,23 +121,12 @@ public class CommonListFragment extends AbsBaseMvpFragment<CommonPresenter> impl
                 mAdapter.loadMoreComplete();
             }
         } else {
-            if (isPull2Refresh) {
-                mAdapter.setEmptyView(mEmptyView);
+            if (isPullToRefresh) {
             } else {
                 mAdapter.loadMoreEnd(true);
             }
         }
         mAdapter.setEnableLoadMore(true);
-    }
-
-    @Override
-    public void onRequestError(boolean isPull2Refresh) {
-        if (isPull2Refresh) {
-            mRefreshLayout.setRefreshing(false);
-            mAdapter.setEmptyView(mErrorView);
-        } else {
-            mAdapter.loadMoreFail();
-        }
     }
 
     @Override

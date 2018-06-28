@@ -34,6 +34,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.SupportActivity;
 
+/**
+ * 使用 BRVAH 库的 Adapter
+ */
 public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, BaseViewHolder> {
 
     //每个 Topic 下显示报道的最大数量

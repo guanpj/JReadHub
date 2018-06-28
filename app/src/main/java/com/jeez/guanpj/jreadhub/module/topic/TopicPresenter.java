@@ -21,6 +21,7 @@ import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 
 public class TopicPresenter extends BasePresenter<TopicContract.View> implements TopicContract.Presenter {
+
     private DataManager mDataManager;
 
     @Inject
@@ -36,22 +37,24 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     }
 
     @Override
-    public void doRefresh() {
+    public void doRefresh(boolean isPullToRefresh) {
         addSubscribe(mDataManager.getTopicList(null, Constants.TOPIC_PAGE_SIZE)
+                .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .compose(RxSchedulers.io2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
                     public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
-                        getView().onRequestEnd(topicBeanDataListBean, true);
+                        getView().bindData(topicBeanDataListBean);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().onRequestError(true);
+                        getView().showError();
                     }
 
                     @Override
                     public void onComplete() {
+                        getView().showContent();
                     }
                 }));
     }
@@ -63,16 +66,17 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
                     public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
-                        getView().onRequestEnd(topicBeanDataListBean, false);
+                        getView().bindData(topicBeanDataListBean);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().onRequestError(false);
+                        getView().showError();
                     }
 
                     @Override
                     public void onComplete() {
+                        getView().showContent();
                     }
                 }));
     }

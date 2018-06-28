@@ -11,6 +11,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,10 +23,10 @@ import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
-import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
-import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicTimelineAdapter;
 import com.jeez.guanpj.jreadhub.module.topic.detail.relate.RelevantTopicWindow;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBean, TopicDetailPresenter> implements TopicDetailContract.View {
+public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBean, TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -104,13 +105,15 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
         mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
         mToolbar.inflateMenu(R.menu.menu_topic_detail);
         mToolbar.setTitle(getText(R.string.topic_detail));
-        mToolbar.setNavigationOnClickListener(v -> pop());
         mToolbarHeader.setText(mTopicTitle);
         mToolbarHeader.setVisibility(View.GONE);
     }
 
     @Override
     public void initDataAndEvent() {
+        mToolbar.setNavigationOnClickListener(v -> pop());
+        mToolbar.setOnMenuItemClickListener(this);
+
         mTimelineAdapter = new TopicTimelineAdapter(getContext());
         mRecyclerTimeline.setAdapter(mTimelineAdapter);
         mRecyclerTimeline.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -211,5 +214,17 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = v;
         getActivity().getWindow().setAttributes(lp);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_collect:
+                showShortToast("Coming soon...");
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

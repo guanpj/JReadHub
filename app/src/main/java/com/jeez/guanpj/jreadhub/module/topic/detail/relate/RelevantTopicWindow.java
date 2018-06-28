@@ -14,12 +14,12 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.di.component.DaggerPopupWindowComponent;
 import com.jeez.guanpj.jreadhub.event.RelevantTopicItemClickEvent;
-import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicTimelineAdapter;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 
 import java.util.List;
@@ -84,7 +84,7 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
     }
 
     private void performInject() {
-        DaggerPopupWindowComponent.builder().appComponent(ReadhubApplication.getAppComponent())
+        DaggerPopupWindowComponent.builder().appComponent(ReadhubApplicationLike.getAppComponent())
                 .build()
                 .inject(this);
     }

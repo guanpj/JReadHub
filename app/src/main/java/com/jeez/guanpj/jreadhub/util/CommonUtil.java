@@ -2,28 +2,22 @@ package com.jeez.guanpj.jreadhub.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Random;
 
 public class CommonUtil {
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static int dp2px(float dpValue) {
-        final float scale = ReadhubApplication.getInstance().getResources().getDisplayMetrics().density;
+        final float scale = ReadhubApplicationLike.getInstance().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -52,7 +46,7 @@ public class CommonUtil {
      * 检查是否有可用网络
      */
     public static boolean isNetworkConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) ReadhubApplication.getInstance()
+        ConnectivityManager connectivityManager = (ConnectivityManager) ReadhubApplicationLike.getInstance()
                 .getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         assert connectivityManager != null;
         return connectivityManager.getActiveNetworkInfo() != null;

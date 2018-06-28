@@ -46,6 +46,21 @@
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
 
+        <!-- bugly配置 -->
+        <!--<meta-data
+            android:name="BUGLY_APPID"
+            android:value="c16799f8bc" />
+        <meta-data
+            android:name="BUGLY_APP_VERSION"
+            android:value="${APP_Version}" />
+        <meta-data
+            android:name="BUGLY_APP_CHANNEL"
+            android:value="${APP_Channel}" />
+        <meta-data
+            android:name="BUGLY_ENABLE_DEBUG"
+            android:value="${isDebug}" />-->
+        <!-- bugly配置 -->
+
     </application>
 
 </manifest>

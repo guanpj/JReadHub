@@ -7,7 +7,7 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
@@ -125,7 +125,7 @@ public abstract class AbsBaseSwipeBackActivity extends SwipeBackActivity impleme
     }
 
     protected void showShortToast(String msg) {
-        Toast.makeText(ReadhubApplication.getInstance(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReadhubApplicationLike.getInstance(), msg, Toast.LENGTH_SHORT).show();
     }
 
     protected void setToolbar(Toolbar toolbar, String title) {

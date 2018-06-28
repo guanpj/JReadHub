@@ -15,11 +15,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
-import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
 import com.jeez.guanpj.jreadhub.module.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.module.main.MainFragment;
+import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
@@ -114,7 +113,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                     //使用本地 css 优化阅读视图
                     WebResourceResponse resourceResponse = null;
                     try {
-                        InputStream in = ReadhubApplication.getInstance().getAssets().open("css/mobi.css");
+                        InputStream in = getContext().getAssets().open("css/mobi.css");
                         resourceResponse = new WebResourceResponse("text/css", "UTF-8", in);
                     } catch (IOException e) {
                         e.printStackTrace();

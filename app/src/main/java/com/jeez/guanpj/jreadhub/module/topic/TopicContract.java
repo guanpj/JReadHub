@@ -2,21 +2,14 @@ package com.jeez.guanpj.jreadhub.module.topic;
 
 import android.support.v7.util.DiffUtil;
 
-import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
-import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.IBaseMvpLceView;
 
 import java.util.List;
 
 public interface TopicContract {
-    interface View extends IBaseMvpView {
-        void onRequestStart();
-
-        void onRequestEnd(DataListBean<TopicBean> data, boolean isPull2Refresh);
-
-        void onRequestError(boolean isPull2Refresh);
-
+    interface View<M> extends IBaseMvpLceView<M> {
         void onFabClick();
 
         void showNewTopicCount(int newTopicCount);
@@ -28,7 +21,7 @@ public interface TopicContract {
         /**
          * 刷新数据
          */
-        void doRefresh();
+        void doRefresh(boolean isPullToRefresh);
 
         /**
          * 加载更多

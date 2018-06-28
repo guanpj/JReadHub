@@ -2,21 +2,14 @@ package com.jeez.guanpj.jreadhub.module.common;
 
 import android.support.v7.util.DiffUtil;
 
-import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
-import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.IBaseMvpLceView;
 
 import java.util.List;
 
 public interface CommonContract {
-    interface View extends IBaseMvpView {
-        void onRequestStart();
-
-        void onRequestEnd(DataListBean<NewsBean> data, boolean isPull2Refresh);
-
-        void onRequestError(boolean isPull2Refresh);
-
+    interface View<M> extends IBaseMvpLceView<M> {
         void onFabClick();
 
         void onDiffResult(DiffUtil.DiffResult diffResult, List<NewsBean> newData);
@@ -26,7 +19,7 @@ public interface CommonContract {
         /**
          * 刷新数据
          */
-        void doRefresh(@NewsBean.Type String type);
+        void doRefresh(@NewsBean.Type String type, boolean isPullToRefresh);
 
         /**
          * 加载更多

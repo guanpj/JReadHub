@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <FrameLayout
+        android:id="@id/content_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -33,5 +34,15 @@
             android:visibility="gone"/>
 
     </FrameLayout>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/view_loading"/>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/view_error"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.fragment;
 
 import android.os.Bundle;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplication;
+import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.di.component.DaggerFragmentComponent;
 import com.jeez.guanpj.jreadhub.di.component.FragmentComponent;
@@ -32,7 +32,7 @@ public abstract class AbsBaseMvpFragment<P extends BasePresenter> extends AbsBas
 
     public FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()
-                .appComponent(ReadhubApplication.getAppComponent())
+                .appComponent(ReadhubApplicationLike.getAppComponent())
                 .fragmentModule(new FragmentModule(this))
                 .build();
     }

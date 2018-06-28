@@ -5,14 +5,12 @@ import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
 public interface IBaseMvpLceView<M> extends IBaseMvpView {
 
     /**
-     * 显示loading页面
-     *
-     * @param isPullToRefresh 是否下拉刷新
+     * 显示加载中页面
      */
     public void showLoading(boolean isPullToRefresh);
 
     /**
-     * 显示ContentView
+     * 显示内容页面
      */
     public void showContent();
 
@@ -23,7 +21,6 @@ public interface IBaseMvpLceView<M> extends IBaseMvpView {
 
     /**
      * 绑定数据
-     * @param data
      */
     public void bindData(M data);
 }

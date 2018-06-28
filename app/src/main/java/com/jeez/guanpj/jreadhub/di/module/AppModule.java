@@ -2,7 +2,6 @@ package com.jeez.guanpj.jreadhub.di.module;
 
 import android.content.Context;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplication;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
 import com.jeez.guanpj.jreadhub.core.net.NetHelperImpl;
@@ -12,18 +11,18 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = NetModule.class)
+@Module(includes = NetworkModule.class)
 public class AppModule {
-    private final ReadhubApplication mApplication;
+    private final Context mContext;
 
-    public AppModule(ReadhubApplication application) {
-        this.mApplication = application;
+    public AppModule(Context context) {
+        this.mContext = context;
     }
 
     @Provides
     @Singleton
     Context provideAppContext() {
-        return mApplication;
+        return mContext;
     }
 
     @Provides
