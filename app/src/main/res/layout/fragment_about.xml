@@ -1,245 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/common_toolbar"/>
-
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_10_dp"
-        android:layout_marginHorizontal="@dimen/dimen_10_dp"
-        app:cardBackgroundColor="@color/bg_topic_trace_list"
-        app:cardCornerRadius="@dimen/dimen_5_dp"
-        app:cardElevation="@dimen/dimen_3_dp">
+        android:fitsSystemWindows="false"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <include layout="@layout/common_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@id/content_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dimen_10_dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/dimen_10_dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/dimen_50_dp"
-                    android:layout_height="@dimen/dimen_50_dp"
-                    android:src="@drawable/ic_logo" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_20_dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/textSize_25" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_introduce"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/textSize_15" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_readhub_des"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/dimen_10_dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_about" />
+                android:layout_marginLeft="@dimen/dimen_10_dp"
+                android:layout_marginRight="@dimen/dimen_10_dp"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                app:cardBackgroundColor="@color/bg_topic_trace_list"
+                app:cardCornerRadius="@dimen/dimen_5_dp"
+                app:cardElevation="@dimen/dimen_3_dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_20_dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dimen_10_dp"
+                    android:paddingRight="@dimen/dimen_10_dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_readhub_desc"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/textSize_18" />
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/dimen_10_dp"
+                        android:paddingTop="@dimen/dimen_10_dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:layout_width="@dimen/dimen_50_dp"
+                            android:layout_height="@dimen/dimen_50_dp"
+                            android:src="@drawable/ic_logo" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_20_dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/app_name"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/textSize_25" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/app_introduce"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/textSize_15" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_readhub_des"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/readhub_desc"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/textSize_16" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/dimen_10_dp"
+                        android:paddingTop="@dimen/dimen_10_dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_about" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_20_dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/text_readhub_desc"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/textSize_18" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/readhub_desc"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/textSize_16" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_1"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_readhub_site"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/dimen_10_dp"
+                        android:paddingTop="@dimen/dimen_10_dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_open_in_browser" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_20_dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/text_readhub_site"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/textSize_18" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/readhub_site"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/textSize_16" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_1"
-                android:background="?android:attr/listDivider"/>
-
-            <LinearLayout
-                android:id="@+id/ll_readhub_site"
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/dimen_10_dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_open_in_browser" />
+                android:layout_marginLeft="@dimen/dimen_10_dp"
+                android:layout_marginRight="@dimen/dimen_10_dp"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:padding="@dimen/dimen_10_dp"
+                app:cardBackgroundColor="@color/bg_topic_trace_list"
+                app:cardCornerRadius="@dimen/dimen_5_dp"
+                app:cardElevation="@dimen/dimen_3_dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_20_dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dimen_10_dp"
+                    android:paddingRight="@dimen/dimen_10_dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_readhub_site"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/textSize_18" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/dimen_10_dp"
+                        android:paddingTop="@dimen/dimen_10_dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_version" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_version"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_20_dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/text_version"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/textSize_18" />
+
+                            <TextView
+                                android:id="@+id/txt_version"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/version"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/textSize_16" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_1"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_code"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/readhub_site"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/textSize_16" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/dimen_10_dp"
+                        android:paddingTop="@dimen/dimen_10_dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_code" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_20_dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/text_readhub_source_site"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/textSize_18" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/readhub_source_site"
+                                android:textColor="?android:textColorSecondary"
+                                android:textSize="@dimen/textSize_16" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </android.support.v4.widget.NestedScrollView>
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_10_dp"
-        android:layout_marginHorizontal="@dimen/dimen_10_dp"
-        android:padding="@dimen/dimen_10_dp"
-        app:cardBackgroundColor="@color/bg_topic_trace_list"
-        app:cardCornerRadius="@dimen/dimen_5_dp"
-        app:cardElevation="@dimen/dimen_3_dp">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dimen_10_dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/dimen_10_dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_version" />
-
-                <LinearLayout
-                    android:id="@+id/ll_version"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_20_dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_version"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/textSize_18" />
-
-                    <TextView
-                        android:id="@+id/txt_version"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/version"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/textSize_16" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_1"
-                android:background="?android:attr/listDivider"/>
-
-            <LinearLayout
-                android:id="@+id/ll_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/dimen_10_dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_code" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_20_dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_readhub_source_site"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/textSize_18" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/readhub_source_site"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/textSize_16" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

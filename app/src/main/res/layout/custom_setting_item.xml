@@ -10,8 +10,7 @@
         android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingVertical="@dimen/dimen_15_dp"
-        android:paddingHorizontal="@dimen/dimen_10_dp">
+        android:padding="@dimen/dimen_10_dp">
 
         <ImageView
             android:id="@+id/img_icon"

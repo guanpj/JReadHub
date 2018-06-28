@@ -5,7 +5,7 @@ def bakPath = file("${buildDir}/bakApk/")
 /**
  * 每次构建生成的基准包目录
  */
-def baseApkDir = "app-0208-15-10-00"
+def baseApkDir = "app-0628-23-56-10"
 
 tinkerSupport {
 
