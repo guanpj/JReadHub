@@ -59,7 +59,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     LinearLayout mRelativeTopicContainer;
     @BindView(R.id.tfl_relative_topic)
     TagFlowLayout mRelativeTopic;
-    @BindView(R.id.content_view)
+    @BindView(R.id.scroll_view)
     NestedScrollView mScrollView;
     @BindView(R.id.txt_toolbar_header)
     TextView mToolbarHeader;
@@ -84,12 +84,17 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
         mTopicTitle = getArguments().getString(Constants.EXTRA_TOPIC_TITLE);
     }
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter.getTopicDetail(mTopicId, false);
+        loadData(false);
     }
 
+    @Override
+    public void loadData(boolean isPullToRefresh) {
+        mPresenter.getTopicDetail(mTopicId, isPullToRefresh);
+    }
     @Override
     protected void performInject() {
         getFragmentComponent().inject(this);

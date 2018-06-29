@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -16,11 +17,11 @@ import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.NewsListAdapterWithThirdLib;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.EmptyEffect;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
-import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.recycler_view)
-    HeaderAndFooterRecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
 
     private NewsListAdapterWithThirdLib mAdapter;
     private @NewsBean.Type String mNewsType;
@@ -69,13 +70,10 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
     @Override
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
-        //mRecyclerView.addOnScrollListener(new FloatingTipButtonBehaviorListener.ForRecyclerView(btnBackToTopAndRefresh));
-
         mAdapter = new NewsListAdapterWithThirdLib();
         mAdapter.isFirstOnly(false);
         mAdapter.setNotDoAnimationCount(3);
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         mAdapter.setLoadMoreView(new CustomLoadMoreView());
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
@@ -92,7 +90,13 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter.doRefresh(mNewsType, false);
+        setLceSwitchEffect(EmptyEffect.getInstance());
+        loadData(false);
+    }
+
+    @Override
+    public void loadData(boolean isPullToRefresh) {
+        mPresenter.doRefresh(mNewsType, isPullToRefresh);
     }
 
     @Override
@@ -110,23 +114,30 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
 
     @Override
     public void bindData(DataListBean<NewsBean> data) {
-        List<NewsBean> dataList = data.getData();
-        if (null != dataList && !dataList.isEmpty()) {
-            if (isPullToRefresh) {
-                mRefreshLayout.setRefreshing(false);
-                //mAdapter.setNewData(dataList);
-                mPresenter.getDiffResult(mAdapter.getData(), dataList);
+        if (null != data) {
+            if (null != data.getData() && !data.getData().isEmpty()) {
+                List<NewsBean> dataList = data.getData();
+                if (isPullToRefresh) {
+                    mRefreshLayout.setRefreshing(false);
+                    //mAdapter.setNewData(dataList);
+                    mPresenter.getDiffResult(mAdapter.getData(), dataList);
+                } else {
+                    mAdapter.addData(dataList);
+                    mAdapter.loadMoreComplete();
+                    mAdapter.setEnableLoadMore(true);
+                }
             } else {
-                mAdapter.addData(dataList);
-                mAdapter.loadMoreComplete();
+                if (isPullToRefresh) {
+                } else {
+                    mAdapter.loadMoreEnd(false);
+                }
             }
         } else {
             if (isPullToRefresh) {
             } else {
-                mAdapter.loadMoreEnd(true);
+                mAdapter.loadMoreFail();
             }
         }
-        mAdapter.setEnableLoadMore(true);
     }
 
     @Override

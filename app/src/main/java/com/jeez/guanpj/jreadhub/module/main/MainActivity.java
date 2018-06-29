@@ -14,11 +14,11 @@ import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
-import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
 import com.jeez.guanpj.jreadhub.module.about.AboutFragment;
 import com.jeez.guanpj.jreadhub.module.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.module.settting.SettingFragment;
 import com.jeez.guanpj.jreadhub.module.splash.SplashActivity;
+import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
 import butterknife.BindView;

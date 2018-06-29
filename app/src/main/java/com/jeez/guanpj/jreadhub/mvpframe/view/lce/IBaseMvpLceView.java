@@ -7,20 +7,25 @@ public interface IBaseMvpLceView<M> extends IBaseMvpView {
     /**
      * 显示加载中页面
      */
-    public void showLoading(boolean isPullToRefresh);
+    void showLoading(boolean isPullToRefresh);
 
     /**
      * 显示内容页面
      */
-    public void showContent();
+    void showContent();
 
     /**
      * 显示异常界面
      */
-    public void showError();
+    void showError();
 
     /**
      * 绑定数据
      */
-    public void bindData(M data);
+    void bindData(M data);
+
+    /**
+     * 加载数据
+     */
+    void loadData(boolean isPullToRefresh);
 }

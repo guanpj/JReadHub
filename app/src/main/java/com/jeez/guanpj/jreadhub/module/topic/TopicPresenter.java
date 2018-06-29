@@ -71,12 +71,11 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().showError();
+                        getView().bindData(null);
                     }
 
                     @Override
                     public void onComplete() {
-                        getView().showContent();
                     }
                 }));
     }

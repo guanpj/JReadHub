@@ -7,7 +7,7 @@ import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.IBaseMvpLceView;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.MvpLceViewDelegate;
-import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.ILceAnimator;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.ILceSwitchEffect;
 
 public abstract class AbsBaseMvpLceSwipeBackFragment<M, P extends BasePresenter> extends AbsBaseMvpSwipeBackFragment<P> implements IBaseMvpLceView<M> {
 
@@ -24,13 +24,11 @@ public abstract class AbsBaseMvpLceSwipeBackFragment<M, P extends BasePresenter>
 
     private void initLceView(View v) {
         lceViewDelegate.initLceView(v);
-        lceViewDelegate.setOnErrorViewClickListener(arg0 -> {
-            //onErrorClick();
-        });
+        lceViewDelegate.setOnErrorViewClickListener(view -> loadData(false));
     }
 
-    public void setLceAnimator(ILceAnimator lceAnimator){
-        lceViewDelegate.setLceAnimator(lceAnimator);
+    public void setLceSwitchEffect(ILceSwitchEffect lceSwitchEffect){
+        lceViewDelegate.setLceSwitchEffect(lceSwitchEffect);
     }
 
     @Override
@@ -51,5 +49,10 @@ public abstract class AbsBaseMvpLceSwipeBackFragment<M, P extends BasePresenter>
     @Override
     public void bindData(M data) {
         lceViewDelegate.bindData(data);
+    }
+
+    @Override
+    public void loadData(boolean isPullToRefresh) {
+        lceViewDelegate.loadData(isPullToRefresh);
     }
 }

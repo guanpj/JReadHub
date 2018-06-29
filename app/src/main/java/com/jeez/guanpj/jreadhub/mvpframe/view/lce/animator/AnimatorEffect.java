@@ -9,22 +9,22 @@ import android.view.View;
 
 import com.jeez.guanpj.jreadhub.R;
 
-public class DefaultLceAnimator implements ILceAnimator {
+public class AnimatorEffect implements ILceSwitchEffect {
 
-    private volatile static DefaultLceAnimator lceAnimator;
+    private volatile static AnimatorEffect mEffect;
 
-    public DefaultLceAnimator() {
+    public AnimatorEffect() {
     }
 
-    public static DefaultLceAnimator getInstance() {
-        if (lceAnimator == null) {
-            synchronized (AnimatorUtils.class) {
-                if (lceAnimator == null) {
-                    lceAnimator = new DefaultLceAnimator();
+    public static AnimatorEffect getInstance() {
+        if (mEffect == null) {
+            synchronized (AnimatorEffect.class) {
+                if (mEffect == null) {
+                    mEffect = new AnimatorEffect();
                 }
             }
         }
-        return lceAnimator;
+        return mEffect;
     }
 
     @Override

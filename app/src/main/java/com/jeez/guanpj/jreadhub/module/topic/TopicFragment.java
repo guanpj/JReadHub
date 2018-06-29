@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -16,11 +17,11 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicListAdapterWithThirdLib;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.EmptyEffect;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
-import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.recycler_view)
-    HeaderAndFooterRecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
     @BindView(R.id.txt_new)
     TextView mTxtNew;
 
@@ -63,16 +64,14 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
     @Override
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //mRecyclerView.addItemDecoration(new GapItemDecoration(getActivity()));
         mAdapter = new TopicListAdapterWithThirdLib();
         mAdapter.isFirstOnly(false);
         mAdapter.setNotDoAnimationCount(3);
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         mAdapter.setLoadMoreView(new CustomLoadMoreView());
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setColorSchemeColors(ContextCompat.getColor(getContext(),
                 ResourceUtil.getResource(getActivity(), R.attr.readhubTheme)));
-
     }
 
     @Override
@@ -80,16 +79,22 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
         mAdapter.setOnLoadMoreListener(() -> doLoadMore(), mRecyclerView);
         mRefreshLayout.setOnRefreshListener(this);
 
-        // 30 秒轮询获取新话题数量
+        // 轮询获取新话题提示
         mPresenter.addSubscribe(Observable.interval(15, TimeUnit.SECONDS)
-                .filter(time -> Constants.TOPIC_TOP_COUNT >= 0)
+                .filter(time -> Constants.TOPIC_TOP_COUNT >= 0 && null != mAdapter.getItem(Constants.TOPIC_TOP_COUNT))
                 .subscribe(time -> mPresenter.getNewTopicCount(mAdapter.getItem(Constants.TOPIC_TOP_COUNT).getOrder())));
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter.doRefresh(false);
+        setLceSwitchEffect(EmptyEffect.getInstance());
+        loadData(false);
+    }
+
+    @Override
+    public void loadData(boolean isPullToRefresh) {
+        mPresenter.doRefresh(isPullToRefresh);
     }
 
     @Override
@@ -107,23 +112,30 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
 
     @Override
     public void bindData(DataListBean<TopicBean> data) {
-        List<TopicBean> dataList = data.getData();
-        if (null != dataList && !dataList.isEmpty()) {
-            if (isPullToRefresh) {
-                mRefreshLayout.setRefreshing(false);
-                //mAdapter.setNewData(dataList);
-                mPresenter.getDiffResult(mAdapter.getData(), dataList);
+        if (null != data) {
+            if (null != data.getData() && !data.getData().isEmpty()) {
+                List<TopicBean> dataList = data.getData();
+                if (isPullToRefresh) {
+                    mRefreshLayout.setRefreshing(false);
+                    //mAdapter.setNewData(dataList);
+                    mPresenter.getDiffResult(mAdapter.getData(), dataList);
+                } else {
+                    mAdapter.addData(dataList);
+                    mAdapter.loadMoreComplete();
+                    mAdapter.setEnableLoadMore(true);
+                }
             } else {
-                mAdapter.addData(dataList);
-                mAdapter.loadMoreComplete();
+                if (isPullToRefresh) {
+                } else {
+                    mAdapter.loadMoreEnd(false);
+                }
             }
         } else {
             if (isPullToRefresh) {
             } else {
-                mAdapter.loadMoreEnd(true);
+                mAdapter.loadMoreFail();
             }
         }
-        mAdapter.setEnableLoadMore(true);
     }
 
     @Override

@@ -3,8 +3,8 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.lce;
 import android.view.View;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.DefaultLceAnimator;
-import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.ILceAnimator;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.AnimatorEffect;
+import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.ILceSwitchEffect;
 
 public class MvpLceViewDelegate implements IBaseMvpLceView {
 
@@ -12,7 +12,7 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
     private View contentView;
     private View errorView;
 
-    private ILceAnimator lceAnimator;
+    private ILceSwitchEffect lceSwitchEffect;
 
     public void initLceView(View view) {
         if (loadingView == null) {
@@ -41,36 +41,41 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
         }
     }
 
-    private ILceAnimator getLceAnimator() {
-        if (lceAnimator == null) {
-            lceAnimator = DefaultLceAnimator.getInstance();
+    private ILceSwitchEffect getLceSwitchEffect() {
+        if (lceSwitchEffect == null) {
+            lceSwitchEffect = AnimatorEffect.getInstance();
         }
-        return lceAnimator;
+        return lceSwitchEffect;
     }
 
-    public void setLceAnimator(ILceAnimator lceAnimator) {
-        this.lceAnimator = lceAnimator;
+    public void setLceSwitchEffect(ILceSwitchEffect lceSwitchEffect) {
+        this.lceSwitchEffect = lceSwitchEffect;
     }
 
     @Override
     public void showLoading(boolean pullToRefresh) {
         if (!pullToRefresh) {
-            getLceAnimator().showLoading(loadingView, contentView, errorView);
+            getLceSwitchEffect().showLoading(loadingView, contentView, errorView);
         }
     }
 
     @Override
     public void showContent() {
-        getLceAnimator().showContent(loadingView, contentView, errorView);
+        getLceSwitchEffect().showContent(loadingView, contentView, errorView);
     }
 
     @Override
     public void showError() {
-        getLceAnimator().showErrorView(loadingView, contentView, errorView);
+        getLceSwitchEffect().showErrorView(loadingView, contentView, errorView);
     }
 
     @Override
     public void bindData(Object data) {
+
+    }
+
+    @Override
+    public void loadData(boolean isPullToRefresh) {
 
     }
 }

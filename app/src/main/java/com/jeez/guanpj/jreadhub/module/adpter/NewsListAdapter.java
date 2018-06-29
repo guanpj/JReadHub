@@ -19,8 +19,6 @@ import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -36,11 +34,6 @@ public class NewsListAdapter extends BaseAdapter<NewsBean> {
     @Override
     public BaseViewHolder<NewsBean> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(mContext, parent);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull BaseViewHolder<NewsBean> holder, int position, @NonNull List<Object> payloads) {
-        super.onBindViewHolder(holder, position, payloads);
     }
 
     class ViewHolder extends BaseViewHolder<NewsBean> {

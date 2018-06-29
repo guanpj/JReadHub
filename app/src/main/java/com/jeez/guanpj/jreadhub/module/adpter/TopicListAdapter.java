@@ -79,8 +79,6 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         ViewGroup layoutSource;
 
         private TopicBean topic;
-        private int position;
-
         private View newsMoreView;
 
         TopicViewHolder(Context context, ViewGroup parent) {
@@ -91,8 +89,6 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         @Override
         public void bindData(TopicBean topic, int position) {
             this.topic = topic;
-            this.position = position;
-
             int newsCount = 0;
             String mediaName = "";
             if (null != topic.getNewsArray() && !topic.getNewsArray().isEmpty()) {
@@ -132,7 +128,6 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
                 }
                 newsViewHolder.bindData(news);
                 if (newsList.size() > MOST_NEWS_COUNT_PER_ITEM && i == MOST_NEWS_COUNT_PER_ITEM - 1) {
-                    View newsMoreView = mInflater.inflate(R.layout.item_topic_news_more, null, false);
                     newsMoreView.setOnClickListener(v ->
                             ((SupportActivity) mContext).findFragment(MainFragment.class)
                                     .start(TopicDetailFragment.newInstance(topic.getId(), topic.getTitle()))

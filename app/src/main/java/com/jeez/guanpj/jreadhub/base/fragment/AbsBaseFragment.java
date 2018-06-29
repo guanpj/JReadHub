@@ -32,10 +32,17 @@ public abstract class AbsBaseFragment extends SupportFragment implements IBaseVi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mContentView = inflater.inflate(getLayoutId(), container, false);
+        if (mContentView == null) {
+            mContentView = inflater.inflate(getLayoutId(), container, false);
+        }
         unBinder = ButterKnife.bind(this, mContentView);
         initView();
         initDataAndEvent();
+        //判断Fragment对应的Activity是否存在这个视图
+        ViewGroup parent = (ViewGroup) mContentView.getParent();
+        if (parent != null){
+            parent.removeView(mContentView);
+        }
         return mContentView;
     }
 

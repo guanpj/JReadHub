@@ -69,12 +69,11 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().showError();
+                        getView().bindData(null);
                     }
 
                     @Override
                     public void onComplete() {
-                        getView().showContent();
                     }
                 }));
     }

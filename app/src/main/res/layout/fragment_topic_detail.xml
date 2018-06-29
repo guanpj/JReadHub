@@ -13,136 +13,158 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
 
-        <include layout="@layout/common_toolbar"/>
+        <include layout="@layout/common_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@id/content_view"
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/dimen_10_dp"
-            android:paddingRight="@dimen/dimen_10_dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_topic_detail_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_4_dp"
-                android:layout_marginTop="@dimen/dimen_10_dp"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/textSize_20"
-                android:textStyle="bold"
-                android:text="标题标题标题标题标题标题标题标题标题"/>
-
-            <TextView
-                android:id="@+id/txt_topic_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_10_dp"
-                android:layout_marginTop="@dimen/dimen_10_dp"
-                android:textColor="#545454"
-                android:textSize="@dimen/textSize_16"
-                android:text="2018-06-19 14:50:10"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_1"
-                android:background="@color/line_space" />
-
-            <TextView
-                android:id="@+id/txt_topic_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_10_dp"
-                android:layout_marginTop="@dimen/dimen_10_dp"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/textSize_18"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_1"
-                android:layout_marginTop="@dimen/dimen_10_dp"
-                android:background="@color/line_space" />
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/ll_web_title_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10_dp"
-                android:orientation="vertical" />
-
-            <LinearLayout
-                android:id="@+id/ll_topic_trace_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@id/content_view"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10_dp"
-                    android:text="相关事件/事件追踪"
-                    android:textColor="@color/text_topic_detail_news_author"
-                    android:textSize="@dimen/textSize_16" />
-
-                <include layout="@layout/layout_topic_timeline"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dimen_10_dp"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dimen_10_dp"
+                    android:paddingRight="@dimen/dimen_10_dp">
+
+                    <TextView
+                        android:id="@+id/txt_topic_detail_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_4_dp"
+                        android:layout_marginTop="@dimen/dimen_10_dp"
+                        android:text="标题标题标题标题标题标题标题标题标题"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/textSize_20"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_topic_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_10_dp"
+                        android:layout_marginTop="@dimen/dimen_10_dp"
+                        android:text="2018-06-19 14:50:10"
+                        android:textColor="#545454"
+                        android:textSize="@dimen/textSize_16" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_1"
+                        android:background="@color/line_space" />
+
+                    <TextView
+                        android:id="@+id/txt_topic_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_10_dp"
+                        android:layout_marginTop="@dimen/dimen_10_dp"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/textSize_18" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_1"
+                        android:layout_marginTop="@dimen/dimen_10_dp"
+                        android:background="@color/line_space" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_web_title_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10_dp"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_topic_trace_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_10_dp"
+                            android:text="相关事件/事件追踪"
+                            android:textColor="@color/text_topic_detail_news_author"
+                            android:textSize="@dimen/textSize_16" />
+
+                        <include
+                            layout="@layout/layout_topic_timeline"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/dimen_10_dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_relative_topic_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="相关话题"
+                            android:textColor="@color/text_topic_detail_news_author"
+                            android:textSize="@dimen/textSize_16" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/line_1"
+                            android:layout_marginTop="@dimen/dimen_5_dp"
+                            android:background="@color/line_space" />
+
+                        <com.zhy.view.flowlayout.TagFlowLayout
+                            android:id="@+id/tfl_relative_topic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/dimen_10_dp"
+                            android:paddingTop="@dimen/dimen_10_dp"
+                            app:max_select="1" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_relative_topic_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="相关话题"
-                android:textColor="@color/text_topic_detail_news_author"
-                android:textSize="@dimen/textSize_16" />
-
-            <View
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/line_1"
-                android:layout_marginTop="@dimen/dimen_5_dp"
-                android:background="@color/line_space" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
 
-            <com.zhy.view.flowlayout.TagFlowLayout
-                android:id="@+id/tfl_relative_topic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/dimen_10_dp"
-                android:paddingBottom="@dimen/dimen_10_dp"
-                app:max_select="1"/>
+                <include
+                    layout="@layout/view_loading"
+                    android:visibility="gone" />
 
-        </LinearLayout>
+                <include
+                    layout="@layout/view_error"
+                    android:visibility="gone" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/view_loading"/>
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/view_error"/>
 
 </android.support.design.widget.CoordinatorLayout>
 
