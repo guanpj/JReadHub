@@ -45,7 +45,6 @@
             layout="@layout/view_loading"
             android:visibility="gone" />
 
-
         <include
             layout="@layout/view_error"
             android:visibility="gone" />
