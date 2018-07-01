@@ -8,8 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/drawable_instant_read_dialog_bg"
-        android:layout_marginVertical="@dimen/dimen_30_dp"
-        android:layout_marginHorizontal="@dimen/dimen_10_dp">
+        android:layout_marginTop="@dimen/dimen_30_dp"
+        android:layout_marginBottom="@dimen/dimen_30_dp"
+        android:layout_marginLeft="@dimen/dimen_10_dp"
+        android:layout_marginRight="@dimen/dimen_10_dp">
 
         <LinearLayout
             android:id="@+id/ll_content_wrapper"
@@ -81,7 +83,8 @@
                 android:id="@+id/web_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/dimen_5_dp"
+                android:layout_marginLeft="@dimen/dimen_5_dp"
+                android:layout_marginRight="@dimen/dimen_5_dp"
                 android:layout_marginBottom="@dimen/dimen_5_dp"/>
 
         </LinearLayout>
