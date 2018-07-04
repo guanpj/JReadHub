@@ -3,14 +3,23 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.lce;
 import android.view.View;
 
 import com.jeez.guanpj.jreadhub.R;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.AnimatorEffect;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.ILceSwitchEffect;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
 
 public class MvpLceViewDelegate implements IBaseMvpLceView {
 
     private View loadingView;
     private View contentView;
     private View errorView;
+    private View retryView;
+
+    private enum State {Error, Loading, Content}
+    private State currentState;
 
     private ILceSwitchEffect lceSwitchEffect;
 
@@ -23,6 +32,7 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
         }
         if (errorView == null) {
             errorView = view.findViewById(R.id.error_view);
+            retryView = view.findViewById(R.id.ll_retry);
         }
         if (loadingView == null) {
             throw new NullPointerException("loadingView is not null!");
@@ -36,8 +46,8 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
     }
 
     public void setOnErrorViewClickListener(View.OnClickListener onClickListener) {
-        if (this.errorView != null) {
-            this.errorView.setOnClickListener(onClickListener);
+        if (this.retryView != null) {
+            this.retryView.setOnClickListener(onClickListener);
         }
     }
 
@@ -57,16 +67,29 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
         if (!pullToRefresh) {
             getLceSwitchEffect().showLoading(loadingView, contentView, errorView);
         }
+        currentState = State.Loading;
     }
 
     @Override
     public void showContent() {
-        getLceSwitchEffect().showContent(loadingView, contentView, errorView);
+        if (currentState == State.Loading) {
+            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.io2Main()).subscribe(time ->
+                    getLceSwitchEffect().showContent(loadingView, contentView, errorView));
+        } else {
+            getLceSwitchEffect().showContent(loadingView, contentView, errorView);
+        }
+        currentState = State.Content;
     }
 
     @Override
     public void showError() {
-        getLceSwitchEffect().showErrorView(loadingView, contentView, errorView);
+        if (currentState == State.Loading) {
+            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.io2Main()).subscribe(time ->
+                    getLceSwitchEffect().showErrorView(loadingView, contentView, errorView));
+        } else {
+            getLceSwitchEffect().showErrorView(loadingView, contentView, errorView);
+        }
+        currentState = State.Error;
     }
 
     @Override

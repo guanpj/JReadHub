@@ -23,7 +23,6 @@ public class ToolbarHideShowBehavior extends CoordinatorLayout.Behavior<Floating
         //得到两个高度值
         this.toolbarHeight = getToolbarHeight(context);
         this.statusBarHeight = getStatusBarHeight(context);
-
     }
 
     @Override

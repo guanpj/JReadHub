@@ -37,8 +37,8 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     @Override
     public void doRefresh(@NewsBean.Type String type, boolean isPullToRefresh) {
         addSubscribe(mDataManager.getNewsList(type, null, Constants.TOPIC_PAGE_SIZE)
-                .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .compose(RxSchedulers.io2Main())
+                .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
                     public void onNext(DataListBean<NewsBean> newsBeanDataListBean) {

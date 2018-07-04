@@ -39,8 +39,8 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     @Override
     public void doRefresh(boolean isPullToRefresh) {
         addSubscribe(mDataManager.getTopicList(null, Constants.TOPIC_PAGE_SIZE)
-                .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .compose(RxSchedulers.io2Main())
+                .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
                     public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {

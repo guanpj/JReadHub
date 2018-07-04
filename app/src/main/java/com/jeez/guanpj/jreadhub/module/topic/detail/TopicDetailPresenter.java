@@ -28,7 +28,6 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
                     @Override
                     public void onNext(TopicBean bean) {
                         getView().bindData(bean);
-                        //getView().onRequestTopicEnd(bean);
                     }
 
                     @Override

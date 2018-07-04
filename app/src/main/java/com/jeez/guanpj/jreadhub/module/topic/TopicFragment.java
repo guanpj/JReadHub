@@ -80,7 +80,7 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
         mRefreshLayout.setOnRefreshListener(this);
 
         // 轮询获取新话题提示
-        mPresenter.addSubscribe(Observable.interval(15, TimeUnit.SECONDS)
+        mPresenter.addSubscribe(Observable.interval(30, TimeUnit.SECONDS)
                 .filter(time -> Constants.TOPIC_TOP_COUNT >= 0 && null != mAdapter.getItem(Constants.TOPIC_TOP_COUNT))
                 .subscribe(time -> mPresenter.getNewTopicCount(mAdapter.getItem(Constants.TOPIC_TOP_COUNT).getOrder())));
     }
