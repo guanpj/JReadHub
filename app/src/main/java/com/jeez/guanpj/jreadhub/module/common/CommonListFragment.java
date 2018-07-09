@@ -172,11 +172,15 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
     }
 
     @Override
-    public void onFabClick() {
-        mRecyclerView.scrollToPosition(0);
-        if (!mRefreshLayout.isRefreshing()) {
-            mRefreshLayout.setRefreshing(true);
-            onRefresh();
+    public void onFabClick(int currentPageIndex) {
+        if ((mNewsType == NewsBean.TYPE_NEWS && currentPageIndex == 1)
+                || (mNewsType == NewsBean.TYPE_TECHNEWS && currentPageIndex == 2)
+                || (mNewsType == NewsBean.TYPE_BLOCKCHAIN && currentPageIndex == 3)) {
+            mRecyclerView.scrollToPosition(0);
+            if (!mRefreshLayout.isRefreshing()) {
+                mRefreshLayout.setRefreshing(true);
+                onRefresh();
+            }
         }
     }
 

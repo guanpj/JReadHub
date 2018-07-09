@@ -31,7 +31,7 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
 
     private void initEvent() {
         addSubscribe(RxBus.getInstance().toFlowable(FabClickEvent.class)
-                .subscribe(fabClickEvent -> getView().onFabClick()));
+                .subscribe(fabClickEvent -> getView().onFabClick(fabClickEvent.getCurrentItemIndex())));
     }
 
     @Override
