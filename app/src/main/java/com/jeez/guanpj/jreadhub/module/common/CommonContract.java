@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CommonContract {
     interface View<M> extends IBaseMvpLceView<M> {
-        void onFabClick();
+        void onFabClick(int currentPageIndex);
 
         void onDiffResult(DiffUtil.DiffResult diffResult, List<NewsBean> newData);
     }

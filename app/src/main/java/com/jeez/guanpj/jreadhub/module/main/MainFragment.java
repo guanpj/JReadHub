@@ -118,7 +118,7 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
 
     @OnClick(R.id.fab)
     void onFabClick() {
-        RxBus.getInstance().post(new FabClickEvent());
+        RxBus.getInstance().post(new FabClickEvent(mViewPager.getCurrentItem()));
     }
 
     @Override

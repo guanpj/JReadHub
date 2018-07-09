@@ -7,10 +7,10 @@ import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
+import com.jeez.guanpj.jreadhub.module.adpter.DiffCallback;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
-import com.jeez.guanpj.jreadhub.module.adpter.DiffCallback;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
@@ -33,6 +33,7 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
 
     private void initEvent() {
         addSubscribe(RxBus.getInstance().toFlowable(FabClickEvent.class)
+                .filter(fabClickEvent -> fabClickEvent.getCurrentItemIndex() == 0)
                 .subscribe(fabClickEvent -> getView().onFabClick()));
     }
 
