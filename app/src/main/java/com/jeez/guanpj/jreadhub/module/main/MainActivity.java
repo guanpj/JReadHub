@@ -19,6 +19,7 @@ import com.jeez.guanpj.jreadhub.module.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.module.settting.SettingFragment;
 import com.jeez.guanpj.jreadhub.module.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
+import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
 import butterknife.BindView;
@@ -32,6 +33,8 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nv_main)
     NavigationView mNavigationView;
+
+    private long TOUCH_TIME = 0;
 
     public static void start(@NonNull Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
@@ -91,11 +94,6 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
     }
 
     @Override
-    public void onBackPressedSupport() {
-        super.onBackPressedSupport();
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
         mDrawerLayout.post(() -> {
@@ -125,6 +123,24 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
 
         // 默认竖向(和安卓5.0以上的动画相同)
         //return super.onCreateFragmentAnimator();
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+                pop();
+            } else {
+                if (System.currentTimeMillis() - TOUCH_TIME < Constants.EXIT_WAIT_TIME) {
+                    finish();
+                } else {
+                    TOUCH_TIME = System.currentTimeMillis();
+                    showShortToast(R.string.exit_tips);
+                }
+            }
+        }
     }
 
     @Override

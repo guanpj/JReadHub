@@ -119,8 +119,8 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
                 List<NewsBean> dataList = data.getData();
                 if (isPullToRefresh) {
                     mRefreshLayout.setRefreshing(false);
-                    //mAdapter.setNewData(dataList);
-                    mPresenter.getDiffResult(mAdapter.getData(), dataList);
+                    mAdapter.setNewData(dataList);
+                    //mPresenter.getDiffResult(mAdapter.getData(), dataList);
                 } else {
                     mAdapter.addData(dataList);
                     mAdapter.loadMoreComplete();
@@ -177,10 +177,6 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
                 || (mNewsType == NewsBean.TYPE_TECHNEWS && currentPageIndex == 2)
                 || (mNewsType == NewsBean.TYPE_BLOCKCHAIN && currentPageIndex == 3)) {
             mRecyclerView.scrollToPosition(0);
-            if (!mRefreshLayout.isRefreshing()) {
-                mRefreshLayout.setRefreshing(true);
-                onRefresh();
-            }
         }
     }
 

@@ -3,7 +3,6 @@ package com.jeez.guanpj.jreadhub.base.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.jeez.guanpj.jreadhub.R;
@@ -27,13 +26,6 @@ import me.yokeyword.fragmentation.SupportActivity;
 public abstract class AbsBaseActivity extends SupportActivity implements IBaseViewFlow {
 
     private Unbinder unBinder;
-    public static final int MODE_BACK = 0;
-    public static final int MODE_DRAWER = 1;
-    public static final int MODE_NONE = 2;
-    public static final int MODE_HOME = 3;
-    private long mExitTime;
-    private boolean isExit = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,26 +98,12 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
         }
     }
 
-    public void setExit(boolean isExit) {
-        this.isExit = isExit;
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && isExit) {
-            if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                showShortToast("再按一次退出程序");
-                mExitTime = System.currentTimeMillis();
-            } else {
-                AppStatusTracker.getInstance().exitApp();
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
     protected void showShortToast(String msg) {
         Toast.makeText(ReadhubApplicationLike.getInstance(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showShortToast(int resId) {
+        Toast.makeText(ReadhubApplicationLike.getInstance(), resId, Toast.LENGTH_SHORT).show();
     }
 
     protected void setToolbar(Toolbar toolbar, String title) {

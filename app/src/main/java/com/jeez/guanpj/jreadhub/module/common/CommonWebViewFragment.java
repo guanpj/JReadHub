@@ -98,6 +98,7 @@ public class CommonWebViewFragment extends AbsBaseSwipeBackFragment implements T
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Observable.timer(50, TimeUnit.MILLISECONDS).subscribe(timeout -> RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED)));
+        Observable.timer(50, TimeUnit.MILLISECONDS).subscribe(
+                timeout -> RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_UNDEFINED)));
     }
 }

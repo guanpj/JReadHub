@@ -10,6 +10,7 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.tencent.bugly.beta.Beta;
 
@@ -54,12 +55,12 @@ public class AboutFragment extends AbsBaseSwipeBackFragment {
 
     @OnClick(R.id.ll_readhub_site)
     void go2ReadhubSite(View view) {
-        RxBus.getInstance().post(new OpenWebSiteEvent("https://readhub.me", "Readhub 官网"));
+        RxBus.getInstance().post(new OpenWebSiteEvent(Constants.READHUB_HOST, "Readhub 官网"));
     }
 
     @OnClick(R.id.ll_code)
     void go2CodeSite(View view) {
-        RxBus.getInstance().post(new OpenWebSiteEvent("https://github.com/guanpj/JReadHub", "项目源码"));
+        RxBus.getInstance().post(new OpenWebSiteEvent(Constants.CODE_SITE, "项目源码"));
     }
 
     @OnClick(R.id.ll_version)
