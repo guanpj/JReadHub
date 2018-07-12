@@ -28,7 +28,7 @@ public class Constants {
     public static final int TOPIC_PAGE_SIZE = 20;
     public static int TOPIC_TOP_COUNT = 0;
 
-    public static final long EXIT_WAIT_TIME = 200L;
+    public static final long EXIT_WAIT_TIME = 2000L;
 
     public static final String KEY_SHARED_PREFERENCE = "readhub_preference";
 
