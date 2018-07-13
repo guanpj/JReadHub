@@ -24,7 +24,7 @@ public class NewsListAdapterWithThirdLib extends BaseQuickAdapter<NewsBean, Base
         super(R.layout.item_news);
     }
 
-    @Override
+    /*@Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position, @NonNull List<Object> payloads) {
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
@@ -32,7 +32,7 @@ public class NewsListAdapterWithThirdLib extends BaseQuickAdapter<NewsBean, Base
             //局部刷新，这里只刷新时间
             setInfo(holder, getItem(position));
         }
-    }
+    }*/
 
     @Override
     protected void convert(BaseViewHolder holder, NewsBean newsBean) {

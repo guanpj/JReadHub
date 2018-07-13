@@ -46,7 +46,7 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
         super(R.layout.item_topic);
     }
 
-    @Override
+    /*@Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position, @NonNull List<Object> payloads) {
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
@@ -54,7 +54,7 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
             //局部刷新，这里只刷新时间
             holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(getItem(position).getPublishDate()));
         }
-    }
+    }*/
 
     @Override
     protected void convert(BaseViewHolder holder, TopicBean topicBean) {
