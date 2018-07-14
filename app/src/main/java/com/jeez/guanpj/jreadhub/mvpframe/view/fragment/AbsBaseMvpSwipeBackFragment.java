@@ -1,6 +1,9 @@
 package com.jeez.guanpj.jreadhub.mvpframe.view.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseSwipeBackFragment;
@@ -21,6 +24,11 @@ public abstract class AbsBaseMvpSwipeBackFragment<P extends BasePresenter> exten
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         performInject();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (null != mPresenter) {
             mPresenter.onAttatch(this);
         }
@@ -36,10 +44,10 @@ public abstract class AbsBaseMvpSwipeBackFragment<P extends BasePresenter> exten
     protected abstract void performInject();
 
     @Override
-    public void onDestroy() {
+    public void onDestroyView() {
         if (mPresenter != null) {
             mPresenter.onDetach();
         }
-        super.onDestroy();
+        super.onDestroyView();
     }
 }

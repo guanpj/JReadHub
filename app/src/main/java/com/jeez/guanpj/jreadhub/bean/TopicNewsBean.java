@@ -4,7 +4,7 @@ import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import org.threeten.bp.OffsetDateTime;
 
-public class TopicNewsBean {
+public class TopicNewsBean implements Cloneable{
 
     /**
      * id : 19116115
@@ -112,5 +112,15 @@ public class TopicNewsBean {
 
     public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
+    }
+
+    @Override
+    public Object clone() {
+        Object o = null;
+        try {
+            o = super.clone();
+        } catch (CloneNotSupportedException e) {
+        }
+        return o;
     }
 }

@@ -9,7 +9,7 @@ import org.threeten.bp.OffsetDateTime;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class NewsBean extends BaseItemBean{
+public class NewsBean extends BaseItemBean {
     private String authorName;
     private String language;
     private String mobileUrl;
@@ -24,10 +24,6 @@ public class NewsBean extends BaseItemBean{
     public static final String TYPE_TECHNEWS = "technews";
     public static final String TYPE_BLOCKCHAIN = "blockchain";
     public static final String TYPE_JOBS = "jobs";
-
-    public NewsBean(String id, String title) {
-        super(id, title);
-    }
 
     @StringDef({TYPE_NEWS, TYPE_TECHNEWS, TYPE_BLOCKCHAIN, TYPE_JOBS})
     @Retention(RetentionPolicy.SOURCE)

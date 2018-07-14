@@ -111,7 +111,7 @@
                         android:layout_gravity="center|end"
                         android:adjustViewBounds="true"
                         android:scaleType="center"
-                        android:src="@drawable/ic_more_info" />
+                        app:srcCompat="@drawable/ic_more_info" />
 
                 </FrameLayout>
 

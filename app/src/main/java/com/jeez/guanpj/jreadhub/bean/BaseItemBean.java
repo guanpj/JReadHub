@@ -1,13 +1,8 @@
 package com.jeez.guanpj.jreadhub.bean;
 
-public class BaseItemBean {
+public class BaseItemBean implements Cloneable{
     String id;
     String title;
-
-    public BaseItemBean(String id, String title) {
-        this.id = id;
-        this.title = title;
-    }
 
     public String getId() {
         return id;
@@ -25,4 +20,13 @@ public class BaseItemBean {
         this.title = title;
     }
 
+    @Override
+    public Object clone() {
+        Object o = null;
+        try {
+            o = super.clone();
+        } catch (CloneNotSupportedException e) {
+        }
+        return o;
+    }
 }

@@ -23,10 +23,10 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void onAttatch(MainContract.View view) {
         super.onAttatch(view);
-        registerEvent();
+        initEvent();
     }
 
-    private void registerEvent() {
+    private void initEvent() {
         addSubscribe(RxBus.getInstance().toFlowable(ToolbarNavigationClickEvent.class)
                 .subscribe(navigationClickEvent -> getView().onToolbarNavigationClickEvent(navigationClickEvent)));
 

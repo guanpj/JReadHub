@@ -35,10 +35,6 @@ public class TopicBean extends BaseItemBean implements Cloneable {
     ArrayList<TopicNewsBean> newsArray;
     Extra extra;
 
-    public TopicBean(String id, String title) {
-        super(id, title);
-    }
-
     public String getCreatedAt() {
         return createdAt;
     }
@@ -136,7 +132,7 @@ public class TopicBean extends BaseItemBean implements Cloneable {
     }
 
     public static class Extra {
-        boolean instantView;
+        public boolean instantView;
     }
 
     @Override
@@ -144,7 +140,8 @@ public class TopicBean extends BaseItemBean implements Cloneable {
         TopicBean bean = null;
         try {
             bean = (TopicBean) super.clone();
-        } catch (CloneNotSupportedException e) {
+            bean.newsArray = (ArrayList<TopicNewsBean>) newsArray.clone();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return bean;

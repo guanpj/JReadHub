@@ -6,10 +6,10 @@ import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
+import com.jeez.guanpj.jreadhub.module.adpter.DiffCallback;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
-import com.jeez.guanpj.jreadhub.module.adpter.DiffCallback;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
@@ -26,6 +26,11 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     CommonPresenter(DataManager dataManager) {
         super(dataManager);
         this.mDataManager = dataManager;
+    }
+
+    @Override
+    public void onAttatch(CommonContract.View view) {
+        super.onAttatch(view);
         initEvent();
     }
 

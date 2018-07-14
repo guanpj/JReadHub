@@ -116,8 +116,10 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
             if (null != data.getData() && !data.getData().isEmpty()) {
                 List<TopicBean> dataList = data.getData();
                 if (isPullToRefresh) {
+                    mTxtNew.setVisibility(View.GONE);
                     mRefreshLayout.setRefreshing(false);
                     mAdapter.setNewData(dataList);
+                    mRecyclerView.scrollToPosition(0);
                     //mPresenter.getDiffResult(mAdapter.getData(), dataList);
                 } else {
                     mAdapter.addData(dataList);
@@ -182,7 +184,6 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
     @Override
     public void onFabClick() {
         mRecyclerView.scrollToPosition(0);
-        mTxtNew.setVisibility(View.GONE);
     }
 
     @Override
@@ -194,10 +195,9 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
     @OnClick(R.id.txt_new)
     void onClick() {
         mTxtNew.setVisibility(View.GONE);
-        if (!mRefreshLayout.isRefreshing()) {
-            mRefreshLayout.setRefreshing(true);
-            onRefresh();
-        }
+        mRecyclerView.scrollToPosition(0);
+        mRefreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @OnTouch(R.id.txt_new)
