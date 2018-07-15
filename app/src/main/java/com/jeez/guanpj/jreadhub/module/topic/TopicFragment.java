@@ -61,6 +61,8 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
         getFragmentComponent().inject(this);
     }
 
+
+
     @Override
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -83,6 +85,7 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
         mPresenter.addSubscribe(Observable.interval(30, TimeUnit.SECONDS)
                 .filter(time -> Constants.TOPIC_TOP_COUNT >= 0 && null != mAdapter.getItem(Constants.TOPIC_TOP_COUNT))
                 .subscribe(time -> mPresenter.getNewTopicCount(mAdapter.getItem(Constants.TOPIC_TOP_COUNT).getOrder())));
+
     }
 
     @Override

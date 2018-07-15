@@ -34,8 +34,13 @@ public abstract class AbsBaseSwipeBackFragment extends SwipeBackFragment impleme
         unBinder = ButterKnife.bind(this, mContentView);
         RxBus.getInstance().post(new SetDrawerStatusEvent(DrawerLayout.LOCK_MODE_LOCKED_CLOSED));
         initView();
-        initDataAndEvent();
         return attachToSwipeBack(mContentView);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initDataAndEvent();
     }
 
     @Override

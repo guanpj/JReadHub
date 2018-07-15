@@ -2,6 +2,7 @@ package com.jeez.guanpj.jreadhub.base.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -31,8 +32,13 @@ public abstract class AbsBaseDialogFragment extends DialogFragment implements IB
         mContentView = inflater.inflate(getLayoutId(), container, false);
         unBinder = ButterKnife.bind(this, mContentView);
         initView();
-        initDataAndEvent();
         return mContentView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initDataAndEvent();
     }
 
     @Override

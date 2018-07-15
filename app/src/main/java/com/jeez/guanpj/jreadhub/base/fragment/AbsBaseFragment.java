@@ -2,6 +2,7 @@ package com.jeez.guanpj.jreadhub.base.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,13 +38,18 @@ public abstract class AbsBaseFragment extends SupportFragment implements IBaseVi
         }
         unBinder = ButterKnife.bind(this, mContentView);
         initView();
-        initDataAndEvent();
         //判断Fragment对应的Activity是否存在这个视图
         ViewGroup parent = (ViewGroup) mContentView.getParent();
         if (parent != null){
             parent.removeView(mContentView);
         }
         return mContentView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initDataAndEvent();
     }
 
     @Override

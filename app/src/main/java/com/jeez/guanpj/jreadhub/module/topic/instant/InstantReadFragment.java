@@ -1,6 +1,8 @@
 package com.jeez.guanpj.jreadhub.module.topic.instant;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.webkit.URLUtil;
@@ -81,6 +83,11 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     public void initDataAndEvent() {
         mTopicId = Objects.requireNonNull(getArguments()).getString(Constants.BUNDLE_TOPIC_ID);
         initWebSettings();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mPresenter.getTopicInstantRead(mTopicId);
     }
 

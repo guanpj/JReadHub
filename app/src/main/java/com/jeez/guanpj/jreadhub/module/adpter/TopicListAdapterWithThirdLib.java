@@ -50,7 +50,7 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
         super(R.layout.item_topic);
     }
 
-    /*@Override
+    @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position, @NonNull List<Object> payloads) {
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
@@ -58,7 +58,7 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
             //局部刷新，这里只刷新时间
             holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(getItem(position).getPublishDate()));
         }
-    }*/
+    }
 
     @Override
     protected void convert(BaseViewHolder holder, TopicBean topicBean) {
@@ -107,19 +107,21 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
             }
         });
 
-        Log.e("gpj", "topic title " + topicBean.getTitle() + "-------------------------------------");
-
         ArrayList<TopicNewsBean> newsList = topicBean.getNewsArray();
         if (null == newsList || newsList.isEmpty()) {
             return;
         }
         LinearLayout layoutSource = holder.getView(R.id.layout_source);
-        Log.e("gpj", "layoutSource child count " + layoutSource.getChildCount());
-        //layoutSource.removeAllViews();
-        if (layoutSource.getChildCount() < MOST_NEWS_COUNT_PER_ITEM) {
 
+        View moreItemView = null;
+        if (layoutSource.getChildCount() > MOST_NEWS_COUNT_PER_ITEM) {
+            //去掉"查看全部" item 并保存
+            moreItemView = layoutSource.getChildAt(MOST_NEWS_COUNT_PER_ITEM);
+            layoutSource.removeViewAt(MOST_NEWS_COUNT_PER_ITEM);
         }
-        adjustLayoutSourceChildren(layoutSource, newsList.size());
+
+        adjustLayoutSourceChildren(layoutSource,
+                newsList.size() > MOST_NEWS_COUNT_PER_ITEM ? MOST_NEWS_COUNT_PER_ITEM : newsList.size());
         for (int i = 0; i < layoutSource.getChildCount(); i++) {
             TopicNewsBean news = newsList.get(i);
             View view = layoutSource.getChildAt(i);
@@ -129,8 +131,25 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
                 view.setTag(newsViewHolder);
             }
             newsViewHolder.bindData(news);
+            newsViewHolder.setLineVisibility(View.VISIBLE);
+            if (newsList.size() <= MOST_NEWS_COUNT_PER_ITEM && i == newsList.size() - 1) {
+                newsViewHolder.setLineVisibility(View.INVISIBLE);
+            }
         }
-        /*for (int i = 0; i < newsList.size(); i++) {
+
+        //如果大于限制数量，则添加"查看全部" item
+        if (newsList.size() > MOST_NEWS_COUNT_PER_ITEM) {
+            if (null == moreItemView) {
+                moreItemView = mLayoutInflater.inflate(R.layout.item_topic_news_more, null, false);
+            }
+            moreItemView.setOnClickListener(v ->
+                    ((SupportActivity) mContext).findFragment(MainFragment.class)
+                            .start(TopicDetailFragment.newInstance(topicBean.getId(), topicBean.getTitle()))
+            );
+            layoutSource.addView(moreItemView);
+        }
+        /*layoutSource.removeAllViews();
+        for (int i = 0; i < newsList.size(); i++) {
             View newsItemView = mLayoutInflater.inflate(R.layout.item_topic_news, layoutSource, false);
             layoutSource.addView(newsItemView);
 
@@ -156,7 +175,6 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
                 }
             }
         }*/
-        Log.e("gpj", "layoutSource child count " + layoutSource.getChildCount());
     }
 
     void adjustLayoutSourceChildren(LinearLayout layoutSource, int count) {
@@ -165,7 +183,7 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
             for (int i = 0; i < offset; i++) {
                 View view;
                 if (newsViewPool.isEmpty()) {
-                    view = mLayoutInflater.inflate(R.layout.item_topic_news, layoutSource, false);
+                    view = mLayoutInflater.inflate(R.layout.item_topic_news, null, false);
                 } else {
                     view = newsViewPool.remove(0);
                 }
@@ -199,7 +217,6 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
         void bindData(@NonNull TopicNewsBean news) {
             this.news = news;
             tvTitle.setText(news.getTitle());
-            Log.e("gpj", "topic item " + news.getTitle());
             String infoText = mContext.getString(R.string.site_name___time, news.getSiteName(),
                     FormatUtils.getRelativeTimeSpanString(news.getPublishDate()));
 
