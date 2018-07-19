@@ -1,8 +1,13 @@
 package com.jeez.guanpj.jreadhub.bean;
 
-public class BaseItemBean implements Cloneable{
-    String id;
-    String title;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+public class BaseItemBean implements Cloneable {
+
+    @PrimaryKey @NonNull
+    protected String id;
+    protected String title;
 
     public String getId() {
         return id;
