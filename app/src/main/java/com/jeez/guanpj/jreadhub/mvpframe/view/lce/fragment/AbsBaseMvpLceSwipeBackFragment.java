@@ -47,6 +47,11 @@ public abstract class AbsBaseMvpLceSwipeBackFragment<M, P extends BasePresenter>
     }
 
     @Override
+    public void showEmpty() {
+        lceViewDelegate.showEmpty();
+    }
+
+    @Override
     public void bindData(M data) {
         lceViewDelegate.bindData(data);
     }

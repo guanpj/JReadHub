@@ -13,6 +13,7 @@ import java.lang.reflect.Proxy;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
  * Created by Jie on 2016-11-2.

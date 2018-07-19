@@ -7,5 +7,7 @@ public interface ILceSwitchEffect {
 
 	public void showErrorView(View loadingView, View contentView, View errorView);
 
+	public void showEmptyView(View loadingView, View contentView, View emptyView);
+
 	public void showContent(View loadingView, View contentView, View errorView);
 }

@@ -66,6 +66,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
 
     private String mTopicTitle;
     private String mTopicId;
+    private TopicBean mTopicBean;
     private TopicTimelineAdapter mTimelineAdapter;
 
     public static TopicDetailFragment newInstance(String topicId, String title) {
@@ -137,13 +138,14 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
 
     @Override
     public void bindData(TopicBean topicBean) {
-        mTxtTopicTitle.setText(topicBean.getTitle());
-        mTxtTopicTime.setText(topicBean.getFormattedPublishDate().toLocalDate().toString() + "  " +
-                topicBean.getFormattedPublishDate().toLocalTime().toString().substring(0, 8));
-        mTxtTopicDescription.setText(topicBean.getSummary());
-        mTxtTopicDescription.setVisibility(TextUtils.isEmpty(topicBean.getSummary()) ? View.GONE : View.VISIBLE);
+        this.mTopicBean = topicBean;
+        mTxtTopicTitle.setText(mTopicBean.getTitle());
+        mTxtTopicTime.setText(mTopicBean.getFormattedPublishDate().toLocalDate().toString() + "  " +
+                mTopicBean.getFormattedPublishDate().toLocalTime().toString().substring(0, 8));
+        mTxtTopicDescription.setText(mTopicBean.getSummary());
+        mTxtTopicDescription.setVisibility(TextUtils.isEmpty(mTopicBean.getSummary()) ? View.GONE : View.VISIBLE);
         mTitleContainer.removeAllViews();
-        for (final TopicNewsBean topic : topicBean.getNewsArray()) {
+        for (final TopicNewsBean topic : mTopicBean.getNewsArray()) {
             TextView textView = new TextView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(params);
@@ -177,16 +179,16 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
             mTitleContainer.addView(textView);
         }
 
-        if (null != topicBean.getTimeline() && null != topicBean.getTimeline().getTopics() && 0 < topicBean.getTimeline().getTopics().size()) {
-            mTimelineAdapter.addItems(topicBean.getTimeline().getTopics());
+        if (null != mTopicBean.getTimeline() && null != mTopicBean.getTimeline().getTopics() && 0 < mTopicBean.getTimeline().getTopics().size()) {
+            mTimelineAdapter.addItems(mTopicBean.getTimeline().getTopics());
             mTimelineContainer.setVisibility(View.VISIBLE);
         } else {
             mTimelineContainer.setVisibility(View.GONE);
         }
 
-        if (!topicBean.getEntityEventTopics().isEmpty()) {
+        if (!mTopicBean.getEntityEventTopics().isEmpty()) {
             mRelativeTopicContainer.setVisibility(View.VISIBLE);
-            ArrayList<EntityEventTopicBean> entityEventTopics = topicBean.getEntityEventTopics();
+            ArrayList<EntityEventTopicBean> entityEventTopics = mTopicBean.getEntityEventTopics();
             mRelativeTopic.setAdapter(new TagAdapter<EntityEventTopicBean>(entityEventTopics) {
                 @Override
                 public View getView(FlowLayout parent, int position, EntityEventTopicBean entityEventTopicBean) {
@@ -197,7 +199,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
             });
             mRelativeTopic.setOnTagClickListener((view, position, parent) -> {
                 String topicId = String.valueOf(entityEventTopics.get(position).getEntityId());
-                long order = topicBean.getOrder();
+                long order = mTopicBean.getOrder();
 
                 RelevantTopicWindow window = new RelevantTopicWindow(getActivity(), topicId, order);
                 window.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE, RelativePopupWindow.HorizontalPosition.CENTER, true);
@@ -225,7 +227,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_collect:
-                showShortToast("Coming soon...");
+                mPresenter.addStar(mTopicBean);
                 break;
             default:
                 break;

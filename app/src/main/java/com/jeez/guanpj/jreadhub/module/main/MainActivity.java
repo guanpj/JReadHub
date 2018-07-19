@@ -18,6 +18,7 @@ import com.jeez.guanpj.jreadhub.module.about.AboutFragment;
 import com.jeez.guanpj.jreadhub.module.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.module.settting.SettingFragment;
 import com.jeez.guanpj.jreadhub.module.splash.SplashActivity;
+import com.jeez.guanpj.jreadhub.module.star.StarFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
@@ -99,7 +100,7 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         mDrawerLayout.post(() -> {
             switch (item.getItemId()) {
                 case R.id.nav_star:
-
+                    findFragment(MainFragment.class).startBrotherFragment(StarFragment.newInstance());
                     break;
                 case R.id.nav_setting:
                     //SettingActivity.start(this);

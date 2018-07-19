@@ -10,5 +10,9 @@ public interface TopicDetailContract {
 
     interface Presenter extends IBasePresenter<View> {
         void getTopicDetail(String topicId, boolean isPullToRefresh);
+
+        void addStar(TopicBean topicBean);
+
+        void removeStar(TopicBean topicBean);
     }
 }

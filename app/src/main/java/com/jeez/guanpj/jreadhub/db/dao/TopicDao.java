@@ -10,11 +10,19 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 @Dao
 public interface TopicDao {
     @Query("SELECT * FROM topic")
     public Flowable<List<TopicBean>> getAllTopic();
+
+    @Query("SELECT * FROM topic")
+    public Maybe<List<TopicBean>> getAllTopic1();
+
+    @Query("SELECT * FROM topic")
+    public Single<List<TopicBean>> getAllTopic2();
 
     @Query("SELECT * FROM topic WHERE id=:topicId")
     public Flowable<TopicBean> getTopicById(String topicId);

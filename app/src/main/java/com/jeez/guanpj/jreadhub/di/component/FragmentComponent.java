@@ -6,6 +6,8 @@ import com.jeez.guanpj.jreadhub.di.module.FragmentModule;
 import com.jeez.guanpj.jreadhub.di.scope.FragmentScope;
 import com.jeez.guanpj.jreadhub.module.common.CommonListFragment;
 import com.jeez.guanpj.jreadhub.module.settting.SettingFragment;
+import com.jeez.guanpj.jreadhub.module.star.news.StarCommonListFragment;
+import com.jeez.guanpj.jreadhub.module.star.topic.StarTopicFragment;
 import com.jeez.guanpj.jreadhub.module.topic.TopicFragment;
 import com.jeez.guanpj.jreadhub.module.topic.detail.TopicDetailFragment;
 import com.jeez.guanpj.jreadhub.module.topic.instant.InstantReadFragment;
@@ -26,4 +28,8 @@ public interface FragmentComponent {
     void inject(CommonListFragment fragment);
 
     void inject(SettingFragment fragment);
+
+    void inject(StarTopicFragment fragment);
+
+    void inject(StarCommonListFragment fragment);
 }

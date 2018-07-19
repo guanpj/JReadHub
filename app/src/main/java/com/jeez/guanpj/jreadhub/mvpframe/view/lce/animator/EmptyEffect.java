@@ -35,6 +35,13 @@ public class EmptyEffect implements ILceSwitchEffect {
     }
 
     @Override
+    public void showEmptyView(View loadingView, View contentView, View emptyView) {
+        contentView.setVisibility(View.GONE);
+        emptyView.setVisibility(View.VISIBLE);
+        loadingView.setVisibility(View.GONE);
+    }
+
+    @Override
     public void showContent(View loadingView, View contentView, View errorView) {
         contentView.setVisibility(View.VISIBLE);
         errorView.setVisibility(View.GONE);

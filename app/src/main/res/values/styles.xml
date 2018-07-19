@@ -27,7 +27,7 @@
         <item name="menuShare">@drawable/ic_share</item>
         <item name="menuSettings">@drawable/ic_settings</item>
         <item name="menuAbout">@drawable/ic_about</item>
-        <item name="menuStar">@drawable/ic_star_border</item>
+        <item name="menuStar">@drawable/ic_star_fill</item>
     </style>
 
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">

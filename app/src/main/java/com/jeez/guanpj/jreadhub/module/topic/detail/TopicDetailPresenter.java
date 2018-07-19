@@ -41,4 +41,14 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
                     }
                 }));
     }
+
+    @Override
+    public void addStar(TopicBean topicBean) {
+        mDataManager.insert(topicBean);
+    }
+
+    @Override
+    public void removeStar(TopicBean topicBean) {
+        mDataManager.delete(topicBean);
+    }
 }

@@ -9,11 +9,14 @@ import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
+import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.FragmentAdapter;
 import com.jeez.guanpj.jreadhub.module.common.CommonListFragment;
+import com.jeez.guanpj.jreadhub.module.star.news.StarCommonListFragment;
+import com.jeez.guanpj.jreadhub.module.star.topic.StarTopicFragment;
 import com.jeez.guanpj.jreadhub.module.topic.TopicFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.Constants;
@@ -24,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class StarFragment extends AbsBaseFragment implements Toolbar.OnMenuItemClickListener {
+public class StarFragment extends AbsBaseSwipeBackFragment implements Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -47,7 +50,7 @@ public class StarFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
 
     @Override
     public void initView() {
-        mToolbar.inflateMenu(R.menu.menu_main);
+        mToolbar.inflateMenu(R.menu.menu_star);
     }
 
     @Override
@@ -57,9 +60,8 @@ public class StarFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
         pageTitles.add("资讯");
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(TopicFragment.newInstance());
-        fragments.add(CommonListFragment.newInstance(Constants.TYPE_NEWS));
-        fragments.add(CommonListFragment.newInstance(Constants.TYPE_TECHNEWS));
+        fragments.add(StarTopicFragment.newInstance());
+        fragments.add(StarCommonListFragment.newInstance());
 
         FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), pageTitles, fragments);
         mViewPager.setAdapter(adapter);

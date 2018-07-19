@@ -13,7 +13,9 @@ import com.jeez.guanpj.jreadhub.util.Constants;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class DataManager implements NetHelper, DatabaseHelper {
     private NetHelper mNetHelper;
@@ -62,6 +64,16 @@ public class DataManager implements NetHelper, DatabaseHelper {
     @Override
     public Flowable<List<TopicBean>> getAllTopic() {
         return mDbHelper.getAllTopic();
+    }
+
+    @Override
+    public Maybe<List<TopicBean>> getAllTopic1() {
+        return mDbHelper.getAllTopic1();
+    }
+
+    @Override
+    public Single<List<TopicBean>> getAllTopic2() {
+        return mDbHelper.getAllTopic2();
     }
 
     @Override

@@ -63,6 +63,34 @@ public class AnimatorEffect implements ILceSwitchEffect {
     }
 
     @Override
+    public void showEmptyView(final View loadingView, final View contentView, final View emptyView) {
+        contentView.setVisibility(View.GONE);
+
+        final Resources resources = loadingView.getResources();
+        AnimatorSet set = new AnimatorSet();
+        ObjectAnimator in = ObjectAnimator.ofFloat(emptyView, "alpha", 1f);
+        ObjectAnimator loadingOut = ObjectAnimator.ofFloat(loadingView,"alpha", 0f);
+
+        set.playTogether(in, loadingOut);
+        set.setDuration(resources.getInteger(R.integer.lce_empty_view_show_animation_time));
+        set.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                emptyView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                loadingView.setVisibility(View.GONE);
+                loadingView.setAlpha(1f);
+            }
+        });
+        set.start();
+    }
+
+    @Override
     public void showContent(final View loadingView, final View contentView, final View errorView) {
         if (contentView.getVisibility() == View.VISIBLE) {
             errorView.setVisibility(View.GONE);

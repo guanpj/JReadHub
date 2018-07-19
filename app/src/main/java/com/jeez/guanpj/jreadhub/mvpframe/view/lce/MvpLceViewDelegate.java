@@ -16,9 +16,10 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
     private View loadingView;
     private View contentView;
     private View errorView;
+    private View emptyView;
     private View retryView;
 
-    private enum State {Error, Loading, Content}
+    private enum State {Loading, Error, Empty, Content}
     private State currentState;
 
     private ILceSwitchEffect lceSwitchEffect;
@@ -34,15 +35,22 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
             errorView = view.findViewById(R.id.error_view);
             retryView = view.findViewById(R.id.ll_retry);
         }
+        if (emptyView == null) {
+            emptyView = view.findViewById(R.id.empty_view);
+            retryView = view.findViewById(R.id.ll_retry);
+        }
         if (loadingView == null) {
-            throw new NullPointerException("loadingView is not null!");
+            throw new NullPointerException("loadingView must be not null!");
         }
         if (contentView == null) {
-            throw new NullPointerException("contentView is not null!");
+            throw new NullPointerException("contentView must be not null!");
         }
-        if (errorView == null) {
-            throw new NullPointerException("errorView is not null!");
+        /*if (errorView == null) {
+            throw new NullPointerException("errorView must be not null!");
         }
+        if (emptyView == null) {
+            throw new NullPointerException("emptyView must be not null!");
+        }*/
     }
 
     public void setOnErrorViewClickListener(View.OnClickListener onClickListener) {
@@ -90,6 +98,17 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
             getLceSwitchEffect().showErrorView(loadingView, contentView, errorView);
         }
         currentState = State.Error;
+    }
+
+    @Override
+    public void showEmpty() {
+        if (currentState == State.Loading) {
+            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.io2Main()).subscribe(time ->
+                    getLceSwitchEffect().showEmptyView(loadingView, contentView, emptyView));
+        } else {
+            getLceSwitchEffect().showEmptyView(loadingView, contentView, emptyView);
+        }
+        currentState = State.Empty;
     }
 
     @Override

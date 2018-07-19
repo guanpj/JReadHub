@@ -20,6 +20,11 @@ public interface IBaseMvpLceView<M> extends IBaseMvpView {
     void showError();
 
     /**
+     * 显示空数据界面
+     */
+    void showEmpty();
+
+    /**
      * 绑定数据
      */
     void bindData(M data);
