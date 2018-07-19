@@ -2,13 +2,14 @@
     <string name="app_name">ReadHub</string>
     <string name="app_introduce">科技新闻，每天三分钟。</string>
 
+    <string name="menu_star">星标内容</string>
     <string name="menu_setting">设置</string>
     <string name="menu_about">关于</string>
     <string name="topic_detail">话题详情</string>
     <string name="action_share">分享</string>
     <string name="action_search">搜索</string>
     <string name="action_open">在浏览器中打开</string>
-    <string name="action_collect">收藏</string>
+    <string name="action_star">收藏</string>
 
     <string name="title___site_name">%1$s&#160;&#160;%2$s</string>
     <string name="site_name___author_name___time">%1$s&#160;/&#160;%2$s&#160;&#160;&#160;%3$s</string>

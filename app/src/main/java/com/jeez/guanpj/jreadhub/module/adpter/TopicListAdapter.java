@@ -99,7 +99,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
             tvTitle.setText(topic.getTitle());
             tvSummary.setText(topic.getSummary());
             tvSummary.setVisibility(TextUtils.isEmpty(topic.getSummary()) ? View.GONE : View.VISIBLE);
-            tvTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getPublishDate()));
+            tvTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getFormattedPublishDate()));
             imgInstantRead.setVisibility(topic.hasInstantView() ? View.VISIBLE : View.GONE);
 
             if (newsCount == 0) {

@@ -1,15 +1,14 @@
 package com.jeez.guanpj.jreadhub.bean;
 
-import android.support.annotation.StringDef;
+import android.arch.persistence.room.Entity;
 
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import org.threeten.bp.OffsetDateTime;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
+@Entity(tableName = "news")
 public class NewsBean extends BaseItemBean {
+
     private String authorName;
     private String language;
     private String mobileUrl;
@@ -19,15 +18,6 @@ public class NewsBean extends BaseItemBean {
     private String summary;
     private String summaryAuto;
     private String url;
-
-    public static final String TYPE_NEWS = "news";
-    public static final String TYPE_TECHNEWS = "technews";
-    public static final String TYPE_BLOCKCHAIN = "blockchain";
-    public static final String TYPE_JOBS = "jobs";
-
-    @StringDef({TYPE_NEWS, TYPE_TECHNEWS, TYPE_BLOCKCHAIN, TYPE_JOBS})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {}
 
     public String getAuthorName() {
         return authorName;
@@ -53,11 +43,11 @@ public class NewsBean extends BaseItemBean {
         this.mobileUrl = mobileUrl;
     }
 
-    /*public String getPublishDate() {
+    public String getPublishDate() {
         return publishDate;
-    }*/
+    }
 
-    public OffsetDateTime getPublishDate() {
+    public OffsetDateTime getFormattedPublishDate() {
         return FormatUtils.string2ODT(publishDate);
     }
 

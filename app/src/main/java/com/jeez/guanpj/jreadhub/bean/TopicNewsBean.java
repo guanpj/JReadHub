@@ -1,10 +1,13 @@
 package com.jeez.guanpj.jreadhub.bean;
 
+import android.arch.persistence.room.Entity;
+
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import org.threeten.bp.OffsetDateTime;
 
-public class TopicNewsBean implements Cloneable{
+@Entity(tableName = "topic_news")
+public class TopicNewsBean implements Cloneable {
 
     /**
      * id : 19116115
@@ -19,16 +22,16 @@ public class TopicNewsBean implements Cloneable{
      * publishDate : 2018-04-24T15:40:07.000Z
      */
 
-    int id;
-    String url;
-    String title;
-    int groupId;
-    String siteName;
-    String siteSlug;
-    String mobileUrl;
-    String authorName;
-    int duplicateId;
-    String publishDate;
+    private int id;
+    private String url;
+    private String title;
+    private int groupId;
+    private String siteName;
+    private String siteSlug;
+    private String mobileUrl;
+    private String authorName;
+    private int duplicateId;
+    private String publishDate;
 
     public int getId() {
         return id;
@@ -102,7 +105,7 @@ public class TopicNewsBean implements Cloneable{
         this.duplicateId = duplicateId;
     }
 
-    /*public String getPublishDate() {
+    /*public String getFormattedPublishDate() {
         return publishDate;
     }*/
 

@@ -3,8 +3,8 @@ package com.jeez.guanpj.jreadhub.bean;
 import java.util.ArrayList;
 
 public class TopicTimelineBean {
-    int errorCode;
-    ArrayList<RelevantTopicBean> topics;
+    private int errorCode;
+    private ArrayList<RelevantTopicBean> topics;
 
     public int getErrorCode() {
         return errorCode;

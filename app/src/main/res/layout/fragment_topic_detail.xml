@@ -52,7 +52,7 @@
                     android:layout_marginBottom="@dimen/dimen_10_dp"
                     android:layout_marginTop="@dimen/dimen_10_dp"
                     android:text="2018-06-19 14:50:10"
-                    android:textColor="#545454"
+                    android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/textSize_16" />
 
                 <View
@@ -101,7 +101,8 @@
                         layout="@layout/layout_topic_timeline"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/dimen_10_dp" />
+                        android:layout_marginTop="@dimen/dimen_10_dp"
+                        android:layout_marginBottom="@dimen/dimen_10_dp"/>
 
                 </LinearLayout>
 

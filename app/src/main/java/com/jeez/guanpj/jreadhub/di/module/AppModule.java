@@ -5,6 +5,8 @@ import android.content.Context;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
 import com.jeez.guanpj.jreadhub.core.net.NetHelperImpl;
+import com.jeez.guanpj.jreadhub.db.DataBaseHelperImpl;
+import com.jeez.guanpj.jreadhub.db.DatabaseHelper;
 
 import javax.inject.Singleton;
 
@@ -33,7 +35,13 @@ public class AppModule {
 
     @Provides
     @Singleton
-    DataManager provideDataManager(NetHelper netHelper) {
-        return new DataManager(netHelper);
+    DatabaseHelper provideDbHelper(DataBaseHelperImpl dataBaseHelperImpl) {
+        return dataBaseHelperImpl;
+    }
+
+    @Provides
+    @Singleton
+    DataManager provideDataManager(NetHelper netHelper, DatabaseHelper dbHelper) {
+        return new DataManager(netHelper, dbHelper);
     }
 }

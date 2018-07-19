@@ -5,11 +5,11 @@ import com.jeez.guanpj.jreadhub.util.FormatUtils;
 import org.threeten.bp.OffsetDateTime;
 
 public class RelevantTopicBean {
-    String createdAt;
-    String id;
-    String title;
-    String url;
-    String mobileUrl;
+    private String createdAt;
+    private String id;
+    private String title;
+    private String url;
+    private String mobileUrl;
 
     public OffsetDateTime getCreatedAt() {
         return FormatUtils.string2ODT(createdAt);

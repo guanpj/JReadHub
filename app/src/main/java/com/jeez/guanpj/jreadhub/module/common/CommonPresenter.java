@@ -40,7 +40,7 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     }
 
     @Override
-    public void doRefresh(@NewsBean.Type String type, boolean isPullToRefresh) {
+    public void doRefresh(@Constants.Type String type, boolean isPullToRefresh) {
         addSubscribe(mDataManager.getNewsList(type, null, Constants.TOPIC_PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
                 .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
@@ -63,7 +63,7 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     }
 
     @Override
-    public void doLoadMore(@NewsBean.Type String type, Long lastCursor) {
+    public void doLoadMore(@Constants.Type String type, Long lastCursor) {
         addSubscribe(mDataManager.getNewsList(type, lastCursor, Constants.TOPIC_PAGE_SIZE)
                 .compose(RxSchedulers.io2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {

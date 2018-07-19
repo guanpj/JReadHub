@@ -37,10 +37,10 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
     RecyclerView mRecyclerView;
 
     private NewsListAdapterWithThirdLib mAdapter;
-    private @NewsBean.Type String mNewsType;
+    private @Constants.Type String mNewsType;
     private boolean isPullToRefresh;
 
-    public static CommonListFragment newInstance(@NewsBean.Type String type) {
+    public static CommonListFragment newInstance(@Constants.Type String type) {
         CommonListFragment fragment = new CommonListFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_NEWS_TYPE, type);
@@ -109,7 +109,7 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
 
     public void doLoadMore() {
         isPullToRefresh = false;
-        mPresenter.doLoadMore(mNewsType, mAdapter.getItem(mAdapter.getItemCount() - 2).getPublishDate().toInstant().toEpochMilli());
+        mPresenter.doLoadMore(mNewsType, mAdapter.getItem(mAdapter.getItemCount() - 2).getFormattedPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
@@ -173,9 +173,9 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
 
     @Override
     public void onFabClick(int currentPageIndex) {
-        if ((mNewsType == NewsBean.TYPE_NEWS && currentPageIndex == 1)
-                || (mNewsType == NewsBean.TYPE_TECHNEWS && currentPageIndex == 2)
-                || (mNewsType == NewsBean.TYPE_BLOCKCHAIN && currentPageIndex == 3)) {
+        if ((mNewsType == Constants.TYPE_NEWS && currentPageIndex == 1)
+                || (mNewsType == Constants.TYPE_TECHNEWS && currentPageIndex == 2)
+                || (mNewsType == Constants.TYPE_BLOCKCHAIN && currentPageIndex == 3)) {
             mRecyclerView.scrollToPosition(0);
         }
     }

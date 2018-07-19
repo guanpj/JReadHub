@@ -7,6 +7,7 @@ import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.net.api.ReadhubApi;
+import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class NetHelperImpl implements NetHelper {
     }
 
     @Override
-    public Observable<DataListBean<NewsBean>> getNewsList(@NewsBean.Type String type, Long lastCursor, int pageSize) {
+    public Observable<DataListBean<NewsBean>> getNewsList(@Constants.Type String type, Long lastCursor, int pageSize) {
         return readhubApi.getNewsList(type, lastCursor, pageSize);
     }
 

@@ -98,6 +98,9 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         mDrawerLayout.closeDrawer(GravityCompat.START);
         mDrawerLayout.post(() -> {
             switch (item.getItemId()) {
+                case R.id.nav_star:
+
+                    break;
                 case R.id.nav_setting:
                     //SettingActivity.start(this);
                     findFragment(MainFragment.class).start(SettingFragment.newInstance());

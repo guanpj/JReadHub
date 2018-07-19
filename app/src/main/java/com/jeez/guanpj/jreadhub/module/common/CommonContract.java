@@ -5,6 +5,7 @@ import android.support.v7.util.DiffUtil;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.IBaseMvpLceView;
+import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
 
@@ -19,13 +20,13 @@ public interface CommonContract {
         /**
          * 刷新数据
          */
-        void doRefresh(@NewsBean.Type String type, boolean isPullToRefresh);
+        void doRefresh(@Constants.Type String type, boolean isPullToRefresh);
 
         /**
          * 加载更多
          * @param lastCursor
          */
-        void doLoadMore(@NewsBean.Type String type, Long lastCursor);
+        void doLoadMore(@Constants.Type String type, Long lastCursor);
 
         /**
          * 对比数据差异

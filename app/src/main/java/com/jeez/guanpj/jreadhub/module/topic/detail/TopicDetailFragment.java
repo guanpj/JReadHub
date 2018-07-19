@@ -138,8 +138,8 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     @Override
     public void bindData(TopicBean topicBean) {
         mTxtTopicTitle.setText(topicBean.getTitle());
-        mTxtTopicTime.setText(topicBean.getPublishDate().toLocalDate().toString() + "  " +
-                topicBean.getPublishDate().toLocalTime().toString().substring(0, 8));
+        mTxtTopicTime.setText(topicBean.getFormattedPublishDate().toLocalDate().toString() + "  " +
+                topicBean.getFormattedPublishDate().toLocalTime().toString().substring(0, 8));
         mTxtTopicDescription.setText(topicBean.getSummary());
         mTxtTopicDescription.setVisibility(TextUtils.isEmpty(topicBean.getSummary()) ? View.GONE : View.VISIBLE);
         mTitleContainer.removeAllViews();

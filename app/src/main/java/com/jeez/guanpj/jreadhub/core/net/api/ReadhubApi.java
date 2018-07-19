@@ -9,6 +9,7 @@ import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface ReadhubApi {
 
     @GET("{type}")
     Observable<DataListBean<NewsBean>> getNewsList(
-            @Path("type") @NewsBean.Type String type,
+            @Path("type") @Constants.Type String type,
             @Query("lastCursor") Long lastCursor,
             @Query("pageSize") int pageSize
     );

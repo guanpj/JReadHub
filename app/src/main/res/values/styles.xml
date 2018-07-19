@@ -25,6 +25,9 @@
         <item name="overFlowIcon">@drawable/ic_more</item>
         <item name="menuSearch">@drawable/ic_search</item>
         <item name="menuShare">@drawable/ic_share</item>
+        <item name="menuSettings">@drawable/ic_settings</item>
+        <item name="menuAbout">@drawable/ic_about</item>
+        <item name="menuStar">@drawable/ic_star_border</item>
     </style>
 
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -47,6 +50,9 @@
         <item name="overFlowIcon">@drawable/ic_more</item>
         <item name="menuSearch">@drawable/ic_search</item>
         <item name="menuShare">@drawable/ic_share</item>
+        <item name="menuSettings">@drawable/ic_settings</item>
+        <item name="menuAbout">@drawable/ic_about</item>
+        <item name="menuStar">@drawable/ic_star_border</item>
     </style>
 
     <style name="AppTheme.NoActionBar.SwipeBack">

@@ -1,11 +1,16 @@
 package com.jeez.guanpj.jreadhub.bean;
 
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+
 import com.jeez.guanpj.jreadhub.util.FormatUtils;
 
 import org.threeten.bp.OffsetDateTime;
 
 import java.util.ArrayList;
 
+@Entity(tableName = "topic")
 public class TopicBean extends BaseItemBean implements Cloneable {
 
     /**
@@ -22,18 +27,21 @@ public class TopicBean extends BaseItemBean implements Cloneable {
      * timeline : null
      * extra : {"instantView":true}
      */
-
-    String createdAt;
-    ArrayList<EntityEventTopicBean> entityEventTopics;
-    ArrayList<EntityTopicBean> entityTopics;
-    /*Object eventData;*/
-    long order;
-    String publishDate;
-    String summary;
-    String updatedAt;
-    TopicTimelineBean timeline;
-    ArrayList<TopicNewsBean> newsArray;
-    Extra extra;
+    private String createdAt;
+    @Ignore
+    private ArrayList<EntityEventTopicBean> entityEventTopics;
+    @Ignore
+    private ArrayList<EntityTopicBean> entityTopics;
+    private long order;
+    private String publishDate;
+    private String summary;
+    private String updatedAt;
+    @Ignore
+    private TopicTimelineBean timeline;
+    @Ignore
+    private ArrayList<TopicNewsBean> newsArray;
+    @Embedded
+    private Extra extra;
 
     public String getCreatedAt() {
         return createdAt;
@@ -59,14 +67,6 @@ public class TopicBean extends BaseItemBean implements Cloneable {
         this.entityTopics = entityTopics;
     }
 
-    /*public Object getEventData() {
-        return eventData;
-    }
-
-    public void setEventData(Object eventData) {
-        this.eventData = eventData;
-    }*/
-
     public long getOrder() {
         return order;
     }
@@ -75,11 +75,11 @@ public class TopicBean extends BaseItemBean implements Cloneable {
         this.order = order;
     }
 
-    /*public String getPublishDate() {
+    public String getPublishDate() {
         return publishDate;
-    }*/
+    }
 
-    public OffsetDateTime getPublishDate() {
+    public OffsetDateTime getFormattedPublishDate() {
         return FormatUtils.string2ODT(publishDate);
     }
 

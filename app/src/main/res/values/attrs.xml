@@ -15,6 +15,9 @@
     <attr name="overFlowIcon" format="reference" />
     <attr name="menuSearch" format="reference" />
     <attr name="menuShare" format="reference" />
+    <attr name="menuSettings" format="reference" />
+    <attr name="menuAbout" format="reference" />
+    <attr name="menuStar" format="reference" />
 
     <declare-styleable name="SettingItemView">
         <attr name="icon" format="reference" />

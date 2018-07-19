@@ -52,7 +52,7 @@ public class NewsListAdapterWithThirdLib extends BaseQuickAdapter<NewsBean, Base
         if (TextUtils.isEmpty(newsBean.getAuthorName())) {
             String infoText = mContext.getString(R.string.site_name___time,
                     newsBean.getSiteName(),
-                    FormatUtils.getRelativeTimeSpanString(newsBean.getPublishDate()));
+                    FormatUtils.getRelativeTimeSpanString(newsBean.getFormattedPublishDate()));
             spannableInfoText = new SpannableString(infoText);
             spannableInfoText.setSpan(new StyleSpan(Typeface.BOLD),
                     0, newsBean.getSiteName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -60,7 +60,7 @@ public class NewsListAdapterWithThirdLib extends BaseQuickAdapter<NewsBean, Base
             String infoText = mContext.getString(R.string.site_name___author_name___time,
                     newsBean.getSiteName(),
                     newsBean.getAuthorName(),
-                    FormatUtils.getRelativeTimeSpanString(newsBean.getPublishDate()));
+                    FormatUtils.getRelativeTimeSpanString(newsBean.getFormattedPublishDate()));
             spannableInfoText = new SpannableString(infoText);
             spannableInfoText.setSpan(new StyleSpan(Typeface.BOLD),
                     0, newsBean.getSiteName().length() + newsBean.getAuthorName().length() + 3,

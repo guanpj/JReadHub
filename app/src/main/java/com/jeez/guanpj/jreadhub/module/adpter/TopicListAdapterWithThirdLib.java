@@ -6,7 +6,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,7 +55,7 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
             onBindViewHolder(holder, position);
         } else {
             //局部刷新，这里只刷新时间
-            holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(getItem(position).getPublishDate()));
+            holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(getItem(position).getFormattedPublishDate()));
         }
     }
 
@@ -72,7 +71,7 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
         holder.setText(R.id.tv_title, topicBean.getTitle());
         holder.setText(R.id.tv_summary, topicBean.getSummary());
         holder.setVisible(R.id.tv_summary, TextUtils.isEmpty(topicBean.getSummary()) ? false : true);
-        holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(topicBean.getPublishDate()));
+        holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(topicBean.getFormattedPublishDate()));
 
         if (newsCount == 0) {
             holder.setGone(R.id.line, true);

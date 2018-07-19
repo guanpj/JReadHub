@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -16,8 +17,11 @@ import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
-import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.module.adpter.FragmentAdapter;
+import com.jeez.guanpj.jreadhub.module.common.CommonListFragment;
+import com.jeez.guanpj.jreadhub.module.topic.TopicFragment;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
 import java.util.ArrayList;
@@ -59,16 +63,23 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
 
     @Override
     public void initDataAndEvent() {
-        List<String> mPageTitles = new ArrayList<>();
-        mPageTitles.add("热门话题");
-        mPageTitles.add("科技动态");
-        mPageTitles.add("开发者资讯");
-        mPageTitles.add("区块链快讯");
-        FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), mPageTitles);
+        List<String> pageTitles = new ArrayList<>();
+        pageTitles.add("热门话题");
+        pageTitles.add("科技动态");
+        pageTitles.add("开发者资讯");
+        pageTitles.add("区块链快讯");
+
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(TopicFragment.newInstance());
+        fragments.add(CommonListFragment.newInstance(Constants.TYPE_NEWS));
+        fragments.add(CommonListFragment.newInstance(Constants.TYPE_TECHNEWS));
+        fragments.add(CommonListFragment.newInstance(Constants.TYPE_BLOCKCHAIN));
+
+        FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), pageTitles, fragments);
         mViewPager.setAdapter(adapter);
 
-        for (int i = 0; i < mPageTitles.size(); i++) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(mPageTitles.get(i)));
+        for (int i = 0; i < pageTitles.size(); i++) {
+            mTabLayout.addTab(mTabLayout.newTab().setText(pageTitles.get(i)));
         }
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);

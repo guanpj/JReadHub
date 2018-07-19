@@ -38,6 +38,17 @@ public class Constants {
         String AUTO_UPGRADE = "auto_upgrade";
     }
 
+    public static final String TYPE_NEWS = "news";
+    public static final String TYPE_TECHNEWS = "technews";
+    public static final String TYPE_BLOCKCHAIN = "blockchain";
+    public static final String TYPE_JOBS = "jobs";
+
+    public static final String TYPE_STAR_OTHER_NEWS = "other_news";
+
+    @StringDef({TYPE_NEWS, TYPE_TECHNEWS, TYPE_BLOCKCHAIN, TYPE_JOBS})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Type {}
+
     @StringDef({ThemeType.Blue, ThemeType.Gray})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Theme {}
