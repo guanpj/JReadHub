@@ -23,4 +23,9 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.jeez.guanpj.jreadhub", appContext.getPackageName());
     }
+
+    @Test
+    public void getAllTopic() {
+
+    }
 }

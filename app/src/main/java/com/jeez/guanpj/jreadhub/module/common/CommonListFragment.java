@@ -120,6 +120,8 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
                 if (isPullToRefresh) {
                     mRefreshLayout.setRefreshing(false);
                     mAdapter.setNewData(dataList);
+                    mRecyclerView.scrollToPosition(0);
+                    mAdapter.setEnableLoadMore(true);
                     //mPresenter.getDiffResult(mAdapter.getData(), dataList);
                 } else {
                     mAdapter.addData(dataList);

@@ -3,8 +3,6 @@ package com.jeez.guanpj.jreadhub.module.star.news;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -12,18 +10,15 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.NewsListAdapterWithThirdLib;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.EmptyEffect;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceFragment;
-import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,7 +49,7 @@ public class StarCommonListFragment extends AbsBaseMvpLceFragment<List<NewsBean>
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_common;
+        return R.layout.fragment_star;
     }
 
     @Override
@@ -109,7 +104,8 @@ public class StarCommonListFragment extends AbsBaseMvpLceFragment<List<NewsBean>
             if (isPullToRefresh) {
                 mRefreshLayout.setRefreshing(false);
                 mAdapter.setNewData(dataList);
-                //mPresenter.getDiffResult(mAdapter.getData(), dataList);
+                mRecyclerView.scrollToPosition(0);
+                mAdapter.setEnableLoadMore(true);
             } else {
                 mAdapter.addData(dataList);
                 mAdapter.loadMoreComplete();

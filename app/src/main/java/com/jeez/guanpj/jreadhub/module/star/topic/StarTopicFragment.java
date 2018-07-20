@@ -1,38 +1,24 @@
 package com.jeez.guanpj.jreadhub.module.star.topic;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.util.ListUpdateCallback;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicListAdapterWithThirdLib;
-import com.jeez.guanpj.jreadhub.module.topic.TopicContract;
-import com.jeez.guanpj.jreadhub.module.topic.TopicPresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.EmptyEffect;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceFragment;
-import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.custom.CustomLoadMoreView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import butterknife.OnTouch;
-import io.reactivex.Observable;
 
 public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicBean>, StarTopicPresenter> implements StarTopicContract.View<List<TopicBean>>, SwipeRefreshLayout.OnRefreshListener {
 
@@ -112,6 +98,7 @@ public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicBean>, St
                 mRefreshLayout.setRefreshing(false);
                 mAdapter.setNewData(data);
                 mRecyclerView.scrollToPosition(0);
+                mAdapter.setEnableLoadMore(true);
             } else {
                 mAdapter.addData(data);
                 mAdapter.loadMoreComplete();

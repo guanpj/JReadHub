@@ -121,6 +121,7 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
                     mRefreshLayout.setRefreshing(false);
                     mAdapter.setNewData(dataList);
                     mRecyclerView.scrollToPosition(0);
+                    mAdapter.setEnableLoadMore(true);
                     //mPresenter.getDiffResult(mAdapter.getData(), dataList);
                 } else {
                     mAdapter.addData(dataList);
