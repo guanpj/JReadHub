@@ -34,7 +34,7 @@ public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresente
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_setting;
+        return R.layout.fragment_setting;
     }
 
     @Override

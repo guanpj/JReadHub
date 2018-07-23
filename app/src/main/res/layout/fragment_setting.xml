@@ -32,7 +32,7 @@
                 android:id="@+id/item_use_system_browser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_browser"
+                app:icon="@drawable/ic_about_browser"
                 app:title="@string/use_system_browser"
                 app:description="@string/use_system_browser_des"
                 app:type="switcher"/>
@@ -41,7 +41,7 @@
                 android:id="@+id/item_auto_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_update"
+                app:icon="@drawable/ic_about_update"
                 app:title="自动检查更新"
                 app:description="自动获取更新内容并提示"
                 app:type="checkbox"/>
@@ -50,7 +50,7 @@
                 android:id="@+id/item_switch_theme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_theme"
+                app:icon="@drawable/ic_menu_main_theme"
                 app:title="@string/change_theme"
                 app:type="none"/>
 

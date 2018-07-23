@@ -150,7 +150,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             textView.setLayoutParams(params);
             textView.setPadding(10, 16, 10, 16);
-            textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_ring, 0, 0, 0);
+            textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_topic_detail_ring, 0, 0, 0);
             textView.setCompoundDrawablePadding(15);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             textView.setTextColor(ContextCompat.getColor(getContext(), R.color.text_topic_detail_news_title));

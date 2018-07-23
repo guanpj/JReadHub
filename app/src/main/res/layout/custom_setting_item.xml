@@ -16,7 +16,7 @@
             android:id="@+id/img_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_version" />
+            android:src="@drawable/ic_about_version" />
 
         <LinearLayout
             android:id="@+id/ll_container"

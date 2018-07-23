@@ -1,6 +1,9 @@
-<vector android:height="48dp" android:viewportHeight="1024"
-    android:viewportWidth="1024" android:width="48dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="?attr/readhubTheme" android:pathData="M512,1024C229.7,1024 0,794.3 0,512S229.7,0 512,0c282.32,0 512,229.7 512,512S794.34,1024 512,1024zM512,44.52C254.23,44.52 44.54,254.21 44.54,512c0,257.77 209.71,467.48 467.48,467.48 257.79,0 467.48,-209.73 467.48,-467.48C979.5,254.21 769.79,44.52 512,44.52z"/>
-    <path android:fillColor="?attr/readhubTheme" android:pathData="M666.69,692.18c-5.7,0 -11.4,-2.16 -15.76,-6.49L342.69,377.39c-8.7,-8.7 -8.7,-22.78 0,-31.49 8.7,-8.7 22.78,-8.7 31.49,0L682.43,654.2c8.7,8.68 8.7,22.78 0,31.49C678.1,690.01 672.42,692.18 666.69,692.18z"/>
-    <path android:fillColor="?attr/readhubTheme" android:pathData="M354.05,692.2c-5.7,0 -11.38,-2.19 -15.73,-6.49 -8.7,-8.7 -8.7,-22.78 0,-31.49L654.2,338.34c8.7,-8.7 22.78,-8.7 31.49,0 8.68,8.7 8.68,22.78 0,31.49L369.8,685.71C365.45,690.01 359.75,692.2 354.05,692.2z"/>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24.0"
+        android:viewportHeight="24.0">
+    <path
+        android:fillColor="@color/bg_gray"
+        android:pathData="M19,6.41L17.59,5 12,10.59 6.41,5 5,6.41 10.59,12 5,17.59 6.41,19 12,13.41 17.59,19 19,17.59 13.41,12z"/>
 </vector>

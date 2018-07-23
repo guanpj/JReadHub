@@ -93,7 +93,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_about" />
+                            android:src="@drawable/ic_menu_main_about" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_open_in_browser" />
+                            android:src="@drawable/ic_tool_bar_open_in_browser" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_version" />
+                            android:src="@drawable/ic_about_version" />
 
                         <LinearLayout
                             android:id="@+id/ll_version"
@@ -241,7 +241,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_code" />
+                            android:src="@drawable/ic_about_code" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

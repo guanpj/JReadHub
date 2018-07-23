@@ -9,17 +9,13 @@ import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
-import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.FragmentAdapter;
-import com.jeez.guanpj.jreadhub.module.common.CommonListFragment;
 import com.jeez.guanpj.jreadhub.module.star.news.StarCommonListFragment;
 import com.jeez.guanpj.jreadhub.module.star.topic.StarTopicFragment;
-import com.jeez.guanpj.jreadhub.module.topic.TopicFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
-import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class StarFragment extends AbsBaseSwipeBackFragment implements Toolbar.OnMenuItemClickListener {
+public class StarFragment extends AbsBaseFragment implements Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;

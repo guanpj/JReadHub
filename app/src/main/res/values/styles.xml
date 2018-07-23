@@ -20,14 +20,15 @@
         <item name="readhubTheme">@color/theme_blue_theme</item>
         <item name="readhubFloatBtn">@color/theme_blue_float_btn</item>
 
-        <item name="navIcon">@drawable/ic_menu</item>
-        <item name="navBackIcon">@drawable/ic_back</item>
-        <item name="overFlowIcon">@drawable/ic_more</item>
-        <item name="menuSearch">@drawable/ic_search</item>
-        <item name="menuShare">@drawable/ic_share</item>
-        <item name="menuSettings">@drawable/ic_settings</item>
-        <item name="menuAbout">@drawable/ic_about</item>
-        <item name="menuStar">@drawable/ic_star_fill</item>
+        <item name="navIcon">@drawable/ic_nav_main</item>
+        <item name="navBackIcon">@drawable/ic_nav_back</item>
+        <item name="overFlowIcon">@drawable/ic_tool_bar_more</item>
+        <item name="menuSearch">@drawable/ic_tool_bar_search</item>
+        <item name="menuShare">@drawable/ic_tool_bar_share</item>
+        <item name="menuHome">@drawable/ic_menu_main_home</item>
+        <item name="menuStar">@drawable/ic_menu_main_star_fill</item>
+        <item name="menuSettings">@drawable/ic_menu_main_settings</item>
+        <item name="menuAbout">@drawable/ic_menu_main_about</item>
     </style>
 
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -45,14 +46,15 @@
         <item name="readhubTheme">@color/theme_gray_theme</item>
         <item name="readhubFloatBtn">@color/theme_gray_float_btn</item>
 
-        <item name="navIcon">@drawable/ic_menu</item>
-        <item name="navBackIcon">@drawable/ic_back</item>
-        <item name="overFlowIcon">@drawable/ic_more</item>
-        <item name="menuSearch">@drawable/ic_search</item>
-        <item name="menuShare">@drawable/ic_share</item>
-        <item name="menuSettings">@drawable/ic_settings</item>
-        <item name="menuAbout">@drawable/ic_about</item>
-        <item name="menuStar">@drawable/ic_star_border</item>
+        <item name="navIcon">@drawable/ic_nav_main</item>
+        <item name="navBackIcon">@drawable/ic_nav_back</item>
+        <item name="overFlowIcon">@drawable/ic_tool_bar_more</item>
+        <item name="menuSearch">@drawable/ic_tool_bar_search</item>
+        <item name="menuShare">@drawable/ic_tool_bar_share</item>
+        <item name="menuHome">@drawable/ic_menu_main_home</item>
+        <item name="menuStar">@drawable/ic_tool_bar_star_border</item>
+        <item name="menuSettings">@drawable/ic_menu_main_settings</item>
+        <item name="menuAbout">@drawable/ic_menu_main_about</item>
     </style>
 
     <style name="AppTheme.NoActionBar.SwipeBack">

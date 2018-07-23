@@ -37,7 +37,7 @@
         android:layout_margin="@dimen/dimen_15_dp"
         android:layout_gravity="bottom|end"
         android:background="?attr/readhubFloatBtn"
-        app:srcCompat="@drawable/ic_top"
+        app:srcCompat="@drawable/ic_main_top"
         app:layout_behavior="com.jeez.guanpj.jreadhub.widget.behavior.ScaleDownShowBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

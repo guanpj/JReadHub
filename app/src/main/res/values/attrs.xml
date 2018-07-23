@@ -13,6 +13,7 @@
     <attr name="navIcon" format="reference" />
     <attr name="navBackIcon" format="reference" />
     <attr name="overFlowIcon" format="reference" />
+    <attr name="menuHome" format="reference" />
     <attr name="menuSearch" format="reference" />
     <attr name="menuShare" format="reference" />
     <attr name="menuSettings" format="reference" />

@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.R;
+import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
@@ -25,7 +26,8 @@ import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.ISupportFragment;
+import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements MainContract.View, NavigationView.OnNavigationItemSelectedListener {
@@ -63,6 +65,7 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         if (findFragment(MainFragment.class) == null) {
             loadRootFragment(R.id.fl_container, MainFragment.newInstance());
         }
+        mNavigationView.setCheckedItem(R.id.nav_home);
     }
 
     @Override
@@ -97,10 +100,19 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
-        mDrawerLayout.post(() -> {
+        mDrawerLayout.postDelayed(() -> {
             switch (item.getItemId()) {
+                case R.id.nav_home:
+                    MainFragment mainFragment = findFragment(MainFragment.class);
+                    start(mainFragment, SupportFragment.SINGLETASK);
+                    break;
                 case R.id.nav_star:
-                    findFragment(MainFragment.class).startBrotherFragment(StarFragment.newInstance());
+                    StarFragment starFragment = findFragment(StarFragment.class);
+                    if (starFragment == null) {
+                        startWithPopTo(StarFragment.newInstance(), MainFragment.class, false);
+                    } else {
+                        start(starFragment, SupportFragment.SINGLETASK);
+                    }
                     break;
                 case R.id.nav_setting:
                     //SettingActivity.start(this);
@@ -112,21 +124,8 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
                 default:
                     break;
             }
-        });
+        }, 300);
         return true;
-    }
-
-    @Override
-    public FragmentAnimator onCreateFragmentAnimator() {
-        // 设置横向(和安卓4.x动画相同)
-         return new DefaultHorizontalAnimator();
-        // 设置无动画
-        // return new DefaultNoAnimator();
-        // 设置自定义动画
-        // return new FragmentAnimator(enter,exit,popEnter,popExit);
-
-        // 默认竖向(和安卓5.0以上的动画相同)
-        //return super.onCreateFragmentAnimator();
     }
 
     @Override
@@ -134,6 +133,11 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
+            ISupportFragment topFragment = getTopFragment();
+            if (topFragment instanceof AbsBaseFragment) {
+                mNavigationView.setCheckedItem(R.id.nav_home);
+            }
+
             if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
                 pop();
             } else {
@@ -155,7 +159,7 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
     @Override
     public void onSetDrawerStatusEvent(SetDrawerStatusEvent event) {
         if (event.getStatus() == DrawerLayout.LOCK_MODE_UNDEFINED) {
-            if (getTopFragment() instanceof MainFragment) {
+            if (getTopFragment() instanceof MainFragment || getTopFragment() instanceof StarFragment) {
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED);
             }
         } else {
@@ -182,5 +186,18 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         Intent intent = getIntent();
         finish();
         startActivity(intent);
+    }
+
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        // 设置横向(和安卓4.x动画相同)
+        //return new DefaultHorizontalAnimator();
+        // 设置无动画
+        // return new DefaultNoAnimator();
+        // 设置自定义动画
+        // return new FragmentAnimator(enter,exit,popEnter,popExit);
+
+        // 默认竖向(和安卓5.0以上的动画相同)
+        return super.onCreateFragmentAnimator();
     }
 }
