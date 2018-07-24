@@ -36,8 +36,10 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import com.zhy.view.flowlayout.TagView;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
 
 public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBean, TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
 
@@ -68,6 +70,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     private String mTopicId;
     private TopicBean mTopicBean;
     private TopicTimelineAdapter mTimelineAdapter;
+    private boolean mIsStar;
 
     public static TopicDetailFragment newInstance(String topicId, String title) {
         TopicDetailFragment fragment = new TopicDetailFragment();
@@ -94,6 +97,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     @Override
     public void loadData(boolean isPullToRefresh) {
         mPresenter.getTopicDetail(mTopicId, isPullToRefresh);
+        mPresenter.checkStar(mTopicId, false);
     }
 
     @Override
@@ -217,6 +221,31 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
         }
     }
 
+    @Override
+    public void onCheckStarResult(boolean isTopicExist, boolean showTips) {
+        if (isTopicExist) {
+            mToolbar.getMenu().findItem(R.id.action_collect).setIcon(R.drawable.ic_tool_bar_star_fill);
+            if (showTips) {
+                if (mIsStar) {
+                    showShortToast(getString(R.string.tips_unstar_faild));
+                } else {
+                    showShortToast(getString(R.string.tips_star_success));
+                }
+            }
+            mIsStar = true;
+        } else {
+            mToolbar.getMenu().findItem(R.id.action_collect).setIcon(R.drawable.ic_tool_bar_star_border);
+            if (showTips) {
+                if (mIsStar) {
+                    showShortToast(getString(R.string.tips_unstar_success));
+                } else {
+                    showShortToast(getString(R.string.tips_star_faild));
+                }
+            }
+            mIsStar = false;
+        }
+    }
+
     private void setBackgroundAlpha(float v) {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = v;
@@ -227,7 +256,13 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_collect:
-                mPresenter.addStar(mTopicBean);
+                if (mIsStar) {
+                    mPresenter.removeStar(mTopicBean);
+                } else {
+                    mPresenter.addStar(mTopicBean);
+                }
+                Observable.timer(50, TimeUnit.MILLISECONDS)
+                        .subscribe(observable -> mPresenter.checkStar(mTopicId, true));
                 break;
             default:
                 break;

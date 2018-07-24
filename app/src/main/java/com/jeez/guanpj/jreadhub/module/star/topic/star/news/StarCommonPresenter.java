@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.star.news;
+package com.jeez.guanpj.jreadhub.module.star.topic.star.news;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;

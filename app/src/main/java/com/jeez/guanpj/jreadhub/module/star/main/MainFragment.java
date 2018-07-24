@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.main;
+package com.jeez.guanpj.jreadhub.module.star.main;
 
 import android.content.res.Resources;
 import android.os.Bundle;

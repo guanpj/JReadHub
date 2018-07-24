@@ -38,5 +38,9 @@
     <string name="brvah_load_end">没有更多数据</string>
     <string name="brvah_empty">暂无数据，点击重试</string>
     <string name="exit_tips">再按一次退出</string>
+    <string name="tips_star_success">收藏成功</string>
+    <string name="tips_star_faild">收藏失败</string>
+    <string name="tips_unstar_success">取消收藏成功</string>
+    <string name="tips_unstar_faild">取消收藏失败</string>
 
 </resources>

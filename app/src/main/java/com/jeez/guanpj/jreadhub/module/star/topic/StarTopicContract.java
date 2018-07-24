@@ -1,12 +1,7 @@
 package com.jeez.guanpj.jreadhub.module.star.topic;
 
-import android.support.v7.util.DiffUtil;
-
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.IBaseMvpLceView;
-
-import java.util.List;
 
 public interface StarTopicContract {
     interface View<M> extends IBaseMvpLceView<M> {

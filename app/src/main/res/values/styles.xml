@@ -26,7 +26,7 @@
         <item name="menuSearch">@drawable/ic_tool_bar_search</item>
         <item name="menuShare">@drawable/ic_tool_bar_share</item>
         <item name="menuHome">@drawable/ic_menu_main_home</item>
-        <item name="menuStar">@drawable/ic_menu_main_star_fill</item>
+        <item name="menuStar">@drawable/ic_menu_main_star</item>
         <item name="menuSettings">@drawable/ic_menu_main_settings</item>
         <item name="menuAbout">@drawable/ic_menu_main_about</item>
     </style>

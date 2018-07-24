@@ -27,6 +27,12 @@ public interface TopicDao {
     @Query("SELECT * FROM topic WHERE id=:topicId")
     public Flowable<TopicBean> getTopicById(String topicId);
 
+    @Query("SELECT * FROM topic WHERE id=:topicId")
+    public Maybe<TopicBean> getTopicById1(String topicId);
+
+    @Query("SELECT * FROM topic WHERE id=:topicId")
+    public Single<TopicBean> getTopicById2(String topicId);
+
     @Insert
     public void insertTopic(TopicBean... topicBeans);
 

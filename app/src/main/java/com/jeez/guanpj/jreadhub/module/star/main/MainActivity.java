@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.main;
+package com.jeez.guanpj.jreadhub.module.star.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.jeez.guanpj.jreadhub.module.about.AboutFragment;
 import com.jeez.guanpj.jreadhub.module.common.CommonWebViewFragment;
 import com.jeez.guanpj.jreadhub.module.settting.SettingFragment;
 import com.jeez.guanpj.jreadhub.module.splash.SplashActivity;
-import com.jeez.guanpj.jreadhub.module.star.StarFragment;
+import com.jeez.guanpj.jreadhub.module.star.topic.star.StarFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;

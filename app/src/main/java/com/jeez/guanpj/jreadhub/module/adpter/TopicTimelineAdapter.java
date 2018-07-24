@@ -15,7 +15,7 @@ import com.jeez.guanpj.jreadhub.base.BaseViewHolder;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.event.RelevantTopicItemClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
-import com.jeez.guanpj.jreadhub.module.main.MainFragment;
+import com.jeez.guanpj.jreadhub.module.star.main.MainFragment;
 import com.jeez.guanpj.jreadhub.module.topic.detail.TopicDetailFragment;
 
 import org.threeten.bp.LocalDate;

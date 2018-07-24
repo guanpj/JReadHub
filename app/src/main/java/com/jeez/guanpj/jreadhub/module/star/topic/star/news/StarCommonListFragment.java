@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.star.news;
+package com.jeez.guanpj.jreadhub.module.star.topic.star.news;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;

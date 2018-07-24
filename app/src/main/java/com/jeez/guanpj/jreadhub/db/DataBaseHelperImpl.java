@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
-import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 public class DataBaseHelperImpl implements DatabaseHelper {
@@ -39,18 +38,18 @@ public class DataBaseHelperImpl implements DatabaseHelper {
     }
 
     @Override
+    public <T> Single<T> getSingleBean(Class<T> tClass, String id) {
+        if (TopicBean.class.equals(tClass)) {
+            return (Single<T>) mTopicDao.getTopicById2(id);
+        } else if (TopicBean.class.equals(tClass)) {
+            return (Single<T>) mNewsDao.getNewsById2(id);
+        }
+        return null;
+    }
+
+    @Override
     public Flowable<List<TopicBean>> getAllTopic() {
         return  mTopicDao.getAllTopic();
-    }
-
-    @Override
-    public Maybe<List<TopicBean>> getAllTopic1() {
-        return mTopicDao.getAllTopic1();
-    }
-
-    @Override
-    public Single<List<TopicBean>> getAllTopic2() {
-        return mTopicDao.getAllTopic2();
     }
 
     @Override

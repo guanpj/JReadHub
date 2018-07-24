@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.jeez.guanpj.jreadhub.di.module.ActivityModule;
 import com.jeez.guanpj.jreadhub.di.scope.ActivityScope;
-import com.jeez.guanpj.jreadhub.module.main.MainActivity;
+import com.jeez.guanpj.jreadhub.module.star.main.MainActivity;
 import com.jeez.guanpj.jreadhub.module.settting.SettingActivity;
 
 import dagger.Component;

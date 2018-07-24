@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.main;
+package com.jeez.guanpj.jreadhub.module.star.main;
 
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;

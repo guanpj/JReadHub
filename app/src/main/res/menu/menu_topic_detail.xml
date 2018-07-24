@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_collect"
-        android:icon="?attr/menuStar"
+        android:icon="@drawable/ic_tool_bar_star_border"
         android:title="@string/action_star"
         app:showAsAction="ifRoom" />
 

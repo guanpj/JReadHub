@@ -118,4 +118,15 @@ dependencies {
     implementation 'com.meituan.android.walle:library:1.1.6'
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.mockito:mockito-core:2.8.9"
+    testImplementation "org.powermock:powermock-module-junit4:1.7.4"
+    testImplementation "org.powermock:powermock-module-junit4-rule:1.7.4"
+    testImplementation "org.powermock:powermock-api-mockito2:1.7.4"
+    testImplementation "org.powermock:powermock-classloading-xstream:1.7.4"
+    testImplementation "org.robolectric:robolectric:3.8"
+    testImplementation "org.robolectric:shadows-support-v4:3.4-rc2"
+    testImplementation "org.robolectric:shadows-multidex:3.+"
+    testImplementation "com.android.support.test:runner:1.0.2"
 }

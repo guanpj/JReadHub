@@ -13,7 +13,6 @@ import java.lang.reflect.Proxy;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
  * Created by Jie on 2016-11-2.
@@ -24,7 +23,7 @@ public class BasePresenter<V extends IBaseMvpView> implements IBasePresenter<V> 
     private WeakReference<V> weakView;
     private V proxyView;
     private CompositeDisposable compositeDisposable;
-    protected DataManager mDataManager;
+    private DataManager mDataManager;
 
     public BasePresenter(DataManager dataManager) {
         this.mDataManager = dataManager;

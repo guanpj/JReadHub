@@ -19,7 +19,7 @@ public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> im
     private DataManager mDataManager;
 
     @Inject
-    StarTopicPresenter(DataManager dataManager) {
+    public StarTopicPresenter(DataManager dataManager) {
         super(dataManager);
         this.mDataManager = dataManager;
     }

@@ -1,13 +1,7 @@
-package com.jeez.guanpj.jreadhub.module.star.news;
+package com.jeez.guanpj.jreadhub.module.star.topic.star.news;
 
-import android.support.v7.util.DiffUtil;
-
-import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.IBaseMvpLceView;
-import com.jeez.guanpj.jreadhub.util.Constants;
-
-import java.util.List;
 
 public interface StarCommonContract {
     interface View<M> extends IBaseMvpLceView<M> {

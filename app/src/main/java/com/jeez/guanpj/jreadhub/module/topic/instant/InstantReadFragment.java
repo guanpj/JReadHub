@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.module.common.CommonWebViewFragment;
-import com.jeez.guanpj.jreadhub.module.main.MainFragment;
+import com.jeez.guanpj.jreadhub.module.star.main.MainFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
