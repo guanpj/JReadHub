@@ -85,7 +85,7 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
 //
 //                            topicBeanDataListBean.setData(topicBeans);
 //                        }
-                        getView().bindData(topicBeanDataListBean);
+                        getView().bindData(topicBeanDataListBean, true);
                     }
 
                     @Override
@@ -107,12 +107,12 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
                     public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
-                        getView().bindData(topicBeanDataListBean);
+                        getView().bindData(topicBeanDataListBean, false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().bindData(null);
+                        getView().bindData(null, false);
                     }
 
                     @Override

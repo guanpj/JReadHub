@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.star.topic.star;
+package com.jeez.guanpj.jreadhub.module.star;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -13,7 +13,7 @@ import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.FragmentAdapter;
-import com.jeez.guanpj.jreadhub.module.star.topic.star.news.StarCommonListFragment;
+import com.jeez.guanpj.jreadhub.module.star.news.StarCommonListFragment;
 import com.jeez.guanpj.jreadhub.module.star.topic.StarTopicFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 
@@ -47,6 +47,7 @@ public class StarFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
     @Override
     public void initView() {
         mToolbar.inflateMenu(R.menu.menu_star);
+        mToolbar.setTitle(getText(R.string.menu_star));
     }
 
     @Override

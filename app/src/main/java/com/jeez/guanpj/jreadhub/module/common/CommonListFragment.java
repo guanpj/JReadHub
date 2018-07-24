@@ -38,7 +38,6 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
 
     private NewsListAdapterWithThirdLib mAdapter;
     private @Constants.Type String mNewsType;
-    private boolean isPullToRefresh;
 
     public static CommonListFragment newInstance(@Constants.Type String type) {
         CommonListFragment fragment = new CommonListFragment();
@@ -101,19 +100,17 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
 
     @Override
     public void onRefresh() {
-        isPullToRefresh = true;
         mRefreshLayout.setRefreshing(true);
         mAdapter.setEnableLoadMore(false);
         mPresenter.doRefresh(mNewsType, true);
     }
 
     public void doLoadMore() {
-        isPullToRefresh = false;
         mPresenter.doLoadMore(mNewsType, mAdapter.getItem(mAdapter.getItemCount() - 2).getFormattedPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
-    public void bindData(DataListBean<NewsBean> data) {
+    public void bindData(DataListBean<NewsBean> data, boolean isPullToRefresh) {
         if (null != data) {
             if (null != data.getData() && !data.getData().isEmpty()) {
                 List<NewsBean> dataList = data.getData();
@@ -186,15 +183,7 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         if (null != adapter.getData() && null != adapter.getData().get(position)) {
             NewsBean newsBean = (NewsBean) adapter.getData().get(position);
-            String url = null;
-            if (!TextUtils.isEmpty(newsBean.getMobileUrl())) {
-                url = newsBean.getMobileUrl();
-            } else {
-                url = newsBean.getUrl();
-            }
-            if (!TextUtils.isEmpty(url)) {
-                RxBus.getInstance().post(new OpenWebSiteEvent(url, newsBean.getTitle()));
-            }
+            RxBus.getInstance().post(new OpenWebSiteEvent(newsBean));
         }
     }
 }

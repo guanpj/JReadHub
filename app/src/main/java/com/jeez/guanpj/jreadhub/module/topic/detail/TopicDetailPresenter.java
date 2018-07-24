@@ -33,7 +33,7 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
                 .subscribeWith(new DisposableObserver<TopicBean>() {
                     @Override
                     public void onNext(TopicBean bean) {
-                        getView().bindData(bean);
+                        getView().bindData(bean, true);
                     }
 
                     @Override

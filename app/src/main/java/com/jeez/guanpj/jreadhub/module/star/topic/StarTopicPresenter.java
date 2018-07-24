@@ -45,8 +45,12 @@ public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> im
                 .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
                     @Override
                     public void onNext(List<TopicBean> topicBeans) {
-                        getView().bindData(topicBeans);
-                        getView().showContent();
+                        if (null != topicBeans && !topicBeans.isEmpty()) {
+                            getView().bindData(topicBeans, true);
+                            getView().showContent();
+                        } else {
+                            getView().showEmpty();
+                        }
                     }
 
                     @Override
@@ -58,26 +62,6 @@ public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> im
                     public void onComplete() {
                     }
                 }));
-        /*addSubscribe(mDataManager.getAllTopic()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
-                .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
-                    @Override
-                    public void onNext(List<TopicBean> topicBeanDataListBean) {
-                        getView().bindData(topicBeanDataListBean);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        getView().showError();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        getView().showContent();
-                    }
-                }));*/
     }
 
     @Override

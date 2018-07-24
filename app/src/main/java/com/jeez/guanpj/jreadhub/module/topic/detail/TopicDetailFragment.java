@@ -76,7 +76,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
         TopicDetailFragment fragment = new TopicDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.BUNDLE_TOPIC_ID, topicId);
-        bundle.putString(Constants.EXTRA_TOPIC_TITLE, title);
+        bundle.putString(Constants.BUNDLE_TOPIC_TITLE, title);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -85,7 +85,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTopicId = getArguments().getString(Constants.BUNDLE_TOPIC_ID);
-        mTopicTitle = getArguments().getString(Constants.EXTRA_TOPIC_TITLE);
+        mTopicTitle = getArguments().getString(Constants.BUNDLE_TOPIC_TITLE);
     }
 
     @Override
@@ -141,7 +141,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     }
 
     @Override
-    public void bindData(TopicBean topicBean) {
+    public void bindData(TopicBean topicBean, boolean isPullToRefresh) {
         this.mTopicBean = topicBean;
         mTxtTopicTitle.setText(mTopicBean.getTitle());
         mTxtTopicTime.setText(mTopicBean.getFormattedPublishDate().toLocalDate().toString() + "  " +

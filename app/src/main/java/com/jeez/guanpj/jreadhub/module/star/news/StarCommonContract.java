@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.star.topic.star.news;
+package com.jeez.guanpj.jreadhub.module.star.news;
 
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.IBasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.IBaseMvpLceView;

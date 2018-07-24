@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.star.main;
+package com.jeez.guanpj.jreadhub.module.main;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;

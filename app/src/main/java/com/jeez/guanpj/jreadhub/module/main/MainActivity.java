@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.star.main;
+package com.jeez.guanpj.jreadhub.module.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,19 +7,21 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
+import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
 import com.jeez.guanpj.jreadhub.module.about.AboutFragment;
-import com.jeez.guanpj.jreadhub.module.common.CommonWebViewFragment;
+import com.jeez.guanpj.jreadhub.module.web.WebViewFragment;
 import com.jeez.guanpj.jreadhub.module.settting.SettingFragment;
 import com.jeez.guanpj.jreadhub.module.splash.SplashActivity;
-import com.jeez.guanpj.jreadhub.module.star.topic.star.StarFragment;
+import com.jeez.guanpj.jreadhub.module.star.StarFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.view.activity.AbsBaseMvpActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
@@ -169,11 +171,28 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
 
     @Override
     public void onOpenWebSiteEvent(OpenWebSiteEvent event) {
+        NewsBean newsBean = event.getNewsBean();
         if (mPresenter.isUseSystemBrowser()) {
-            NavigationUtil.openInBrowser(this, event.getUrl());
+            if (null != newsBean) {
+                String url = null;
+                if (!TextUtils.isEmpty(newsBean.getMobileUrl())) {
+                    url = newsBean.getMobileUrl();
+                } else {
+                    url = newsBean.getUrl();
+                }
+                if (!TextUtils.isEmpty(url)) {
+                    NavigationUtil.openInBrowser(this, event.getUrl());
+                }
+            } else if (!TextUtils.isEmpty(event.getUrl())) {
+                NavigationUtil.openInBrowser(this, event.getUrl());
+            }
         } else {
-            //findFragment(MainFragment.class).start(CommonArticleFragment.newInstance(event.getUrl()));
-            findFragment(MainFragment.class).start(CommonWebViewFragment.newInstance(event.getUrl(), event.getTitle()));
+            if (null != newsBean) {
+                findFragment(MainFragment.class).start(WebViewFragment.newInstance(newsBean));
+            } else if (!TextUtils.isEmpty(event.getUrl())
+                    && !TextUtils.isEmpty(event.getTitle())) {
+                findFragment(MainFragment.class).start(WebViewFragment.newInstance(event.getUrl(), event.getTitle()));
+            }
         }
     }
 

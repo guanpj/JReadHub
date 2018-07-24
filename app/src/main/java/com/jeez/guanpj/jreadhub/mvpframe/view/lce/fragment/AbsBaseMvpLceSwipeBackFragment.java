@@ -52,8 +52,8 @@ public abstract class AbsBaseMvpLceSwipeBackFragment<M, P extends BasePresenter>
     }
 
     @Override
-    public void bindData(M data) {
-        lceViewDelegate.bindData(data);
+    public void bindData(M data, boolean isPullToRefresh) {
+        lceViewDelegate.bindData(data, isPullToRefresh);
     }
 
     @Override

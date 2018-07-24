@@ -27,7 +27,7 @@ public interface IBaseMvpLceView<M> extends IBaseMvpView {
     /**
      * 绑定数据
      */
-    void bindData(M data);
+    void bindData(M data, boolean replaceData);
 
     /**
      * 加载数据

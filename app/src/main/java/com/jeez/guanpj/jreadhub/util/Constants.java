@@ -22,8 +22,9 @@ public class Constants {
 
     public static final String BUNDLE_TOPIC_ID = "BUNDLE_TOPIC_ID";
     public static final String BUNDLE_NEWS_TYPE = "BUNDLE_NEWS_TYPE";
-    public static final String EXTRA_TOPIC_URL = "EXTRA_TOPIC_URL";
-    public static final String EXTRA_TOPIC_TITLE = "EXTRA_TOPIC_TITLE";
+    public static final String BUNDLE_TOPIC_URL = "BUNDLE_TOPIC_URL";
+    public static final String BUNDLE_TOPIC_TITLE = "BUNDLE_TOPIC_TITLE";
+    public static final String BUNDLE_NEWS_BEAN = "BUNDLE_NEWS_BEAN";
 
     public static final int TOPIC_PAGE_SIZE = 10;
     public static int TOPIC_TOP_COUNT = 0;

@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.star.main;
+package com.jeez.guanpj.jreadhub.module.main;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -58,7 +58,8 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
 
     @Override
     public void initView() {
-        mToolbar.inflateMenu(R.menu.menu_main);
+        mToolbar.inflateMenu(R.menu.menu_home);
+        mToolbar.setTitle(getText(R.string.menu_home));
     }
 
     @Override

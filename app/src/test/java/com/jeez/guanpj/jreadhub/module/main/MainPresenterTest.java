@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.module.star.main;
+package com.jeez.guanpj.jreadhub.module.main;
 
 import org.junit.After;
 import org.junit.Before;

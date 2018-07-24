@@ -96,7 +96,7 @@ public class NewsListAdapter extends BaseAdapter<NewsBean> {
                 RxBus.getInstance().post(new OpenWebSiteEvent(url, news.getTitle()));
             }
             /*((SupportActivity) mContext).findFragment(MainFragment.class)
-                    .start(CommonWebViewFragment.newInstance(news.getMobileUrl()));*/
+                    .start(WebViewFragment.newInstance(news.getMobileUrl()));*/
         }
     }
 }

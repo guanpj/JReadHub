@@ -15,7 +15,7 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
 import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
-import com.jeez.guanpj.jreadhub.module.star.main.MainActivity;
+import com.jeez.guanpj.jreadhub.module.main.MainActivity;
 
 import java.util.concurrent.TimeUnit;
 

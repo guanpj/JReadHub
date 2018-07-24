@@ -42,7 +42,6 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
     TextView mTxtNew;
 
     private TopicListAdapterWithThirdLib mAdapter;
-    private boolean isPullToRefresh;
 
     public static TopicFragment newInstance() {
         Bundle args = new Bundle();
@@ -100,19 +99,17 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
 
     @Override
     public void onRefresh() {
-        isPullToRefresh = true;
         mRefreshLayout.setRefreshing(true);
         mAdapter.setEnableLoadMore(false);
         mPresenter.doRefresh(true);
     }
 
     public void doLoadMore() {
-        isPullToRefresh = false;
         mPresenter.doLoadMore(mAdapter.getItem(mAdapter.getItemCount() - 2).getOrder());
     }
 
     @Override
-    public void bindData(DataListBean<TopicBean> data) {
+    public void bindData(DataListBean<TopicBean> data, boolean isPullToRefresh) {
         if (null != data) {
             if (null != data.getData() && !data.getData().isEmpty()) {
                 List<TopicBean> dataList = data.getData();

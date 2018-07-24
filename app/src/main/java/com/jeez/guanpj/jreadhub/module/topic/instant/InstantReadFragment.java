@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
-import com.jeez.guanpj.jreadhub.module.common.CommonWebViewFragment;
-import com.jeez.guanpj.jreadhub.module.star.main.MainFragment;
+import com.jeez.guanpj.jreadhub.module.web.WebViewFragment;
+import com.jeez.guanpj.jreadhub.module.main.MainFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
@@ -108,7 +108,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                         NavigationUtil.openInBrowser(getActivity(), request.getUrl().toString());
                     } else {
                         ((SupportActivity) getContext()).findFragment(MainFragment.class)
-                                .start(CommonWebViewFragment.newInstance(request.getUrl().toString(), ""));
+                                .start(WebViewFragment.newInstance(request.getUrl().toString(), ""));
                     }
                 }
                 return true;
@@ -163,7 +163,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
         mTxtJump2Source.setOnClickListener(v -> {
             dismiss();
             ((SupportActivity) getContext()).findFragment(MainFragment.class)
-                .start(CommonWebViewFragment.newInstance(data.getUrl(), data.getTitle()));
+                .start(WebViewFragment.newInstance(data.getUrl(), data.getTitle()));
         });
 
         String htmlHead = "<head>"

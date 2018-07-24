@@ -41,7 +41,7 @@ public class DataBaseHelperImpl implements DatabaseHelper {
     public <T> Single<T> getSingleBean(Class<T> tClass, String id) {
         if (TopicBean.class.equals(tClass)) {
             return (Single<T>) mTopicDao.getTopicById2(id);
-        } else if (TopicBean.class.equals(tClass)) {
+        } else if (NewsBean.class.equals(tClass)) {
             return (Single<T>) mNewsDao.getNewsById2(id);
         }
         return null;

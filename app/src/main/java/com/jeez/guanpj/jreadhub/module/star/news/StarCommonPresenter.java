@@ -1,6 +1,7 @@
-package com.jeez.guanpj.jreadhub.module.star.topic.star.news;
+package com.jeez.guanpj.jreadhub.module.star.news;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
+import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
@@ -13,8 +14,10 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 public class StarCommonPresenter extends BasePresenter<StarCommonContract.View> implements StarCommonContract.Presenter {
+
     private DataManager mDataManager;
 
     @Inject
@@ -40,15 +43,24 @@ public class StarCommonPresenter extends BasePresenter<StarCommonContract.View> 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
-                .subscribe(new Consumer<List<NewsBean>>() {
+                .subscribeWith(new DisposableSubscriber<List<NewsBean>>() {
                     @Override
-                    public void accept(List<NewsBean> topicBeans) throws Exception {
-                        getView().bindData(topicBeans);
+                    public void onNext(List<NewsBean> topicBeans) {
+                        if (null != topicBeans && !topicBeans.isEmpty()) {
+                            getView().bindData(topicBeans, true);
+                            getView().showContent();
+                        } else {
+                            getView().showEmpty();
+                        }
                     }
-                }, new Consumer<Throwable>() {
+
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        getView().showEmpty();
+                    public void onError(Throwable t) {
+                        getView().showError();
+                    }
+
+                    @Override
+                    public void onComplete() {
                     }
                 }));
     }

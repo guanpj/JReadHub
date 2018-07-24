@@ -112,7 +112,7 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
     }
 
     @Override
-    public void bindData(Object data) {
+    public void bindData(Object data, boolean replaceData) {
 
     }
 

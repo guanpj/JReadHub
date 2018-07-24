@@ -28,7 +28,6 @@ public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicBean>, St
     RecyclerView mRecyclerView;
 
     private TopicListAdapterWithThirdLib mAdapter;
-    private boolean isPullToRefresh;
 
     public static StarTopicFragment newInstance() {
         Bundle args = new Bundle();
@@ -80,35 +79,26 @@ public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicBean>, St
 
     @Override
     public void onRefresh() {
-        isPullToRefresh = true;
         mRefreshLayout.setRefreshing(true);
         mAdapter.setEnableLoadMore(false);
         mPresenter.doRefresh(true);
     }
 
     public void doLoadMore() {
-        isPullToRefresh = false;
         mPresenter.doLoadMore(mAdapter.getItem(mAdapter.getItemCount() - 2).getOrder());
     }
 
     @Override
-    public void bindData(List<TopicBean> data) {
-        if (null != data && !data.isEmpty()) {
-            if (isPullToRefresh) {
-                mRefreshLayout.setRefreshing(false);
-                mAdapter.setNewData(data);
-                mRecyclerView.scrollToPosition(0);
-                mAdapter.setEnableLoadMore(true);
-            } else {
-                mAdapter.addData(data);
-                mAdapter.loadMoreComplete();
-                mAdapter.setEnableLoadMore(true);
-            }
+    public void bindData(List<TopicBean> data, boolean isPullToRefresh) {
+        if (isPullToRefresh) {
+            mRefreshLayout.setRefreshing(false);
+            mAdapter.setNewData(data);
+            mRecyclerView.scrollToPosition(0);
+            mAdapter.setEnableLoadMore(true);
         } else {
-            if (isPullToRefresh) {
-            } else {
-                mAdapter.loadMoreEnd(false);
-            }
+            mAdapter.addData(data);
+            mAdapter.loadMoreComplete();
+            mAdapter.setEnableLoadMore(true);
         }
     }
 

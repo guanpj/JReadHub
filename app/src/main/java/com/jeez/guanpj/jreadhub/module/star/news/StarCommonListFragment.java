@@ -1,11 +1,10 @@
-package com.jeez.guanpj.jreadhub.module.star.topic.star.news;
+package com.jeez.guanpj.jreadhub.module.star.news;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -33,7 +32,6 @@ public class StarCommonListFragment extends AbsBaseMvpLceFragment<List<NewsBean>
     RecyclerView mRecyclerView;
 
     private NewsListAdapterWithThirdLib mAdapter;
-    private boolean isPullToRefresh;
 
     public static StarCommonListFragment newInstance() {
         StarCommonListFragment fragment = new StarCommonListFragment();
@@ -86,36 +84,27 @@ public class StarCommonListFragment extends AbsBaseMvpLceFragment<List<NewsBean>
 
     @Override
     public void onRefresh() {
-        isPullToRefresh = true;
         mRefreshLayout.setRefreshing(true);
         mAdapter.setEnableLoadMore(false);
         mPresenter.doRefresh(true);
     }
 
     public void doLoadMore() {
-        isPullToRefresh = false;
         mPresenter.doLoadMore(mAdapter.getItem(mAdapter.getItemCount() - 2).getFormattedPublishDate().toInstant().toEpochMilli());
     }
 
     @Override
-    public void bindData(List<NewsBean> data) {
-        if (null != data && !data.isEmpty()) {
-            List<NewsBean> dataList = data;
-            if (isPullToRefresh) {
-                mRefreshLayout.setRefreshing(false);
-                mAdapter.setNewData(dataList);
-                mRecyclerView.scrollToPosition(0);
-                mAdapter.setEnableLoadMore(true);
-            } else {
-                mAdapter.addData(dataList);
-                mAdapter.loadMoreComplete();
-                mAdapter.setEnableLoadMore(true);
-            }
+    public void bindData(List<NewsBean> data, boolean isPullToRefresh) {
+        List<NewsBean> dataList = data;
+        if (isPullToRefresh) {
+            mRefreshLayout.setRefreshing(false);
+            mAdapter.setNewData(dataList);
+            mRecyclerView.scrollToPosition(0);
+            mAdapter.setEnableLoadMore(true);
         } else {
-            if (isPullToRefresh) {
-            } else {
-                mAdapter.loadMoreEnd(false);
-            }
+            mAdapter.addData(dataList);
+            mAdapter.loadMoreComplete();
+            mAdapter.setEnableLoadMore(true);
         }
     }
 
@@ -128,15 +117,7 @@ public class StarCommonListFragment extends AbsBaseMvpLceFragment<List<NewsBean>
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         if (null != adapter.getData() && null != adapter.getData().get(position)) {
             NewsBean newsBean = (NewsBean) adapter.getData().get(position);
-            String url = null;
-            if (!TextUtils.isEmpty(newsBean.getMobileUrl())) {
-                url = newsBean.getMobileUrl();
-            } else {
-                url = newsBean.getUrl();
-            }
-            if (!TextUtils.isEmpty(url)) {
-                RxBus.getInstance().post(new OpenWebSiteEvent(url, newsBean.getTitle()));
-            }
+            RxBus.getInstance().post(new OpenWebSiteEvent(newsBean));
         }
     }
 }

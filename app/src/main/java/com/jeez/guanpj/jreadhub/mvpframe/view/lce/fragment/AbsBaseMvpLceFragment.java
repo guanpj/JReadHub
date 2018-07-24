@@ -52,8 +52,8 @@ public abstract class AbsBaseMvpLceFragment<M, P extends BasePresenter> extends 
     }
 
     @Override
-    public void bindData(M data) {
-        lceViewDelegate.bindData(data);
+    public void bindData(M data, boolean replaceData) {
+        lceViewDelegate.bindData(data, replaceData);
     }
 
     @Override

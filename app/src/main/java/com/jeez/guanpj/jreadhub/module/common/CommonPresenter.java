@@ -47,7 +47,7 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
                     public void onNext(DataListBean<NewsBean> newsBeanDataListBean) {
-                        getView().bindData(newsBeanDataListBean);
+                        getView().bindData(newsBeanDataListBean, true);
                     }
 
                     @Override
@@ -69,12 +69,12 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
                     public void onNext(DataListBean<NewsBean> newsBeanDataListBean) {
-                        getView().bindData(newsBeanDataListBean);
+                        getView().bindData(newsBeanDataListBean, false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().bindData(null);
+                        getView().bindData(null, false);
                     }
 
                     @Override
