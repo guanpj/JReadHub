@@ -1,6 +1,6 @@
 package com.jeez.guanpj.jreadhub.module.settting;
 
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.util.PreferenceHelper;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 

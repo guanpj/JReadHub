@@ -1,9 +1,9 @@
-package com.jeez.guanpj.jreadhub.core.db;
+package com.jeez.guanpj.jreadhub.data.local;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
-import com.jeez.guanpj.jreadhub.core.db.dao.NewsDao;
-import com.jeez.guanpj.jreadhub.core.db.dao.TopicDao;
+import com.jeez.guanpj.jreadhub.data.local.dao.NewsDao;
+import com.jeez.guanpj.jreadhub.data.local.dao.TopicDao;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -13,14 +13,14 @@ import javax.inject.Inject;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
-public class DatabaseHelperImpl implements DatabaseHelper {
+public class LocalRepository implements LocalDataSource {
 
     private NewsDao mNewsDao;
     private TopicDao mTopicDao;
     private Executor mExecutor;
 
     @Inject
-    public DatabaseHelperImpl(TopicDao topicDao, NewsDao newsDao, Executor executor) {
+    public LocalRepository(TopicDao topicDao, NewsDao newsDao, Executor executor) {
         mTopicDao = topicDao;
         mNewsDao = newsDao;
         mExecutor = executor;

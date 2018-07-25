@@ -1,7 +1,7 @@
 package com.jeez.guanpj.jreadhub.module.star.news;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;

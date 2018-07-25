@@ -1,6 +1,6 @@
 package com.jeez.guanpj.jreadhub.mvpframe.presenter;
 
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.PreferenceHelper;

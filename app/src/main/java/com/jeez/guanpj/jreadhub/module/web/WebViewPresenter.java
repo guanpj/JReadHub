@@ -1,8 +1,9 @@
 package com.jeez.guanpj.jreadhub.module.web;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 
 import java.util.List;
 
@@ -25,8 +26,7 @@ public class WebViewPresenter extends BasePresenter<WebViewContract.View> implem
     @Override
     public void checkStar(String newsId) {
         addSubscribe(mDataManager.getNewsById(newsId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxSchedulers.flowableIo2Main())
                 .subscribeWith(new DisposableSubscriber<List<NewsBean>>() {
                     @Override
                     public void onNext(List<NewsBean> topicBean) {

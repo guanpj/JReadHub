@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.di.component;
 
 import android.content.Context;
 
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.di.module.AppModule;
 
 import javax.inject.Singleton;

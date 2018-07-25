@@ -2,11 +2,11 @@ package com.jeez.guanpj.jreadhub.di.module;
 
 import android.content.Context;
 
-import com.jeez.guanpj.jreadhub.core.DataManager;
-import com.jeez.guanpj.jreadhub.core.db.DatabaseHelper;
-import com.jeez.guanpj.jreadhub.core.db.DatabaseHelperImpl;
-import com.jeez.guanpj.jreadhub.core.net.NetHelper;
-import com.jeez.guanpj.jreadhub.core.net.NetHelperImpl;
+import com.jeez.guanpj.jreadhub.data.DataManager;
+import com.jeez.guanpj.jreadhub.data.local.LocalDataSource;
+import com.jeez.guanpj.jreadhub.data.local.LocalRepository;
+import com.jeez.guanpj.jreadhub.data.remote.RemoteDataSource;
+import com.jeez.guanpj.jreadhub.data.remote.RemoteRepository;
 
 import javax.inject.Singleton;
 
@@ -29,19 +29,19 @@ public class AppModule {
 
     @Provides
     @Singleton
-    NetHelper provideNetHelper(NetHelperImpl netHelperImpl) {
-        return netHelperImpl;
+    RemoteDataSource provideRemoteDataSource(RemoteRepository remoteRepository) {
+        return remoteRepository;
     }
 
     @Provides
     @Singleton
-    DatabaseHelper provideDbHelper(DatabaseHelperImpl dataBaseHelperImpl) {
-        return dataBaseHelperImpl;
+    LocalDataSource provideLocalDataSource(LocalRepository localRepository) {
+        return localRepository;
     }
 
     @Provides
     @Singleton
-    DataManager provideDataManager(NetHelper netHelper, DatabaseHelper dbHelper) {
-        return new DataManager(netHelper, dbHelper);
+    DataManager provideDataManager(RemoteDataSource remoteDataSource, LocalDataSource localDataSource) {
+        return new DataManager(remoteDataSource, localDataSource);
     }
 }

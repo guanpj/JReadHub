@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.core.net;
+package com.jeez.guanpj.jreadhub.data.remote;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
@@ -6,7 +6,7 @@ import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
-import com.jeez.guanpj.jreadhub.core.net.api.ReadhubApi;
+import com.jeez.guanpj.jreadhub.data.remote.api.ReadhubApi;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
@@ -15,12 +15,12 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
-public class NetHelperImpl implements NetHelper {
+public class RemoteRepository implements RemoteDataSource {
 
     private ReadhubApi readhubApi;
 
     @Inject
-    public NetHelperImpl(ReadhubApi readhubApi) {
+    public RemoteRepository(ReadhubApi readhubApi) {
         this.readhubApi = readhubApi;
     }
 

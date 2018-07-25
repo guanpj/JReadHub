@@ -4,7 +4,7 @@ import android.support.v7.util.DiffUtil;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.DiffCallback;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
@@ -42,7 +42,7 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     @Override
     public void doRefresh(@Constants.Type String type, boolean isPullToRefresh) {
         addSubscribe(mDataManager.getNewsList(type, null, Constants.TOPIC_PAGE_SIZE)
-                .compose(RxSchedulers.io2Main())
+                .compose(RxSchedulers.observableIo2Main())
                 .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
@@ -65,7 +65,7 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     @Override
     public void doLoadMore(@Constants.Type String type, Long lastCursor) {
         addSubscribe(mDataManager.getNewsList(type, lastCursor, Constants.TOPIC_PAGE_SIZE)
-                .compose(RxSchedulers.io2Main())
+                .compose(RxSchedulers.observableIo2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<NewsBean>>() {
                     @Override
                     public void onNext(DataListBean<NewsBean> newsBeanDataListBean) {

@@ -10,7 +10,7 @@ import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
-import com.jeez.guanpj.jreadhub.core.AppStatusTracker;
+import com.jeez.guanpj.jreadhub.data.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.di.component.AppComponent;
 import com.jeez.guanpj.jreadhub.di.component.DaggerAppComponent;
 import com.jeez.guanpj.jreadhub.di.module.AppModule;

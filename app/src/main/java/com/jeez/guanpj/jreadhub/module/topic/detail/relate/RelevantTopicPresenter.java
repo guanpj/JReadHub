@@ -1,7 +1,7 @@
 package com.jeez.guanpj.jreadhub.module.topic.detail.relate;
 
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 
@@ -24,7 +24,7 @@ public class RelevantTopicPresenter extends BasePresenter<RelevantTopicContract.
     @Override
     public void getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
         addSubscribe(mDataManager.getRelateTopic(topicId, eventType, order, timeStamp)
-                .compose(RxSchedulers.io2Main())
+                .compose(RxSchedulers.observableIo2Main())
                 .doOnSubscribe(disposable -> getView().onRequestStart())
                 .subscribeWith(new DisposableObserver<List<RelevantTopicBean>>() {
                     @Override

@@ -5,7 +5,7 @@ import android.support.v7.util.DiffUtil;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.DiffCallback;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
@@ -45,7 +45,7 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     @Override
     public void doRefresh(boolean isPullToRefresh) {
         addSubscribe(mDataManager.getTopicList(null, Constants.TOPIC_PAGE_SIZE)
-                .compose(RxSchedulers.io2Main())
+                .compose(RxSchedulers.observableIo2Main())
                 .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
@@ -103,7 +103,7 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     @Override
     public void doLoadMore(Long lastCursor) {
         addSubscribe(mDataManager.getTopicList(lastCursor, Constants.TOPIC_PAGE_SIZE)
-                .compose(RxSchedulers.io2Main())
+                .compose(RxSchedulers.observableIo2Main())
                 .subscribeWith(new DisposableObserver<DataListBean<TopicBean>>() {
                     @Override
                     public void onNext(DataListBean<TopicBean> topicBeanDataListBean) {
@@ -124,7 +124,7 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     @Override
     public void getNewTopicCount(Long latestCursor) {
         addSubscribe(mDataManager.getNewTopicCount(latestCursor)
-                .compose(RxSchedulers.io2Main())
+                .compose(RxSchedulers.observableIo2Main())
                 .subscribeWith(new DisposableObserver<NewTopicCountBean>() {
                     @Override
                     public void onNext(NewTopicCountBean newTopicCountBean) {

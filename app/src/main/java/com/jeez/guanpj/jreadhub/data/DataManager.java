@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.core;
+package com.jeez.guanpj.jreadhub.data;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
@@ -6,8 +6,8 @@ import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
-import com.jeez.guanpj.jreadhub.core.net.NetHelper;
-import com.jeez.guanpj.jreadhub.core.db.DatabaseHelper;
+import com.jeez.guanpj.jreadhub.data.remote.RemoteDataSource;
+import com.jeez.guanpj.jreadhub.data.local.LocalDataSource;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
@@ -16,77 +16,77 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
-public class DataManager implements NetHelper, DatabaseHelper {
-    private NetHelper mNetHelper;
-    private DatabaseHelper mDbHelper;
+public class DataManager implements RemoteDataSource, LocalDataSource {
+    private RemoteDataSource mReemoteDataSource;
+    private LocalDataSource mLocalDataSource;
 
-    public DataManager(NetHelper netHelper, DatabaseHelper databaseHelper) {
-        this.mNetHelper = netHelper;
-        this.mDbHelper = databaseHelper;
+    public DataManager(RemoteDataSource remoteDataSource, LocalDataSource localDataSource) {
+        this.mReemoteDataSource = remoteDataSource;
+        this.mLocalDataSource = localDataSource;
     }
 
     @Override
     public Observable<DataListBean<TopicBean>> getTopicList(Long lastCursor, int pageSize) {
-        return mNetHelper.getTopicList(lastCursor, pageSize);
+        return mReemoteDataSource.getTopicList(lastCursor, pageSize);
     }
 
     @Override
     public Observable<DataListBean<NewsBean>> getNewsList(@Constants.Type String type, Long lastCursor, int pageSize) {
-        return mNetHelper.getNewsList(type, lastCursor, pageSize);
+        return mReemoteDataSource.getNewsList(type, lastCursor, pageSize);
     }
 
     @Override
     public Observable<InstantReadBean> getTopicInstantRead(String topicId) {
-        return mNetHelper.getTopicInstantRead(topicId);
+        return mReemoteDataSource.getTopicInstantRead(topicId);
     }
 
     @Override
     public Observable<TopicBean> getTopicDetail(String topicId) {
-        return mNetHelper.getTopicDetail(topicId);
+        return mReemoteDataSource.getTopicDetail(topicId);
     }
 
     @Override
     public Observable<List<RelevantTopicBean>> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
-        return mNetHelper.getRelateTopic(topicId, eventType, order, timeStamp);
+        return mReemoteDataSource.getRelateTopic(topicId, eventType, order, timeStamp);
     }
 
     @Override
     public Observable<NewTopicCountBean> getNewTopicCount(Long latestCursor) {
-        return mNetHelper.getNewTopicCount(latestCursor);
+        return mReemoteDataSource.getNewTopicCount(latestCursor);
     }
 
     @Override
     public Flowable<List<TopicBean>> getTopicById(String id) {
-        return mDbHelper.getTopicById(id);
+        return mLocalDataSource.getTopicById(id);
     }
 
     @Override
     public Flowable<List<NewsBean>> getNewsById(String id) {
-        return mDbHelper.getNewsById(id);
+        return mLocalDataSource.getNewsById(id);
     }
 
     @Override
     public <T> Single<T> getSingleBean(Class<T> tClass, String id) {
-        return mDbHelper.getSingleBean(tClass, id);
+        return mLocalDataSource.getSingleBean(tClass, id);
     }
 
     @Override
     public Flowable<List<TopicBean>> getAllTopic() {
-        return mDbHelper.getAllTopic();
+        return mLocalDataSource.getAllTopic();
     }
 
     @Override
     public Flowable<List<NewsBean>> getAllNews() {
-        return mDbHelper.getAllNews();
+        return mLocalDataSource.getAllNews();
     }
 
     @Override
     public void delete(Object object) {
-        mDbHelper.delete(object);
+        mLocalDataSource.delete(object);
     }
 
     @Override
     public void insert(Object object) {
-        mDbHelper.insert(object);
+        mLocalDataSource.insert(object);
     }
 }

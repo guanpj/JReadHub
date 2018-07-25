@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.core.net.exception;
+package com.jeez.guanpj.jreadhub.data.remote.exception;
 
 /**
  * @author quchao

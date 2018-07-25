@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.core.net;
+package com.jeez.guanpj.jreadhub.data.remote;
 
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
@@ -13,7 +13,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public interface NetHelper {
+public interface RemoteDataSource {
     Observable<DataListBean<TopicBean>> getTopicList(Long lastCursor, int pageSize);
 
     Observable<DataListBean<NewsBean>> getNewsList(@Constants.Type String type, Long lastCursor, int pageSize);

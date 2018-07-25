@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.core.net.cookies;
+package com.jeez.guanpj.jreadhub.data.remote.cookies;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

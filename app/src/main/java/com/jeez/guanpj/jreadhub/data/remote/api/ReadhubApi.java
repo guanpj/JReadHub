@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.core.net.api;
+package com.jeez.guanpj.jreadhub.data.remote.api;
 
 import android.os.Build;
 

@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.core.db.dao;
+package com.jeez.guanpj.jreadhub.data.local.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;

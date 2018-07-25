@@ -1,7 +1,7 @@
 package com.jeez.guanpj.jreadhub.module.topic.instant;
 
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 
@@ -21,7 +21,7 @@ public class InstantReadPresenter extends BasePresenter<InstantReadContract.View
     @Override
     public void getTopicInstantRead(String topicId) {
         addSubscribe(mDataManager.getTopicInstantRead(topicId)
-                .compose(RxSchedulers.io2Main())
+                .compose(RxSchedulers.observableIo2Main())
                 .doOnSubscribe(disposable -> getView().onRequestStart())
                 .subscribeWith(new DisposableObserver<InstantReadBean>() {
                     @Override

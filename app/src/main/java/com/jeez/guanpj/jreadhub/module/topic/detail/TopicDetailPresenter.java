@@ -1,7 +1,7 @@
 package com.jeez.guanpj.jreadhub.module.topic.detail;
 
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
-import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 
@@ -27,7 +27,7 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
     @Override
     public void getTopicDetail(String topicId, boolean isPullToRefresh) {
         addSubscribe(mDataManager.getTopicDetail(topicId)
-                .compose(RxSchedulers.io2Main())
+                .compose(RxSchedulers.observableIo2Main())
                 .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .subscribeWith(new DisposableObserver<TopicBean>() {
                     @Override
@@ -50,8 +50,7 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
     @Override
     public void checkStar(String topicId) {
         addSubscribe(mDataManager.getTopicById(topicId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxSchedulers.flowableIo2Main())
                 .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
                     @Override
                     public void onNext(List<TopicBean> topicBean) {

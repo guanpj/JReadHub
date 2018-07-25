@@ -1,8 +1,8 @@
 package com.jeez.guanpj.jreadhub.di.module;
 
 import com.jeez.guanpj.jreadhub.BuildConfig;
-import com.jeez.guanpj.jreadhub.core.net.api.ReadhubApi;
-import com.jeez.guanpj.jreadhub.core.net.cookies.CookiesManager;
+import com.jeez.guanpj.jreadhub.data.remote.api.ReadhubApi;
+import com.jeez.guanpj.jreadhub.data.remote.cookies.CookiesManager;
 import com.jeez.guanpj.jreadhub.util.CommonUtil;
 import com.jeez.guanpj.jreadhub.util.Constants;
 

@@ -81,7 +81,7 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
     @Override
     public void showContent() {
         if (currentState == State.Loading) {
-            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.io2Main()).subscribe(time ->
+            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.observableIo2Main()).subscribe(time ->
                     getLceSwitchEffect().showContent(loadingView, contentView, errorView));
         } else {
             getLceSwitchEffect().showContent(loadingView, contentView, errorView);
@@ -92,7 +92,7 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
     @Override
     public void showError() {
         if (currentState == State.Loading) {
-            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.io2Main()).subscribe(time ->
+            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.observableIo2Main()).subscribe(time ->
                     getLceSwitchEffect().showErrorView(loadingView, contentView, errorView));
         } else {
             getLceSwitchEffect().showErrorView(loadingView, contentView, errorView);
@@ -103,7 +103,7 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
     @Override
     public void showEmpty() {
         if (currentState == State.Loading) {
-            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.io2Main()).subscribe(time ->
+            Observable.timer(1, TimeUnit.SECONDS).compose(RxSchedulers.observableIo2Main()).subscribe(time ->
                     getLceSwitchEffect().showEmptyView(loadingView, contentView, emptyView));
         } else {
             getLceSwitchEffect().showEmptyView(loadingView, contentView, emptyView);

@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.core;
+package com.jeez.guanpj.jreadhub.data;
 
 import android.app.Activity;
 import android.app.Application;
