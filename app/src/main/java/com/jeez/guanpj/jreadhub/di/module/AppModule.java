@@ -3,17 +3,17 @@ package com.jeez.guanpj.jreadhub.di.module;
 import android.content.Context;
 
 import com.jeez.guanpj.jreadhub.core.DataManager;
+import com.jeez.guanpj.jreadhub.core.db.DatabaseHelper;
+import com.jeez.guanpj.jreadhub.core.db.DatabaseHelperImpl;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
 import com.jeez.guanpj.jreadhub.core.net.NetHelperImpl;
-import com.jeez.guanpj.jreadhub.db.DataBaseHelperImpl;
-import com.jeez.guanpj.jreadhub.db.DatabaseHelper;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = NetworkModule.class)
+@Module(includes = {NetworkModule.class, DatabaseModule.class})
 public class AppModule {
     private final Context mContext;
 
@@ -29,13 +29,13 @@ public class AppModule {
 
     @Provides
     @Singleton
-    NetHelper provideNetHelper(NetHelperImpl retrofitHelper) {
-        return retrofitHelper;
+    NetHelper provideNetHelper(NetHelperImpl netHelperImpl) {
+        return netHelperImpl;
     }
 
     @Provides
     @Singleton
-    DatabaseHelper provideDbHelper(DataBaseHelperImpl dataBaseHelperImpl) {
+    DatabaseHelper provideDbHelper(DatabaseHelperImpl dataBaseHelperImpl) {
         return dataBaseHelperImpl;
     }
 

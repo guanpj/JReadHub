@@ -95,16 +95,19 @@ public class StarCommonListFragment extends AbsBaseMvpLceFragment<List<NewsBean>
 
     @Override
     public void bindData(List<NewsBean> data, boolean isPullToRefresh) {
-        List<NewsBean> dataList = data;
         if (isPullToRefresh) {
             mRefreshLayout.setRefreshing(false);
-            mAdapter.setNewData(dataList);
+            mAdapter.setNewData(data);
             mRecyclerView.scrollToPosition(0);
             mAdapter.setEnableLoadMore(true);
         } else {
-            mAdapter.addData(dataList);
-            mAdapter.loadMoreComplete();
-            mAdapter.setEnableLoadMore(true);
+            if (null != data && data.size() > 0) {
+                mAdapter.addData(data);
+                mAdapter.setEnableLoadMore(true);
+                mAdapter.loadMoreComplete();
+            } else {
+                mAdapter.loadMoreEnd();
+            }
         }
     }
 

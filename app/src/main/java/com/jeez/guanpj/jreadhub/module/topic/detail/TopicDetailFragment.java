@@ -36,10 +36,8 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import com.zhy.view.flowlayout.TagView;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
 
 public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBean, TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
 
@@ -71,6 +69,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     private TopicBean mTopicBean;
     private TopicTimelineAdapter mTimelineAdapter;
     private boolean mIsStar;
+    private boolean mShowTips = false;
 
     public static TopicDetailFragment newInstance(String topicId, String title) {
         TopicDetailFragment fragment = new TopicDetailFragment();
@@ -97,7 +96,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     @Override
     public void loadData(boolean isPullToRefresh) {
         mPresenter.getTopicDetail(mTopicId, isPullToRefresh);
-        mPresenter.checkStar(mTopicId, false);
+        mPresenter.checkStar(mTopicId);
     }
 
     @Override
@@ -222,10 +221,10 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     }
 
     @Override
-    public void onCheckStarResult(boolean isTopicExist, boolean showTips) {
+    public void onCheckStarResult(boolean isTopicExist) {
         if (isTopicExist) {
             mToolbar.getMenu().findItem(R.id.action_collect).setIcon(R.drawable.ic_tool_bar_star_fill);
-            if (showTips) {
+            if (mShowTips) {
                 if (mIsStar) {
                     showShortToast(getString(R.string.tips_unstar_faild));
                 } else {
@@ -235,7 +234,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
             mIsStar = true;
         } else {
             mToolbar.getMenu().findItem(R.id.action_collect).setIcon(R.drawable.ic_tool_bar_star_border);
-            if (showTips) {
+            if (mShowTips) {
                 if (mIsStar) {
                     showShortToast(getString(R.string.tips_unstar_success));
                 } else {
@@ -244,6 +243,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
             }
             mIsStar = false;
         }
+        mShowTips = true;
     }
 
     private void setBackgroundAlpha(float v) {
@@ -261,8 +261,6 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
                 } else {
                     mPresenter.addStar(mTopicBean);
                 }
-                Observable.timer(50, TimeUnit.MILLISECONDS)
-                        .subscribe(observable -> mPresenter.checkStar(mTopicId, true));
                 break;
             default:
                 break;

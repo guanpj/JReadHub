@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.db.dao;
+package com.jeez.guanpj.jreadhub.core.db.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -25,7 +25,7 @@ public interface TopicDao {
     public Single<List<TopicBean>> getAllTopic2();
 
     @Query("SELECT * FROM topic WHERE id=:topicId")
-    public Flowable<TopicBean> getTopicById(String topicId);
+    public Flowable<List<TopicBean>> getTopicById(String topicId);
 
     @Query("SELECT * FROM topic WHERE id=:topicId")
     public Maybe<TopicBean> getTopicById1(String topicId);

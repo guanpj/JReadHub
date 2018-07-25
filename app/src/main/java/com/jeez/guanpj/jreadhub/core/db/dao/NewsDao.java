@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.db.dao;
+package com.jeez.guanpj.jreadhub.core.db.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -19,7 +19,7 @@ public interface NewsDao {
     public Flowable<List<NewsBean>> getAllNews();
 
     @Query("SELECT * FROM news WHERE id=:newsId")
-    public Flowable<NewsBean> getNewsById(String newsId);
+    public Flowable<List<NewsBean>> getNewsById(String newsId);
 
     @Query("SELECT * FROM news WHERE id=:newsId")
     public Maybe<NewsBean> getNewsById1(String newsId);

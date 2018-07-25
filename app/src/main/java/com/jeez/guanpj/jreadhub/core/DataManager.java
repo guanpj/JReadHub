@@ -7,7 +7,7 @@ import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.net.NetHelper;
-import com.jeez.guanpj.jreadhub.db.DatabaseHelper;
+import com.jeez.guanpj.jreadhub.core.db.DatabaseHelper;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
@@ -56,8 +56,13 @@ public class DataManager implements NetHelper, DatabaseHelper {
     }
 
     @Override
-    public <T> Flowable<T> get(Class<T> tClass, String id) {
-        return mDbHelper.get(tClass, id);
+    public Flowable<List<TopicBean>> getTopicById(String id) {
+        return mDbHelper.getTopicById(id);
+    }
+
+    @Override
+    public Flowable<List<NewsBean>> getNewsById(String id) {
+        return mDbHelper.getNewsById(id);
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.jeez.guanpj.jreadhub.di.component.DaggerAppComponent;
 import com.jeez.guanpj.jreadhub.di.module.AppModule;
 import com.jeez.guanpj.jreadhub.module.main.MainActivity;
 import com.meituan.android.walle.WalleChannelReader;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.tinker.TinkerApplicationLike;
@@ -50,15 +51,15 @@ public class ReadhubApplicationLike extends TinkerApplicationLike {
     public void onCreate() {
         super.onCreate();
         sInstance = getApplication();
-        /*if (LeakCanary.isInAnalyzerProcess(getApplication())) {
+        if (LeakCanary.isInAnalyzerProcess(getApplication())) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             return;
-        }*/
+        }
 
-        //initBugly();
+        initBugly();
 
-        //LeakCanary.install(getApplication());
+        LeakCanary.install(getApplication());
         AppStatusTracker.init(getApplication());
         AndroidThreeTen.init(getApplication());
         //CrashHandler.getInstance().init(getApplicationContext());
@@ -86,13 +87,13 @@ public class ReadhubApplicationLike extends TinkerApplicationLike {
         MultiDex.install(base);
 
         // 安装tinker
-        //Beta.installTinker(this);
+        Beta.installTinker(this);
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-        //Beta.unInit();
+        Beta.unInit();
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)

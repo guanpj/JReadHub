@@ -38,9 +38,10 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
     TextView mToolbarHeader;
     AgentWeb mAgentWeb;
     private NewsBean mNewsBean;
-    private boolean mIsStar;
     private String mUrl;
     private String mTitle;
+    private boolean mIsStar;
+    private boolean mShowTips = false;
 
     public static WebViewFragment newInstance(String url, String title) {
         WebViewFragment fragment = new WebViewFragment();
@@ -82,7 +83,7 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (null != mNewsBean) {
-            mPresenter.checkStar(mNewsBean.getId(), false);
+            mPresenter.checkStar(mNewsBean.getId());
         }
     }
 
@@ -123,10 +124,10 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
     }
 
     @Override
-    public void onCheckStarResult(boolean isNewsExist, boolean showTips) {
+    public void onCheckStarResult(boolean isNewsExist) {
         if (isNewsExist) {
             mToolbar.getMenu().findItem(R.id.action_collect).setIcon(R.drawable.ic_tool_bar_star_fill);
-            if (showTips) {
+            if (mShowTips) {
                 if (mIsStar) {
                     showShortToast(getString(R.string.tips_unstar_faild));
                 } else {
@@ -136,7 +137,7 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
             mIsStar = true;
         } else {
             mToolbar.getMenu().findItem(R.id.action_collect).setIcon(R.drawable.ic_tool_bar_star_border);
-            if (showTips) {
+            if (mShowTips) {
                 if (mIsStar) {
                     showShortToast(getString(R.string.tips_unstar_success));
                 } else {
@@ -145,6 +146,7 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
             }
             mIsStar = false;
         }
+        mShowTips = true;
     }
 
     @Override
@@ -156,8 +158,6 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
                 } else {
                     mPresenter.addStar(mNewsBean);
                 }
-                Observable.timer(50, TimeUnit.MILLISECONDS)
-                        .subscribe(observable -> mPresenter.checkStar(mNewsBean.getId(), true));
                 return true;
             case R.id.action_open:
                 NavigationUtil.openByApp(getActivity(), mUrl);

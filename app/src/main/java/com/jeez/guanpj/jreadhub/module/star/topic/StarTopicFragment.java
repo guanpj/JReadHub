@@ -96,9 +96,13 @@ public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicBean>, St
             mRecyclerView.scrollToPosition(0);
             mAdapter.setEnableLoadMore(true);
         } else {
-            mAdapter.addData(data);
-            mAdapter.loadMoreComplete();
-            mAdapter.setEnableLoadMore(true);
+            if (null != data && data.size() > 0) {
+                mAdapter.addData(data);
+                mAdapter.setEnableLoadMore(true);
+                mAdapter.loadMoreComplete();
+            } else {
+                mAdapter.loadMoreEnd();
+            }
         }
     }
 

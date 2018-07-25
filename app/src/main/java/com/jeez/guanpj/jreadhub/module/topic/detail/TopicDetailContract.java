@@ -6,13 +6,13 @@ import com.jeez.guanpj.jreadhub.mvpframe.view.lce.IBaseMvpLceView;
 
 public interface TopicDetailContract {
     interface View extends IBaseMvpLceView<TopicBean> {
-        void onCheckStarResult(boolean isTopicExist, boolean showTips);
+        void onCheckStarResult(boolean isTopicExist);
     }
 
     interface Presenter extends IBasePresenter<View> {
         void getTopicDetail(String topicId, boolean isPullToRefresh);
 
-        void checkStar(String topicId, boolean showTips);
+        void checkStar(String topicId);
 
         void addStar(TopicBean topicBean);
 

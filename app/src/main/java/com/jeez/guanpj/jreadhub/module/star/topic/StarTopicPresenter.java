@@ -66,6 +66,6 @@ public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> im
 
     @Override
     public void doLoadMore(Long lastCursor) {
-
+        getView().bindData(null, false);
     }
 }

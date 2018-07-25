@@ -1,40 +1,39 @@
-package com.jeez.guanpj.jreadhub.db;
+package com.jeez.guanpj.jreadhub.core.db;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
-import com.jeez.guanpj.jreadhub.db.dao.NewsDao;
-import com.jeez.guanpj.jreadhub.db.dao.TopicDao;
+import com.jeez.guanpj.jreadhub.core.db.dao.NewsDao;
+import com.jeez.guanpj.jreadhub.core.db.dao.TopicDao;
 
 import java.util.List;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
-public class DataBaseHelperImpl implements DatabaseHelper {
+public class DatabaseHelperImpl implements DatabaseHelper {
 
     private NewsDao mNewsDao;
     private TopicDao mTopicDao;
     private Executor mExecutor;
 
     @Inject
-    public DataBaseHelperImpl() {
-        mNewsDao = ReadhubDatabase.getInstance().getNewsDao();
-        mTopicDao = ReadhubDatabase.getInstance().getTopicDao();
-        mExecutor = Executors.newFixedThreadPool(2);
+    public DatabaseHelperImpl(TopicDao topicDao, NewsDao newsDao, Executor executor) {
+        mTopicDao = topicDao;
+        mNewsDao = newsDao;
+        mExecutor = executor;
     }
 
     @Override
-    public <T> Flowable<T> get(Class<T> tClass, String id) {
-        if (TopicBean.class.equals(tClass)) {
-            return (Flowable<T>) mTopicDao.getTopicById(id);
-        } else if (TopicBean.class.equals(tClass)) {
-            return (Flowable<T>) mNewsDao.getNewsById(id);
-        }
-        return null;
+    public Flowable<List<TopicBean>> getTopicById(String id) {
+        return mTopicDao.getTopicById(id);
+    }
+
+    @Override
+    public Flowable<List<NewsBean>> getNewsById(String id) {
+        return mNewsDao.getNewsById(id);
     }
 
     @Override

@@ -1,19 +1,18 @@
 package com.jeez.guanpj.jreadhub.module.topic.detail;
 
-import android.arch.persistence.room.EmptyResultSetException;
-
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.core.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View> implements TopicDetailContract.Presenter {
 
@@ -49,8 +48,31 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
     }
 
     @Override
-    public void checkStar(String topicId, boolean showTips) {
-        mDataManager.getSingleBean(TopicBean.class, topicId)
+    public void checkStar(String topicId) {
+        addSubscribe(mDataManager.getTopicById(topicId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
+                    @Override
+                    public void onNext(List<TopicBean> topicBean) {
+                        if (null != topicBean && topicBean.size() > 0) {
+                            getView().onCheckStarResult(true);
+                        } else {
+                            getView().onCheckStarResult(false);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+        /*mDataManager.getSingleBean(TopicBean.class, topicId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<TopicBean>() {
@@ -72,7 +94,7 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
                             getView().onCheckStarResult(false, showTips);
                         }
                     }
-                });
+                });*/
     }
 
     @Override
