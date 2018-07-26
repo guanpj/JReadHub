@@ -1,5 +1,8 @@
 package com.jeez.guanpj.jreadhub.data;
 
+import android.support.annotation.NonNull;
+
+import com.jeez.guanpj.jreadhub.bean.BaseListItemBean;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
@@ -71,6 +74,16 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
+    public Flowable<List<TopicBean>> getTopicsByKeyword(@NonNull String keyWord) {
+        return mLocalDataSource.getTopicsByKeyword(keyWord);
+    }
+
+    @Override
+    public Flowable<List<NewsBean>> getNewsByKeyword(@NonNull String keyWord) {
+        return mLocalDataSource.getNewsByKeyword(keyWord);
+    }
+
+    @Override
     public Flowable<List<TopicBean>> getAllTopic() {
         return mLocalDataSource.getAllTopic();
     }
@@ -81,12 +94,17 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
-    public void delete(Object object) {
+    public void delete(@NonNull BaseListItemBean object) {
         mLocalDataSource.delete(object);
     }
 
     @Override
-    public void insert(Object object) {
+    public void insert(@NonNull BaseListItemBean object) {
         mLocalDataSource.insert(object);
+    }
+
+    @Override
+    public void update(@NonNull BaseListItemBean object) {
+        mLocalDataSource.update(object);
     }
 }

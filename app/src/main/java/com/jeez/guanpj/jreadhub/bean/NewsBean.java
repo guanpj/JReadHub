@@ -9,7 +9,7 @@ import org.threeten.bp.OffsetDateTime;
 import java.io.Serializable;
 
 @Entity(tableName = "news")
-public class NewsBean extends BaseItemBean implements Serializable {
+public class NewsBean extends BaseListItemBean implements Serializable {
 
     private String authorName;
     private String language;

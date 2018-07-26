@@ -3,7 +3,7 @@ package com.jeez.guanpj.jreadhub.bean;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-public class BaseItemBean implements Cloneable {
+public class BaseListItemBean implements Cloneable {
 
     @PrimaryKey @NonNull
     protected String id;

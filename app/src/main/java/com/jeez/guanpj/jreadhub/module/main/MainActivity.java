@@ -14,6 +14,7 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.constant.AppStatus;
+import com.jeez.guanpj.jreadhub.data.AppStatusTracker;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
@@ -144,7 +145,7 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
                 pop();
             } else {
                 if (System.currentTimeMillis() - TOUCH_TIME < Constants.EXIT_WAIT_TIME) {
-                    finish();
+                    AppStatusTracker.getInstance().exitApp();
                 } else {
                     TOUCH_TIME = System.currentTimeMillis();
                     showShortToast(R.string.exit_tips);

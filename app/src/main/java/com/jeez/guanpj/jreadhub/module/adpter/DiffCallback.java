@@ -3,18 +3,18 @@ package com.jeez.guanpj.jreadhub.module.adpter;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 
-import com.jeez.guanpj.jreadhub.bean.BaseItemBean;
+import com.jeez.guanpj.jreadhub.bean.BaseListItemBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiffCallback<T extends BaseItemBean> extends DiffUtil.Callback {
+public class DiffCallback<T extends BaseListItemBean> extends DiffUtil.Callback {
     public static final String UPDATE_TIME_SIGNAL = "update_time";
 
-    private List<BaseItemBean> mOldData, mNewData;
+    private List<BaseListItemBean> mOldData, mNewData;
 
     public DiffCallback(List<T> oldData, List<T> newData) {
-        List<BaseItemBean> temp = new ArrayList<>();
+        List<BaseListItemBean> temp = new ArrayList<>();
         temp.addAll(oldData);
         this.mOldData = temp;
         temp = new ArrayList<>();

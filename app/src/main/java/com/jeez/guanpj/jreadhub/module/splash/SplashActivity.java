@@ -47,8 +47,9 @@ public class SplashActivity extends AbsBaseActivity {
 
     @Override
     public void initDataAndEvent() {
+        ObjectAnimator alphaAnim = ObjectAnimator.ofFloat(mAppDes, "alpha", 0, 1f);
         ObjectAnimator desAnim = ObjectAnimator.ofFloat(mAppDes, "translationX", -500f, 0f);
-        desAnim.setDuration(700);
+        desAnim.setDuration(3000);
         desAnim.setInterpolator(new DecelerateInterpolator());
         desAnim.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -72,7 +73,7 @@ public class SplashActivity extends AbsBaseActivity {
         });
 
         AnimatorSet animSet = new AnimatorSet();
-        animSet.play(nameAnim).after(desAnim);
+        animSet.play(desAnim).with(alphaAnim).before(nameAnim);
         animSet.start();
     }
 

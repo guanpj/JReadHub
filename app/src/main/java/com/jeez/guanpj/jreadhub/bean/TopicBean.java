@@ -11,7 +11,7 @@ import org.threeten.bp.OffsetDateTime;
 import java.util.ArrayList;
 
 @Entity(tableName = "topic")
-public class TopicBean extends BaseItemBean implements Cloneable {
+public class TopicBean extends BaseListItemBean implements Cloneable {
 
     /**
      * id : 1mY1Lpcntvs
