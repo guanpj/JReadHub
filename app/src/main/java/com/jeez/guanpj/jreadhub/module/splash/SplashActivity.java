@@ -49,7 +49,7 @@ public class SplashActivity extends AbsBaseActivity {
     public void initDataAndEvent() {
         ObjectAnimator alphaAnim = ObjectAnimator.ofFloat(mAppDes, "alpha", 0, 1f);
         ObjectAnimator desAnim = ObjectAnimator.ofFloat(mAppDes, "translationX", -500f, 0f);
-        desAnim.setDuration(3000);
+        desAnim.setDuration(700);
         desAnim.setInterpolator(new DecelerateInterpolator());
         desAnim.addListener(new AnimatorListenerAdapter() {
             @Override
