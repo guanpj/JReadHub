@@ -34,8 +34,8 @@ public class CommonUtil {
     /**
      * 判断2个对象是否相等
      *
-     * @param a Object a
-     * @param b Object b
+     * @param a BaseListItemBean a
+     * @param b BaseListItemBean b
      * @return isEqual
      */
     public static boolean isEquals(Object a, Object b) {

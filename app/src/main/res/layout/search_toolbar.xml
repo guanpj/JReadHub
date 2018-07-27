@@ -7,7 +7,7 @@
     android:layout_height="55dp"
     android:gravity="center"
     android:background="?attr/readhubTheme"
-    app:popupTheme="@style/AppTheme.PopupOverlay"
+    android:theme="@style/Custom.Theme.ToolBar"
     app:title="@string/app_name"
     app:titleTextColor="?attr/readhubToolbarText"
     app:titleTextAppearance="@style/toolbar_textAppearance"

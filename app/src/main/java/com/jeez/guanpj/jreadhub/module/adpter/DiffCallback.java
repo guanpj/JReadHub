@@ -48,7 +48,7 @@ public class DiffCallback<T extends BaseListItemBean> extends DiffUtil.Callback 
 
     @Nullable
     @Override
-    public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+    public java.lang.Object getChangePayload(int oldItemPosition, int newItemPosition) {
         return UPDATE_TIME_SIGNAL;
     }
 }

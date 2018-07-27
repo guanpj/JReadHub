@@ -2,15 +2,15 @@ package com.jeez.guanpj.jreadhub.data;
 
 import android.support.annotation.NonNull;
 
-import com.jeez.guanpj.jreadhub.bean.BaseListItemBean;
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
 import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
+import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
-import com.jeez.guanpj.jreadhub.data.remote.RemoteDataSource;
 import com.jeez.guanpj.jreadhub.data.local.LocalDataSource;
+import com.jeez.guanpj.jreadhub.data.remote.RemoteDataSource;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
@@ -94,17 +94,27 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
-    public void delete(@NonNull BaseListItemBean object) {
+    public Flowable<List<SearchHistoryBean>> getAllSearchHistroy() {
+        return mLocalDataSource.getAllSearchHistroy();
+    }
+
+    @Override
+    public <T> void deleteAll(Class<T> tClass) {
+        mLocalDataSource.deleteAll(tClass);
+    }
+
+    @Override
+    public void delete(@NonNull Object object) {
         mLocalDataSource.delete(object);
     }
 
     @Override
-    public void insert(@NonNull BaseListItemBean object) {
+    public void insert(@NonNull Object object) {
         mLocalDataSource.insert(object);
     }
 
     @Override
-    public void update(@NonNull BaseListItemBean object) {
+    public void update(@NonNull Object object) {
         mLocalDataSource.update(object);
     }
 }

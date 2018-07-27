@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.data.local.ReadhubDatabase;
 import com.jeez.guanpj.jreadhub.data.local.dao.NewsDao;
+import com.jeez.guanpj.jreadhub.data.local.dao.SearchHistoryDao;
 import com.jeez.guanpj.jreadhub.data.local.dao.TopicDao;
 
 import java.util.concurrent.Executor;
@@ -37,6 +38,12 @@ public class DatabaseModule {
     @Singleton
     NewsDao provideNewsDao(ReadhubDatabase database) {
         return database.getNewsDao();
+    }
+
+    @Provides
+    @Singleton
+    SearchHistoryDao provideSearchHistoryDao(ReadhubDatabase database) {
+        return database.getSearchHistoryDao();
     }
 
     @Provides

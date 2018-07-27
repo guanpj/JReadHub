@@ -40,4 +40,7 @@ public interface TopicDao {
 
     @Delete
     void deleteTopic(TopicBean topicBean);
+
+    @Query("DELETE FROM topic")
+    void deleteAllTopic();
 }

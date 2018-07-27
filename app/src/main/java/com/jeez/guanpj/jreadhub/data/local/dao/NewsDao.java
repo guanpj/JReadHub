@@ -40,4 +40,7 @@ public interface NewsDao {
 
     @Delete
     void deleteNews(NewsBean newsBean);
+
+    @Query("DELETE FROM news")
+    void deleteAllNews();
 }

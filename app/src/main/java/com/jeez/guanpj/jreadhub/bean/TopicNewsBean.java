@@ -118,10 +118,10 @@ public class TopicNewsBean implements Cloneable {
     }
 
     @Override
-    public Object clone() {
-        Object o = null;
+    public BaseListItemBean clone() {
+        BaseListItemBean o = null;
         try {
-            o = super.clone();
+            o = (BaseListItemBean) super.clone();
         } catch (CloneNotSupportedException e) {
         }
         return o;

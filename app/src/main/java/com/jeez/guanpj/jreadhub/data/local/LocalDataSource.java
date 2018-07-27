@@ -2,8 +2,8 @@ package com.jeez.guanpj.jreadhub.data.local;
 
 import android.support.annotation.NonNull;
 
-import com.jeez.guanpj.jreadhub.bean.BaseListItemBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
+import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface LocalDataSource {
 
     Flowable<List<NewsBean>> getNewsById(@NonNull String id);
 
-    <T> Single<T> getSingleBean(@NonNull Class<T> tClass, @NonNull String id);
+    <T>Single<T> getSingleBean(@NonNull Class<T> tClass, @NonNull String id);
 
     Flowable<List<TopicBean>> getTopicsByKeyword(@NonNull String keyWord);
 
@@ -26,9 +26,13 @@ public interface LocalDataSource {
 
     Flowable<List<NewsBean>> getAllNews();
 
-    void delete(@NonNull BaseListItemBean object);
+    Flowable<List<SearchHistoryBean>> getAllSearchHistroy();
 
-    void insert(@NonNull BaseListItemBean object);
+    <T>void deleteAll(@NonNull Class<T> tClass);
 
-    void update(@NonNull BaseListItemBean object);
+    void delete(@NonNull Object object);
+
+    void insert(@NonNull Object object);
+
+    void update(@NonNull Object object);
 }

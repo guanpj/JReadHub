@@ -2,10 +2,11 @@ package com.jeez.guanpj.jreadhub.data.local;
 
 import android.support.annotation.NonNull;
 
-import com.jeez.guanpj.jreadhub.bean.BaseListItemBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
+import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.data.local.dao.NewsDao;
+import com.jeez.guanpj.jreadhub.data.local.dao.SearchHistoryDao;
 import com.jeez.guanpj.jreadhub.data.local.dao.TopicDao;
 
 import java.util.List;
@@ -20,12 +21,15 @@ public class LocalRepository implements LocalDataSource {
 
     private NewsDao mNewsDao;
     private TopicDao mTopicDao;
+    private SearchHistoryDao mSearchHistoryDao;
     private Executor mExecutor;
 
     @Inject
-    public LocalRepository(TopicDao topicDao, NewsDao newsDao, Executor executor) {
+    public LocalRepository(TopicDao topicDao, NewsDao newsDao,
+                           SearchHistoryDao searchHistoryDao, Executor executor) {
         mTopicDao = topicDao;
         mNewsDao = newsDao;
+        mSearchHistoryDao = searchHistoryDao;
         mExecutor = executor;
     }
 
@@ -70,34 +74,56 @@ public class LocalRepository implements LocalDataSource {
     }
 
     @Override
-    public void delete(@NonNull BaseListItemBean object) {
+    public Flowable<List<SearchHistoryBean>> getAllSearchHistroy() {
+        return mSearchHistoryDao.getAllHistory();
+    }
+
+    @Override
+    public <T> void deleteAll(@NonNull Class<T> tClass) {
+        if (TopicBean.class.equals(tClass)) {
+            mTopicDao.deleteAllTopic();
+        } else if (NewsBean.class.equals(tClass)) {
+            mNewsDao.deleteAllNews();
+        } else if (SearchHistoryDao.class.equals(tClass)) {
+            mSearchHistoryDao.deleteAllHistory();
+        }
+    }
+
+    @Override
+    public void delete(@NonNull Object object) {
         mExecutor.execute(() -> {
             if (object instanceof TopicBean) {
                 mTopicDao.deleteTopic((TopicBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.deleteNews((NewsBean) object);
+            } else if (object instanceof SearchHistoryBean) {
+                mSearchHistoryDao.deleteHistory((SearchHistoryBean) object);
             }
         });
     }
 
     @Override
-    public void insert(@NonNull BaseListItemBean object) {
+    public void insert(@NonNull Object object) {
         mExecutor.execute(() -> {
             if (object instanceof TopicBean) {
                 mTopicDao.insertTopic((TopicBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.insertNews((NewsBean) object);
+            } else if (object instanceof SearchHistoryBean) {
+                mSearchHistoryDao.insertHistory((SearchHistoryBean) object);
             }
         });
     }
 
     @Override
-    public void update(@NonNull BaseListItemBean object) {
+    public void update(@NonNull Object object) {
         mExecutor.execute(() -> {
             if (object instanceof TopicBean) {
                 mTopicDao.updateTopic((TopicBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.updateNews((NewsBean) object);
+            } else if (object instanceof SearchHistoryBean) {
+                mSearchHistoryDao.updateHistory((SearchHistoryBean) object);
             }
         });
     }

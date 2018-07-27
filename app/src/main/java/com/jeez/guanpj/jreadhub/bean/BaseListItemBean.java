@@ -26,8 +26,8 @@ public class BaseListItemBean implements Cloneable {
     }
 
     @Override
-    public Object clone() {
-        Object o = null;
+    public java.lang.Object clone() {
+        java.lang.Object o = null;
         try {
             o = super.clone();
         } catch (CloneNotSupportedException e) {
