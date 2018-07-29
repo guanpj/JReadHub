@@ -76,7 +76,8 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
         fragments.add(CommonListFragment.newInstance(Constants.TYPE_TECHNEWS));
         fragments.add(CommonListFragment.newInstance(Constants.TYPE_BLOCKCHAIN));
 
-        FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), pageTitles, fragments);
+        FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), pageTitles);
+        adapter.setFragments(fragments);
         mViewPager.setAdapter(adapter);
 
         for (int i = 0; i < pageTitles.size(); i++) {

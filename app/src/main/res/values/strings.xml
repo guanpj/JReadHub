@@ -34,7 +34,7 @@
     <string name="jump_source">访问原网址</string>
     <string name="new_topic_tips">有&#160;%1$d&#160;个新话题，点击查看</string>
     <string name="brvah_loading">正在加载...</string>
-    <string name="brvah_load_failed">加载失败，点击重试</string>
+    <string name="brvah_load_failed">Sorry，数据加载出错</string>
     <string name="brvah_load_end">没有更多数据</string>
     <string name="brvah_empty">暂无数据，点击重试</string>
     <string name="exit_tips">再按一次退出</string>

@@ -13,7 +13,20 @@
         android:fitsSystemWindows="false"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <include layout="@layout/common_toolbar"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center|right"
+            android:background="?attr/readhubTheme"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="?attr/readhubToolbarText"
+            app:titleTextAppearance="@style/toolbar_textAppearance"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="?attr/navBackIcon"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+        </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:visibility="gone"
@@ -29,11 +42,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/ll_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="8dp">
 
         <RelativeLayout
+            android:id="@+id/rl_list_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp">
@@ -62,7 +76,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_history"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="2dp"/>
 
     </LinearLayout>

@@ -10,6 +10,10 @@ public interface StarTopicContract {
 
     interface Presenter extends IBasePresenter<View> {
         /**
+         * 根据关键字获取话题
+         */
+        void getDataWithKeyword(String keyWord);
+        /**
          * 刷新数据
          */
         void doRefresh(boolean isPullToRefresh);

@@ -79,6 +79,11 @@ public class LocalRepository implements LocalDataSource {
     }
 
     @Override
+    public Single<SearchHistoryBean> getSingleHistory(@NonNull String keyWord) {
+        return mSearchHistoryDao.getSingleHistory(keyWord);
+    }
+
+    @Override
     public <T> void deleteAll(@NonNull Class<T> tClass) {
         if (TopicBean.class.equals(tClass)) {
             mTopicDao.deleteAllTopic();

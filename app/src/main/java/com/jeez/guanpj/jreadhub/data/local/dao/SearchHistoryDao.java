@@ -8,16 +8,21 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.support.annotation.NonNull;
 
+import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 @Dao
 public interface SearchHistoryDao {
-    @Query("SELECT * FROM search_history")
+    @Query("SELECT * FROM search_history ORDER BY time DESC")
     Flowable<List<SearchHistoryBean>> getAllHistory();
+
+    @Query("SELECT * FROM search_history WHERE keyWord = :keyWord")
+    Single<SearchHistoryBean> getSingleHistory(@NonNull String keyWord);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertHistory(SearchHistoryBean... searchHistoryBeans);

@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.module.star;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -11,9 +12,9 @@ import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;
-import com.jeez.guanpj.jreadhub.event.ToolbarSearchClickEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.FragmentAdapter;
 import com.jeez.guanpj.jreadhub.module.star.news.StarCommonListFragment;
+import com.jeez.guanpj.jreadhub.module.star.search.SearchFragment;
 import com.jeez.guanpj.jreadhub.module.star.topic.StarTopicFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 
@@ -31,6 +32,8 @@ public class StarFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
+    @BindView(R.id.fab)
+    FloatingActionButton mFab;
 
     public static StarFragment newInstance() {
         Bundle args = new Bundle();
@@ -60,7 +63,8 @@ public class StarFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
         fragments.add(StarTopicFragment.newInstance());
         fragments.add(StarCommonListFragment.newInstance());
 
-        FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), pageTitles, fragments);
+        FragmentAdapter adapter = new FragmentAdapter(getChildFragmentManager(), pageTitles);
+        adapter.setFragments(fragments);
         mViewPager.setAdapter(adapter);
 
         for (int i = 0; i < pageTitles.size(); i++) {
@@ -82,8 +86,7 @@ public class StarFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                RxBus.getInstance().post(new ToolbarSearchClickEvent());
-                showShortToast("Coming soon...");
+                start(SearchFragment.newInstance());
                 break;
             default:
                 break;

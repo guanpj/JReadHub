@@ -12,9 +12,12 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     private List<String> mTitles;
     private List<Fragment> mFragments;
 
-    public FragmentAdapter(FragmentManager fm, List<String> titles, List<Fragment> fragments) {
+    public FragmentAdapter(FragmentManager fm, List<String> titles) {
         super(fm);
         mTitles = titles;
+    }
+
+    public void setFragments(List<Fragment> fragments) {
         mFragments = fragments;
     }
 

@@ -99,6 +99,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="12dp"
         android:background="@drawable/drawable_instant_read_close"
-        android:src="@drawable/ic_instant_read_close" />
+        android:src="@drawable/ic_close_gray_24" />
 
 </RelativeLayout>

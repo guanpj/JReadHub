@@ -99,6 +99,11 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
+    public Single<SearchHistoryBean> getSingleHistory(@NonNull String keyWord) {
+        return mLocalDataSource.getSingleHistory(keyWord);
+    }
+
+    @Override
     public <T> void deleteAll(Class<T> tClass) {
         mLocalDataSource.deleteAll(tClass);
     }

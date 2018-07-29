@@ -11,7 +11,7 @@ public class SearchHistoryBean {
     @NonNull
     private int id;
     private String keyWord;
-    private String time;
+    private Long time;
 
     @NonNull
     public int getId() {
@@ -30,11 +30,11 @@ public class SearchHistoryBean {
         this.keyWord = keyWord;
     }
 
-    public String getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 }

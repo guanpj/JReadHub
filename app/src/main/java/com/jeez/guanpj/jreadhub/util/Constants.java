@@ -25,6 +25,7 @@ public class Constants {
     public static final String BUNDLE_TOPIC_URL = "BUNDLE_TOPIC_URL";
     public static final String BUNDLE_TOPIC_TITLE = "BUNDLE_TOPIC_TITLE";
     public static final String BUNDLE_NEWS_BEAN = "BUNDLE_NEWS_BEAN";
+    public static final String BUNDLE_KEY_WORD = "BUNDLE_KEY_WORD";
 
     public static final int TOPIC_PAGE_SIZE = 10;
     public static int TOPIC_TOP_COUNT = 0;

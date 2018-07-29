@@ -1,5 +1,6 @@
 package com.jeez.guanpj.jreadhub.data.local;
 
+import android.arch.persistence.room.Query;
 import android.support.annotation.NonNull;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
@@ -27,6 +28,8 @@ public interface LocalDataSource {
     Flowable<List<NewsBean>> getAllNews();
 
     Flowable<List<SearchHistoryBean>> getAllSearchHistroy();
+
+    Single<SearchHistoryBean> getSingleHistory(@NonNull String keyWord);
 
     <T>void deleteAll(@NonNull Class<T> tClass);
 

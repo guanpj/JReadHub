@@ -5,13 +5,12 @@ import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
+import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> implements StarTopicContract.Presenter {
@@ -37,10 +36,36 @@ public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> im
     }
 
     @Override
+    public void getDataWithKeyword(String keyWord) {
+        addSubscribe(mDataManager.getTopicsByKeyword(keyWord)
+                .compose(RxSchedulers.flowableIo2Main())
+                .doOnSubscribe(disposable -> getView().showLoading(false))
+                .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
+                    @Override
+                    public void onNext(List<TopicBean> topicBeans) {
+                        if (null != topicBeans && !topicBeans.isEmpty()) {
+                            getView().bindData(topicBeans, true);
+                            getView().showContent();
+                        } else {
+                            getView().showEmpty();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        getView().showError();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                }));
+    }
+
+    @Override
     public void doRefresh(boolean isPullToRefresh) {
         addSubscribe(mDataManager.getAllTopic()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxSchedulers.flowableIo2Main())
                 .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
                 .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
                     @Override
