@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -60,6 +61,7 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
     private FragmentAdapter mFragmentAdapter;
     private SearchHistoryAdapterWithThirdLib mHistoryAdapter;
     private View mEmptyView;
+    private TextView mEmptyTipsView;
 
     public static SearchFragment newInstance() {
         Bundle args = new Bundle();
@@ -95,6 +97,8 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
         mHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mHistoryRecyclerView.setAdapter(mHistoryAdapter);
         mEmptyView = getLayoutInflater().inflate(R.layout.view_empty, (ViewGroup) mHistoryRecyclerView.getParent(), false);
+        mEmptyTipsView = mEmptyView.findViewById(R.id.txt_tips);
+        mEmptyTipsView.setText("暂无搜索历史数据");
     }
 
     @Override
@@ -185,8 +189,8 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
 
     @Override
     public void showEmpty() {
-        mHistoryAdapter.setEmptyView(mEmptyView);
         mListHeaderView.setVisibility(View.GONE);
+        mHistoryAdapter.setEmptyView(mEmptyView);
     }
 
     @Override

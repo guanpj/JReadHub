@@ -24,6 +24,7 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicTimelineAdapter;
+import com.jeez.guanpj.jreadhub.module.adpter.TopicTimelineAdapterWithThirdLib;
 import com.jeez.guanpj.jreadhub.module.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceSwipeBackFragment;

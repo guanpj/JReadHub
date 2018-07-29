@@ -33,11 +33,11 @@ public class MvpLceViewDelegate implements IBaseMvpLceView {
         }
         if (errorView == null) {
             errorView = view.findViewById(R.id.error_view);
-            retryView = view.findViewById(R.id.ll_retry);
+            retryView = view.findViewById(R.id.ll_wrapper);
         }
         if (emptyView == null) {
             emptyView = view.findViewById(R.id.empty_view);
-            retryView = view.findViewById(R.id.ll_retry);
+            retryView = view.findViewById(R.id.ll_wrapper);
         }
         if (loadingView == null) {
             throw new NullPointerException("loadingView must be not null!");

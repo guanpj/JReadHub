@@ -73,9 +73,9 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
         }
 
         @Override
-        public void bindData(RelevantTopicBean value, int position) {
-            mRelevantTopicBean = value;
-            LocalDate date = value.getCreatedAt().toLocalDate();
+        public void bindData(RelevantTopicBean relevantTopicBean, int position) {
+            mRelevantTopicBean = relevantTopicBean;
+            LocalDate date = relevantTopicBean.getCreatedAt().toLocalDate();
             int year = date.getYear();
             int month = date.getMonthValue();
             int day = date.getDayOfMonth();
@@ -89,7 +89,7 @@ public class TopicTimelineAdapter extends BaseAdapter<RelevantTopicBean> {
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 mTxtDate.setText(spannableTitle);
             }
-            mTxtContent.setText(value.getTitle());
+            mTxtContent.setText(relevantTopicBean.getTitle());
             mDividerTop.setVisibility(getItemViewType() == VIEW_TYPE_TOP || getItemViewType() == VIEW_TYPE_ONLY_ONE ? View.INVISIBLE : View.VISIBLE);
             mDividerBottom.setVisibility(getItemViewType() == VIEW_TYPE_BOTTOM || getItemViewType() == VIEW_TYPE_ONLY_ONE ? View.INVISIBLE : View.VISIBLE);
         }
