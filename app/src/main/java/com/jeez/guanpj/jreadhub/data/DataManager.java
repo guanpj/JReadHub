@@ -1,5 +1,6 @@
 package com.jeez.guanpj.jreadhub.data;
 
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 
 import com.jeez.guanpj.jreadhub.bean.DataListBean;
@@ -14,6 +15,7 @@ import com.jeez.guanpj.jreadhub.data.remote.RemoteDataSource;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
@@ -101,6 +103,11 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     @Override
     public Single<SearchHistoryBean> getSingleHistory(@NonNull String keyWord) {
         return mLocalDataSource.getSingleHistory(keyWord);
+    }
+
+    @Override
+    public void getHistoryCursor(@NonNull String keyWord, @NonNull Consumer<Cursor> consumer) {
+        mLocalDataSource.getHistoryCursor(keyWord, consumer);
     }
 
     @Override

@@ -75,6 +75,11 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
     }
 
     @Override
+    public void getHistoryCursor(String keyWord) {
+        mDataManager.getHistoryCursor(keyWord, cursor -> getView().onHistoryCursorResult(cursor));
+    }
+
+    @Override
     public void updateHistory(SearchHistoryBean searchHistoryBean) {
         mDataManager.update(searchHistoryBean);
     }

@@ -1,11 +1,12 @@
 package com.jeez.guanpj.jreadhub.module.star.search;
 
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -19,7 +20,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
@@ -39,8 +39,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
-import static android.content.Context.SEARCH_SERVICE;
 
 public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter> implements SearchContract.View {
 
@@ -98,7 +96,7 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
         mHistoryRecyclerView.setAdapter(mHistoryAdapter);
         mEmptyView = getLayoutInflater().inflate(R.layout.view_empty, (ViewGroup) mHistoryRecyclerView.getParent(), false);
         mEmptyTipsView = mEmptyView.findViewById(R.id.txt_tips);
-        mEmptyTipsView.setText("暂无搜索历史数据");
+        mEmptyTipsView.setText("暂无搜索历史");
     }
 
     @Override
@@ -156,11 +154,38 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
                         searchHistoryBean.setKeyWord(keyWord);
                         searchHistoryBean.setTime(System.currentTimeMillis());
                         mPresenter.addHistory(searchHistoryBean);
+                    } else {
+                        if (!TextUtils.isEmpty(keyWord)) {
+                            mPresenter.getHistoryCursor(keyWord);
+                        }
                     }
                     if (TextUtils.isEmpty(keyWord)) {
                         showHistory();
                     }
                 });
+    }
+
+    @Override
+    public void onHistoryCursorResult(Cursor cursor) {
+        mSearchView.setSuggestionsAdapter(new SimpleCursorAdapter(getContext(), R.layout.item_search_suggestion,
+                cursor, new String[] {"keyWord"}, new int[] {R.id.txt_sug}));
+        mSearchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionSelect(int position) {
+                return false;
+            }
+
+            @Override
+            public boolean onSuggestionClick(int position) {
+                cursor.moveToPosition(position);
+                mSearchView.setQuery(cursor.getString(cursor.getColumnIndex("keyWord")), true);
+                mSearchView.clearFocus();
+                if (!cursor.isClosed()) {
+                    cursor.close();
+                }
+                return true;
+            }
+        });
     }
 
     private void showSearchResult() {
@@ -190,6 +215,7 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
     @Override
     public void showEmpty() {
         mListHeaderView.setVisibility(View.GONE);
+        mHistoryAdapter.setNewData(null);
         mHistoryAdapter.setEmptyView(mEmptyView);
     }
 

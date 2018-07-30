@@ -15,7 +15,7 @@ import org.threeten.bp.OffsetDateTime;
 
 public class TopicTimelineAdapterWithThirdLib extends BaseQuickAdapter<RelevantTopicBean, BaseViewHolder> {
 
-    public static final int VIEW_TYPE_TOP = 1, VIEW_TYPE_BOTTOM = 2, VIEW_TYPE_ONLY_ONE = 3;
+    public static final int VIEW_TYPE_TOP = 3, VIEW_TYPE_BOTTOM = 4, VIEW_TYPE_ONLY_ONE = 5;
 
     public TopicTimelineAdapterWithThirdLib() {
         super(R.layout.item_topic_timeline);
@@ -23,14 +23,16 @@ public class TopicTimelineAdapterWithThirdLib extends BaseQuickAdapter<RelevantT
 
     @Override
     public int getItemViewType(int position) {
-        if (getItemCount() == 1) {
-            return VIEW_TYPE_ONLY_ONE;
-        }
-        if (position == 0) {
-            return VIEW_TYPE_TOP;
-        }
-        if (position == getItemCount() - 1) {
-            return VIEW_TYPE_BOTTOM;
+        if (getEmptyViewCount() == 0) {
+            if (getItemCount() == 1) {
+                return VIEW_TYPE_ONLY_ONE;
+            }
+            if (position == 0) {
+                return VIEW_TYPE_TOP;
+            }
+            if (position == getItemCount() - 1) {
+                return VIEW_TYPE_BOTTOM;
+            }
         }
         return super.getItemViewType(position);
     }

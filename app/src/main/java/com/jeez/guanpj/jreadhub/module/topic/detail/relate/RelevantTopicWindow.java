@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -100,14 +99,6 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
     }
 
     @Override
-    public void showOnAnchor(@NonNull View anchor, int vertPos, int horizPos, int x, int y, boolean fitInScreen) {
-        super.showOnAnchor(anchor, vertPos, horizPos, x, y, fitInScreen);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            /*circularReveal(anchor);*/
-        }
-    }
-
-    @Override
     public void onRequestStart() {
         mAdapter.setEmptyView(mLoadingView);
     }
@@ -117,12 +108,14 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
         if (beans != null && !beans.isEmpty()) {
             mAdapter.setNewData(beans);
         } else {
+            mAdapter.setNewData(null);
             mAdapter.setEmptyView(mEmptyView);
         }
     }
 
     @Override
     public void onRequestError() {
+        mAdapter.setNewData(null);
         mAdapter.setEmptyView(mErrorView);
     }
 }

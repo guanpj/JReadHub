@@ -1,5 +1,8 @@
 package com.jeez.guanpj.jreadhub.data.local;
 
+import android.annotation.SuppressLint;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
@@ -11,6 +14,8 @@ import com.jeez.guanpj.jreadhub.data.local.dao.TopicDao;
 
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 
 import javax.inject.Inject;
 
@@ -22,15 +27,14 @@ public class LocalRepository implements LocalDataSource {
     private NewsDao mNewsDao;
     private TopicDao mTopicDao;
     private SearchHistoryDao mSearchHistoryDao;
-    private Executor mExecutor;
+    private ExecutorService mExecutorService;
 
     @Inject
-    public LocalRepository(TopicDao topicDao, NewsDao newsDao,
-                           SearchHistoryDao searchHistoryDao, Executor executor) {
+    public LocalRepository(TopicDao topicDao, NewsDao newsDao, SearchHistoryDao searchHistoryDao, ExecutorService executorService) {
         mTopicDao = topicDao;
         mNewsDao = newsDao;
         mSearchHistoryDao = searchHistoryDao;
-        mExecutor = executor;
+        mExecutorService = executorService;
     }
 
     @Override
@@ -83,6 +87,22 @@ public class LocalRepository implements LocalDataSource {
         return mSearchHistoryDao.getSingleHistory(keyWord);
     }
 
+    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void getHistoryCursor(@NonNull String keyWord, @NonNull Consumer<Cursor> consumer) {
+        new AsyncTask<String, Integer, Cursor>(){
+            @Override
+            protected Cursor doInBackground(String... strings) {
+                return mSearchHistoryDao.getHistoryCursor(keyWord);
+            }
+
+            @Override
+            protected void onPostExecute(Cursor cursor) {
+                consumer.accept(cursor);
+            }
+        }.execute(keyWord);
+    }
+
     @Override
     public <T> void deleteAll(@NonNull Class<T> tClass) {
         if (TopicBean.class.equals(tClass)) {
@@ -96,7 +116,7 @@ public class LocalRepository implements LocalDataSource {
 
     @Override
     public void delete(@NonNull Object object) {
-        mExecutor.execute(() -> {
+        mExecutorService.execute(() -> {
             if (object instanceof TopicBean) {
                 mTopicDao.deleteTopic((TopicBean) object);
             } else if (object instanceof NewsBean) {
@@ -109,7 +129,7 @@ public class LocalRepository implements LocalDataSource {
 
     @Override
     public void insert(@NonNull Object object) {
-        mExecutor.execute(() -> {
+        mExecutorService.execute(() -> {
             if (object instanceof TopicBean) {
                 mTopicDao.insertTopic((TopicBean) object);
             } else if (object instanceof NewsBean) {
@@ -122,7 +142,7 @@ public class LocalRepository implements LocalDataSource {
 
     @Override
     public void update(@NonNull Object object) {
-        mExecutor.execute(() -> {
+        mExecutorService.execute(() -> {
             if (object instanceof TopicBean) {
                 mTopicDao.updateTopic((TopicBean) object);
             } else if (object instanceof NewsBean) {
