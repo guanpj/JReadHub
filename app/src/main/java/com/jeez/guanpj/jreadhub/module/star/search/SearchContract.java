@@ -13,8 +13,6 @@ public interface SearchContract {
         void bindData(List<SearchHistoryBean> data);
 
         void showEmpty();
-
-        void onHistoryCursorResult(Cursor cursor);
     }
 
     interface Presenter extends IBasePresenter<View> {
@@ -22,10 +20,12 @@ public interface SearchContract {
 
         void addHistory(SearchHistoryBean searchHistoryBean);
 
-        void getHistoryCursor(String keyWord);
+        Cursor getHistoryCursor(String keyWord);
 
         void updateHistory(SearchHistoryBean searchHistoryBean);
 
         void deleteHistory(SearchHistoryBean searchHistoryBean);
+
+        void deleteAllHistory();
     }
 }

@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -39,6 +41,8 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+
+import static android.widget.CursorAdapter.FLAG_AUTO_REQUERY;
 
 public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter> implements SearchContract.View {
 
@@ -156,7 +160,8 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
                         mPresenter.addHistory(searchHistoryBean);
                     } else {
                         if (!TextUtils.isEmpty(keyWord)) {
-                            mPresenter.getHistoryCursor(keyWord);
+                            Cursor cursor = mPresenter.getHistoryCursor(keyWord);
+                            initSuggestionData(cursor);
                         }
                     }
                     if (TextUtils.isEmpty(keyWord)) {
@@ -165,10 +170,9 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
                 });
     }
 
-    @Override
-    public void onHistoryCursorResult(Cursor cursor) {
+    private void initSuggestionData(Cursor cursor) {
         mSearchView.setSuggestionsAdapter(new SimpleCursorAdapter(getContext(), R.layout.item_search_suggestion,
-                cursor, new String[] {"keyWord"}, new int[] {R.id.txt_sug}));
+                cursor, new String[] {"keyWord"}, new int[] {R.id.txt_sug}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER));
         mSearchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
             public boolean onSuggestionSelect(int position) {
@@ -198,6 +202,18 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
         mViewPager.setVisibility(View.GONE);
         mTabLayout.setVisibility(View.GONE);
         mHistoryLayout.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.tv_clear)
+    void clearHistory() {
+        new AlertDialog.Builder(getContext())
+                .setMessage(R.string.delete_all_search_history)
+                .setPositiveButton(R.string.button_enter, (dialog, which) -> {
+                    mPresenter.deleteAllHistory();
+                    dialog.dismiss();
+                })
+                .setNegativeButton(R.string.button_cancel, (dialog, which) -> dialog.dismiss())
+                .show();
     }
 
     @Override

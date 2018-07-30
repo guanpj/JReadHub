@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +7,6 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/iv_history"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dimen_5_dp"
@@ -18,27 +16,45 @@
         app:srcCompat="@drawable/ic_history_gray_24"
         tools:ignore="ContentDescription"/>
 
-    <TextView
-        android:id="@+id/tv_keyword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_5_dp"
-        android:layout_marginRight="@dimen/dimen_5_dp"
-        android:layout_weight="1"
+    <LinearLayout
+        android:orientation="vertical"
         android:gravity="center_vertical"
-        android:minHeight="?android:attr/listPreferredItemHeightSmall"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/img_close"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:paddingTop="@dimen/dimen_5_dp"
-        android:paddingBottom="@dimen/dimen_5_dp"
-        android:paddingLeft="@dimen/dimen_10_dp"
-        android:paddingRight="@dimen/dimen_10_dp"
-        android:scaleType="center"
-        app:srcCompat="@drawable/ic_close_gray_24"
-        tools:ignore="ContentDescription"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_keyword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5_dp"
+                android:layout_marginRight="@dimen/dimen_5_dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="xiaomi"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"/>
+
+            <ImageView
+                android:id="@+id/img_close"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="@dimen/dimen_5_dp"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ic_close_gray_24"
+                tools:ignore="ContentDescription"/>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/bg_topic_trace_item_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_1"/>
+
+    </LinearLayout>
 
 </LinearLayout>

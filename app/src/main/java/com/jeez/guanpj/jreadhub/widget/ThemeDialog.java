@@ -47,7 +47,7 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
         Window window = getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         mView.setMinimumWidth((int)(displayRectangle.width() * 0.8f));
-        window.setBackgroundDrawableResource(R.color.dialog_bg);
+        window.setBackgroundDrawableResource(R.color.bg_dialog);
 
         imgThemeBlue.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_blue_theme), 25));
         imgThemeGray.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_gray_theme), 25));

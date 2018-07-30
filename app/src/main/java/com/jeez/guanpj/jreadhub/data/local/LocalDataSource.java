@@ -32,7 +32,7 @@ public interface LocalDataSource {
 
     Single<SearchHistoryBean> getSingleHistory(@NonNull String keyWord);
 
-    void getHistoryCursor(@NonNull String keyWord, @NonNull Consumer<Cursor> consumer);
+    Cursor getHistoryCursor(@NonNull String keyWord);
 
     <T>void deleteAll(@NonNull Class<T> tClass);
 

@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.module.star.search;
 
 import android.arch.persistence.room.EmptyResultSetException;
+import android.database.Cursor;
 
 import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
 import com.jeez.guanpj.jreadhub.data.DataManager;
@@ -75,8 +76,8 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
     }
 
     @Override
-    public void getHistoryCursor(String keyWord) {
-        mDataManager.getHistoryCursor(keyWord, cursor -> getView().onHistoryCursorResult(cursor));
+    public Cursor getHistoryCursor(String keyWord) {
+        return mDataManager.getHistoryCursor(keyWord);
     }
 
     @Override
@@ -87,5 +88,10 @@ public class SearchPresenter extends BasePresenter<SearchContract.View> implemen
     @Override
     public void deleteHistory(SearchHistoryBean searchHistoryBean) {
         mDataManager.delete(searchHistoryBean);
+    }
+
+    @Override
+    public void deleteAllHistory() {
+        mDataManager.deleteAll(SearchHistoryBean.class);
     }
 }

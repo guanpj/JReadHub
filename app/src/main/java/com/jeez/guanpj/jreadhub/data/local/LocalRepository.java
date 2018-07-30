@@ -13,6 +13,8 @@ import com.jeez.guanpj.jreadhub.data.local.dao.SearchHistoryDao;
 import com.jeez.guanpj.jreadhub.data.local.dao.TopicDao;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
@@ -87,31 +89,29 @@ public class LocalRepository implements LocalDataSource {
         return mSearchHistoryDao.getSingleHistory(keyWord);
     }
 
-    @SuppressLint("StaticFieldLeak")
     @Override
-    public void getHistoryCursor(@NonNull String keyWord, @NonNull Consumer<Cursor> consumer) {
-        new AsyncTask<String, Integer, Cursor>(){
-            @Override
-            protected Cursor doInBackground(String... strings) {
-                return mSearchHistoryDao.getHistoryCursor(keyWord);
+    public <T> void deleteAll(@NonNull Class<T> tClass) {
+        mExecutorService.execute(() -> {
+            if (TopicBean.class.equals(tClass)) {
+                mTopicDao.deleteAllTopic();
+            } else if (NewsBean.class.equals(tClass)) {
+                mNewsDao.deleteAllNews();
+            } else if (SearchHistoryBean.class.equals(tClass)) {
+                mSearchHistoryDao.deleteAllHistory();
             }
-
-            @Override
-            protected void onPostExecute(Cursor cursor) {
-                consumer.accept(cursor);
-            }
-        }.execute(keyWord);
+        });
     }
 
     @Override
-    public <T> void deleteAll(@NonNull Class<T> tClass) {
-        if (TopicBean.class.equals(tClass)) {
-            mTopicDao.deleteAllTopic();
-        } else if (NewsBean.class.equals(tClass)) {
-            mNewsDao.deleteAllNews();
-        } else if (SearchHistoryDao.class.equals(tClass)) {
-            mSearchHistoryDao.deleteAllHistory();
+    public Cursor getHistoryCursor(@NonNull String keyWord) {
+        try {
+            return mExecutorService.submit(() -> mSearchHistoryDao.getHistoryCursor(keyWord)).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     @Override

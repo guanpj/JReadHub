@@ -42,5 +42,8 @@
     <string name="tips_star_faild">收藏失败</string>
     <string name="tips_unstar_success">取消收藏成功</string>
     <string name="tips_unstar_faild">取消收藏失败</string>
+    <string name="delete_all_search_history">删除所有搜索历史记录?</string>
+    <string name="button_enter">确定</string>
+    <string name="button_cancel">取消</string>
 
 </resources>

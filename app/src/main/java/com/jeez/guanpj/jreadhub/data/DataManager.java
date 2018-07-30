@@ -106,8 +106,8 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
-    public void getHistoryCursor(@NonNull String keyWord, @NonNull Consumer<Cursor> consumer) {
-        mLocalDataSource.getHistoryCursor(keyWord, consumer);
+    public Cursor getHistoryCursor(@NonNull String keyWord) {
+        return mLocalDataSource.getHistoryCursor(keyWord);
     }
 
     @Override
