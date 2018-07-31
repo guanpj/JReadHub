@@ -10,10 +10,12 @@
 
     <item
         android:id="@+id/action_open"
-        android:title="@string/action_open"/>
+        android:title="@string/action_open"
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_share"
-        android:title="@string/action_share"/>
+        android:title="@string/action_share"
+        app:showAsAction="never"/>
 
 </menu>

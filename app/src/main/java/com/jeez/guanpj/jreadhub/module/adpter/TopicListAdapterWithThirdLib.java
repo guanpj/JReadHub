@@ -68,9 +68,13 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
             mediaName = topicBean.getNewsArray().get(0).getSiteName();
         }
 
-        holder.setText(R.id.tv_title, topicBean.getTitle());
-        holder.setText(R.id.tv_summary, topicBean.getSummary());
-        holder.setVisible(R.id.tv_summary, TextUtils.isEmpty(topicBean.getSummary()) ? false : true);
+        holder.setText(R.id.tv_title, topicBean.getTitle().trim());
+        if (TextUtils.isEmpty(topicBean.getSummary().trim())) {
+            holder.setGone(R.id.tv_summary, false);
+        } else {
+            holder.setText(R.id.tv_summary, topicBean.getSummary().trim());
+            holder.setGone(R.id.tv_summary, true);
+        }
         holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(topicBean.getFormattedPublishDate()));
 
         if (newsCount == 0) {

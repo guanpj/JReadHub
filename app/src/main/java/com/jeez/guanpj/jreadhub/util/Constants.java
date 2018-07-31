@@ -51,12 +51,13 @@ public class Constants {
     @Retention(RetentionPolicy.SOURCE)
     public @interface Type {}
 
-    @StringDef({ThemeType.Blue, ThemeType.Gray})
+    @StringDef({ThemeType.Blue, ThemeType.Gray, ThemeType.Dark})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Theme {}
 
     public interface ThemeType {
         String Blue = "blue";
         String Gray = "gray";
+        String Dark = "dark";
     }
 }

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
+    android:background="?attr/readhubBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,9 +22,9 @@
             android:background="?attr/readhubTheme"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:titleTextColor="?attr/readhubToolbarText"
-            app:titleTextAppearance="@style/toolbar_textAppearance"
+            app:titleTextAppearance="@style/Toolbar_TextAppearance"
             app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="?attr/navBackIcon"
+            app:navigationIcon="@drawable/ic_nav_back"
             app:layout_scrollFlags="scroll|enterAlways">
 
         </android.support.v7.widget.Toolbar>

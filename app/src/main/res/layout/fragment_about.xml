@@ -55,7 +55,7 @@
                         <ImageView
                             android:layout_width="@dimen/dimen_50_dp"
                             android:layout_height="@dimen/dimen_50_dp"
-                            android:src="@drawable/ic_logo" />
+                            app:srcCompat="@drawable/ic_logo" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_menu_main_about" />
+                            app:srcCompat="@drawable/ic_about_info" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_tool_bar_open_in_browser" />
+                            app:srcCompat="@drawable/ic_setting_open_in_browser" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_about_version" />
+                            app:srcCompat="@drawable/ic_about_version" />
 
                         <LinearLayout
                             android:id="@+id/ll_version"
@@ -241,7 +241,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_about_code" />
+                            app:srcCompat="@drawable/ic_about_code" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

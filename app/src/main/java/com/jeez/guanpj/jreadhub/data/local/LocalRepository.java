@@ -1,8 +1,6 @@
 package com.jeez.guanpj.jreadhub.data.local;
 
-import android.annotation.SuppressLint;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
@@ -13,11 +11,8 @@ import com.jeez.guanpj.jreadhub.data.local.dao.SearchHistoryDao;
 import com.jeez.guanpj.jreadhub.data.local.dao.TopicDao;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import java.util.function.Consumer;
 
 import javax.inject.Inject;
 
@@ -106,9 +101,7 @@ public class LocalRepository implements LocalDataSource {
     public Cursor getHistoryCursor(@NonNull String keyWord) {
         try {
             return mExecutorService.submit(() -> mSearchHistoryDao.getHistoryCursor(keyWord)).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return null;

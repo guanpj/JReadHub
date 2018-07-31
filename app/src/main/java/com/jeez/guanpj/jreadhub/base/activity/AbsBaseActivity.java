@@ -75,6 +75,9 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
             case Constants.ThemeType.Gray:
                 setTheme(R.style.GrayTheme);
                 break;
+            case Constants.ThemeType.Dark:
+                setTheme(R.style.DarkTheme);
+                break;
             default:
                 setTheme(R.style.BlueTheme);
                 break;

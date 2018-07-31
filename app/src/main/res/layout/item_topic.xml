@@ -6,15 +6,14 @@
     android:layout_marginLeft="@dimen/dimen_10_dp"
     android:layout_marginRight="@dimen/dimen_10_dp"
     android:layout_marginTop="@dimen/dimen_12_dp"
+    android:background="?attr/readhubViewBackground"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="@dimen/dimen_5_dp"
     app:cardElevation="@dimen/dimen_5_dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:elevation="2dp"
         android:orientation="vertical">
 
@@ -40,7 +39,7 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
-                    android:textColor="?android:attr/textColorPrimary"
+                    android:textColor="?attr/readhubTextColorPrimary"
                     android:textSize="16sp" />
 
                 <LinearLayout
@@ -56,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="时间时间"
-                        android:textColor="?attr/readhubTheme"
+                        android:textColor="?attr/readhubColorAccent"
                         android:textSize="@dimen/textSize_14" />
 
                     <ImageView
@@ -64,7 +63,7 @@
                         android:layout_marginLeft="@dimen/dimen_10_dp"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dimen_18_dp"
-                        android:src="@drawable/ic_instant_read"
+                        app:srcCompat="@drawable/ic_instant_read"
                         android:background="@drawable/drawable_instant_read_btn_bg"/>
 
                 </LinearLayout>
@@ -77,7 +76,7 @@
                     android:ellipsize="end"
                     android:maxLines="5"
                     android:text="内容内容"
-                    android:textColor="?attr/readhubTextContentColor"
+                    android:textColor="?attr/readhubTextColorSecondary"
                     android:textSize="14sp" />
 
                 <View
@@ -101,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="腾讯科技 等 5 家媒体报道"
-                        android:textColor="?attr/readhubTheme"
+                        android:textColor="?attr/readhubColorAccent"
                         android:textSize="@dimen/textSize_14" />
 
                     <ImageView
@@ -123,7 +122,7 @@
             android:id="@+id/layout_expand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/readhubTheme"
+            android:background="?attr/readhubColorAccent"
             app:el_expanded="true">
 
             <LinearLayout
@@ -131,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_8_dp"
-                android:background="@android:color/white"
+                android:background="?attr/readhubBackground"
                 android:orientation="vertical">
 
                 <!--<include layout="@layout/item_topic_news" />-->

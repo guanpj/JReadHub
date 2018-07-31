@@ -36,12 +36,12 @@ public class NewsListAdapterWithThirdLib extends BaseQuickAdapter<NewsBean, Base
 
     @Override
     protected void convert(BaseViewHolder holder, NewsBean newsBean) {
-        holder.setText(R.id.tv_title, newsBean.getTitle());
-        if (!TextUtils.isEmpty(newsBean.getSummaryAuto())) {
-            holder.setGone(R.id.tv_summary, true);
-            holder.setText(R.id.tv_summary, newsBean.getSummaryAuto());
-        } else {
+        holder.setText(R.id.tv_title, newsBean.getTitle().trim());
+        if (TextUtils.isEmpty(newsBean.getSummaryAuto().trim())) {
             holder.setGone(R.id.tv_summary, false);
+        } else {
+            holder.setGone(R.id.tv_summary, true);
+            holder.setText(R.id.tv_summary, newsBean.getSummaryAuto().trim());
         }
 
         setInfo(holder, newsBean);

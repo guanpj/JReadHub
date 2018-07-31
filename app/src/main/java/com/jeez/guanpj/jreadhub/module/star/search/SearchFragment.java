@@ -32,7 +32,6 @@ import com.jeez.guanpj.jreadhub.module.star.news.StarCommonListFragment;
 import com.jeez.guanpj.jreadhub.module.star.topic.StarTopicFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
-import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +40,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
-import static android.widget.CursorAdapter.FLAG_AUTO_REQUERY;
 
 public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter> implements SearchContract.View {
 
@@ -85,7 +82,7 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
     @Override
     public void initView() {
         mToolbar.inflateMenu(R.menu.menu_search);
-        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
+        mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.setNavigationOnClickListener(v -> pop());
 
         MenuItem item = mToolbar.getMenu().findItem(R.id.action_search);

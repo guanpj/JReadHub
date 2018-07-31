@@ -24,12 +24,10 @@ import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicTimelineAdapter;
-import com.jeez.guanpj.jreadhub.module.adpter.TopicTimelineAdapterWithThirdLib;
 import com.jeez.guanpj.jreadhub.module.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
-import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -112,7 +110,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
 
     @Override
     public void initView() {
-        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
+        mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.inflateMenu(R.menu.menu_topic_detail);
         mToolbar.setTitle(getText(R.string.topic_detail));
         mToolbarHeader.setText(mTopicTitle);
@@ -143,15 +141,22 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     @Override
     public void bindData(TopicBean topicBean, boolean isPullToRefresh) {
         this.mTopicBean = topicBean;
-        mTxtTopicTitle.setText(mTopicBean.getTitle());
+        mTxtTopicTitle.setText(mTopicBean.getTitle().trim());
+
         if (null != mTopicBean.getFormattedPublishDate()) {
             mTxtTopicTime.setText(mTopicBean.getFormattedPublishDate().toLocalDate().toString() + "  " +
                     mTopicBean.getFormattedPublishDate().toLocalTime().toString().substring(0, 8));
         } else {
             mTxtTopicTime.setVisibility(View.GONE);
         }
-        mTxtTopicDescription.setText(mTopicBean.getSummary());
-        mTxtTopicDescription.setVisibility(TextUtils.isEmpty(mTopicBean.getSummary()) ? View.GONE : View.VISIBLE);
+
+        if (TextUtils.isEmpty(mTopicBean.getSummary().trim())) {
+            mTxtTopicDescription.setVisibility(View.GONE);
+        } else {
+            mTxtTopicDescription.setText(mTopicBean.getSummary().trim());
+            mTxtTopicDescription.setVisibility(View.VISIBLE);
+        }
+
         mTitleContainer.removeAllViews();
         for (final TopicNewsBean topic : mTopicBean.getNewsArray()) {
             TextView textView = new TextView(getContext());

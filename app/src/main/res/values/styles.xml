@@ -1,60 +1,57 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="BlueTheme">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="DarkTheme">
     </style>
 
     <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">?attr/readhubTheme</item>
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
-        <item name="colorAccent">?attr/readhubTheme</item>
+        <item name="colorAccent">?attr/readhubColorAccent</item>
 
-        <item name="readhubBackground">@color/theme_blue_background</item>
-        <item name="readhubToolbarText">@color/theme_blue_toolbar_text</item>
-        <item name="readhubBadge">@color/theme_blue_badge</item>
-        <item name="readhubStatus">@color/theme_blue_status</item>
-        <item name="readhubTextCommonColor">@color/theme_blue_text_common</item>
-        <item name="readhubTextContentColor">@color/theme_blue_text_content</item>
         <item name="readhubTheme">@color/theme_blue_theme</item>
+        <item name="readhubStatus">@color/theme_blue_status</item>
+        <item name="readhubColorAccent">@color/theme_blue_theme</item>
+        <item name="readhubBackground">@color/theme_blue_background</item>
+        <item name="readhubViewBackground">@color/theme_blue_view_background</item>
+        <item name="readhubDrawerBackground">@color/theme_blue_drawer_menu_background</item>
+        <item name="readhubToolbarText">@color/theme_blue_toolbar_text</item>
+        <item name="readhubTextColorPrimary">@color/theme_blue_text_primary</item>
+        <item name="readhubTextColorSecondary">@color/theme_blue_text_secondary</item>
         <item name="readhubFloatBtn">@color/theme_blue_float_btn</item>
-
-        <item name="navIcon">@drawable/ic_nav_main</item>
-        <item name="navBackIcon">@drawable/ic_nav_back</item>
-        <item name="overFlowIcon">@drawable/ic_tool_bar_more</item>
-        <item name="menuSearch">@drawable/ic_tool_bar_search</item>
-        <item name="menuShare">@drawable/ic_tool_bar_share</item>
-        <item name="menuHome">@drawable/ic_menu_main_home</item>
-        <item name="menuStar">@drawable/ic_menu_main_star</item>
-        <item name="menuSettings">@drawable/ic_menu_main_settings</item>
-        <item name="menuAbout">@drawable/ic_menu_main_about</item>
     </style>
 
     <style name="GrayTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">?attr/readhubTheme</item>
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
-        <item name="colorAccent">?attr/readhubTheme</item>
+        <item name="colorAccent">?attr/readhubColorAccent</item>
 
-        <item name="readhubBackground">@color/theme_gray_background</item>
-        <item name="readhubToolbarText">@color/theme_gray_toolbar_text</item>
-        <item name="readhubBadge">@color/theme_gray_badge</item>
-        <item name="readhubStatus">@color/theme_gray_status</item>
-        <item name="readhubTextCommonColor">@color/theme_gray_text_common</item>
-        <item name="readhubTextContentColor">@color/theme_gray_text_content</item>
         <item name="readhubTheme">@color/theme_gray_theme</item>
+        <item name="readhubStatus">@color/theme_gray_status</item>
+        <item name="readhubColorAccent">@color/theme_gray_theme</item>
+        <item name="readhubBackground">@color/theme_gray_background</item>
+        <item name="readhubViewBackground">@color/theme_gray_view_background</item>
+        <item name="readhubDrawerBackground">@color/theme_gray_drawer_menu_background</item>
+        <item name="readhubToolbarText">@color/theme_gray_toolbar_text</item>
+        <item name="readhubTextColorPrimary">@color/theme_gray_text_primary</item>
+        <item name="readhubTextColorSecondary">@color/theme_gray_text_secondary</item>
         <item name="readhubFloatBtn">@color/theme_gray_float_btn</item>
+    </style>
 
-        <item name="navIcon">@drawable/ic_nav_main</item>
-        <item name="navBackIcon">@drawable/ic_nav_back</item>
-        <item name="overFlowIcon">@drawable/ic_tool_bar_more</item>
-        <item name="menuSearch">@drawable/ic_tool_bar_search</item>
-        <item name="menuShare">@drawable/ic_tool_bar_share</item>
-        <item name="menuHome">@drawable/ic_menu_main_home</item>
-        <item name="menuStar">@drawable/ic_tool_bar_star_border</item>
-        <item name="menuSettings">@drawable/ic_menu_main_settings</item>
-        <item name="menuAbout">@drawable/ic_menu_main_about</item>
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">?attr/readhubTheme</item>
+        <item name="colorPrimaryDark">?attr/readhubStatus</item>
+        <item name="colorAccent">?attr/readhubColorAccent</item>
+
+        <item name="readhubTheme">@color/theme_dark_text_secondary</item>
+        <item name="readhubStatus">@color/theme_dark_status</item>
+        <item name="readhubColorAccent">@color/theme_dark_theme</item>
+        <item name="readhubBackground">@color/theme_dark_background</item>
+        <item name="readhubViewBackground">@color/theme_dark_view_background</item>
+        <item name="readhubDrawerBackground">@color/theme_dark_drawer_menu_background</item>
+        <item name="readhubToolbarText">@color/theme_dark_toolbar_text</item>
+        <item name="readhubTextColorPrimary">@color/theme_dark_text_primary</item>
+        <item name="readhubTextColorSecondary">@color/theme_dark_text_secondary</item>
+        <item name="readhubFloatBtn">@color/theme_dark_float_btn</item>
     </style>
 
     <style name="AppTheme.NoActionBar.SwipeBack">
@@ -66,21 +63,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Custom.Theme.ToolBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:actionOverflowButtonStyle">@style/ActionButton.Overflow</item>
-    </style>
-
-    <style name="Theme.ToolBar.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">@dimen/textSize_16</item>
-        <item name="android:textColorPrimary">@color/text_common</item>
-    </style>
-
-    <style name="ActionButton.Overflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
-        <item name="android:src">?attr/overFlowIcon</item>
-        <item name="android:color">@android:color/white</item>
-    </style>
-
-    <style name="toolbar_textAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+    <style name="Toolbar_TextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">@dimen/textSize_18</item>
         <item name="android:textStyle">bold</item>
     </style>

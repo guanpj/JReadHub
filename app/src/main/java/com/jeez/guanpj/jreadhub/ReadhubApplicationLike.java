@@ -56,7 +56,6 @@ public class ReadhubApplicationLike extends TinkerApplicationLike {
             // You should not init your app in this process.
             return;
         }
-
         initBugly();
 
         LeakCanary.install(getApplication());

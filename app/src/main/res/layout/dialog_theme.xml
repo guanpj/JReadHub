@@ -36,6 +36,12 @@
             android:layout_height="@dimen/dimen_50_dp"
             android:layout_marginLeft="@dimen/dimen_15_dp"/>
 
+        <ImageView
+            android:id="@+id/theme_dark"
+            android:layout_width="@dimen/dimen_50_dp"
+            android:layout_height="@dimen/dimen_50_dp"
+            android:layout_marginLeft="@dimen/dimen_15_dp"/>
+
     </LinearLayout>
 
 </LinearLayout>

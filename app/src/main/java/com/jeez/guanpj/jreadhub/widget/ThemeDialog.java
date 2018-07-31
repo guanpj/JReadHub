@@ -28,6 +28,8 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
     ImageView imgThemeBlue;
     @BindView(R.id.theme_gray)
     ImageView imgThemeGray;
+    @BindView(R.id.theme_dark)
+    ImageView imgThemeDark;
 
     public ThemeDialog(@NonNull Context context) {
         this(context, R.style.ThemeDialog);
@@ -51,9 +53,10 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
 
         imgThemeBlue.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_blue_theme), 25));
         imgThemeGray.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_gray_theme), 25));
+        imgThemeDark.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_dark_theme), 25));
     }
 
-    @OnClick({R.id.theme_blue, R.id.theme_gray})
+    @OnClick({R.id.theme_blue, R.id.theme_gray, R.id.theme_dark})
     public void onClick(View v) {
         @Constants.Theme String selectedTheme = null;
         switch (v.getId()) {
@@ -62,6 +65,9 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
                 break;
             case R.id.theme_gray:
                 selectedTheme = Constants.ThemeType.Gray;
+                break;
+            case R.id.theme_dark:
+                selectedTheme = Constants.ThemeType.Dark;
                 break;
             default:
                 break;

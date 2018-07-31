@@ -7,7 +7,6 @@ import com.jeez.guanpj.jreadhub.event.ChangeThemeEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
-import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.jeez.guanpj.jreadhub.widget.ThemeDialog;
 import com.jeez.guanpj.jreadhub.widget.custom.SettingItemView;
 import com.tencent.bugly.beta.Beta;
@@ -40,7 +39,7 @@ public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresente
     @Override
     public void initView() {
         mThemeDialog = new ThemeDialog(getActivity());
-        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
+        mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.setTitle(getText(R.string.menu_setting));
         mToolbar.setNavigationOnClickListener(v -> pop());
     }

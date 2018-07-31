@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="readhubStatus" format="color"/>
-    <attr name="readhubBackground" format="color" />
-    <attr name="readhubBadge" format="color" />
-    <attr name="readhubTextCommonColor" format="color" />
-    <attr name="readhubTextContentColor" format="color" />
     <attr name="readhubTheme" format="color" />
+    <attr name="readhubStatus" format="color"/>
+    <attr name="readhubColorAccent" format="color"/>
+    <attr name="readhubBackground" format="color" />
+    <attr name="readhubViewBackground" format="color" />
+    <attr name="readhubDrawerBackground" format="color" />
+    <attr name="readhubTextColorPrimary" format="color" />
+    <attr name="readhubTextColorSecondary" format="color" />
     <attr name="readhubFloatBtn" format="color" />
     <attr name="readhubToolbarText" format="color" />
-
-    <attr name="navIcon" format="reference" />
-    <attr name="navBackIcon" format="reference" />
-    <attr name="overFlowIcon" format="reference" />
-    <attr name="menuHome" format="reference" />
-    <attr name="menuSearch" format="reference" />
-    <attr name="menuShare" format="reference" />
-    <attr name="menuSettings" format="reference" />
-    <attr name="menuAbout" format="reference" />
-    <attr name="menuStar" format="reference" />
 
     <declare-styleable name="SettingItemView">
         <attr name="icon" format="reference" />

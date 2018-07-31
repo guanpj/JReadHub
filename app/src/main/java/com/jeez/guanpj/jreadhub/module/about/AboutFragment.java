@@ -11,7 +11,6 @@ import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.util.Constants;
-import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
@@ -42,7 +41,7 @@ public class AboutFragment extends AbsBaseSwipeBackFragment {
 
     @Override
     public void initView() {
-        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
+        mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.setTitle(getText(R.string.menu_about));
         mToolbar.setNavigationOnClickListener(v -> pop());
         mVersion.setText(BuildConfig.VERSION_NAME);

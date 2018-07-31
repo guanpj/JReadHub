@@ -20,7 +20,6 @@ import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
-import com.jeez.guanpj.jreadhub.util.ResourceUtil;
 import com.just.agentweb.AgentWeb;
 
 import java.util.concurrent.TimeUnit;
@@ -99,7 +98,7 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
 
     @Override
     public void initView() {
-        mToolbar.setNavigationIcon(ResourceUtil.getResource(getActivity(), R.attr.navBackIcon));
+        mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.setNavigationOnClickListener(v -> pop());
         mToolbar.inflateMenu(R.menu.menu_web);
         mToolbar.setTitle("");

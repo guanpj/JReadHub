@@ -7,12 +7,12 @@
     android:layout_height="55dp"
     android:gravity="center"
     android:background="?attr/readhubTheme"
-    android:theme="@style/Custom.Theme.ToolBar"
+    app:popupTheme="@style/AppTheme.PopupOverlay"
     app:title="@string/app_name"
     app:titleTextColor="?attr/readhubToolbarText"
-    app:titleTextAppearance="@style/toolbar_textAppearance"
+    app:titleTextAppearance="@style/Toolbar_TextAppearance"
     app:contentInsetStartWithNavigation="0dp"
-    app:navigationIcon="?attr/navIcon"
+    app:navigationIcon="@drawable/ic_nav_main"
     app:layout_scrollFlags="scroll|enterAlways">
 
     <TextView
