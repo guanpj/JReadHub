@@ -7,11 +7,11 @@
     android:layout_marginRight="@dimen/dimen_10_dp"
     android:layout_marginTop="@dimen/dimen_12_dp"
     android:background="?attr/readhubViewBackground"
-    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/dimen_5_dp"
     app:cardElevation="@dimen/dimen_5_dp">
 
     <LinearLayout
+        android:background="?attr/readhubViewBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="2dp"
@@ -21,9 +21,7 @@
             android:id="@+id/btn_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:elevation="2dp"
-            android:foreground="?attr/selectableItemBackground">
+            android:elevation="2dp">
 
             <LinearLayout
                 android:id="@+id/ll_item_header"
@@ -40,7 +38,7 @@
                     android:maxLines="2"
                     android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
                     android:textColor="?attr/readhubTextColorPrimary"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/textSize_16" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -63,7 +61,7 @@
                         android:layout_marginLeft="@dimen/dimen_10_dp"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dimen_18_dp"
-                        app:srcCompat="@drawable/ic_instant_read"
+                        app:srcCompat="@drawable/ic_topic_list_instant_read"
                         android:background="@drawable/drawable_instant_read_btn_bg"/>
 
                 </LinearLayout>
@@ -77,7 +75,7 @@
                     android:maxLines="5"
                     android:text="内容内容"
                     android:textColor="?attr/readhubTextColorSecondary"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/textSize_14" />
 
                 <View
                     android:id="@+id/line"
@@ -110,7 +108,7 @@
                         android:layout_gravity="center|end"
                         android:adjustViewBounds="true"
                         android:scaleType="center"
-                        app:srcCompat="@drawable/ic_more_info" />
+                        app:srcCompat="@drawable/ic_topic_list_more_info" />
 
                 </FrameLayout>
 

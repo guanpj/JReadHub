@@ -111,7 +111,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
                 tvInfo.setText(mContext.getString(R.string.multi__media___report, mediaName, newsCount));
             }
 
-            imgExpandState.setImageResource( R.drawable.ic_more_info);
+            imgExpandState.setImageResource( R.drawable.ic_topic_list_more_info);
             layoutExpand.setExpanded(false);
 
             layoutSource.removeAllViews();
@@ -157,10 +157,10 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
         @OnClick(R.id.fl_item_footer)
         void onItemFooterClick() {
             if (layoutExpand.getState() == ExpandableLayout.State.COLLAPSED) {
-                imgExpandState.setImageResource(R.drawable.ic_less_info);
+                imgExpandState.setImageResource(R.drawable.ic_topic_list_less_info);
                 layoutExpand.setExpanded(true);
             } else if (layoutExpand.getState() == ExpandableLayout.State.EXPANDED) {
-                imgExpandState.setImageResource(R.drawable.ic_more_info);
+                imgExpandState.setImageResource(R.drawable.ic_topic_list_more_info);
                 layoutExpand.setExpanded(false);
             }
         }

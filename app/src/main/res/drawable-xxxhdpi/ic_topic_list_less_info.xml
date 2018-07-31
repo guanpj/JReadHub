@@ -5,5 +5,5 @@
     android:viewportHeight="1024">
   <path
       android:pathData="M240.36,646.2 L297.79,703.63 511.71,489.71 725.63,703.63 783.06,646.2 511.71,374.85Z"
-      android:fillColor="?attr/readhubTheme"/>
+      android:fillColor="?attr/readhubColorAccent"/>
 </vector>

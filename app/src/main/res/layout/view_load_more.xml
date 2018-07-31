@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_4"
             android:text="@string/brvah_loading"
-            android:textColor="?attr/readhubTheme"
+            android:textColor="?attr/readhubTextColorSecondary"
             android:textSize="@dimen/textSize_14"/>
     </LinearLayout>
 
@@ -34,13 +34,12 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-
         <TextView
             android:id="@+id/tv_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="?attr/readhubTheme"
+            android:textColor="?attr/readhubTextColorSecondary"
             android:text="@string/brvah_load_failed"/>
 
     </FrameLayout>
@@ -56,6 +55,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/brvah_load_end"
-            android:textColor="?attr/readhubTheme"/>
+            android:textColor="?attr/readhubTextColorSecondary"/>
     </FrameLayout>
 </FrameLayout>

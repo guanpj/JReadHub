@@ -98,14 +98,14 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
         layoutExpand.setExpanded(false);
 
         ImageView imgExpandState = holder.getView(R.id.img_expand_state);
-        imgExpandState.setImageResource(R.drawable.ic_more_info);
+        imgExpandState.setImageResource(R.drawable.ic_topic_list_more_info);
 
         holder.setOnClickListener(R.id.fl_item_footer, v -> {
             if (layoutExpand.getState() == ExpandableLayout.State.COLLAPSED) {
-                imgExpandState.setImageResource(R.drawable.ic_less_info);
+                imgExpandState.setImageResource(R.drawable.ic_topic_list_less_info);
                 layoutExpand.setExpanded(true);
             } else if (layoutExpand.getState() == ExpandableLayout.State.EXPANDED) {
-                imgExpandState.setImageResource(R.drawable.ic_more_info);
+                imgExpandState.setImageResource(R.drawable.ic_topic_list_more_info);
                 layoutExpand.setExpanded(false);
             }
         });

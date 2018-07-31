@@ -42,9 +42,9 @@
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
         <item name="colorAccent">?attr/readhubColorAccent</item>
 
-        <item name="readhubTheme">@color/theme_dark_text_secondary</item>
+        <item name="readhubTheme">@color/theme_dark_theme</item>
         <item name="readhubStatus">@color/theme_dark_status</item>
-        <item name="readhubColorAccent">@color/theme_dark_theme</item>
+        <item name="readhubColorAccent">@color/theme_dark_text_primary</item>
         <item name="readhubBackground">@color/theme_dark_background</item>
         <item name="readhubViewBackground">@color/theme_dark_view_background</item>
         <item name="readhubDrawerBackground">@color/theme_dark_drawer_menu_background</item>

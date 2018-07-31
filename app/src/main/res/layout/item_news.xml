@@ -6,18 +6,15 @@
     android:layout_marginTop="@dimen/dimen_12_dp"
     android:layout_marginLeft="@dimen/dimen_10_dp"
     android:layout_marginRight="@dimen/dimen_10_dp"
-    android:foreground="?attr/selectableItemBackground"
+    android:background="?attr/readhubViewBackground"
     app:cardElevation="@dimen/dimen_5_dp"
-    app:cardCornerRadius="@dimen/dimen_5_dp"
-    app:cardBackgroundColor="@android:color/white">
+    app:cardCornerRadius="@dimen/dimen_5_dp">
 
     <FrameLayout
         android:id="@+id/btn_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:elevation="@dimen/dimen_2_dp"
-        android:foreground="?attr/selectableItemBackground">
+        android:elevation="@dimen/dimen_2_dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +29,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="标题标题"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="?attr/readhubTextColorPrimary"
                 android:textSize="@dimen/textSize_16" />
 
             <TextView
@@ -43,7 +40,7 @@
                 android:ellipsize="end"
                 android:maxLines="5"
                 android:text="内容内容"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="?attr/readhubTextColorSecondary"
                 android:textSize="@dimen/textSize_14" />
 
             <View
@@ -59,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:text="时间时间"
-                android:textColor="?attr/readhubTheme"
+                android:textColor="?attr/readhubColorAccent"
                 android:textSize="@dimen/textSize_14" />
 
         </LinearLayout>

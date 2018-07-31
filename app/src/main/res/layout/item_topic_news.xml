@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/btn_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,14 +7,13 @@
     android:paddingStart="@dimen/dimen_8_dp"
     android:paddingEnd="@dimen/dimen_8_dp"
     android:orientation="vertical"
-    android:background="?attr/selectableItemBackground"
-    tools:background="@android:color/white">
+    android:background="?attr/readhubViewBackground">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="?attr/readhubTextColorPrimary"
         android:textSize="14sp"
         android:ellipsize="end"
         android:maxLines="2"
@@ -26,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textColor="?attr/readhubTextColorSecondary"
         android:textSize="@dimen/textSize_12"
         android:ellipsize="end"
         android:maxLines="2"

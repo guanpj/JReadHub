@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/readhubViewBackground">
 
     <TextView
         android:id="@+id/tv_more"
@@ -13,7 +14,7 @@
         android:paddingTop="@dimen/dimen_10_dp"
         android:paddingBottom="@dimen/dimen_10_dp"
         android:textSize="@dimen/textSize_14"
-        android:textColor="?attr/readhubTheme"
+        android:textColor="?attr/readhubColorAccent"
         android:text="查看全部"/>
 
 </LinearLayout>
