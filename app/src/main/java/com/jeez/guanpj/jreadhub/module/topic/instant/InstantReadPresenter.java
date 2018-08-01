@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import io.reactivex.observers.DisposableObserver;
 
 public class InstantReadPresenter extends BasePresenter<InstantReadContract.View> implements InstantReadContract.Presenter {
+
     private DataManager mDataManager;
 
     @Inject
@@ -40,4 +41,6 @@ public class InstantReadPresenter extends BasePresenter<InstantReadContract.View
                     }
                 }));
     }
+
+
 }

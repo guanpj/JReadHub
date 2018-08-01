@@ -41,7 +41,6 @@
         <item name="colorPrimary">?attr/readhubTheme</item>
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
         <item name="colorAccent">?attr/readhubColorAccent</item>
-        <item name="android:windowBackground">?attr/readhubTheme</item>
 
         <item name="readhubTheme">@color/theme_dark_theme</item>
         <item name="readhubStatus">@color/theme_dark_status</item>
@@ -53,6 +52,55 @@
         <item name="android:textColorPrimary">@color/theme_dark_text_primary</item>
         <item name="android:textColorSecondary">@color/theme_dark_text_secondary</item>
         <item name="readhubFloatBtn">@color/theme_dark_float_btn</item>
+    </style>
+
+    <!--InstantRead 对话框-->
+    <style name="AlertDialogStyle.Base" parent="@android:style/Theme.Holo.Light.Dialog.MinWidth">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="AlertDialogStyle_Blue" parent="AlertDialogStyle.Base">
+        <item name="colorPrimary">?attr/readhubTheme</item>
+        <item name="colorPrimaryDark">?attr/readhubStatus</item>
+        <item name="colorAccent">?attr/readhubColorAccent</item>
+
+        <item name="readhubTheme">@color/theme_blue_theme</item>
+        <item name="readhubColorAccent">@color/theme_blue_accent</item>
+        <item name="readhubBackground">@color/theme_blue_background</item>
+        <item name="readhubViewBackground">@color/theme_blue_view_background</item>
+        <item name="android:textColorPrimary">@color/theme_blue_text_primary</item>
+        <item name="android:textColorSecondary">@color/theme_blue_text_secondary</item>
+    </style>
+
+    <style name="AlertDialogStyle_Gray" parent="AlertDialogStyle.Base">
+        <item name="colorPrimary">?attr/readhubTheme</item>
+        <item name="colorPrimaryDark">?attr/readhubStatus</item>
+        <item name="colorAccent">?attr/readhubColorAccent</item>
+
+        <item name="readhubTheme">@color/theme_gray_theme</item>
+        <item name="readhubColorAccent">@color/theme_gray_accent</item>
+        <item name="readhubBackground">@color/theme_gray_background</item>
+        <item name="readhubViewBackground">@color/theme_gray_view_background</item>
+        <item name="android:textColorPrimary">@color/theme_gray_text_primary</item>
+        <item name="android:textColorSecondary">@color/theme_gray_text_secondary</item>
+    </style>
+
+    <style name="AlertDialogStyle_Dark" parent="AlertDialogStyle.Base">
+        <item name="colorPrimary">?attr/readhubTheme</item>
+        <item name="colorPrimaryDark">?attr/readhubStatus</item>
+        <item name="colorAccent">?attr/readhubColorAccent</item>
+
+        <item name="readhubTheme">@color/theme_dark_theme</item>
+        <item name="readhubColorAccent">@color/theme_dark_accent</item>
+        <item name="readhubBackground">@color/theme_dark_background</item>
+        <item name="readhubViewBackground">@color/theme_dark_view_background</item>
+        <item name="android:textColorPrimary">@color/theme_dark_text_primary</item>
+        <item name="android:textColorSecondary">@color/theme_dark_text_secondary</item>
     </style>
 
     <!--SwipeBackActivity 样式-->
@@ -98,16 +146,6 @@
         <item name="tabBackground">?attr/readhubTheme</item>
         <item name="tabTextAppearance">@style/Tab_TextAppearance</item>
         <item name="tabSelectedTextColor">?attr/readhubToolbarText</item>
-    </style>
-
-    <!--InstantRead 对话框-->
-    <style name="AlertDialogStyle" parent="@android:style/Theme.Holo.Light.Dialog.MinWidth">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!--主题对话框-->

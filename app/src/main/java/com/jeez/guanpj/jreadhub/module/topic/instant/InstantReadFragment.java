@@ -1,5 +1,8 @@
 package com.jeez.guanpj.jreadhub.module.topic.instant;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +27,8 @@ import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -50,6 +55,8 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     TextView mTxtJump2Source;
 
     private String mTopicId;
+    private String mTheme;
+    private String mDarkThemeJS;
 
     public static InstantReadFragment newInstance(String topicId) {
         InstantReadFragment fragment = new InstantReadFragment();
@@ -60,9 +67,29 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mDarkThemeJS = getDarkThemeJS();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle);
+        mTheme = mPresenter.getTheme();
+        switch (mTheme) {
+            case Constants.ThemeType.Blue:
+                setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle_Blue);
+                break;
+            case Constants.ThemeType.Gray:
+                setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle_Gray);
+                break;
+            case Constants.ThemeType.Dark:
+                setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle_Dark);
+                break;
+            default:
+                setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle_Base);
+                break;
+        }
     }
 
     @Override
@@ -101,35 +128,29 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                if (URLUtil.isNetworkUrl(request.getUrl().toString())) {
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                mWebView.loadUrl(mDarkThemeJS);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (URLUtil.isNetworkUrl(url)) {
                     dismiss();
                     if (mPresenter.isUseSystemBrowser()) {
-                        NavigationUtil.openInBrowser(getActivity(), request.getUrl().toString());
+                        NavigationUtil.openInBrowser(getActivity(), url);
                     } else {
                         ((SupportActivity) getContext()).findFragment(MainFragment.class)
-                                .start(WebViewFragment.newInstance(request.getUrl().toString(), ""));
+                                .start(WebViewFragment.newInstance(url, ""));
                     }
                 }
                 return true;
             }
 
             @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                if (request.getUrl().toString().endsWith("mobi.min.css")) {
-                    //使用本地 css 优化阅读视图
-                    WebResourceResponse resourceResponse = null;
-                    try {
-                        InputStream in = getContext().getAssets().open("css/mobi.css");
-                        resourceResponse = new WebResourceResponse("text/css", "UTF-8", in);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    if (resourceResponse != null) {
-                        return resourceResponse;
-                    }
-                }
-                return super.shouldInterceptRequest(view, request);
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                mWebView.loadUrl(mDarkThemeJS);
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
@@ -141,6 +162,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 } else if (mProgressBar != null) {
                     mProgressBar.setProgress(newProgress);
                 }
+                mWebView.loadUrl(mDarkThemeJS);
             }
 
             @Override
@@ -148,6 +170,32 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 super.onReceivedTitle(view, title);
             }
         });
+    }
+
+    @Nullable
+    private String getDarkThemeJS() {
+        InputStream inputStream = null;
+        String js = null;
+        try {
+            inputStream = getResources().getAssets().open("readhub_dark.js");
+            if(inputStream != null){
+                byte buff[] = new byte[1024];
+                ByteArrayOutputStream fromFile = new ByteArrayOutputStream();
+                do {
+                    int numRead = 0;
+                    numRead = inputStream.read(buff);
+                    if (numRead <= 0) {
+                        break;
+                    }
+                    fromFile.write(buff, 0, numRead);
+                } while (true);
+
+                js = fromFile.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return js;
     }
 
     @Override
@@ -166,10 +214,16 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 .start(WebViewFragment.newInstance(data.getUrl(), data.getTitle()));
         });
 
+        String css = "";
+        if (mTheme.equals(Constants.ThemeType.Dark)) {
+            css = "<link rel=\"stylesheet\" href=\"file:///android_asset/readhub_dark.css\" type=\"text/css\">";
+        }
+
         String htmlHead = "<head>"
                 + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> "
-                + "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi.css/dist/mobi.min.css\">"
-                /*+ "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi-plugin-color/dist/mobi-plugin-color.min.css\">"*/
+                //+ css
+                //+ "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi.css/dist/mobi.min.css\">"
+                //+ "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi-plugin-color/dist/mobi-plugin-color.min.css\">"
                 + "<style>"
                 + "img{max-width:100% !important; width:auto; height:auto;}"
                 + "body {font-size: 110%;word-spacing:110%；}"

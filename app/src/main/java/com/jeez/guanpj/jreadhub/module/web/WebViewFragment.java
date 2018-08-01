@@ -1,5 +1,7 @@
 package com.jeez.guanpj.jreadhub.module.web;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,22 +12,31 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
+import com.jeez.guanpj.jreadhub.module.main.MainFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.just.agentweb.AgentWeb;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
+import me.yokeyword.fragmentation.SupportActivity;
 
 public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresenter> implements WebViewContract.View, Toolbar.OnMenuItemClickListener {
 
@@ -41,6 +52,7 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
     private String mTitle;
     private boolean mIsStar;
     private boolean mShowTips = false;
+    private String mDarkThemeJS;
 
     public static WebViewFragment newInstance(String url, String title) {
         WebViewFragment fragment = new WebViewFragment();
@@ -57,6 +69,12 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
         bundle.putSerializable(Constants.BUNDLE_NEWS_BEAN, newsBean);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mDarkThemeJS = getDarkThemeJS();
     }
 
     @Nullable
@@ -111,12 +129,75 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
         mToolbarHeader.setText(mTitle);
     }
 
+    @Nullable
+    private String getDarkThemeJS() {
+        InputStream inputStream = null;
+        String js = null;
+        try {
+            inputStream = getResources().getAssets().open("readhub_dark.js");
+            if(inputStream != null){
+                byte buff[] = new byte[1024];
+                ByteArrayOutputStream fromFile = new ByteArrayOutputStream();
+                do {
+                    int numRead = 0;
+                    numRead = inputStream.read(buff);
+                    if (numRead <= 0) {
+                        break;
+                    }
+                    fromFile.write(buff, 0, numRead);
+                } while (true);
+
+                js = fromFile.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return js;
+    }
+
+    private WebViewClient mWebViewClient = new WebViewClient() {
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (URLUtil.isNetworkUrl(url)) {
+                if (mPresenter.isUseSystemBrowser()) {
+                    NavigationUtil.openInBrowser(getActivity(), url);
+                } else {
+                    ((SupportActivity) getContext()).findFragment(MainFragment.class)
+                            .start(WebViewFragment.newInstance(url, ""));
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+        }
+    };
+
+    private WebChromeClient mWebChromeClient = new WebChromeClient() {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+        }
+    };
+
     @Override
     public void initDataAndEvent() {
         mAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mWebContainer, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                         FrameLayout.LayoutParams.MATCH_PARENT))
                 .useDefaultIndicator()
+                .setWebViewClient(mWebViewClient)
+                .setWebChromeClient(mWebChromeClient)
                 .createAgentWeb()
                 .ready()
                 .go(mUrl);
