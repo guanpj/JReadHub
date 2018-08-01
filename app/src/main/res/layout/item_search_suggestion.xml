@@ -6,11 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeightSmall">
 
-    <View
-        android:background="@color/line_space"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_1"/>
-
     <LinearLayout
         android:layout_marginTop="@dimen/line_1"
         android:layout_marginLeft="@dimen/dimen_10_dp"
@@ -30,6 +25,7 @@
             android:layout_marginLeft="@dimen/dimen_10_dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/textSize_16"/>
 
     </LinearLayout>

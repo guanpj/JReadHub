@@ -10,13 +10,13 @@
 
         <item name="readhubTheme">@color/theme_blue_theme</item>
         <item name="readhubStatus">@color/theme_blue_status</item>
-        <item name="readhubColorAccent">@color/theme_blue_theme</item>
+        <item name="readhubColorAccent">@color/theme_blue_accent</item>
         <item name="readhubBackground">@color/theme_blue_background</item>
         <item name="readhubViewBackground">@color/theme_blue_view_background</item>
         <item name="readhubDrawerBackground">@color/theme_blue_drawer_menu_background</item>
         <item name="readhubToolbarText">@color/theme_blue_toolbar_text</item>
-        <item name="readhubTextColorPrimary">@color/theme_blue_text_primary</item>
-        <item name="readhubTextColorSecondary">@color/theme_blue_text_secondary</item>
+        <item name="android:textColorPrimary">@color/theme_blue_text_primary</item>
+        <item name="android:textColorSecondary">@color/theme_blue_text_secondary</item>
         <item name="readhubFloatBtn">@color/theme_blue_float_btn</item>
     </style>
 
@@ -27,13 +27,13 @@
 
         <item name="readhubTheme">@color/theme_gray_theme</item>
         <item name="readhubStatus">@color/theme_gray_status</item>
-        <item name="readhubColorAccent">@color/theme_gray_theme</item>
+        <item name="readhubColorAccent">@color/theme_gray_accent</item>
         <item name="readhubBackground">@color/theme_gray_background</item>
         <item name="readhubViewBackground">@color/theme_gray_view_background</item>
         <item name="readhubDrawerBackground">@color/theme_gray_drawer_menu_background</item>
         <item name="readhubToolbarText">@color/theme_gray_toolbar_text</item>
-        <item name="readhubTextColorPrimary">@color/theme_gray_text_primary</item>
-        <item name="readhubTextColorSecondary">@color/theme_gray_text_secondary</item>
+        <item name="android:textColorPrimary">@color/theme_gray_text_primary</item>
+        <item name="android:textColorSecondary">@color/theme_gray_text_secondary</item>
         <item name="readhubFloatBtn">@color/theme_gray_float_btn</item>
     </style>
 
@@ -41,19 +41,21 @@
         <item name="colorPrimary">?attr/readhubTheme</item>
         <item name="colorPrimaryDark">?attr/readhubStatus</item>
         <item name="colorAccent">?attr/readhubColorAccent</item>
+        <item name="android:windowBackground">?attr/readhubTheme</item>
 
         <item name="readhubTheme">@color/theme_dark_theme</item>
         <item name="readhubStatus">@color/theme_dark_status</item>
-        <item name="readhubColorAccent">@color/theme_dark_text_primary</item>
+        <item name="readhubColorAccent">@color/theme_dark_accent</item>
         <item name="readhubBackground">@color/theme_dark_background</item>
         <item name="readhubViewBackground">@color/theme_dark_view_background</item>
         <item name="readhubDrawerBackground">@color/theme_dark_drawer_menu_background</item>
         <item name="readhubToolbarText">@color/theme_dark_toolbar_text</item>
-        <item name="readhubTextColorPrimary">@color/theme_dark_text_primary</item>
-        <item name="readhubTextColorSecondary">@color/theme_dark_text_secondary</item>
+        <item name="android:textColorPrimary">@color/theme_dark_text_primary</item>
+        <item name="android:textColorSecondary">@color/theme_dark_text_secondary</item>
         <item name="readhubFloatBtn">@color/theme_dark_float_btn</item>
     </style>
 
+    <!--SwipeBackActivity 样式-->
     <style name="AppTheme.NoActionBar.SwipeBack">
         <item name="android:windowIsTranslucent">true</item>
     </style>
@@ -63,21 +65,33 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--Toolbar 字体样式-->
     <style name="Toolbar_TextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">@dimen/textSize_18</item>
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!--AppBarLayout 样式-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!--Menu 样式，设置白色背景和弹出框锚点位置-->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+    </style>
 
+    <!--OverflowMenu 样式，这里使其显示在下方-->
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+    </style>
+
+    <!--首页/星标内容 Tab 字体样式-->
     <style name="Tab_TextAppearance" parent="TextAppearance.AppCompat.Button">
         <item name="android:textSize">@dimen/design_tab_text_size</item>
         <item name="android:textColor">?attr/readhubToolbarText</item>
         <item name="textAllCaps">true</item>
     </style>
 
+    <!--首页/星标内容 Tab 样式-->
     <style name="TabLayout" parent="Base.Widget.Design.TabLayout">
         <item name="tabMaxWidth">@dimen/design_tab_max_width</item>
         <item name="tabIndicatorColor">?attr/readhubToolbarText</item>
@@ -86,6 +100,7 @@
         <item name="tabSelectedTextColor">?attr/readhubToolbarText</item>
     </style>
 
+    <!--InstantRead 对话框-->
     <style name="AlertDialogStyle" parent="@android:style/Theme.Holo.Light.Dialog.MinWidth">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -95,6 +110,7 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!--主题对话框-->
     <style name="ThemeDialog" parent="android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>

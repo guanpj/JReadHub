@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_4"
             android:text="@string/brvah_loading"
-            android:textColor="?attr/readhubTextColorSecondary"
+            android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/textSize_14"/>
     </LinearLayout>
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="?attr/readhubTextColorSecondary"
+            android:textColor="?android:textColorSecondary"
             android:text="@string/brvah_load_failed"/>
 
     </FrameLayout>
@@ -55,6 +55,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/brvah_load_end"
-            android:textColor="?attr/readhubTextColorSecondary"/>
+            android:textColor="?android:textColorSecondary"/>
     </FrameLayout>
 </FrameLayout>

@@ -158,38 +158,45 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
         }
 
         mTitleContainer.removeAllViews();
-        for (final TopicNewsBean topic : mTopicBean.getNewsArray()) {
-            TextView textView = new TextView(getContext());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            textView.setLayoutParams(params);
-            textView.setPadding(10, 16, 10, 16);
-            textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_topic_detail_ring, 0, 0, 0);
-            textView.setCompoundDrawablePadding(15);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            textView.setTextColor(ContextCompat.getColor(getContext(), R.color.text_topic_detail_news_title));
-            textView.setBackgroundResource(R.drawable.selector_btn_background);
-            if (TextUtils.isEmpty(topic.getSiteName())) {
-                textView.setText(topic.getTitle());
-            } else {
-                SpannableString spannableTitle = SpannableString.valueOf(getContext().getString(R.string.title___site_name, topic.getTitle(), topic.getSiteName()));
-                spannableTitle.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.text_topic_detail_news_author)),
-                        topic.getTitle().length(),
-                        topic.getTitle().length() + topic.getSiteName().length() + 2,
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                textView.setText(spannableTitle);
-            }
-            textView.setOnClickListener(v -> {
-                String url = null;
-                if (!TextUtils.isEmpty(topic.getMobileUrl())) {
-                    url = topic.getMobileUrl();
+        if (mTopicBean.getNewsArray() == null || mTopicBean.getNewsArray().isEmpty()) {
+            mTitleContainer.setVisibility(View.GONE);
+        } else {
+            mTitleContainer.setVisibility(View.VISIBLE);
+            for (final TopicNewsBean topic : mTopicBean.getNewsArray()) {
+                TextView textView = new TextView(getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                textView.setLayoutParams(params);
+                textView.setPadding(10, 16, 10, 16);
+                textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_topic_detail_ring, 0, 0, 0);
+                textView.setCompoundDrawablePadding(15);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                /*textView.setTextColor(ContextCompat.getColor(getContext(),
+                        ResourceUtil.getResource(getActivity(), R.attr.readhubTextColorPrimary)));*/
+                textView.setTextColor(ContextCompat.getColor(getContext(), R.color.text_topic_detail_news_title));
+                //textView.setBackgroundResource(R.drawable.selector_btn_background);
+                if (TextUtils.isEmpty(topic.getSiteName())) {
+                    textView.setText(topic.getTitle());
                 } else {
-                    url = topic.getUrl();
+                    SpannableString spannableTitle = SpannableString.valueOf(getContext().getString(R.string.title___site_name, topic.getTitle(), topic.getSiteName()));
+                    spannableTitle.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.text_topic_detail_news_author)),
+                            topic.getTitle().length(),
+                            topic.getTitle().length() + topic.getSiteName().length() + 2,
+                            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    textView.setText(spannableTitle);
                 }
-                if (!TextUtils.isEmpty(url)) {
-                    RxBus.getInstance().post(new OpenWebSiteEvent(url, topic.getTitle()));
-                }
-            });
-            mTitleContainer.addView(textView);
+                textView.setOnClickListener(v -> {
+                    String url = null;
+                    if (!TextUtils.isEmpty(topic.getMobileUrl())) {
+                        url = topic.getMobileUrl();
+                    } else {
+                        url = topic.getUrl();
+                    }
+                    if (!TextUtils.isEmpty(url)) {
+                        RxBus.getInstance().post(new OpenWebSiteEvent(url, topic.getTitle()));
+                    }
+                });
+                mTitleContainer.addView(textView);
+            }
         }
 
         if (null != mTopicBean.getTimeline() && null != mTopicBean.getTimeline().getTopics() && 0 < mTopicBean.getTimeline().getTopics().size()) {

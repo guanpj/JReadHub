@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_width="@dimen/dimen_60_dp"
         android:text="6-19 2018"
-        android:textColor="@color/text_common"
+        android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/textSize_16" />
 
     <LinearLayout
@@ -41,14 +41,14 @@
     </LinearLayout>
 
     <TextView
-        android:background="?android:selectableItemBackground"
-        android:ellipsize="end"
         android:id="@+id/txt_topic_trace_content"
+        android:background="?android:selectableItemBackground"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_10_dp"
         android:layout_width="wrap_content"
-        android:maxLines="2"
         android:padding="@dimen/dimen_5_dp"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:text="标题标题标题"
         android:textColor="@color/text_topic_detail_news_title"
         android:textSize="@dimen/textSize_16" />

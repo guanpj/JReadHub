@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:background="@drawable/drawable_topic_detail_relevant_bg"
-    android:textColor="?attr/readhubTextColorSecondary"
+    android:textColor="?android:textColorSecondary"
     android:textSize="@dimen/textSize_16"
     android:text="Hello World">
 

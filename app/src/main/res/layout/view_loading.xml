@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_8_dp"
             android:text="@string/brvah_loading"
-            android:textColor="?attr/readhubTextColorSecondary" />
+            android:textColor="?android:textColorSecondary" />
 
     </LinearLayout>
 

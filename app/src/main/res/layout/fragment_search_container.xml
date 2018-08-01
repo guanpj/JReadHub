@@ -53,7 +53,7 @@
             android:paddingLeft="@dimen/dimen_5_dp"
             android:paddingRight="@dimen/dimen_5_dp"
             android:gravity="center_vertical"
-            android:background="@color/bg_search_list_header"
+            android:background="?attr/readhubBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -64,6 +64,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/tv_clear"
                 android:textSize="@dimen/textSize_15"
+                android:textColor="?android:textColorSecondary"
                 android:text="搜索历史" />
 
             <TextView
@@ -72,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/textSize_15"
+                android:textColor="?android:textColorSecondary"
                 android:text="清空"/>
 
         </RelativeLayout>

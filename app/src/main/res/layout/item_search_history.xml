@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeightSmall"
-    android:orientation="horizontal">
+    android:background="?attr/readhubViewBackground"
+    android:layout_height="?android:attr/listPreferredItemHeightSmall">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -33,10 +34,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5_dp"
                 android:layout_marginRight="@dimen/dimen_5_dp"
+                android:textColor="?android:textColorSecondary"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="xiaomi"
-                android:minHeight="?android:attr/listPreferredItemHeightSmall"/>
+                android:minHeight="@dimen/dimen_50_dp"/>
 
             <ImageView
                 android:id="@+id/img_close"
@@ -51,7 +53,7 @@
         </LinearLayout>
 
         <View
-            android:background="@color/bg_topic_trace_item_line"
+            android:background="?android:attr/listDivider"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_1"/>
 

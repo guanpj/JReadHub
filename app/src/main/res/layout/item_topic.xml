@@ -6,115 +6,106 @@
     android:layout_marginLeft="@dimen/dimen_10_dp"
     android:layout_marginRight="@dimen/dimen_10_dp"
     android:layout_marginTop="@dimen/dimen_12_dp"
-    android:background="?attr/readhubViewBackground"
+    android:background="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="?attr/readhubViewBackground"
     app:cardCornerRadius="@dimen/dimen_5_dp"
     app:cardElevation="@dimen/dimen_5_dp">
 
     <LinearLayout
-        android:background="?attr/readhubViewBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/btn_item"
+        <LinearLayout
+            android:id="@+id/ll_item_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="2dp">
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <LinearLayout
-                android:id="@+id/ll_item_header"
+            <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/textSize_16" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/dimen_5_dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
-                    android:textColor="?attr/readhubTextColorPrimary"
-                    android:textSize="@dimen/textSize_16" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="@dimen/dimen_5_dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="时间时间"
-                        android:textColor="?attr/readhubColorAccent"
-                        android:textSize="@dimen/textSize_14" />
-
-                    <ImageView
-                        android:id="@+id/img_instant_read"
-                        android:layout_marginLeft="@dimen/dimen_10_dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dimen_18_dp"
-                        app:srcCompat="@drawable/ic_topic_list_instant_read"
-                        android:background="@drawable/drawable_instant_read_btn_bg"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_summary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5_dp"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:text="内容内容"
-                    android:textColor="?attr/readhubTextColorSecondary"
+                    android:layout_gravity="center_vertical"
+                    android:text="时间时间"
+                    android:textColor="?attr/readhubColorAccent"
                     android:textSize="@dimen/textSize_14" />
 
-                <View
-                    android:id="@+id/line"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_1"
-                    android:layout_marginTop="@dimen/dimen_10_dp"
-                    android:background="?android:attr/listDivider" />
-
-                <FrameLayout
-                    android:id="@+id/fl_item_footer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingBottom="@dimen/dimen_5_dp"
-                    android:paddingTop="@dimen/dimen_10_dp">
-
-                    <TextView
-                        android:id="@+id/tv_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="腾讯科技 等 5 家媒体报道"
-                        android:textColor="?attr/readhubColorAccent"
-                        android:textSize="@dimen/textSize_14" />
-
-                    <ImageView
-                        android:id="@+id/img_expand_state"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|end"
-                        android:adjustViewBounds="true"
-                        android:scaleType="center"
-                        app:srcCompat="@drawable/ic_topic_list_more_info" />
-
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/img_instant_read"
+                    android:layout_marginLeft="@dimen/dimen_10_dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_18_dp"
+                    app:srcCompat="@drawable/ic_topic_list_instant_read"
+                    android:background="@drawable/drawable_instant_read_btn_bg"/>
 
             </LinearLayout>
 
-        </FrameLayout>
+            <TextView
+                android:id="@+id/tv_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_5_dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:text="内容内容"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/textSize_14" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                android:background="?android:attr/listDivider" />
+
+            <FrameLayout
+                android:id="@+id/fl_item_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="@dimen/dimen_5_dp"
+                android:paddingTop="@dimen/dimen_10_dp">
+
+                <TextView
+                    android:id="@+id/tv_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="腾讯科技 等 5 家媒体报道"
+                    android:textColor="?attr/readhubColorAccent"
+                    android:textSize="@dimen/textSize_14" />
+
+                <ImageView
+                    android:id="@+id/img_expand_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:adjustViewBounds="true"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_topic_list_more_info" />
+
+            </FrameLayout>
+
+        </LinearLayout>
 
         <net.cachapa.expandablelayout.ExpandableLayout
             android:id="@+id/layout_expand"
@@ -138,4 +129,5 @@
         </net.cachapa.expandablelayout.ExpandableLayout>
 
     </LinearLayout>
+
 </android.support.v7.widget.CardView>

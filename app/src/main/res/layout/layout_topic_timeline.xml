@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/dimen_5_dp"
     app:cardElevation="0dp"
-    app:cardBackgroundColor="@color/bg_topic_trace_list">
+    app:cardBackgroundColor="?attr/readhubViewBackground">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_topic_trace"

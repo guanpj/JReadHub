@@ -21,6 +21,8 @@
         android:layout_gravity="start"
         android:background="?attr/readhubDrawerBackground"
         app:headerLayout="@layout/navigation_header"
+        app:itemIconTint="@color/color_nav_item"
+        app:itemTextColor="@color/color_nav_item"
         app:menu="@menu/menu_drawer"/>
 
 </android.support.v4.widget.DrawerLayout>

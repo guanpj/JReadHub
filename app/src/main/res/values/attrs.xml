@@ -7,8 +7,6 @@
     <attr name="readhubBackground" format="color" />
     <attr name="readhubViewBackground" format="color" />
     <attr name="readhubDrawerBackground" format="color" />
-    <attr name="readhubTextColorPrimary" format="color" />
-    <attr name="readhubTextColorSecondary" format="color" />
     <attr name="readhubFloatBtn" format="color" />
     <attr name="readhubToolbarText" format="color" />
 
