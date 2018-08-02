@@ -141,6 +141,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     @Override
     public void bindData(TopicBean topicBean, boolean isPullToRefresh) {
         this.mTopicBean = topicBean;
+
         mTxtTopicTitle.setText(mTopicBean.getTitle().trim());
 
         if (null != mTopicBean.getFormattedPublishDate()) {
