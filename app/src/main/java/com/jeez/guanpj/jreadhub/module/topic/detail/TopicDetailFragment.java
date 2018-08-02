@@ -112,7 +112,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     public void initView() {
         mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.inflateMenu(R.menu.menu_topic_detail);
-        mToolbar.setTitle(getText(R.string.topic_detail));
+        mToolbar.setTitle(getText(R.string.menu_topic_detail));
         mToolbarHeader.setText(mTopicTitle);
         mToolbarHeader.setVisibility(View.GONE);
     }
@@ -133,7 +133,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
                 mToolbar.setTitle("");
             } else {
                 mToolbarHeader.setVisibility(View.GONE);
-                mToolbar.setTitle(getText(R.string.topic_detail));
+                mToolbar.setTitle(getText(R.string.menu_topic_detail));
             }
         });
     }

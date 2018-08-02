@@ -100,7 +100,7 @@ public class TopicListAdapter extends BaseAdapter<TopicBean> {
             tvSummary.setText(topic.getSummary());
             tvSummary.setVisibility(TextUtils.isEmpty(topic.getSummary()) ? View.GONE : View.VISIBLE);
             tvTime.setText(FormatUtils.getRelativeTimeSpanString(topic.getFormattedPublishDate()));
-            imgInstantRead.setVisibility(topic.hasInstantView() ? View.VISIBLE : View.GONE);
+            imgInstantRead.setVisibility(topic.checkInstView() ? View.VISIBLE : View.GONE);
 
             if (newsCount == 0) {
                 mLineView.setVisibility(View.GONE);

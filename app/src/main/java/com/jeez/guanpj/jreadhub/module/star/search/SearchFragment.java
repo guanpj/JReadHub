@@ -203,7 +203,8 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
 
     @OnClick(R.id.tv_clear)
     void clearHistory() {
-        new AlertDialog.Builder(getContext())
+        new AlertDialog.Builder(getContext(), R.style.AlertDialog)
+                .setInverseBackgroundForced(true)
                 .setMessage(R.string.delete_all_search_history)
                 .setPositiveButton(R.string.button_enter, (dialog, which) -> {
                     mPresenter.deleteAllHistory();

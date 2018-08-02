@@ -69,30 +69,34 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
         }
 
         holder.setText(R.id.tv_title, topicBean.getTitle().trim());
+
         if (TextUtils.isEmpty(topicBean.getSummary().trim())) {
             holder.setGone(R.id.tv_summary, false);
         } else {
             holder.setText(R.id.tv_summary, topicBean.getSummary().trim());
             holder.setGone(R.id.tv_summary, true);
         }
+
         holder.setText(R.id.tv_time, FormatUtils.getRelativeTimeSpanString(topicBean.getFormattedPublishDate()));
 
+        holder.setVisible(R.id.img_instant_read, topicBean.checkInstView() ? true : false);
+        holder.setOnClickListener(R.id.img_instant_read, v ->
+                InstantReadFragment.newInstance(topicBean.getId()).show(((MainActivity) mContext).getSupportFragmentManager(),
+                        InstantReadFragment.TAG)
+        );
+
+        holder.setOnClickListener(R.id.ll_item_header, v -> ((SupportActivity) mContext).findFragment(MainFragment.class)
+                .start(TopicDetailFragment.newInstance(topicBean.getId(), topicBean.getTitle())));
+
         if (newsCount == 0) {
-            holder.setGone(R.id.line, true);
-            holder.setGone(R.id.fl_item_footer, true);
+            holder.setGone(R.id.line, false);
+            holder.setGone(R.id.fl_item_footer, false);
+            return;
         } else if (newsCount == 1){
             holder.setText(R.id.tv_info, mContext.getString(R.string.single__media___report, mediaName));
         } else {
             holder.setText(R.id.tv_info, mContext.getString(R.string.multi__media___report, mediaName, newsCount));
         }
-
-        holder.setVisible(R.id.img_instant_read, topicBean.hasInstantView() ? true : false);
-        holder.setOnClickListener(R.id.img_instant_read, v ->
-                InstantReadFragment.newInstance(topicBean.getId()).show(((MainActivity) mContext).getSupportFragmentManager(),
-                InstantReadFragment.TAG)
-        );
-        holder.setOnClickListener(R.id.ll_item_header, v -> ((SupportActivity) mContext).findFragment(MainFragment.class)
-                .start(TopicDetailFragment.newInstance(topicBean.getId(), topicBean.getTitle())));
 
         ExpandableLayout layoutExpand = holder.getView(R.id.layout_expand);
         layoutExpand.setExpanded(false);
@@ -111,11 +115,7 @@ public class TopicListAdapterWithThirdLib extends BaseQuickAdapter<TopicBean, Ba
         });
 
         ArrayList<TopicNewsBean> newsList = topicBean.getNewsArray();
-        if (null == newsList || newsList.isEmpty()) {
-            return;
-        }
         LinearLayout layoutSource = holder.getView(R.id.layout_source);
-
         View moreItemView = null;
         if (layoutSource.getChildCount() > MOST_NEWS_COUNT_PER_ITEM) {
             //去掉"查看全部" item 并保存

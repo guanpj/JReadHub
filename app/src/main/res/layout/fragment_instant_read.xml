@@ -99,6 +99,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/dimen_12_dp"
         android:background="@drawable/drawable_instant_read_close"
-        app:srcCompat="@drawable/ic_sug_item_close" />
+        app:srcCompat="@drawable/ic_search_close" />
 
 </RelativeLayout>

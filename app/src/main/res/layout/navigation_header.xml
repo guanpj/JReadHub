@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="@color/text_white"
+        android:textColor="@color/White"
         android:textSize="@dimen/textSize_25"
         android:textStyle="bold"/>
 
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_introduce"
-        android:textColor="@color/text_white"
+        android:textColor="@color/White"
         android:textSize="@dimen/textSize_15"/>
 
 </LinearLayout>

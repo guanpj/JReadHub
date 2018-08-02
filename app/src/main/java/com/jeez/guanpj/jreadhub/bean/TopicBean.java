@@ -1,6 +1,5 @@
 package com.jeez.guanpj.jreadhub.bean;
 
-import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 
@@ -40,8 +39,9 @@ public class TopicBean extends BaseListItemBean implements Cloneable {
     private TopicTimelineBean timeline;
     @Ignore
     private ArrayList<TopicNewsBean> newsArray;
-    @Embedded
+    @Ignore
     private Extra extra;
+    private boolean hasInstantView;
 
     public String getCreatedAt() {
         return createdAt;
@@ -127,8 +127,16 @@ public class TopicBean extends BaseListItemBean implements Cloneable {
         this.extra = extra;
     }
 
-    public boolean hasInstantView() {
-        return extra != null && extra.instantView;
+    public boolean checkInstView() {
+        return (extra != null && extra.instantView) || hasInstantView;
+    }
+
+    public boolean getHasInstantView() {
+        return hasInstantView;
+    }
+
+    public void setHasInstantView(boolean hasInstantView) {
+        this.hasInstantView = hasInstantView;
     }
 
     public static class Extra {

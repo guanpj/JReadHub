@@ -1,6 +1,5 @@
 package com.jeez.guanpj.jreadhub.module.web;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -52,6 +51,8 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
     private String mTitle;
     private boolean mIsStar;
     private boolean mShowTips = false;
+
+    private String mTheme;
     private String mDarkThemeJS;
 
     public static WebViewFragment newInstance(String url, String title) {
@@ -72,9 +73,12 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mDarkThemeJS = getDarkThemeJS();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mTheme = mPresenter.getTheme();
+        if (mTheme.equals(Constants.ThemeType.Dark)) {
+            mDarkThemeJS = getDarkThemeJS();
+        }
     }
 
     @Nullable
@@ -159,7 +163,9 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+            if (mTheme.equals(Constants.ThemeType.Dark)) {
+                mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+            }
         }
 
         @Override
@@ -178,7 +184,9 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+            if (mTheme.equals(Constants.ThemeType.Dark)) {
+                mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+            }
         }
     };
 
@@ -186,7 +194,11 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+            if (newProgress == 100) {
+                if (mTheme.equals(Constants.ThemeType.Dark)) {
+                    mAgentWeb.getJsAccessEntrace().callJs(mDarkThemeJS);
+                }
+            }
         }
     };
 

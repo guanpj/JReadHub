@@ -6,7 +6,7 @@
     <string name="menu_star">星标内容</string>
     <string name="menu_setting">设置</string>
     <string name="menu_about">关于</string>
-    <string name="topic_detail">话题详情</string>
+    <string name="menu_topic_detail">话题详情</string>
     <string name="action_share">分享</string>
     <string name="action_search">搜索</string>
     <string name="action_open">在浏览器中打开</string>
@@ -21,8 +21,9 @@
     <string name="month__day">%1$d-%2$d</string>
     <string name="month__day__year">%1$d-%2$d\n%3$d</string>
     <string name="use_system_browser">使用系统内置浏览器</string>
-    <string name="use_system_browser_des">开启后，将使用系统内置的浏览器打开网页内容</string>
+    <string name="use_system_browser_des">使用系统内置的浏览器打开网页内容</string>
     <string name="change_theme">切换主题</string>
+    <string name="change_theme_des">根据不同场景优化阅读体验</string>
     <string name="readhub_site"><a href="" target="_blank">https://readhub.me</a></string>
     <string name="readhub_source_site"><a href="" target="_blank">https://github.com/guanpj/JReadHub</a></string>
     <string name="text_readhub_source_site">源码地址</string>

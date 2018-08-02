@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6E9AC1</color>
-    <color name="colorPrimaryDark">#6E9AC1</color>
-    <color name="colorAccent">#6E9AC1</color>
+    <color name="White">#ffffff</color>
+    <color name="Black">#000000</color>
 
-    <color name="text_common">#535353</color>
-    <color name="text_content">#727272</color>
-    <color name="text_white">#fff</color>
-    <color name="text_nav">#b2ebf2</color>
-    <color name="text_gray">#cdcdcd</color>
+    <color name="Red">#f44336</color>
+    <color name="Pink">#e91e63</color>
+    <color name="Purple">#9c27b0</color>
+    <color name="Deep_Purple">#673ab7</color>
+    <color name="Indigo">#3f51b5</color>
+    <color name="Blue">#2196f3</color>
+    <color name="Light_Blue">#03a9f4</color>
+    <color name="Cyan">#00bcd4</color>
+    <color name="Teal">#009688</color>
+    <color name="Green">#4caf50</color>
+    <color name="Light_Green">#8bc34a</color>
+    <color name="Lime">#cddc39</color>
+    <color name="Yellow">#ffeb3b</color>
+    <color name="Amber">#ffc107</color>
+    <color name="Orange">#ff9800</color>
+    <color name="Deep_Orange">#ff5722</color>
+    <color name="Brown">#795548</color>
+    <color name="Grey">#9e9e9e</color>
+    <color name="Blue_Grey">#607d8b</color>
+
     <color name="text_topic_detail_news_title">#607D8B</color>
     <color name="text_topic_detail_news_author">#AAACB4</color>
 
-    <color name="line_space">#f5f5f5</color>
-
-    <color name="btn_green_bg">#5cb85c</color>
-    <color name="btn_green_border">#4cae4c</color>
-
-    <color name="bg_main">#E9EAED</color>
-    <color name="bg_gray">#979797</color>
-    <color name="bg_dialog">#6b000000</color>
+    <color name="bg_common">#bfbfbf</color>
     <color name="bg_topic_trace_item_line">#D7D7D7</color>
     <color name="bg_instant_read_close_bg">#e7e7e7</color>
-    <color name="bg_new_topic_bar">#d7f46ea4</color>
 
     <color name="theme_blue_theme">#5ca1de</color>
     <color name="theme_blue_status">#5ca1de</color>

@@ -29,9 +29,9 @@
             android:drawableRight="@drawable/ic_close_white"
             android:paddingRight="@dimen/dimen_8_dp"
             android:gravity="center"
-            android:background="@color/bg_new_topic_bar"
+            android:background="@color/bg_common"
             android:textSize="@dimen/textSize_14"
-            android:textColor="@color/white"
+            android:textColor="@color/White"
             android:visibility="gone"/>
 
     </FrameLayout>

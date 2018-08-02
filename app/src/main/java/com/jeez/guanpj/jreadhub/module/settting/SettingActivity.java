@@ -37,7 +37,7 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
 
     @Override
     public void initView() {
-        mThemeDialog = new ThemeDialog(this);
+        mThemeDialog = new ThemeDialog(this, mPresenter.getTheme());
         mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.setNavigationOnClickListener(v -> finish());
     }

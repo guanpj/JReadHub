@@ -1,7 +1,5 @@
 package com.jeez.guanpj.jreadhub.module.topic.instant;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,8 +8,6 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,14 +17,13 @@ import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.InstantReadBean;
-import com.jeez.guanpj.jreadhub.module.web.WebViewFragment;
 import com.jeez.guanpj.jreadhub.module.main.MainFragment;
+import com.jeez.guanpj.jreadhub.module.web.WebViewFragment;
 import com.jeez.guanpj.jreadhub.mvpframe.view.fragment.AbsBaseMvpDialogFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
 import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -67,12 +62,6 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mDarkThemeJS = getDarkThemeJS();
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTheme = mPresenter.getTheme();
@@ -85,6 +74,7 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 break;
             case Constants.ThemeType.Dark:
                 setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle_Dark);
+                mDarkThemeJS = getDarkThemeJS();
                 break;
             default:
                 setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle_Base);
@@ -130,7 +120,9 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                mWebView.loadUrl(mDarkThemeJS);
+                if (mTheme.equals(Constants.ThemeType.Dark)) {
+                    mWebView.loadUrl(mDarkThemeJS);
+                }
             }
 
             @Override
@@ -150,7 +142,9 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                mWebView.loadUrl(mDarkThemeJS);
+                if (mTheme.equals(Constants.ThemeType.Dark)) {
+                    mWebView.loadUrl(mDarkThemeJS);
+                }
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
@@ -159,10 +153,12 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
                 super.onProgressChanged(view, newProgress);
                 if (newProgress == 100 && mProgressBarWrapper != null) {
                     mProgressBarWrapper.setVisibility(View.GONE);
+                    if (mTheme.equals(Constants.ThemeType.Dark)) {
+                        mWebView.loadUrl(mDarkThemeJS);
+                    }
                 } else if (mProgressBar != null) {
                     mProgressBar.setProgress(newProgress);
                 }
-                mWebView.loadUrl(mDarkThemeJS);
             }
 
             @Override

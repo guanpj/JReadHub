@@ -38,7 +38,7 @@ public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresente
 
     @Override
     public void initView() {
-        mThemeDialog = new ThemeDialog(getActivity());
+        mThemeDialog = new ThemeDialog(getActivity(), mPresenter.getTheme());
         mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.setTitle(getText(R.string.menu_setting));
         mToolbar.setNavigationOnClickListener(v -> pop());

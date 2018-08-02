@@ -31,13 +31,16 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
     @BindView(R.id.theme_dark)
     ImageView imgThemeDark;
 
-    public ThemeDialog(@NonNull Context context) {
-        this(context, R.style.ThemeDialog);
+    private String mCurrentTheme;
+
+    public ThemeDialog(@NonNull Context context, String currentTheme) {
+        this(context, R.style.ThemeDialog, currentTheme);
     }
 
-    public ThemeDialog(@NonNull Context context, int themeResId) {
+    public ThemeDialog(@NonNull Context context, int themeResId, String currentTheme) {
         super(context, themeResId);
         this.mContext = context;
+        this.mCurrentTheme = currentTheme;
         mView = LayoutInflater.from(mContext).inflate(R.layout.dialog_theme, null, false);
         setContentView(mView);
         ButterKnife.bind(this, mView);
@@ -49,35 +52,73 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
         Window window = getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
         mView.setMinimumWidth((int)(displayRectangle.width() * 0.8f));
-        window.setBackgroundDrawableResource(R.color.bg_dialog);
 
-        imgThemeBlue.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_blue_theme), 25));
-        imgThemeGray.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_gray_theme), 25));
-        imgThemeDark.setImageDrawable(new CircleImageDrawable(mContext.getResources().getColor(R.color.theme_dark_theme), 25));
+        if (mCurrentTheme.equals(Constants.ThemeType.Blue)) {
+            imgThemeBlue.setImageDrawable(new CircleImageDrawable(
+                    mContext.getResources().getColor(R.color.theme_blue_theme), 25, true));
+        } else {
+            imgThemeBlue.setImageDrawable(new CircleImageDrawable(
+                    mContext.getResources().getColor(R.color.theme_blue_theme), 25));
+        }
+
+        if (mCurrentTheme.equals(Constants.ThemeType.Gray)) {
+            imgThemeGray.setImageDrawable(new CircleImageDrawable(
+                    mContext.getResources().getColor(R.color.theme_gray_theme), 25, true));
+        } else {
+            imgThemeGray.setImageDrawable(new CircleImageDrawable(
+                    mContext.getResources().getColor(R.color.theme_gray_theme), 25));
+        }
+
+        if (mCurrentTheme.equals(Constants.ThemeType.Dark)) {
+            imgThemeDark.setImageDrawable(new CircleImageDrawable(
+                    mContext.getResources().getColor(R.color.theme_dark_theme), 25, true));
+        } else {
+            imgThemeDark.setImageDrawable(new CircleImageDrawable(
+                    mContext.getResources().getColor(R.color.theme_dark_theme), 25));
+        }
     }
 
     @OnClick({R.id.theme_blue, R.id.theme_gray, R.id.theme_dark})
     public void onClick(View v) {
-        @Constants.Theme String selectedTheme = null;
         switch (v.getId()) {
             case R.id.theme_blue:
-                selectedTheme = Constants.ThemeType.Blue;
+                if (!mCurrentTheme.equals(Constants.ThemeType.Blue)) {
+                    if (onThemeChangeListener != null) {
+                        onThemeChangeListener.onChangeTheme(Constants.ThemeType.Blue);
+                    }
+                }
                 break;
             case R.id.theme_gray:
-                selectedTheme = Constants.ThemeType.Gray;
+                if (!mCurrentTheme.equals(Constants.ThemeType.Gray)) {
+                    if (onThemeChangeListener != null) {
+                        onThemeChangeListener.onChangeTheme(Constants.ThemeType.Gray);
+                    }
+                }
                 break;
             case R.id.theme_dark:
-                selectedTheme = Constants.ThemeType.Dark;
+                if (!mCurrentTheme.equals(Constants.ThemeType.Dark)) {
+                    if (onThemeChangeListener != null) {
+                        onThemeChangeListener.onChangeTheme(Constants.ThemeType.Dark);
+                    }
+                }
                 break;
             default:
+                dismiss();
                 break;
         }
 
-        if (onThemeChangeListener != null) {
-            onThemeChangeListener.onChangeTheme(selectedTheme);
-            dismiss();
-        }
+        dismiss();
     }
+
+    public String getCurrentTheme() {
+        return mCurrentTheme;
+    }
+
+    public void setCurrentTheme(String currentTheme) {
+        this.mCurrentTheme = currentTheme;
+    }
+
+
 
     public interface OnThemeChangeListener {
         void onChangeTheme(@Constants.Theme String selectedTheme);

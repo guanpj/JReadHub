@@ -14,7 +14,7 @@
         android:layout_marginRight="@dimen/dimen_5_dp"
         android:gravity="center_vertical"
         android:scaleType="center"
-        app:srcCompat="@drawable/ic_history_gray_24"
+        app:srcCompat="@drawable/ic_search_history"
         tools:ignore="ContentDescription"/>
 
     <LinearLayout
@@ -47,7 +47,7 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/dimen_5_dp"
                 android:scaleType="center"
-                app:srcCompat="@drawable/ic_sug_item_close"
+                app:srcCompat="@drawable/ic_search_close"
                 tools:ignore="ContentDescription"/>
 
         </LinearLayout>
