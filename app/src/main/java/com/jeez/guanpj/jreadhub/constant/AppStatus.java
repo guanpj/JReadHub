@@ -12,6 +12,4 @@ public class AppStatus {
     public static final int ACTION_RESTART_APP = 1;
     public static final int ACTION_LOGOUT = 2;
     public static final int ACTION_KICK_OUT = 3;
-    public static final String KEY_FRAGMENT_PAGE = "key_fragment_page";
-    public static final String KEY_SAVE_LIST = "key_save_list";
 }
