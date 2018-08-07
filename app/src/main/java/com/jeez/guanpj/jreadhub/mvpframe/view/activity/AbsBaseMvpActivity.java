@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.mvpframe.view.activity;
 
 import android.os.Bundle;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
+import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.di.component.ActivityComponent;
 import com.jeez.guanpj.jreadhub.di.component.DaggerActivityComponent;

@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.util;
 
 import android.support.annotation.StringDef;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
+import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 
 import java.io.File;
 import java.lang.annotation.Retention;

@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.module;
 
 import android.app.Application;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
+import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.module.rule.MyRule;
 import com.jeez.guanpj.jreadhub.module.rule.RxJavaRule;

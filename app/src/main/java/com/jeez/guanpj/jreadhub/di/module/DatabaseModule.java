@@ -2,7 +2,7 @@ package com.jeez.guanpj.jreadhub.di.module;
 
 import android.arch.persistence.room.Room;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
+import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.data.local.ReadhubDatabase;
 import com.jeez.guanpj.jreadhub.data.local.dao.NewsDao;
 import com.jeez.guanpj.jreadhub.data.local.dao.SearchHistoryDao;

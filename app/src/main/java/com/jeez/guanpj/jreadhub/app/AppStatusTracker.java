@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.data;
+package com.jeez.guanpj.jreadhub.app;
 
 import android.app.Activity;
 import android.app.Application;
@@ -7,8 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-
-import com.jeez.guanpj.jreadhub.constant.AppStatus;
 
 import java.util.HashSet;
 import java.util.Set;

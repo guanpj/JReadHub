@@ -1,4 +1,4 @@
-package com.jeez.guanpj.jreadhub.constant;
+package com.jeez.guanpj.jreadhub.app;
 
 public class AppStatus {
     public static final int STATUS_FORCE_KILLED = -1;

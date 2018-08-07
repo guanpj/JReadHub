@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
+import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

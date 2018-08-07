@@ -3,7 +3,7 @@ package com.jeez.guanpj.jreadhub.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.jeez.guanpj.jreadhub.ReadhubApplicationLike;
+import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 
 public class PreferenceHelper {
 
