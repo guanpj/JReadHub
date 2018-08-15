@@ -11,10 +11,10 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
-import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.app.AppStatus;
 import com.jeez.guanpj.jreadhub.app.AppStatusTracker;
+import com.jeez.guanpj.jreadhub.base.fragment.AbsBaseFragment;
+import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.event.SetDrawerStatusEvent;
 import com.jeez.guanpj.jreadhub.event.ToolbarNavigationClickEvent;

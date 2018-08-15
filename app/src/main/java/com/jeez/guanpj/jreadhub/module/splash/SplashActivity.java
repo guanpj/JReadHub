@@ -12,9 +12,9 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.app.AppStatus;
 import com.jeez.guanpj.jreadhub.app.AppStatusTracker;
+import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
 import com.jeez.guanpj.jreadhub.module.main.MainActivity;
 
 import java.util.concurrent.TimeUnit;

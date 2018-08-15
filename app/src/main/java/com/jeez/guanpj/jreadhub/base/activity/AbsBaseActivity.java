@@ -6,10 +6,10 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
-import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
 import com.jeez.guanpj.jreadhub.app.AppStatus;
 import com.jeez.guanpj.jreadhub.app.AppStatusTracker;
+import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
+import com.jeez.guanpj.jreadhub.base.IBaseViewFlow;
 import com.jeez.guanpj.jreadhub.module.main.MainActivity;
 import com.jeez.guanpj.jreadhub.module.splash.SplashActivity;
 import com.jeez.guanpj.jreadhub.util.Constants;
