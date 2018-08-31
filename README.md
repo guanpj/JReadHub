@@ -60,14 +60,14 @@
 [Dagger](https://github.com/google/dagger) | 依赖注入框架
 [Fragmentation](https://github.com/YoKeyword/Fragmentation) | 强大的 Fragment 管理库
 [ExpandableLayout](https://github.com/cachapa/ExpandableLayout) | 支持展开和收缩子 View 的 Layout
-[FlowLayout](https://github.com/hongyangAndroid/FlowLayout) | Android流式布局，支持单选、多选等，适合用于产品标签等
+[FlowLayout](https://github.com/hongyangAndroid/FlowLayout) | Android 流式布局，支持单选、多选等，适合用于产品标签等
 [leakcanary](https://github.com/square/leakcanary) | 使用于 Android 和 Java 和内存泄漏检查工具
 [AgentWeb](https://github.com/Justson/AgentWeb) | Android WebView 框架
 [Android-HeaderAndFooterRecyclerView](https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView) | 支持添加头部和尾部的 RecyclerView
 [Android-Debug-Database](https://github.com/amitshekhariitbhu/Android-Debug-Database) | 用于调试 Android SQLite 和 Shared preferences 的库
 [Bugly](https://bugly.qq.com/v2/) | 帮助开发者快速发现并解决异常，同时掌握产品运营动态，及时跟进用户反馈
-[Tinker](https://github.com/Tencent/tinker) | Android 热修复解决方案，支持 dex，library和资源更新且不用重新安装 app
-[walle](https://github.com/Meituan-Dianping/walle) | Android Signature V2 Scheme签名下的新一代渠道包打包神器
+[Tinker](https://github.com/Tencent/tinker) | Android 热修复解决方案，支持 dex，library 和资源更新且不用重新安装 app
+[walle](https://github.com/Meituan-Dianping/walle) | Android Signature V2 Scheme 签名下的新一代渠道包打包神器
 
 ## 使用到的工具/网站
 
