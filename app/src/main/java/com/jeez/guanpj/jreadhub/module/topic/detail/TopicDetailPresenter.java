@@ -1,6 +1,6 @@
 package com.jeez.guanpj.jreadhub.module.topic.detail;
 
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
@@ -27,9 +27,9 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
         addSubscribe(mDataManager.getTopicDetail(topicId)
                 .compose(RxSchedulers.observableIo2Main())
                 .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
-                .subscribeWith(new DisposableObserver<TopicBean>() {
+                .subscribeWith(new DisposableObserver<TopicDetailBean>() {
                     @Override
-                    public void onNext(TopicBean bean) {
+                    public void onNext(TopicDetailBean bean) {
                         getView().bindData(bean, true);
                     }
 
@@ -49,9 +49,9 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
     public void checkStar(String topicId) {
         addSubscribe(mDataManager.getTopicById(topicId)
                 .compose(RxSchedulers.flowableIo2Main())
-                .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
+                .subscribeWith(new DisposableSubscriber<List<TopicDetailBean>>() {
                     @Override
-                    public void onNext(List<TopicBean> topicBean) {
+                    public void onNext(List<TopicDetailBean> topicBean) {
                         if (null != topicBean && topicBean.size() > 0) {
                             getView().onCheckStarResult(true);
                         } else {
@@ -95,12 +95,12 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
     }
 
     @Override
-    public void addStar(TopicBean topicBean) {
+    public void addStar(TopicDetailBean topicBean) {
         mDataManager.insert(topicBean);
     }
 
     @Override
-    public void removeStar(TopicBean topicBean) {
+    public void removeStar(TopicDetailBean topicBean) {
         mDataManager.delete(topicBean);
     }
 }

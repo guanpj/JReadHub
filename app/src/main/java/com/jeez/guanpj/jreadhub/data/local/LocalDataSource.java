@@ -5,26 +5,25 @@ import android.support.annotation.NonNull;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 public interface LocalDataSource {
-    Flowable<List<TopicBean>> getTopicById(@NonNull String id);
+    Flowable<List<TopicDetailBean>> getTopicById(@NonNull String id);
 
     Flowable<List<NewsBean>> getNewsById(@NonNull String id);
 
     <T>Single<T> getSingleBean(@NonNull Class<T> tClass, @NonNull String id);
 
-    Flowable<List<TopicBean>> getTopicsByKeyword(@NonNull String keyWord);
+    Flowable<List<TopicDetailBean>> getTopicsByKeyword(@NonNull String keyWord);
 
     Flowable<List<NewsBean>> getNewsByKeyword(@NonNull String keyWord);
 
-    Flowable<List<TopicBean>> getAllTopic();
+    Flowable<List<TopicDetailBean>> getAllTopic();
 
     Flowable<List<NewsBean>> getAllNews();
 

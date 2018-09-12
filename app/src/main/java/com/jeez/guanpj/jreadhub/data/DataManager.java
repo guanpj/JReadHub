@@ -10,12 +10,12 @@ import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.data.local.LocalDataSource;
 import com.jeez.guanpj.jreadhub.data.remote.RemoteDataSource;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
@@ -46,7 +46,7 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
-    public Observable<TopicBean> getTopicDetail(String topicId) {
+    public Observable<TopicDetailBean> getTopicDetail(String topicId) {
         return mReemoteDataSource.getTopicDetail(topicId);
     }
 
@@ -61,7 +61,7 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
-    public Flowable<List<TopicBean>> getTopicById(String id) {
+    public Flowable<List<TopicDetailBean>> getTopicById(String id) {
         return mLocalDataSource.getTopicById(id);
     }
 
@@ -76,7 +76,7 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
-    public Flowable<List<TopicBean>> getTopicsByKeyword(@NonNull String keyWord) {
+    public Flowable<List<TopicDetailBean>> getTopicsByKeyword(@NonNull String keyWord) {
         return mLocalDataSource.getTopicsByKeyword(keyWord);
     }
 
@@ -86,7 +86,7 @@ public class DataManager implements RemoteDataSource, LocalDataSource {
     }
 
     @Override
-    public Flowable<List<TopicBean>> getAllTopic() {
+    public Flowable<List<TopicDetailBean>> getAllTopic() {
         return mLocalDataSource.getAllTopic();
     }
 

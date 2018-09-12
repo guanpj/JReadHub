@@ -6,6 +6,7 @@ import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.data.remote.api.ReadhubApi;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
@@ -40,7 +41,7 @@ public class RemoteRepository implements RemoteDataSource {
     }
 
     @Override
-    public Observable<TopicBean> getTopicDetail(String topicId) {
+    public Observable<TopicDetailBean> getTopicDetail(String topicId) {
         return readhubApi.getTopicDetail(topicId);
     }
 

@@ -1,6 +1,6 @@
 package com.jeez.guanpj.jreadhub.module.star.topic;
 
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
@@ -40,9 +40,9 @@ public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> im
         addSubscribe(mDataManager.getTopicsByKeyword(keyWord)
                 .compose(RxSchedulers.flowableIo2Main())
                 .doOnSubscribe(disposable -> getView().showLoading(false))
-                .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
+                .subscribeWith(new DisposableSubscriber<List<TopicDetailBean>>() {
                     @Override
-                    public void onNext(List<TopicBean> topicBeans) {
+                    public void onNext(List<TopicDetailBean> topicBeans) {
                         if (null != topicBeans && !topicBeans.isEmpty()) {
                             getView().bindData(topicBeans, true);
                             getView().showContent();
@@ -67,9 +67,9 @@ public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> im
         addSubscribe(mDataManager.getAllTopic()
                 .compose(RxSchedulers.flowableIo2Main())
                 .doOnSubscribe(disposable -> getView().showLoading(isPullToRefresh))
-                .subscribeWith(new DisposableSubscriber<List<TopicBean>>() {
+                .subscribeWith(new DisposableSubscriber<List<TopicDetailBean>>() {
                     @Override
-                    public void onNext(List<TopicBean> topicBeans) {
+                    public void onNext(List<TopicDetailBean> topicBeans) {
                         if (null != topicBeans && !topicBeans.isEmpty()) {
                             getView().bindData(topicBeans, true);
                             getView().showContent();

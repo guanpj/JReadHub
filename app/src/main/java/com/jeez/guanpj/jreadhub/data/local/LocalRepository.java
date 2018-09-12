@@ -6,9 +6,10 @@ import android.support.annotation.NonNull;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.data.local.dao.NewsDao;
 import com.jeez.guanpj.jreadhub.data.local.dao.SearchHistoryDao;
-import com.jeez.guanpj.jreadhub.data.local.dao.TopicDao;
+import com.jeez.guanpj.jreadhub.data.local.dao.TopicDetailDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -22,12 +23,12 @@ import io.reactivex.Single;
 public class LocalRepository implements LocalDataSource {
 
     private NewsDao mNewsDao;
-    private TopicDao mTopicDao;
+    private TopicDetailDao mTopicDao;
     private SearchHistoryDao mSearchHistoryDao;
     private ExecutorService mExecutorService;
 
     @Inject
-    public LocalRepository(TopicDao topicDao, NewsDao newsDao, SearchHistoryDao searchHistoryDao, ExecutorService executorService) {
+    public LocalRepository(TopicDetailDao topicDao, NewsDao newsDao, SearchHistoryDao searchHistoryDao, ExecutorService executorService) {
         mTopicDao = topicDao;
         mNewsDao = newsDao;
         mSearchHistoryDao = searchHistoryDao;
@@ -35,7 +36,7 @@ public class LocalRepository implements LocalDataSource {
     }
 
     @Override
-    public Flowable<List<TopicBean>> getTopicById(String id) {
+    public Flowable<List<TopicDetailBean>> getTopicById(String id) {
         return mTopicDao.getTopicById(id);
     }
 
@@ -55,7 +56,7 @@ public class LocalRepository implements LocalDataSource {
     }
 
     @Override
-    public Flowable<List<TopicBean>> getTopicsByKeyword(@NonNull String keyWord) {
+    public Flowable<List<TopicDetailBean>> getTopicsByKeyword(@NonNull String keyWord) {
         return mTopicDao.getTopicsByKeyword(keyWord);
     }
 
@@ -65,7 +66,7 @@ public class LocalRepository implements LocalDataSource {
     }
 
     @Override
-    public Flowable<List<TopicBean>> getAllTopic() {
+    public Flowable<List<TopicDetailBean>> getAllTopic() {
         return  mTopicDao.getAllTopic();
     }
 
@@ -111,7 +112,7 @@ public class LocalRepository implements LocalDataSource {
     public void delete(@NonNull Object object) {
         mExecutorService.execute(() -> {
             if (object instanceof TopicBean) {
-                mTopicDao.deleteTopic((TopicBean) object);
+                mTopicDao.deleteTopic((TopicDetailBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.deleteNews((NewsBean) object);
             } else if (object instanceof SearchHistoryBean) {
@@ -124,7 +125,7 @@ public class LocalRepository implements LocalDataSource {
     public void insert(@NonNull Object object) {
         mExecutorService.execute(() -> {
             if (object instanceof TopicBean) {
-                mTopicDao.insertTopic((TopicBean) object);
+                mTopicDao.insertTopic((TopicDetailBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.insertNews((NewsBean) object);
             } else if (object instanceof SearchHistoryBean) {
@@ -137,7 +138,7 @@ public class LocalRepository implements LocalDataSource {
     public void update(@NonNull Object object) {
         mExecutorService.execute(() -> {
             if (object instanceof TopicBean) {
-                mTopicDao.updateTopic((TopicBean) object);
+                mTopicDao.updateTopic((TopicDetailBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.updateNews((NewsBean) object);
             } else if (object instanceof SearchHistoryBean) {

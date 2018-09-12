@@ -9,8 +9,8 @@ import org.threeten.bp.OffsetDateTime;
 
 import java.util.ArrayList;
 
-@Entity(tableName = "topic")
-public class TopicBean extends BaseListItemBean implements Cloneable {
+@Entity(tableName = "topic_detail")
+public class TopicDetailBean extends BaseListItemBean implements Cloneable {
 
     /**
      * id : 1mY1Lpcntvs
@@ -36,7 +36,7 @@ public class TopicBean extends BaseListItemBean implements Cloneable {
     private String summary;
     private String updatedAt;
     @Ignore
-    private String timeline;
+    private TopicTimelineBean timeline;
     @Ignore
     private ArrayList<TopicNewsBean> newsArray;
     @Ignore
@@ -103,11 +103,11 @@ public class TopicBean extends BaseListItemBean implements Cloneable {
         this.updatedAt = updatedAt;
     }
 
-    public String getTimeline() {
+    public TopicTimelineBean getTimeline() {
         return timeline;
     }
 
-    public void setTimeline(String timeline) {
+    public void setTimeline(TopicTimelineBean timeline) {
         this.timeline = timeline;
     }
 
@@ -144,10 +144,10 @@ public class TopicBean extends BaseListItemBean implements Cloneable {
     }
 
     @Override
-    public TopicBean clone() {
-        TopicBean bean = null;
+    public TopicDetailBean clone() {
+        TopicDetailBean bean = null;
         try {
-            bean = (TopicBean) super.clone();
+            bean = (TopicDetailBean) super.clone();
             bean.newsArray = (ArrayList<TopicNewsBean>) newsArray.clone();
         } catch (Exception e) {
             e.printStackTrace();

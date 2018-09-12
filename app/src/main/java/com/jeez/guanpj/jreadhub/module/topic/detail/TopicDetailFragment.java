@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.bean.EntityEventTopicBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.bean.TopicNewsBean;
 import com.jeez.guanpj.jreadhub.event.OpenWebSiteEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicTimelineAdapter;
@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBean, TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
+public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicDetailBean, TopicDetailPresenter> implements TopicDetailContract.View, Toolbar.OnMenuItemClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -65,7 +65,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
 
     private String mTopicTitle;
     private String mTopicId;
-    private TopicBean mTopicBean;
+    private TopicDetailBean mTopicBean;
     private TopicTimelineAdapter mTimelineAdapter;
     private boolean mIsStar;
     private boolean mShowTips = false;
@@ -139,7 +139,7 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicBea
     }
 
     @Override
-    public void bindData(TopicBean topicBean, boolean isPullToRefresh) {
+    public void bindData(TopicDetailBean topicBean, boolean isPullToRefresh) {
         this.mTopicBean = topicBean;
 
         mTxtTopicTitle.setText(mTopicBean.getTitle().trim());

@@ -6,7 +6,7 @@ import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.data.local.ReadhubDatabase;
 import com.jeez.guanpj.jreadhub.data.local.dao.NewsDao;
 import com.jeez.guanpj.jreadhub.data.local.dao.SearchHistoryDao;
-import com.jeez.guanpj.jreadhub.data.local.dao.TopicDao;
+import com.jeez.guanpj.jreadhub.data.local.dao.TopicDetailDao;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -32,8 +32,8 @@ public class DatabaseModule {
 
     @Provides
     @Singleton
-    TopicDao provideTopicDao(ReadhubDatabase database) {
-        return database.getTopicDao();
+    TopicDetailDao provideTopicDao(ReadhubDatabase database) {
+        return database.getTopicDetailDao();
     }
 
     @Provides

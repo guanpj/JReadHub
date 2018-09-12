@@ -9,6 +9,7 @@ import com.jeez.guanpj.jreadhub.bean.NewTopicCountBean;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.util.Constants;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public interface ReadhubApi {
     Observable<InstantReadBean> getTopicInstantRead(@Query("topicId") String topicId);
 
     @GET("topic/{topic_id}")
-    Observable<TopicBean> getTopicDetail(@Path("topic_id") String topicId);
+    Observable<TopicDetailBean> getTopicDetail(@Path("topic_id") String topicId);
 
     @GET("topic/related")
     Observable<List<RelevantTopicBean>> getRelateTopic(@Query("entityId") String topicId,
