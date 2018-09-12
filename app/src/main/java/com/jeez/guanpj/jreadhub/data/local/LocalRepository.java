@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.bean.SearchHistoryBean;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
 import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.data.local.dao.NewsDao;
 import com.jeez.guanpj.jreadhub.data.local.dao.SearchHistoryDao;
@@ -47,7 +46,7 @@ public class LocalRepository implements LocalDataSource {
 
     @Override
     public <T> Single<T> getSingleBean(Class<T> tClass, String id) {
-        if (TopicBean.class.equals(tClass)) {
+        if (TopicDetailBean.class.equals(tClass)) {
             return (Single<T>) mTopicDao.getSingleTopicById(id);
         } else if (NewsBean.class.equals(tClass)) {
             return (Single<T>) mNewsDao.getSingleNewsById(id);
@@ -88,7 +87,7 @@ public class LocalRepository implements LocalDataSource {
     @Override
     public <T> void deleteAll(@NonNull Class<T> tClass) {
         mExecutorService.execute(() -> {
-            if (TopicBean.class.equals(tClass)) {
+            if (TopicDetailBean.class.equals(tClass)) {
                 mTopicDao.deleteAllTopic();
             } else if (NewsBean.class.equals(tClass)) {
                 mNewsDao.deleteAllNews();
@@ -111,7 +110,7 @@ public class LocalRepository implements LocalDataSource {
     @Override
     public void delete(@NonNull Object object) {
         mExecutorService.execute(() -> {
-            if (object instanceof TopicBean) {
+            if (object instanceof TopicDetailBean) {
                 mTopicDao.deleteTopic((TopicDetailBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.deleteNews((NewsBean) object);
@@ -124,7 +123,7 @@ public class LocalRepository implements LocalDataSource {
     @Override
     public void insert(@NonNull Object object) {
         mExecutorService.execute(() -> {
-            if (object instanceof TopicBean) {
+            if (object instanceof TopicDetailBean) {
                 mTopicDao.insertTopic((TopicDetailBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.insertNews((NewsBean) object);
@@ -137,7 +136,7 @@ public class LocalRepository implements LocalDataSource {
     @Override
     public void update(@NonNull Object object) {
         mExecutorService.execute(() -> {
-            if (object instanceof TopicBean) {
+            if (object instanceof TopicDetailBean) {
                 mTopicDao.updateTopic((TopicDetailBean) object);
             } else if (object instanceof NewsBean) {
                 mNewsDao.updateNews((NewsBean) object);

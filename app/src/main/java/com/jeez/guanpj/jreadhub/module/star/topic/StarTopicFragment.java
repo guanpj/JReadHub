@@ -10,9 +10,9 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jeez.guanpj.jreadhub.R;
-import com.jeez.guanpj.jreadhub.bean.TopicBean;
+import com.jeez.guanpj.jreadhub.bean.TopicDetailBean;
 import com.jeez.guanpj.jreadhub.event.SearchByKeywordEvent;
-import com.jeez.guanpj.jreadhub.module.adpter.TopicListAdapterWithThirdLib;
+import com.jeez.guanpj.jreadhub.module.adpter.TopicDetailListAdapterWithThirdLib;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.animator.EmptyEffect;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceFragment;
@@ -24,15 +24,15 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicBean>, StarTopicPresenter>
-        implements StarTopicContract.View<List<TopicBean>>, SwipeRefreshLayout.OnRefreshListener {
+public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicDetailBean>, StarTopicPresenter>
+        implements StarTopicContract.View<List<TopicDetailBean>>, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    private TopicListAdapterWithThirdLib mAdapter;
+    private TopicDetailListAdapterWithThirdLib mAdapter;
     private String mKeyword;
 
     public static StarTopicFragment newInstance() {
@@ -63,7 +63,7 @@ public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicBean>, St
     @Override
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new TopicListAdapterWithThirdLib();
+        mAdapter = new TopicDetailListAdapterWithThirdLib();
         mAdapter.isFirstOnly(false);
         mAdapter.setNotDoAnimationCount(3);
         mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
@@ -115,7 +115,7 @@ public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicBean>, St
     }
 
     @Override
-    public void bindData(List<TopicBean> data, boolean isPullToRefresh) {
+    public void bindData(List<TopicDetailBean> data, boolean isPullToRefresh) {
         if (isPullToRefresh) {
             mRefreshLayout.setRefreshing(false);
             mAdapter.setNewData(data);
