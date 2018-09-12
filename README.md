@@ -5,14 +5,11 @@
 
 #### 此项目是个人基于 [Readhub](https://readhub.me) 开发一的一款非官方 Android 客户端，旨在为用户提供一个互联网资讯阅读平台和良好的阅读体验。
 
-## Demo
+## 下载地址
 ##### Google Play
 [![Google Play](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/google_play.png?raw=true)](https://play.google.com/store/apps/details?id=com.jeez.guanpj.jreadhub)
-
 ##### Fir
-[![Fir](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/fir.png?raw=true)](https://play.google.com/store/apps/details?id=com.jeez.guanpj.jreadhub)
-
-[直接下载]: https://fir.im/f5uj
+[![Fir](https://raw.githubusercontent.com/guanpj/JReadhub/master/img/fir.png?raw=true)](https://fir.im/f5uj)
 
 ## 特点
 
