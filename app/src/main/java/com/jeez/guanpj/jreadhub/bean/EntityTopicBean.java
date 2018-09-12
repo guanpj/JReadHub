@@ -12,7 +12,7 @@ public class EntityTopicBean {
      */
 
     private String nerName;
-    private int entityId;
+    private String entityId;
     private String entityName;
     private String entityType;
     private int eventType;
@@ -26,11 +26,11 @@ public class EntityTopicBean {
         this.nerName = nerName;
     }
 
-    public int getEntityId() {
+    public String getEntityId() {
         return entityId;
     }
 
-    public void setEntityId(int entityId) {
+    public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
 

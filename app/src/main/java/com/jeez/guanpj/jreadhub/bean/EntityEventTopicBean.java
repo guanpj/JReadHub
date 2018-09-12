@@ -10,17 +10,17 @@ public class EntityEventTopicBean {
      * eventTypeLabel : 投融资
      */
 
-    private int entityId;
+    private String entityId;
     private String entityName;
     private String entityType;
     private int eventType;
     private String eventTypeLabel;
 
-    public int getEntityId() {
+    public String getEntityId() {
         return entityId;
     }
 
-    public void setEntityId(int entityId) {
+    public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
 

@@ -36,6 +36,7 @@ public class TopicDetailPresenter extends BasePresenter<TopicDetailContract.View
                     @Override
                     public void onError(Throwable e) {
                         getView().showError();
+                        e.printStackTrace();
                     }
 
                     @Override
