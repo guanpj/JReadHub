@@ -22,7 +22,7 @@ public class TopicNewsBean implements Cloneable {
      * publishDate : 2018-04-24T15:40:07.000Z
      */
 
-    private int id;
+    private String id;
     private String url;
     private String title;
     private int groupId;
@@ -33,11 +33,11 @@ public class TopicNewsBean implements Cloneable {
     private int duplicateId;
     private String publishDate;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

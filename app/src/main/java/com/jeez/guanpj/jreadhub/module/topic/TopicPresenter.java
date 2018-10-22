@@ -31,8 +31,8 @@ public class TopicPresenter extends BasePresenter<TopicContract.View> implements
     }
 
     @Override
-    public void onAttatch(TopicContract.View view) {
-        super.onAttatch(view);
+    public void onAttach(TopicContract.View view) {
+        super.onAttach(view);
         initEvent();
     }
 

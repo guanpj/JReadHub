@@ -29,8 +29,8 @@ public class CommonPresenter extends BasePresenter<CommonContract.View> implemen
     }
 
     @Override
-    public void onAttatch(CommonContract.View view) {
-        super.onAttatch(view);
+    public void onAttach(CommonContract.View view) {
+        super.onAttach(view);
         initEvent();
     }
 

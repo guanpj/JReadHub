@@ -21,8 +21,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     }
 
     @Override
-    public void onAttatch(MainContract.View view) {
-        super.onAttatch(view);
+    public void onAttach(MainContract.View view) {
+        super.onAttach(view);
         initEvent();
     }
 

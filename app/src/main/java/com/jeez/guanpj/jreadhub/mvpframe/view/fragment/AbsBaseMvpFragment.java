@@ -34,7 +34,7 @@ public abstract class AbsBaseMvpFragment<P extends BasePresenter> extends AbsBas
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (null != mPresenter) {
-            mPresenter.onAttatch(this);
+            mPresenter.onAttach(this);
         }
     }
 

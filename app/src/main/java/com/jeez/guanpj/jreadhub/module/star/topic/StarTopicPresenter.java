@@ -24,8 +24,8 @@ public class StarTopicPresenter extends BasePresenter<StarTopicContract.View> im
     }
 
     @Override
-    public void onAttatch(StarTopicContract.View view) {
-        super.onAttatch(view);
+    public void onAttach(StarTopicContract.View view) {
+        super.onAttach(view);
         initEvent();
     }
 

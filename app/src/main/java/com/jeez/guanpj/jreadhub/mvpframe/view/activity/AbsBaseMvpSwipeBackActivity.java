@@ -29,7 +29,7 @@ public abstract class AbsBaseMvpSwipeBackActivity<P extends BasePresenter> exten
         performInject();
         getSwipeBackLayout().setEdgeOrientation(SwipeBackLayout.EDGE_ALL);
         if (null != mPresenter) {
-            mPresenter.onAttatch(this);
+            mPresenter.onAttach(this);
         }
     }
 

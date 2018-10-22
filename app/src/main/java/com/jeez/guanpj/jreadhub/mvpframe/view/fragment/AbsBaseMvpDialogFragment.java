@@ -30,7 +30,7 @@ public abstract class AbsBaseMvpDialogFragment<P extends BasePresenter> extends 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (null != mPresenter) {
-            mPresenter.onAttatch(this);
+            mPresenter.onAttach(this);
         }
     }
 

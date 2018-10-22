@@ -100,7 +100,7 @@ public class MainFragment extends AbsBaseFragment implements Toolbar.OnMenuItemC
                 showShortToast("Coming soon...");
                 break;
             case R.id.action_share:
-                NavigationUtil.shareToApp(getActivity(), "https://readhub.me\n互联网聚合阅读平台");
+                NavigationUtil.shareToApp(getActivity(), "https://readhub.cn\n互联网聚合阅读平台");
                 break;
             default:
                 break;

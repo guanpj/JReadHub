@@ -26,7 +26,7 @@ public abstract class AbsBaseMvpActivity<P extends BasePresenter> extends AbsBas
         super.onCreate(savedInstanceState);
         performInject();
         if (null != mPresenter) {
-            mPresenter.onAttatch(this);
+            mPresenter.onAttach(this);
         }
     }
 

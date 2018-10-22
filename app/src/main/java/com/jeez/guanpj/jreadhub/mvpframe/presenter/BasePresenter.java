@@ -30,7 +30,7 @@ public class BasePresenter<V extends IBaseMvpView> implements IBasePresenter<V> 
     }
 
     @Override
-    public void onAttatch(V view) {
+    public void onAttach(V view) {
         this.weakView = new WeakReference<>(view);
         proxyView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(),
                 view.getClass().getInterfaces(), new MyInvocationHandler(this.weakView.get()));

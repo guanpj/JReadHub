@@ -24,7 +24,7 @@
     <string name="use_system_browser_des">使用系统内置的浏览器打开网页内容</string>
     <string name="change_theme">切换主题</string>
     <string name="change_theme_des">根据不同场景优化阅读体验</string>
-    <string name="readhub_site"><a href="" target="_blank">https://readhub.me</a></string>
+    <string name="readhub_site"><a href="" target="_blank">https://readhub.cn</a></string>
     <string name="readhub_source_site"><a href="" target="_blank">https://github.com/guanpj/JReadHub</a></string>
     <string name="text_readhub_source_site">源码地址</string>
     <string name="version">V 1.0.0</string>

@@ -6,7 +6,7 @@ import com.jeez.guanpj.jreadhub.util.Constants;
 import io.reactivex.disposables.Disposable;
 
 public interface IBasePresenter<V extends IBaseMvpView> {
-    void onAttatch(V view);
+    void onAttach(V view);
 
     void onDetach();
 

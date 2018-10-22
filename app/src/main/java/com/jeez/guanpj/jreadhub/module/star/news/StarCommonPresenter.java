@@ -3,7 +3,6 @@ package com.jeez.guanpj.jreadhub.module.star.news;
 import com.jeez.guanpj.jreadhub.bean.NewsBean;
 import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.event.FabClickEvent;
-import com.jeez.guanpj.jreadhub.event.SearchByKeywordEvent;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxSchedulers;
@@ -25,8 +24,8 @@ public class StarCommonPresenter extends BasePresenter<StarCommonContract.View> 
     }
 
     @Override
-    public void onAttatch(StarCommonContract.View view) {
-        super.onAttatch(view);
+    public void onAttach(StarCommonContract.View view) {
+        super.onAttach(view);
         initEvent();
     }
 

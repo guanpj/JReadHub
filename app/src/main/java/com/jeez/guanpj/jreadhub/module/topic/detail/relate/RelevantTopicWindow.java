@@ -50,7 +50,7 @@ public class RelevantTopicWindow extends RelativePopupWindow implements Relevant
 
         performInject();
         if (null != mPresenter) {
-            mPresenter.onAttatch(this);
+            mPresenter.onAttach(this);
         }
         View view = LayoutInflater.from(context).inflate(R.layout.layout_topic_timeline, null);
         mRecyclerView = view.findViewById(R.id.recycler_topic_trace);
