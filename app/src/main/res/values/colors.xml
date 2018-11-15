@@ -32,6 +32,7 @@
 
     <color name="theme_blue_theme">#5ca1de</color>
     <color name="theme_blue_status">#5ca1de</color>
+    <color name="theme_blue_icon">#ffffff</color>
     <color name="theme_blue_accent">#5ca1de</color>
     <color name="theme_blue_background">#ffffff</color>
     <color name="theme_blue_view_background">#f4f4f4</color>
@@ -43,24 +44,26 @@
 
     <color name="theme_gray_theme">#8f8d86</color>
     <color name="theme_gray_status">#8f8d86</color>
+    <color name="theme_gray_icon">#ffffff</color>
     <color name="theme_gray_accent">#8f8d86</color>
     <color name="theme_gray_background">#ffffff</color>
     <color name="theme_gray_view_background">#f4f4f4</color>
     <color name="theme_gray_drawer_menu_background">#ffffff</color>
     <color name="theme_gray_text_primary">#535353</color>
     <color name="theme_gray_text_secondary">#727272</color>
-    <color name="theme_gray_float_btn">#ffffff</color>
+    <color name="theme_gray_float_btn">#bababa</color>
     <color name="theme_gray_toolbar_text">#ffffff</color>
 
     <color name="theme_dark_theme">#2D3035</color>
     <color name="theme_dark_status">#2D3035</color>
-    <color name="theme_dark_accent">#ffffff</color>
+    <color name="theme_dark_icon">#bababa</color>
+    <color name="theme_dark_accent">#bababa</color>
     <color name="theme_dark_background">#2D3035</color>
     <color name="theme_dark_view_background">#3a3d43</color>
     <color name="theme_dark_drawer_menu_background">#2D3035</color>
-    <color name="theme_dark_text_primary">#d2d2d2</color>
-    <color name="theme_dark_text_secondary">#9b9b9b</color>
+    <color name="theme_dark_text_primary">#bababa</color>
+    <color name="theme_dark_text_secondary">#8e8e8e</color>
     <color name="theme_dark_float_btn">#2D3035</color>
-    <color name="theme_dark_toolbar_text">#ffffff</color>
+    <color name="theme_dark_toolbar_text">#bababa</color>
 
 </resources>

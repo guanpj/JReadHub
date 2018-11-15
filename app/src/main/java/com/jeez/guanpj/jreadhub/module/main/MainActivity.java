@@ -175,7 +175,7 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
         NewsBean newsBean = event.getNewsBean();
         if (mPresenter.isUseSystemBrowser()) {
             if (null != newsBean) {
-                String url = null;
+                String url;
                 if (!TextUtils.isEmpty(newsBean.getMobileUrl())) {
                     url = newsBean.getMobileUrl();
                 } else {

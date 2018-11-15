@@ -28,6 +28,7 @@ import com.jeez.guanpj.jreadhub.module.topic.detail.relate.RelevantTopicWindow;
 import com.jeez.guanpj.jreadhub.mvpframe.rx.RxBus;
 import com.jeez.guanpj.jreadhub.mvpframe.view.lce.fragment.AbsBaseMvpLceSwipeBackFragment;
 import com.jeez.guanpj.jreadhub.util.Constants;
+import com.jeez.guanpj.jreadhub.util.NavigationUtil;
 import com.jeez.guanpj.jreadhub.widget.RelativePopupWindow;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -279,6 +280,9 @@ public class TopicDetailFragment extends AbsBaseMvpLceSwipeBackFragment<TopicDet
                 } else {
                     mPresenter.addStar(mTopicBean);
                 }
+                break;
+            case R.id.action_share:
+                NavigationUtil.shareToApp(getActivity(), "https://readhub.cn\n互联网聚合阅读平台");
                 break;
             default:
                 break;

@@ -10,6 +10,7 @@
 
         <item name="readhubTheme">@color/theme_blue_theme</item>
         <item name="readhubStatus">@color/theme_blue_status</item>
+        <item name="readhubIcon">@color/theme_blue_icon</item>
         <item name="readhubColorAccent">@color/theme_blue_accent</item>
         <item name="readhubBackground">@color/theme_blue_background</item>
         <item name="readhubViewBackground">@color/theme_blue_view_background</item>
@@ -27,6 +28,7 @@
 
         <item name="readhubTheme">@color/theme_gray_theme</item>
         <item name="readhubStatus">@color/theme_gray_status</item>
+        <item name="readhubIcon">@color/theme_gray_icon</item>
         <item name="readhubColorAccent">@color/theme_gray_accent</item>
         <item name="readhubBackground">@color/theme_gray_background</item>
         <item name="readhubViewBackground">@color/theme_gray_view_background</item>
@@ -44,6 +46,7 @@
 
         <item name="readhubTheme">@color/theme_dark_theme</item>
         <item name="readhubStatus">@color/theme_dark_status</item>
+        <item name="readhubIcon">@color/theme_dark_icon</item>
         <item name="readhubColorAccent">@color/theme_dark_accent</item>
         <item name="readhubBackground">@color/theme_dark_background</item>
         <item name="readhubViewBackground">@color/theme_dark_view_background</item>
@@ -125,6 +128,7 @@
     <!--Menu 样式，设置白色背景和弹出框锚点位置-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <item name="android:textColorSecondary">?attr/readhubIcon</item>
     </style>
 
     <!--OverflowMenu 样式，这里使其显示在下方-->

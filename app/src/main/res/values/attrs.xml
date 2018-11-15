@@ -3,6 +3,7 @@
 
     <attr name="readhubTheme" format="color" />
     <attr name="readhubStatus" format="color"/>
+    <attr name="readhubIcon" format="color" />
     <attr name="readhubColorAccent" format="color"/>
     <attr name="readhubBackground" format="color" />
     <attr name="readhubViewBackground" format="color" />
