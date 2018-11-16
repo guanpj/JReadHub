@@ -125,15 +125,24 @@
     <!--AppBarLayout 样式-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <!--Toolbar 样式，设置白色背景和弹出框锚点位置-->
+    <style name="Theme.Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+    </style>
+
     <!--Menu 样式，设置白色背景和弹出框锚点位置-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
-        <item name="android:textColorSecondary">?attr/readhubIcon</item>
+        <item name="actionOverflowMenuStyle">@style/MyOverflowMenuStyle</item>
     </style>
 
     <!--OverflowMenu 样式，这里使其显示在下方-->
-    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+    <style name="MyOverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item>
+    </style>
+
+    <!--OverflowButton 图标-->
+    <style name="MyOverflowButtonStyle" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_tool_bar_more</item>
     </style>
 
     <!--首页/星标内容 Tab 字体样式-->

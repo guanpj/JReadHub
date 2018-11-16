@@ -11,8 +11,8 @@ android {
         applicationId "com.jeez.guanpj.jreadhub"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 7
-        versionName "2.0.2"
+        versionCode 8
+        versionName "2.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         // 开启multidex
         multiDexEnabled true
