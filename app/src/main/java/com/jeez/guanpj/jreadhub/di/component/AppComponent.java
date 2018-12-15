@@ -1,6 +1,7 @@
 package com.jeez.guanpj.jreadhub.di.component;
 
 import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
+import com.jeez.guanpj.jreadhub.data.DataManager;
 import com.jeez.guanpj.jreadhub.di.module.AbstractAllActivityModule;
 import com.jeez.guanpj.jreadhub.di.module.AbstractAllDialogFragmentModule;
 import com.jeez.guanpj.jreadhub.di.module.AbstractAllFragmentModule;
@@ -23,8 +24,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AbstractAllFragmentModule.class,
         AbstractAllSwipeBackFragmentModule.class,
         AbstractAllDialogFragmentModule.class,
-        AppModule.class,
-        PopupWindowModule.class})
+        AppModule.class})
 public interface AppComponent {
     void inject(ReadhubApplicationLike app);
+
+    DataManager getDataManager();
 }

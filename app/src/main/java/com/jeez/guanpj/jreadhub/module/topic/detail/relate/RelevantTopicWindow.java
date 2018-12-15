@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.jeez.guanpj.jreadhub.R;
 import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.bean.RelevantTopicBean;
+import com.jeez.guanpj.jreadhub.di.component.DaggerPopupWindowComponent;
 import com.jeez.guanpj.jreadhub.event.RelevantTopicItemClickEvent;
 import com.jeez.guanpj.jreadhub.module.adpter.TopicTimelineAdapterWithThirdLib;
 import com.jeez.guanpj.jreadhub.module.main.MainFragment;
