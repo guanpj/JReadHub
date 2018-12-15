@@ -22,42 +22,42 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public class DataManager implements RemoteDataSource, LocalDataSource {
-    private RemoteDataSource mReemoteDataSource;
+    private RemoteDataSource mRemoteDataSource;
     private LocalDataSource mLocalDataSource;
 
     public DataManager(RemoteDataSource remoteDataSource, LocalDataSource localDataSource) {
-        this.mReemoteDataSource = remoteDataSource;
+        this.mRemoteDataSource = remoteDataSource;
         this.mLocalDataSource = localDataSource;
     }
 
     @Override
     public Observable<DataListBean<TopicBean>> getTopicList(Long lastCursor, int pageSize) {
-        return mReemoteDataSource.getTopicList(lastCursor, pageSize);
+        return mRemoteDataSource.getTopicList(lastCursor, pageSize);
     }
 
     @Override
     public Observable<DataListBean<NewsBean>> getNewsList(@Constants.Type String type, Long lastCursor, int pageSize) {
-        return mReemoteDataSource.getNewsList(type, lastCursor, pageSize);
+        return mRemoteDataSource.getNewsList(type, lastCursor, pageSize);
     }
 
     @Override
     public Observable<InstantReadBean> getTopicInstantRead(String topicId) {
-        return mReemoteDataSource.getTopicInstantRead(topicId);
+        return mRemoteDataSource.getTopicInstantRead(topicId);
     }
 
     @Override
     public Observable<TopicDetailBean> getTopicDetail(String topicId) {
-        return mReemoteDataSource.getTopicDetail(topicId);
+        return mRemoteDataSource.getTopicDetail(topicId);
     }
 
     @Override
     public Observable<List<RelevantTopicBean>> getRelateTopic(String topicId, int eventType, long order, long timeStamp) {
-        return mReemoteDataSource.getRelateTopic(topicId, eventType, order, timeStamp);
+        return mRemoteDataSource.getRelateTopic(topicId, eventType, order, timeStamp);
     }
 
     @Override
     public Observable<NewTopicCountBean> getNewTopicCount(Long latestCursor) {
-        return mReemoteDataSource.getNewTopicCount(latestCursor);
+        return mRemoteDataSource.getNewTopicCount(latestCursor);
     }
 
     @Override

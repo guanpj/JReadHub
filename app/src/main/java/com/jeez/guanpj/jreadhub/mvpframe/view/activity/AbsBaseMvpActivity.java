@@ -1,43 +1,45 @@
 package com.jeez.guanpj.jreadhub.mvpframe.view.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.jeez.guanpj.jreadhub.app.ReadhubApplicationLike;
 import com.jeez.guanpj.jreadhub.base.activity.AbsBaseActivity;
-import com.jeez.guanpj.jreadhub.di.component.ActivityComponent;
-import com.jeez.guanpj.jreadhub.di.component.DaggerActivityComponent;
-import com.jeez.guanpj.jreadhub.di.module.ActivityModule;
 import com.jeez.guanpj.jreadhub.mvpframe.presenter.BasePresenter;
 import com.jeez.guanpj.jreadhub.mvpframe.view.IBaseMvpView;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
 /**
  * Created by Jie on 2016-11-2.
  */
 
-public abstract class AbsBaseMvpActivity<P extends BasePresenter> extends AbsBaseActivity implements IBaseMvpView {
+public abstract class AbsBaseMvpActivity<P extends BasePresenter> extends AbsBaseActivity implements IBaseMvpView, HasSupportFragmentInjector {
 
+    @Inject
+    DispatchingAndroidInjector<Fragment> mFragmentDispatchingAndroidInjector;
     @Inject
     public P mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //AndroidInjection.inject(this);
+        ReadhubApplicationLike.getInstance().activityInjector()
+                .inject(this);
         super.onCreate(savedInstanceState);
-        performInject();
         if (null != mPresenter) {
             mPresenter.onAttach(this);
         }
     }
 
-    public ActivityComponent getActivityComponent() {
-        return DaggerActivityComponent.builder()
-                .appComponent(ReadhubApplicationLike.getAppComponent())
-                .activityModule(new ActivityModule(this))
-                .build();
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return mFragmentDispatchingAndroidInjector;
     }
-
-    protected abstract void performInject();
 
     @Override
     protected void onDestroy() {

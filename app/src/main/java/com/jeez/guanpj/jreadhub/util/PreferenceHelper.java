@@ -18,7 +18,7 @@ public class PreferenceHelper {
     }
 
     private PreferenceHelper() {
-        mPreferences = ReadhubApplicationLike.getInstance().getSharedPreferences(Constants.KEY_SHARED_PREFERENCE, Context.MODE_PRIVATE);
+        mPreferences = ReadhubApplicationLike.getApp().getSharedPreferences(Constants.KEY_SHARED_PREFERENCE, Context.MODE_PRIVATE);
     }
 
     public void setTheme(String theme) {

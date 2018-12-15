@@ -102,11 +102,11 @@ public abstract class AbsBaseActivity extends SupportActivity implements IBaseVi
     }
 
     protected void showShortToast(String msg) {
-        Toast.makeText(ReadhubApplicationLike.getInstance(), msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReadhubApplicationLike.getApp(), msg, Toast.LENGTH_SHORT).show();
     }
 
     protected void showShortToast(int resId) {
-        Toast.makeText(ReadhubApplicationLike.getInstance(), resId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReadhubApplicationLike.getApp(), resId, Toast.LENGTH_SHORT).show();
     }
 
     protected void setToolbar(Toolbar toolbar, String title) {

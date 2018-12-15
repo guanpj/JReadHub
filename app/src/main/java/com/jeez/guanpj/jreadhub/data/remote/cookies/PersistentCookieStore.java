@@ -34,7 +34,7 @@ public class PersistentCookieStore {
     private final SharedPreferences cookiePrefs;
 
     PersistentCookieStore() {
-        cookiePrefs = ReadhubApplicationLike.getInstance().getSharedPreferences(COOKIE_PREFS, 0);
+        cookiePrefs = ReadhubApplicationLike.getApp().getSharedPreferences(COOKIE_PREFS, 0);
         cookies = new HashMap<>();
 
         //将持久化的cookies缓存到内存中 即map cookies

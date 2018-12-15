@@ -55,11 +55,6 @@ public class StarCommonListFragment extends AbsBaseMvpLceFragment<List<NewsBean>
     }
 
     @Override
-    protected void performInject() {
-        getFragmentComponent().inject(this);
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_star;
     }

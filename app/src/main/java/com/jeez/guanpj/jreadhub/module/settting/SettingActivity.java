@@ -61,11 +61,6 @@ public class SettingActivity extends AbsBaseMvpSwipeBackActivity<SettingPresente
     }
 
     @Override
-    protected void performInject() {
-        getActivityComponent().inject(this);
-    }
-
-    @Override
     public void onChangeTheme(@Constants.Theme String selectedTheme) {
         mPresenter.setTheme(selectedTheme);
         switch (selectedTheme) {

@@ -23,7 +23,7 @@ public class BasePresenter<V extends IBaseMvpView> implements IBasePresenter<V> 
     private WeakReference<V> weakView;
     private V proxyView;
     private CompositeDisposable compositeDisposable;
-    private DataManager mDataManager;
+    public DataManager mDataManager;
 
     public BasePresenter(DataManager dataManager) {
         this.mDataManager = dataManager;

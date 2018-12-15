@@ -1,12 +1,14 @@
 package com.jeez.guanpj.jreadhub.app;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Environment;
 import android.support.multidex.MultiDex;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
@@ -25,31 +27,51 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadhubApplicationLike extends TinkerApplicationLike {
-    private static Application sInstance;
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class ReadhubApplicationLike extends TinkerApplicationLike implements HasActivityInjector, HasSupportFragmentInjector {
+
+    private static Application sApp;
+    private static ReadhubApplicationLike sInstance;
     private static volatile AppComponent appComponent;
+
+    @Inject
+    DispatchingAndroidInjector<Activity> mActivityInjector;
+    @Inject
+    DispatchingAndroidInjector<Fragment> mFragmentInjector;
 
     public ReadhubApplicationLike(Application application, int tinkerFlags, boolean tinkerLoadVerifyFlag, long applicationStartElapsedTime, long applicationStartMillisTime, Intent tinkerResultIntent) {
         super(application, tinkerFlags, tinkerLoadVerifyFlag, applicationStartElapsedTime, applicationStartMillisTime, tinkerResultIntent);
     }
 
-    public static synchronized Application getInstance() {
+    public static synchronized Application getApp() {
+        return sApp;
+    }
+
+    public static synchronized ReadhubApplicationLike getInstance() {
         return sInstance;
     }
 
     public static synchronized AppComponent getAppComponent() {
-        if (appComponent == null) {
-            appComponent = DaggerAppComponent.builder()
-                    .appModule(new AppModule(sInstance))
-                    .build();
-        }
         return appComponent;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        sInstance = getApplication();
+        sApp = getApplication();
+        sInstance = this;
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(sApp))
+                /*.databaseModule(new DatabaseModule())
+                .networkModule(new NetworkModule())*/
+                .build();
+        appComponent.inject(this);
         if (LeakCanary.isInAnalyzerProcess(getApplication())) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
@@ -60,7 +82,7 @@ public class ReadhubApplicationLike extends TinkerApplicationLike {
         LeakCanary.install(getApplication());
         AppStatusTracker.init(getApplication());
         AndroidThreeTen.init(getApplication());
-        //CrashHandler.getInstance().init(getApplicationContext());
+        //CrashHandler.getApp().init(getApplicationContext());
     }
 
     private void initBugly() {
@@ -127,5 +149,15 @@ public class ReadhubApplicationLike extends TinkerApplicationLike {
             }
         }
         return null;
+    }
+
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return mActivityInjector;
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return mFragmentInjector;
     }
 }

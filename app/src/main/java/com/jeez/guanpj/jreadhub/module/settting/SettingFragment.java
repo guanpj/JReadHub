@@ -63,10 +63,6 @@ public class SettingFragment extends AbsBaseMvpSwipeBackFragment<SettingPresente
         mThemeDialog.show();
     }
 
-    @Override
-    protected void performInject() {
-        getFragmentComponent().inject(this);
-    }
 
     @Override
     public void onChangeTheme(@Constants.Theme String selectedTheme) {

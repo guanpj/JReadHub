@@ -57,11 +57,6 @@ public class CommonListFragment extends AbsBaseMvpLceFragment<DataListBean<NewsB
     }
 
     @Override
-    protected void performInject() {
-        getFragmentComponent().inject(this);
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_common;
     }

@@ -17,7 +17,7 @@ public class CommonUtil {
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static int dp2px(float dpValue) {
-        final float scale = ReadhubApplicationLike.getInstance().getResources().getDisplayMetrics().density;
+        final float scale = ReadhubApplicationLike.getApp().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -46,7 +46,7 @@ public class CommonUtil {
      * 检查是否有可用网络
      */
     public static boolean isNetworkConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) ReadhubApplicationLike.getInstance()
+        ConnectivityManager connectivityManager = (ConnectivityManager) ReadhubApplicationLike.getApp()
                 .getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         assert connectivityManager != null;
         return connectivityManager.getActiveNetworkInfo() != null;

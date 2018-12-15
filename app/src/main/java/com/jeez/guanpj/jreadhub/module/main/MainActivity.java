@@ -54,11 +54,6 @@ public class MainActivity extends AbsBaseMvpActivity<MainPresenter> implements M
     }
 
     @Override
-    protected void performInject() {
-        getActivityComponent().inject(this);
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_main;
     }

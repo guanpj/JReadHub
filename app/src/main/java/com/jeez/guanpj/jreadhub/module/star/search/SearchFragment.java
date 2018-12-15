@@ -70,11 +70,6 @@ public class SearchFragment extends AbsBaseMvpSwipeBackFragment<SearchPresenter>
     }
 
     @Override
-    protected void performInject() {
-        getFragmentComponent().inject(this);
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_search_container;
     }

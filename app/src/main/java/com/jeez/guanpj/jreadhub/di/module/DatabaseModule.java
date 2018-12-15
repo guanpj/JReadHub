@@ -26,7 +26,7 @@ public class DatabaseModule {
     @Provides
     @Singleton
     ReadhubDatabase provideDatabase() {
-        return Room.databaseBuilder(ReadhubApplicationLike.getInstance(),
+        return Room.databaseBuilder(ReadhubApplicationLike.getApp(),
                 ReadhubDatabase.class, "Readhub.db").build();
     }
 

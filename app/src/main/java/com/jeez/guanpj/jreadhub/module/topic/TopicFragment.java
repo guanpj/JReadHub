@@ -56,11 +56,6 @@ public class TopicFragment extends AbsBaseMvpLceFragment<DataListBean<TopicBean>
     }
 
     @Override
-    protected void performInject() {
-        getFragmentComponent().inject(this);
-    }
-
-    @Override
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new TopicListAdapterWithThirdLib();

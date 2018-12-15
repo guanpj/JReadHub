@@ -20,6 +20,7 @@ import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 
 public class CommonPresenter extends BasePresenter<CommonContract.View> implements CommonContract.Presenter {
+
     private DataManager mDataManager;
 
     @Inject

@@ -56,11 +56,6 @@ public class StarTopicFragment extends AbsBaseMvpLceFragment<List<TopicDetailBea
     }
 
     @Override
-    protected void performInject() {
-        getFragmentComponent().inject(this);
-    }
-
-    @Override
     public void initView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new TopicDetailListAdapterWithThirdLib();

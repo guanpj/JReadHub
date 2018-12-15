@@ -83,11 +83,6 @@ public class InstantReadFragment extends AbsBaseMvpDialogFragment<InstantReadPre
     }
 
     @Override
-    protected void performInject() {
-        getFragmentComponent().inject(this);
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.fragment_instant_read;
     }

@@ -114,11 +114,6 @@ public class WebViewFragment extends AbsBaseMvpSwipeBackFragment<WebViewPresente
     }
 
     @Override
-    protected void performInject() {
-        getFragmentComponent().inject(this);
-    }
-
-    @Override
     public void initView() {
         mToolbar.setNavigationIcon(R.drawable.ic_nav_back);
         mToolbar.setNavigationOnClickListener(v -> pop());
